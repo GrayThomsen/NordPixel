@@ -14,7 +14,7 @@ export const STATUS_MESSAGE = {
   active: true,
   text: 'Open for commissions',
   bgColor: 'bg-primary-bright',
-  textColor: 'text-primary-dark',
+  textColor: 'text-slate-900',
 };
 
 /**

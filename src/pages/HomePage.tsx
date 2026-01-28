@@ -18,7 +18,7 @@ const HeroCanvas: React.FC<{ canvasRef: React.RefObject<HTMLCanvasElement> }> = 
     const canvas = canvasRef.current;
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0xfff7d6, 0.1);
+    renderer.setClearColor(0x0f1117, 0.1);
 
     // Create a simple rotating cube geometry
     const geometry = new THREE.IcosahedronGeometry(2, 4);
@@ -87,7 +87,7 @@ export const HomePage: React.FC = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary-light via-white to-secondary-light">
+      <section className="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
         {/* WebGL Canvas - only render on desktop */}
         {!isMobile && (
           <>
@@ -102,10 +102,10 @@ export const HomePage: React.FC = () => {
 
         {/* Content */}
         <div className="relative z-10 max-w-4xl mx-auto text-center px-4 animate-fade-in">
-          <h1 className="font-heading text-5xl md:text-7xl text-primary-dark mb-4">
+          <h1 className="font-heading text-5xl md:text-7xl text-white mb-4">
             Welcome to <span className="text-primary-bright">NordPixel</span>
           </h1>
-          <p className="font-body text-lg md:text-xl text-primary-dark opacity-80 mb-8 max-w-2xl mx-auto">
+          <p className="font-body text-lg md:text-xl text-gray-300 opacity-90 mb-8 max-w-2xl mx-auto">
             WebGL & 3D Design, Web Applications, and Frontend Development
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

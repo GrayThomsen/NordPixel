@@ -5,7 +5,7 @@ export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-primary-dark text-white py-12">
+    <footer className="bg-slate-900 text-white py-12 border-t border-slate-700">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
@@ -33,7 +33,7 @@ export const Footer: React.FC = () => {
                 href={SOCIAL_LINKS.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 hover:bg-primary-bright hover:text-primary-dark rounded-lg transition-colors"
+                className="p-2 hover:bg-slate-700 hover:text-primary-bright rounded-lg transition-colors text-gray-300"
                 aria-label="LinkedIn"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -45,7 +45,7 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Divider */}
-        <div className="border-t border-secondary-muted my-8"></div>
+        <div className="border-t border-slate-700 my-8"></div>
 
         {/* Bottom Footer */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">

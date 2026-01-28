@@ -24,9 +24,9 @@ export const Button: React.FC<{
   const baseClasses = 'font-body font-medium rounded-lg transition-all duration-300 ease-smooth focus-visible:outline-2 focus-visible:outline-offset-2';
 
   const variantClasses = {
-    primary: 'bg-primary-bright text-primary-dark hover:bg-accent hover:text-white focus-visible:outline-primary-bright',
-    secondary: 'bg-primary-dark text-white hover:bg-secondary-muted focus-visible:outline-primary-dark',
-    outline: 'border-2 border-primary-bright text-primary-bright hover:bg-primary-bright hover:text-primary-dark focus-visible:outline-primary-bright',
+    primary: 'bg-primary-bright text-slate-900 hover:bg-accent hover:text-white focus-visible:outline-primary-bright',
+    secondary: 'bg-slate-700 text-white hover:bg-slate-600 focus-visible:outline-primary-bright',
+    outline: 'border-2 border-primary-bright text-primary-bright hover:bg-primary-bright hover:text-slate-900 focus-visible:outline-primary-bright',
   };
 
   const sizeClasses = {
