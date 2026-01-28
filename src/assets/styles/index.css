@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&family=IBM+Plex+Sans+Hebrew:wght@100;200;300;400;500;600;700&family=Oldenburg&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: theme('fontFamily.body');
+  background-color: theme('colors.white');
+  color: theme('colors.primary-dark');
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: theme('fontFamily.heading');
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+h1 {
+  @apply text-5xl md:text-6xl font-heading;
+}
+
+h2 {
+  @apply text-4xl md:text-5xl font-heading;
+}
+
+h3 {
+  @apply text-2xl md:text-3xl font-heading;
+}
+
+h4 {
+  @apply text-xl md:text-2xl font-heading;
+}
+
+p {
+  @apply text-base leading-relaxed;
+  font-weight: 300;
+}
+
+a {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+a:focus-visible {
+  outline: 2px solid theme('colors.primary-bright');
+  outline-offset: 2px;
+}
+
+/* Smooth scrolling for anchor links */
+@supports (scroll-behavior: smooth) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: theme('colors.primary-light');
+}
+
+::-webkit-scrollbar-thumb {
+  background: theme('colors.primary-bright');
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: theme('colors.primary-dark');
+}
