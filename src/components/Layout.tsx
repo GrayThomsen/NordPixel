@@ -13,7 +13,6 @@ export const Layout: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <StatusBanner />
       {/* Add padding-top to account for fixed header */}
       <main className="flex-1 pt-16">
         <Outlet />

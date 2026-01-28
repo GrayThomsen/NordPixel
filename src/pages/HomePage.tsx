@@ -20,7 +20,7 @@ const HeroCanvas: React.FC<{ canvasRef: React.RefObject<HTMLCanvasElement> }> = 
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setClearColor(0x0f1117, 0.1);
 
-    // Create a simple rotating cube geometry
+    // Create main icosphere
     const geometry = new THREE.IcosahedronGeometry(2, 4);
     const material = new THREE.MeshPhongMaterial({
       color: 0x00c599,
@@ -59,9 +59,11 @@ const HeroCanvas: React.FC<{ canvasRef: React.RefObject<HTMLCanvasElement> }> = 
     let animationFrameId: number;
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
-      mesh.rotation.x += 0.001;
-      mesh.rotation.y += 0.002;
-      mesh.rotation.z += 0.0005;
+
+      // Rotate the orb
+      mesh.rotation.x += 0.003;
+      mesh.rotation.y += 0.005;
+
       renderer.render(scene, camera);
     };
 
@@ -71,6 +73,7 @@ const HeroCanvas: React.FC<{ canvasRef: React.RefObject<HTMLCanvasElement> }> = 
     return () => {
       window.removeEventListener('resize', handleResize);
       cancelAnimationFrame(animationFrameId);
+      
       geometry.dispose();
       material.dispose();
       renderer.dispose();
