@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { Button } from '@components/Button';
+import { ConstructionPopup } from '@components/ConstructionPopup';
 import { useIsMobile } from '@hooks/useIsMobile';
 import * as THREE from 'three';
 
@@ -89,6 +90,8 @@ export const HomePage: React.FC = () => {
 
   return (
     <div className="min-h-screen">
+      <ConstructionPopup />
+      
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
         {/* WebGL Canvas - only render on desktop */}

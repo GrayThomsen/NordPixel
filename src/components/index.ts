@@ -8,3 +8,4 @@ export { Footer } from './Footer';
 export { Layout } from './Layout';
 export { Button } from './Button';
 export { StatusBanner } from './StatusBanner';
+export { ConstructionPopup } from './ConstructionPopup';
