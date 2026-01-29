@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logoUrl from '../assets/branding/Logo (WhiteOnBlack).svg';
+import logoUrl from '../assets/branding/logo-mark-white-on-black.svg';
 
 interface LogoProps {
   size?: number;
