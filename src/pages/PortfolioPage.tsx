@@ -4,7 +4,7 @@ import { Button } from '@components/Button';
 
 export const PortfolioPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-slate-900">
+    <div className="min-h-screen bg-gradient-dark">
       {/* Header */}
       <section className="py-12 px-4 md:px-8 max-w-7xl mx-auto">
         <h1 className="font-heading text-5xl md:text-6xl text-white mb-4">
@@ -21,9 +21,9 @@ export const PortfolioPage: React.FC = () => {
           {projects.map((project) => (
             <div
               key={project.id}
-              className="group bg-slate-800 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+              className="group bg-gradient-darker rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-accent-orange border-opacity-20"
             >
-              <div className="aspect-video bg-gradient-to-br from-slate-700 to-slate-600 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+              <div className="aspect-video bg-gradient-to-br from-gradient-darker to-gradient-dark flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
                 <p className="text-white font-heading text-lg">{project.title}</p>
               </div>
               <div className="p-6">
@@ -37,7 +37,7 @@ export const PortfolioPage: React.FC = () => {
                   {project.technologies.slice(0, 3).map((tech) => (
                     <span
                       key={tech}
-                      className="px-3 py-1 bg-slate-700 text-primary-bright text-xs rounded-full font-body"
+                      className="px-3 py-1 bg-accent-orange bg-opacity-20 text-accent-orange text-xs rounded-full font-body"
                     >
                       {tech}
                     </span>

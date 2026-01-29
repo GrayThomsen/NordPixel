@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&family=IBM+Plex+Sans+Hebrew:wght@100;200;300;400;500;600;700&family=Oldenburg&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&family=IBM+Plex+Sans+Hebrew:wght@100;200;300;400;500;600;700&family=Oldenburg&family=Tomorrow:wght@400;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -14,15 +14,23 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Dark mode (default) */
 body {
   font-family: theme('fontFamily.body');
-  background-color: #0f1117;
+  background-color: #00181D;
   color: #e6edf3;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Light mode */
+body.light {
+  background-color: #ffffff;
+  color: #000000;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: theme('fontFamily.heading');
-  font-weight: 400;
+  font-weight: 700;
   letter-spacing: -0.01em;
 }
 
@@ -48,12 +56,22 @@ p {
 }
 
 a {
+  color: #FBB03B;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+a:hover {
+  opacity: 0.8;
+}
+
 a:focus-visible {
-  outline: 2px solid theme('colors.primary-bright');
+  outline: 2px solid #FBB03B;
   outline-offset: 2px;
+}
+
+/* Light mode link styling */
+.light a {
+  color: #FBB03B;
 }
 
 /* Smooth scrolling for anchor links */
@@ -63,20 +81,72 @@ a:focus-visible {
   }
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar - Dark mode */
 ::-webkit-scrollbar {
   width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: theme('colors.primary-light');
+  background: #00181D;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: theme('colors.primary-bright');
+  background: #FBB03B;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: theme('colors.primary-dark');
+  background: #DFDFDF;
+}
+
+/* Custom scrollbar - Light mode */
+.light ::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+.light ::-webkit-scrollbar-thumb {
+  background: #FBB03B;
+}
+
+.light ::-webkit-scrollbar-thumb:hover {
+  background: #000000;
+}
+
+/* Interactive elements */
+button, input, textarea, select {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:hover {
+  background-color: #FBB03B;
+}
+
+/* Utilities for project gallery */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-snap-x {
+  scroll-snap-type: x mandatory;
+}
+
+.scroll-snap-align-start {
+  scroll-snap-align: start;
+}
+/* Code blocks and pre */
+code {
+  background-color: rgba(251, 176, 59, 0.1);
+  color: #FBB03B;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-family: 'Courier New', monospace;
+}
+
+.light code {
+  background-color: rgba(251, 176, 59, 0.15);
+  color: #FBB03B;
 }

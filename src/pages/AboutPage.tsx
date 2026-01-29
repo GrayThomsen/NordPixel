@@ -6,10 +6,10 @@ export const AboutPage: React.FC = () => {
     <div className="min-h-screen pt-20">
       {/* Header */}
       <section className="py-12 px-4 md:px-8 max-w-7xl mx-auto">
-        <h1 className="font-heading text-5xl md:text-6xl text-primary-dark mb-4">
+        <h1 className="font-heading text-5xl md:text-6xl text-white mb-4">
           About Me
         </h1>
-        <p className="font-body text-lg text-primary-dark opacity-70">
+        <p className="font-body text-lg text-gray-300">
           Designer, Developer, and Creative Problem Solver
         </p>
       </section>
@@ -17,18 +17,18 @@ export const AboutPage: React.FC = () => {
       {/* Bio Section */}
       <section className="py-12 px-4 md:px-8 max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
         <div>
-          <div className="aspect-square bg-gradient-to-br from-primary-bright to-primary-dark rounded-lg"></div>
+          <div className="aspect-square bg-gradient-to-br from-accent-orange to-gradient-dark rounded-lg"></div>
         </div>
         <div>
-          <h2 className="font-heading text-3xl md:text-4xl text-primary-dark mb-6">
+          <h2 className="font-heading text-3xl md:text-4xl text-white mb-6">
             Welcome
           </h2>
-          <p className="font-body text-lg text-primary-dark opacity-80 mb-4 leading-relaxed">
+          <p className="font-body text-lg text-gray-300 mb-4 leading-relaxed">
             I'm a passionate designer and developer specializing in creating immersive digital experiences.
             With expertise in WebGL, 3D design, and modern web technologies, I craft solutions that blend
             aesthetics with functionality.
           </p>
-          <p className="font-body text-lg text-primary-dark opacity-80 leading-relaxed">
+          <p className="font-body text-lg text-gray-300 leading-relaxed">
             My journey combines technical proficiency with creative vision, ensuring every project
             tells a compelling story and delivers measurable results.
           </p>
@@ -36,8 +36,8 @@ export const AboutPage: React.FC = () => {
       </section>
 
       {/* Services Section */}
-      <section className="py-20 px-4 md:px-8 max-w-7xl mx-auto bg-secondary-light rounded-lg mb-12">
-        <h2 className="font-heading text-4xl text-primary-dark mb-12 text-center">
+      <section className="py-20 px-4 md:px-8 max-w-7xl mx-auto bg-gradient-darker rounded-lg mb-12">
+        <h2 className="font-heading text-4xl text-white mb-12 text-center">
           Services & Expertise
         </h2>
         <div className="grid md:grid-cols-2 gap-8">
@@ -59,11 +59,11 @@ export const AboutPage: React.FC = () => {
               description: 'Clean, intuitive designs that prioritize user experience and accessibility.',
             },
           ].map((service, index) => (
-            <div key={index} className="bg-white p-8 rounded-lg">
-              <h3 className="font-heading text-xl text-primary-dark mb-3">
+            <div key={index} className="bg-gradient-dark p-8 rounded-lg border border-accent-orange border-opacity-20">
+              <h3 className="font-heading text-xl text-accent-orange mb-3">
                 {service.title}
               </h3>
-              <p className="font-body text-primary-dark opacity-70">
+              <p className="font-body text-gray-300">
                 {service.description}
               </p>
             </div>
@@ -73,7 +73,7 @@ export const AboutPage: React.FC = () => {
 
       {/* Skills Section */}
       <section className="py-12 px-4 md:px-8 max-w-7xl mx-auto mb-12">
-        <h2 className="font-heading text-3xl md:text-4xl text-primary-dark mb-8">
+        <h2 className="font-heading text-3xl md:text-4xl text-white mb-8">
           Technical Stack
         </h2>
         <div className="grid md:grid-cols-3 gap-8">
@@ -92,12 +92,12 @@ export const AboutPage: React.FC = () => {
             },
           ].map((skillGroup, index) => (
             <div key={index}>
-              <h3 className="font-heading text-lg text-primary-dark mb-4">
+              <h3 className="font-heading text-lg text-accent-orange mb-4">
                 {skillGroup.category}
               </h3>
               <ul className="space-y-2">
                 {skillGroup.skills.map((skill) => (
-                  <li key={skill} className="font-body text-primary-dark opacity-70">
+                  <li key={skill} className="font-body text-gray-300">
                     • {skill}
                   </li>
                 ))}
@@ -109,7 +109,7 @@ export const AboutPage: React.FC = () => {
 
       {/* CV Section */}
       <section className="py-12 px-4 md:px-8 max-w-7xl mx-auto">
-        <div className="bg-primary-dark text-white p-12 rounded-lg text-center">
+        <div className="bg-gradient-darker text-white p-12 rounded-lg text-center border border-accent-orange border-opacity-20">
           <h2 className="font-heading text-3xl mb-4">Download My CV</h2>
           <p className="font-body text-lg opacity-80 mb-8">
             Get a detailed overview of my experience, education, and achievements.

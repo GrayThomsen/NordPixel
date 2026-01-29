@@ -13,15 +13,19 @@ export const SITE_URL = 'https://nordpixel.com';
 export const STATUS_MESSAGE = {
   active: true,
   text: 'Open for commissions',
-  bgColor: 'bg-primary-bright',
-  textColor: 'text-slate-900',
+  bgColor: 'bg-accent-orange',
+  textColor: 'text-black',
 };
+
+// Toggle to show the "Under Construction" overlay (set true to enable)
+export const SHOW_UNDER_CONSTRUCTION = true;
 
 /**
  * Social links
  */
 export const SOCIAL_LINKS = {
-  linkedin: 'https://www.linkedin.com/in/your-profile',
+  linkedin: 'https://www.linkedin.com/in/emil-gray-thomsen-845a8b33b/',
+  companyLinkedIn: 'https://www.linkedin.com/company/107025728/admin/dashboard/',
   github: 'https://github.com/your-profile',
 };
 
