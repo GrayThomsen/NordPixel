@@ -1,8 +1,12 @@
 import React, { useRef } from 'react';
-import { getFeaturedProjects } from '../assets/data/projects';
+import { webProjects } from '@/assets/data/webProjects';
+import { threeProjects } from '@/assets/data/threeProjects';
+import { Project } from '@/assets/data/projects';
 
 export const ProjectGallery: React.FC = () => {
-  const projects = getFeaturedProjects();
+  // combine and pick featured
+  const allProjects: Project[] = [...webProjects, ...threeProjects];
+  const projects = allProjects.filter((p) => p.featured);
   const ref = useRef<HTMLDivElement | null>(null);
 
   const scrollLeft = () => {
@@ -36,7 +40,7 @@ export const ProjectGallery: React.FC = () => {
           style={{ WebkitOverflowScrolling: 'touch' }}
         >
           <div className="flex gap-6 items-stretch">
-            {projects.map((p) => (
+            {projects.map((p: Project) => (
               <article key={p.id} className="min-w-[260px] sm:min-w-[320px] md:min-w-[380px] lg:min-w-[420px] bg-gradient-dark rounded-lg overflow-hidden shadow-lg scroll-snap-align-start">
                 <div className="h-40 bg-gray-800">
                   <img src={p.image} alt={p.title} className="w-full h-full object-cover" />

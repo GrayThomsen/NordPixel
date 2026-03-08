@@ -3,7 +3,7 @@
  */
 
 export const SITE_NAME = 'NordPixel';
-export const SITE_DESCRIPTION = 'WebGL & 3D Design, Web Applications, and Frontend Development';
+export const SITE_DESCRIPTION = 'Webdev with a third dimension';
 export const SITE_URL = 'https://nordpixel.com';
 
 /**
@@ -33,10 +33,12 @@ export const SOCIAL_LINKS = {
  * Navigation links
  */
 export const NAV_LINKS = [
-  { label: 'Home', href: '/' },
-  { label: 'Portfolio', href: '/portfolio' },
-  { label: 'About', href: '/about' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Web.dev', href: '/web' },
+  { label: '3D.dev', href: '/3d' },
+  { label: 'Teaching', href: '/teaching' },
+  { label: 'Shop', href: '/shop' },
+  { label: 'Updates', href: '/updates' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 /**

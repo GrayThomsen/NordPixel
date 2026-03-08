@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { NAV_LINKS, SOCIAL_LINKS } from '@config/site';
 import { Logo } from './Logo';
 
 export const Header: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
+  const [isOpen, setIsOpen] = useState(false);  return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-dark bg-opacity-95 backdrop-blur-md border-b border-gradient-darker">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -18,13 +16,17 @@ export const Header: React.FC = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {NAV_LINKS.map((link) => (
-              <Link
+              <NavLink
                 key={link.href}
                 to={link.href}
-                className="text-gray-300 hover:text-accent-orange transition-colors font-body text-sm font-medium"
+                className={({ isActive }) =>
+                  `text-gray-300 hover:text-accent-orange transition-colors font-body text-sm font-medium ${
+                    isActive ? 'text-accent-orange' : ''
+                  }`
+                }
               >
                 {link.label}
-              </Link>
+              </NavLink>
             ))}
           </div>
 
@@ -63,14 +65,18 @@ export const Header: React.FC = () => {
         {isOpen && (
           <div className="md:hidden pb-4 animate-slide-down">
             {NAV_LINKS.map((link) => (
-              <Link
+              <NavLink
                 key={link.href}
                 to={link.href}
-                className="block py-2 text-gray-300 hover:text-accent-orange transition-colors font-body text-sm font-medium"
+                className={({ isActive }) =>
+                  `block py-2 text-gray-300 hover:text-accent-orange transition-colors font-body text-sm font-medium ${
+                    isActive ? 'text-accent-orange' : ''
+                  }`
+                }
                 onClick={() => setIsOpen(false)}
               >
                 {link.label}
-              </Link>
+              </NavLink>
             ))}
           </div>
         )}

@@ -12,3 +12,4 @@ export { ConstructionPopup } from './ConstructionPopup';
 export { OrangeCube3D } from './OrangeCube3D';
 export { OrangeCube2D } from './OrangeCube2D';
 export { PixelStarField } from './PixelStarField';
+export { ContactFab } from './ContactFab';

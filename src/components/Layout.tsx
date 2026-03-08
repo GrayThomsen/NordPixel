@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Header } from '@components/Header';
-import { Footer } from '@components/Footer';
+import { Header, Footer, ContactFab } from '@components';
 import { ConstructionPopup } from '@components/ConstructionPopup';
 import { SHOW_UNDER_CONSTRUCTION } from '@config/site';
 
@@ -30,6 +29,7 @@ export const Layout: React.FC = () => {
       <main className="flex-1 pt-16">
         <Outlet />
       </main>
+      <ContactFab />
       <Footer />
     </div>
   );

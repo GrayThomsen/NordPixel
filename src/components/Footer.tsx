@@ -14,12 +14,37 @@ export const Footer: React.FC = () => {
           <div className="flex items-center gap-3">
             <Logo />
             <div>
-              <h3 className="font-heading text-xl mb-1">NordPixel</h3>
-              <p className="font-body text-sm text-gray-300">WebGL & 3D Design, Web Applications, and Frontend Development</p>
+              <h3 className="font-heading text-xl mb-1">Nordpixel.dev</h3>
+              <p className="font-body text-sm text-gray-300">
+                Webdev with a third dimension
+              </p>
             </div>
           </div>
 
-          {/* Connect (moved to right) */}
+          {/* Links (left) */}
+          <div className="flex flex-col md:flex-row items-start md:items-center gap-8 mb-8">
+            <div>
+              <h4 className="font-heading text-base mb-3">Explore</h4>
+              <div className="flex flex-col md:flex-row gap-4">
+                <a href="/web" className="text-gray-300 hover:text-accent-orange transition-colors">
+                  Web.dev
+                </a>
+                <a href="/3d" className="text-gray-300 hover:text-accent-orange transition-colors">
+                  3D.dev
+                </a>
+                <a href="/teaching" className="text-gray-300 hover:text-accent-orange transition-colors">
+                  Teaching
+                </a>
+                <a href="/shop" className="text-gray-300 hover:text-accent-orange transition-colors">
+                  Shop
+                </a>
+                <a href="/updates" className="text-gray-300 hover:text-accent-orange transition-colors">
+                  Updates
+                </a>
+              </div>
+            </div>
+            {/* Connect (moved to right) */}
+          </div>
           <div className="flex flex-col items-start md:items-end">
             <h4 className="font-heading text-base mb-3">Connect</h4>
             <div className="flex items-center gap-4">

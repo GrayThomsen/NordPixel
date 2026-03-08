@@ -1,7 +1,9 @@
 import React from 'react';
 import { Button } from '@components/Button';
+import { usePageTitle } from '@hooks/usePageTitle';
 
 export const AboutPage: React.FC = () => {
+  usePageTitle('About');
   return (
     <div className="min-h-screen pt-20">
       {/* Header */}
