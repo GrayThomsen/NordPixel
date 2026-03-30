@@ -137,7 +137,7 @@ export default function FoundationLayout() {
                   Om os
                 </NavLink>
                 <a
-                  href="https://www.linkedin.com/company/pordpixel-development/"
+                  href="https://www.linkedin.com/company/nordpixel-development/"
                   target="_blank"
                   rel="noreferrer"
                   className="text-slate-200 transition-colors hover:text-white"

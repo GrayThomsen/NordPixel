@@ -5,8 +5,18 @@ const email = 'thomsenwork@outlook.dk';
 
 const studentCourses = [
   {
+    title: "Computerens Sprog - Tegn og Symboler",
+    grade: "Fra 4. klasse",
+    duration: "4 timer (inkl. pauser)",
+    price: "1150,00 kr (ekskl. moms)",
+    ctaLabel: "Book kursus",
+    description: "Eleverne præcenteres for de mange symboler og tegn, der udgør computerens sprog, og får en forståelse for, hvordan disse bruges til at kommunikere med maskiner.",
+    outcome: "Efter 4 timer (inkl. pauser) har eleverne en grundlæggende forståelse for, hvordan de kan bruge special-tegn og symboler til at kommunikere med maskiner.",
+  },
+
+  {
     title: 'HTML & CSS 1',
-    grade: 'Fra 8. klasse',
+    grade: 'Fra 7. klasse',
     duration: '4 timer (inkl. pauser)',
     price: '1150,00 kr (ekskl. moms)',
     ctaLabel: 'Book kursus',
@@ -17,7 +27,7 @@ const studentCourses = [
   },
   {
     title: 'HTML & CSS 2',
-    grade: 'Fra 8. klasse',
+    grade: 'Fra 7. klasse',
     duration: '4 timer (inkl. pauser)',
     price: '1150,00 kr (ekskl. moms)',
     ctaLabel: 'Book kursus',
@@ -27,16 +37,24 @@ const studentCourses = [
       'Anbefales efter HTML & CSS 1. Efter 4 timer (inkl. pauser) har eleverne redskaberne til at producere egne hjemmesider til skoleprojekter og en bedre forståelse af den digitale verden bag skærmen.',
   },
   {
-    title: 'JavaScript',
-    grade: 'Fra 9. klasse',
+    title: 'JavaScript 1',
+    grade: 'Fra 8. klasse',
     duration: '4 timer (inkl. pauser)',
     price: '1150,00 kr (ekskl. moms)',
     ctaLabel: 'Book kursus',
-    description:
-      'JavaScript er et centralt sprog på hjemmesider og et godt startpunkt for elever, der ønsker at lære programmering.',
-    outcome:
-      'Efter 4 timer (inkl. pauser) har eleverne en forståelse af, hvad programmering er, og kan bruge dokumentation til at skabe egne tråde og processer. Det anbefales at have arbejdet med HTML og CSS først.',
+    description: 'JavaScript er et centralt sprog på hjemmesider og et godt startpunkt for elever, der ønsker at lære programmering.',
+    outcome: 'Efter 4 timer (inkl. pauser) har eleverne en forståelse af, hvad programmering er, og kan bruge dokumentation til at skabe egne tråde og processer. Det anbefales at have arbejdet med HTML og CSS først.',
   },
+
+  {
+    title: 'JavaScript 2',
+    grade: 'Fra 8. klasse',
+    duration: '4 timer (inkl. pauser)',
+    price: '1150,00 kr (ekskl. moms)',
+    ctaLabel: 'Book kursus',
+    description: "Giv dine elever værktøjet til selvstændigt at arbejde videre med JavaScript i skoleprojekter og privat, og en bedre forståelse for, hvordan programmering kan bruges til at skabe digitale løsninger.",
+    outcome: "Anbefales efter JavaScript 1. Efter 4 timer (inkl. pauser) har eleverne redskaberne til at arbejde videre med JavaScript i reale programmerings-sammenhænge og en bedre forståelse for, hvordan man bedst udnytter den computationelle tankegang.",
+  }
 ];
 
 type TeacherCourse = {
@@ -351,47 +369,45 @@ export default function TeachingPage() {
           Kontakt mig direkte for booking af elevkurser eller workshops til lærere.
         </p>
 
-        <form id="booking-form" onSubmit={handleSubmit} className="mt-8 space-y-4 rounded-xl border border-slate-700 p-4 sm:p-5 md:p-6">
-          <div className="space-y-2">
+        <form id="booking-form" onSubmit={handleSubmit} className="mt-8 space-y-6 rounded-xl border border-slate-700 p-4 sm:p-5 md:p-6">
+          <div className="space-y-3">
             <h3>Book en aftale</h3>
             <p className="text-sm text-slate-300">
               Udfyld formularen, så vender jeg tilbage med svar om pris, muligheder og næste skridt.
             </p>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2">
-            <label className="space-y-2 text-sm text-slate-200">
-              <span>Kontaktperson *</span>
+          <div className="grid gap-x-4 gap-y-6 md:grid-cols-2">
+            <label className="block space-y-2 text-sm text-slate-200">
+              <span className="block font-medium">Kontaktperson *</span>
               <input
                 type="text"
                 name="name"
                 value={formState.name}
                 onChange={handleFormChange}
                 required
-                className={`w-full rounded-lg border bg-slate-950/60 px-4 py-3 text-slate-100 outline-none transition-colors ${
-                  formErrors.name ? 'border-red-400 focus:border-red-400' : 'border-slate-600 focus:border-accent-orange'
-                }`}
+                className={`w-full rounded-lg border bg-slate-950/60 px-4 py-3 text-slate-100 outline-none transition-colors ${formErrors.name ? 'border-red-400 focus:border-red-400' : 'border-slate-600 focus:border-accent-orange'
+                  }`}
               />
               {formErrors.name && <p className="text-xs text-red-400">{formErrors.name}</p>}
             </label>
 
-            <label className="space-y-2 text-sm text-slate-200">
-              <span>Kontakt mail *</span>
+            <label className="block space-y-2 text-sm text-slate-200">
+              <span className="block font-medium">Kontakt mail *</span>
               <input
                 type="email"
                 name="email"
                 value={formState.email}
                 onChange={handleFormChange}
                 required
-                className={`w-full rounded-lg border bg-slate-950/60 px-4 py-3 text-slate-100 outline-none transition-colors ${
-                  formErrors.email ? 'border-red-400 focus:border-red-400' : 'border-slate-600 focus:border-accent-orange'
-                }`}
+                className={`w-full rounded-lg border bg-slate-950/60 px-4 py-3 text-slate-100 outline-none transition-colors ${formErrors.email ? 'border-red-400 focus:border-red-400' : 'border-slate-600 focus:border-accent-orange'
+                  }`}
               />
               {formErrors.email && <p className="text-xs text-red-400">{formErrors.email}</p>}
             </label>
 
-            <label className="space-y-2 text-sm text-slate-200">
-              <span>Organisation *</span>
+            <label className="block space-y-2 text-sm text-slate-200">
+              <span className="block font-medium">Organisation *</span>
               <input
                 type="text"
                 name="school"
@@ -403,8 +419,8 @@ export default function TeachingPage() {
               {formErrors.school && <p className="text-xs text-red-400">{formErrors.school}</p>}
             </label>
 
-            <label className="space-y-2 text-sm text-slate-200">
-              <span>Telefon</span>
+            <label className="block space-y-2 text-sm text-slate-200">
+              <span className="block font-medium">Telefon</span>
               <input
                 type="tel"
                 name="phone"
@@ -415,34 +431,35 @@ export default function TeachingPage() {
             </label>
           </div>
 
-          <label className="space-y-2 text-sm text-slate-200">
-            <span>Kursus/workshop *</span>
-            <input
-              type="text"
-              name="course"
-              value={formState.course}
-              onChange={handleFormChange}
-              required
-              placeholder="Fx HTML & CSS 1 eller Underviser-workshop"
-              className={`w-full rounded-lg border bg-slate-950/60 px-4 py-3 text-slate-100 outline-none transition-colors ${
-                formErrors.course ? 'border-red-400 focus:border-red-400' : 'border-slate-600 focus:border-accent-orange'
-              }`}
-            />
-            {formErrors.course && <p className="text-xs text-red-400">{formErrors.course}</p>}
-          </label>
+          <div className="space-y-6">
+            <label className="block space-y-2 text-sm text-slate-200">
+              <span className="block font-medium">Kursus/workshop *</span>
+              <input
+                type="text"
+                name="course"
+                value={formState.course}
+                onChange={handleFormChange}
+                required
+                placeholder="Fx HTML & CSS 1 eller Underviser-workshop"
+                className={`w-full rounded-lg border bg-slate-950/60 px-4 py-3 text-slate-100 outline-none transition-colors ${formErrors.course ? 'border-red-400 focus:border-red-400' : 'border-slate-600 focus:border-accent-orange'
+                  }`}
+              />
+              {formErrors.course && <p className="text-xs text-red-400">{formErrors.course}</p>}
+            </label>
 
-          <label className="space-y-2 text-sm text-slate-200">
-            <span>Besked (valgfri)</span>
-            <textarea
-              name="message"
-              value={formState.message}
-              onChange={handleFormChange}
-              rows={6}
-              className="w-full rounded-lg border border-slate-600 bg-slate-950/60 px-4 py-3 text-slate-100 outline-none transition-colors focus:border-accent-orange"
-            />
-          </label>
+            <label className="block space-y-2 text-sm text-slate-200">
+              <span className="block font-medium">Besked (valgfri)</span>
+              <textarea
+                name="message"
+                value={formState.message}
+                onChange={handleFormChange}
+                rows={6}
+                className="w-full rounded-lg border border-slate-600 bg-slate-950/60 px-4 py-3 text-slate-100 outline-none transition-colors focus:border-accent-orange"
+              />
+            </label>
+          </div>
 
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+          <div className="flex flex-col gap-3 pt-1 sm:flex-row sm:items-center">
             <button
               type="submit"
               disabled={submitState === 'sending'}
