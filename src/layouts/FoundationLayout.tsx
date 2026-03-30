@@ -21,6 +21,10 @@ export default function FoundationLayout() {
     }
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-b from-gradient-dark to-gradient-darker text-slate-100">
         <header className="border-b border-slate-800/80 bg-gradient-dark/95 backdrop-blur-sm">
@@ -80,20 +84,17 @@ export default function FoundationLayout() {
         </main>
 
       <footer className="border-t border-slate-800/80 bg-[#020b0e]">
-        <div className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
-          <div className="grid gap-10 border-b border-slate-800/80 pb-8 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,0.85fr)_minmax(0,0.85fr)]">
-            <section className="space-y-5">
+        <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.9fr)_minmax(0,0.9fr)]">
+            <section className="space-y-4">
               <img
                 src="/nordpixel-white-on-black.svg"
                 alt="NordPixel"
                 className="h-12 w-auto"
               />
-              <div className="space-y-3">
-                <p className="text-xs font-semibold uppercase tracking-[0.26em] text-accent-orange">NordPixel</p>
-                <p className="max-w-xl text-sm leading-relaxed text-slate-300 sm:text-base">
-                  Praksisnære forløb i teknologiforståelse, web og digital undervisning til skoler, lærere og elever.
-                </p>
-              </div>
+              <p className="max-w-xl text-sm leading-relaxed text-slate-300 sm:text-base">
+                Praksisnære forløb i teknologiforståelse, web og digital undervisning til skoler, lærere og elever.
+              </p>
               <div className="flex flex-wrap gap-2 text-xs text-slate-400">
                 <span className="rounded-full border border-slate-800 px-3 py-1.5">Folkeskole</span>
                 <span className="rounded-full border border-slate-800 px-3 py-1.5">Workshops</span>
@@ -101,9 +102,9 @@ export default function FoundationLayout() {
               </div>
             </section>
 
-            <section className="space-y-4">
+            <section className="space-y-3">
               <h5 className="text-slate-500">Kontakt</h5>
-              <div className="space-y-3 text-sm text-slate-300">
+              <div className="space-y-2.5 text-sm text-slate-300">
                 <button
                   type="button"
                   onClick={copyEmail}
@@ -117,22 +118,22 @@ export default function FoundationLayout() {
                 {copyState === 'failed' && <p className="text-xs text-red-400">Kunne ikke kopiere email.</p>}
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Kontaktperson</p>
-                  <p className="mt-1 text-base text-slate-100">Emil G. Thomsen</p>
+                  <p className="mt-0.5 text-base text-slate-100">Emil G. Thomsen</p>
                 </div>
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">CVR</p>
-                  <p className="mt-1 text-base text-slate-100">{cvr}</p>
+                  <p className="mt-0.5 text-base text-slate-100">{cvr}</p>
                 </div>
               </div>
             </section>
 
-            <section className="space-y-4">
+            <section className="space-y-3">
               <h5 className="text-slate-500">Navigation</h5>
-              <nav className="grid gap-3 text-sm">
-                <NavLink to="/" className="text-slate-200 transition-colors hover:text-white">
+              <nav className="grid gap-2.5 text-sm">
+                <NavLink to="/" onClick={scrollToTop} className="text-slate-200 transition-colors hover:text-white">
                   Undervisning
                 </NavLink>
-                <NavLink to="/about" className="text-slate-200 transition-colors hover:text-white">
+                <NavLink to="/about" onClick={scrollToTop} className="text-slate-200 transition-colors hover:text-white">
                   Om os
                 </NavLink>
                 <a

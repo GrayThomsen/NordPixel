@@ -1,5 +1,4 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
-import emailjs from 'emailjs-com';
 
 // Kontaktmail, genbrugt på tværs af komponenten.
 const email = 'thomsenwork@outlook.dk';
@@ -104,11 +103,23 @@ const teacherCourses: TeacherCourse[] = [
 
 // Forside med undervisningsindhold og kontaktsektion.
 export default function TeachingPage() {
+  const emailJsConfig = {
+    serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID,
+    templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+    publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+  };
+  const missingEmailJsKeys = [
+    !emailJsConfig.serviceId && 'VITE_EMAILJS_SERVICE_ID',
+    !emailJsConfig.templateId && 'VITE_EMAILJS_TEMPLATE_ID',
+    !emailJsConfig.publicKey && 'VITE_EMAILJS_PUBLIC_KEY',
+  ].filter(Boolean) as string[];
+
   // Status til UI-feedback efter forsøg på at kopiere email.
   const [copyState, setCopyState] = useState<'idle' | 'copied' | 'failed'>('idle');
   const [formState, setFormState] = useState<BookingFormState>(initialFormState);
   const [formErrors, setFormErrors] = useState<BookingFormErrors>({});
   const [submitState, setSubmitState] = useState<'idle' | 'sending' | 'sent' | 'error' | 'config-missing'>('idle');
+  const [submitErrorMessage, setSubmitErrorMessage] = useState<string | null>(null);
 
   // Kopierer email til clipboard og viser kort statusbesked.
   const copyEmail = async () => {
@@ -178,38 +189,54 @@ export default function TeachingPage() {
       return;
     }
 
-    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-
-    if (!serviceId || !templateId || !publicKey) {
+    if (missingEmailJsKeys.length > 0) {
       setSubmitState('config-missing');
       return;
     }
 
     setSubmitState('sending');
+    setSubmitErrorMessage(null);
 
     try {
-      await emailjs.send(
-        serviceId,
-        templateId,
-        {
-          from_name: formState.name.trim(),
-          from_email: formState.email.trim(),
-          school: formState.school.trim(),
-          phone: formState.phone.trim(),
-          course: formState.course.trim(),
-          message: formState.message.trim(),
-          to_email: email,
-          reply_to: formState.email.trim(),
+      const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-        publicKey,
-      );
+        body: JSON.stringify({
+          service_id: emailJsConfig.serviceId,
+          template_id: emailJsConfig.templateId,
+          user_id: emailJsConfig.publicKey,
+          template_params: {
+            from_name: formState.name.trim(),
+            from_email: formState.email.trim(),
+            school: formState.school.trim(),
+            phone: formState.phone.trim(),
+            course: formState.course.trim(),
+            message: formState.message.trim(),
+            to_email: email,
+            reply_to: formState.email.trim(),
+          },
+        }),
+      });
+
+      if (!response.ok) {
+        const responseText = await response.text();
+        throw new Error(`EmailJS fejl (${response.status}): ${responseText || 'Ukendt fejl'}`);
+      }
 
       setSubmitState('sent');
       setFormState(initialFormState);
       setFormErrors({});
-    } catch {
+    } catch (error) {
+      const rawErrorMessage = error instanceof Error ? error.message : 'Ukendt fejl ved afsendelse.';
+      if (/Account not found/i.test(rawErrorMessage)) {
+        setSubmitErrorMessage(
+          'EmailJS-konto blev ikke fundet. Tjek at Public Key, Service ID og Template ID kommer fra samme EmailJS-konto.',
+        );
+      } else {
+        setSubmitErrorMessage(rawErrorMessage);
+      }
       setSubmitState('error');
     }
   };
@@ -217,7 +244,6 @@ export default function TeachingPage() {
   return (
     <section className="space-y-10 md:space-y-12">
       <header className="space-y-4">
-        <p className="text-sm uppercase tracking-[0.2em] text-accent-orange">NordPixel</p>
         <h1 className="leading-tight">Teknologiforståelse for Folkeskolen</h1>
         <p className="max-w-3xl text-base text-slate-300 sm:text-lg">
           Kurser i webdesign og udvikling til udskolingen, hvor eleverne får hands-on erfaring med at bygge egne hjemmesider
@@ -431,11 +457,14 @@ export default function TeachingPage() {
             <p className="text-sm text-green-400">Tak. Din forespørgsel er sendt, og jeg vender tilbage hurtigst muligt.</p>
           )}
           {submitState === 'error' && (
-            <p className="text-sm text-red-400">Der opstod en fejl under afsendelse. Prøv igen eller skriv direkte til emailen nedenfor.</p>
+            <p className="text-sm text-red-400">
+              Der opstod en fejl under afsendelse. Prøv igen eller skriv direkte til emailen nedenfor.
+              {submitErrorMessage && <span className="block mt-1 text-xs text-red-300">{submitErrorMessage}</span>}
+            </p>
           )}
           {submitState === 'config-missing' && (
             <p className="text-sm text-amber-400">
-              Email-afsendelse er ikke konfigureret endnu. Tilføj EmailJS-nøglerne for at aktivere formularen.
+              Email-afsendelse er ikke konfigureret endnu. Manglende nøgler: {missingEmailJsKeys.join(', ')}.
             </p>
           )}
         </form>

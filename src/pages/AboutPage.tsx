@@ -12,7 +12,7 @@ export default function AboutPage() {
 
       <div className="max-w-4xl space-y-10 md:space-y-12">
         <section className="space-y-4 border-b border-slate-800/80 pb-8 md:space-y-5">
-          <h5 className="text-accent-orange/90">Om NordPixel</h5>
+          <h2 className="text-accent-orange/90">Om NordPixel</h2>
           <div className="space-y-4 text-base leading-relaxed text-slate-300 md:text-[1.05rem]">
             <p>
               NordPixel er bygget op omkring idéen om, at teknologi ikke bare skal forklares — den skal opleves, afprøves og
@@ -32,7 +32,7 @@ export default function AboutPage() {
         </section>
 
         <section className="space-y-4 border-b border-slate-800/80 pb-8 md:space-y-5">
-          <h5 className="text-accent-orange/90">Om instruktøren</h5>
+          <h2 className="text-accent-orange/90">Om instruktøren</h2>
           <div className="space-y-4 text-base leading-relaxed text-slate-300 md:text-[1.05rem]">
             <p>
               Jeg hedder Emil G. Thomsen, er webudvikler og multimediedesigner, og jeg hjælper folkeskoler med
@@ -51,7 +51,7 @@ export default function AboutPage() {
         </section>
 
         <section className="space-y-4 md:space-y-5">
-          <h5 className="text-accent-orange/90">Tilpasset forløb</h5>
+          <h2 className="text-accent-orange/90">Tilpasset forløb</h2>
           <div className="space-y-4 text-base leading-relaxed text-slate-300 md:text-[1.05rem]">
             <p>
               Alle klasser er forskellige og har forskellige behov. Forløb tilpasses for at styrke elevernes digitale
