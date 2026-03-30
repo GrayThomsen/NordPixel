@@ -8,7 +8,7 @@
     <title>NordPixel - Teknologiforståelse for Folkeskolen</title>
     
     <!-- Favicons for dark/light mode -->
-    <link rel="icon" type="image/png" href="/favicon-dark.png" id="favicon" />
+    <link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" id="favicon" />
   </head>
   <body>
     <div id="root"></div>
@@ -19,7 +19,7 @@
       function updateFavicon() {
         const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         const favicon = document.getElementById('favicon');
-        favicon.href = isDark ? '/favicon-dark.png' : '/favicon-light.png';
+        favicon.href = isDark ? '/favicon-dark.svg' : '/favicon-light.svg';
       }
       
       // Initial load
