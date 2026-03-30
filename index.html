@@ -1,14 +1,32 @@
 <!doctype html>
-<html lang="en">
+<html lang="da">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Nordpixel.dev: Webdev with a third dimension" />
-    <title>Nordpixel.dev - Webdev with a third dimension</title>
+    <meta name="color-scheme" content="light dark" />
+    <meta name="description" content="NordPixel Development - Teknologiforståelse undervisning til folkeskoler" />
+    <title>NordPixel - Teknologiforståelse for Folkeskolen</title>
+    
+    <!-- Favicons for dark/light mode -->
+    <link rel="icon" type="image/png" href="/favicon-dark.png" id="favicon" />
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Favicon switcher -->
+    <script>
+      function updateFavicon() {
+        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const favicon = document.getElementById('favicon');
+        favicon.href = isDark ? '/favicon-dark.png' : '/favicon-light.png';
+      }
+      
+      // Initial load
+      updateFavicon();
+      
+      // Listen for changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateFavicon);
+    </script>
   </body>
 </html>
