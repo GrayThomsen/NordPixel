@@ -1,6 +1,6 @@
 # NordPixel – Teknologiforståelse
 
-Minimal hjemmeside for NordPixel Development – fokuseret på undervisning i teknologiforståelse for folkeskoler.
+Minimal hjemmeside for NordPixel – fokuseret på undervisning i teknologiforståelse for folkeskoler.
 
 ## Indhold
 - Hovedside med information om undervisning og booking (`/`)

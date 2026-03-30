@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { NavLink, Route, Routes } from 'react-router-dom';
 import AboutPage from '@/pages/AboutPage';
 import TeachingPage from '@/pages/TeachingPage';
@@ -7,131 +8,151 @@ const cvr = '45551695';
 
 // Fælles side-layout med header, navigation og route-indhold.
 export default function FoundationLayout() {
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-gradient-dark to-gradient-darker text-slate-100">
-      <header className="border-b border-slate-800/80 bg-gradient-dark/95 backdrop-blur-sm">
-        <div className="mx-auto flex w-full max-w-5xl flex-col gap-4 px-6 py-6 md:flex-row md:items-center md:justify-between md:px-8">
-          <NavLink
-            to="/"
-            className="flex items-center transition-opacity hover:opacity-80"
-            title="Hjem"
-          >
-            <img
-              src="/nordpixel-white-on-black.svg"
-              alt="NordPixel Development"
-              className="h-12 md:h-14 w-auto"
-            />
-          </NavLink>
+  const [copyState, setCopyState] = useState<'idle' | 'copied' | 'failed'>('idle');
 
-          <nav className="flex items-center gap-6 ">
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(email);
+      setCopyState('copied');
+      window.setTimeout(() => setCopyState('idle'), 2000);
+    } catch {
+      setCopyState('failed');
+      window.setTimeout(() => setCopyState('idle'), 2000);
+    }
+  };
+
+  return (
+    <div className="flex min-h-screen flex-col bg-gradient-to-b from-gradient-dark to-gradient-darker text-slate-100">
+        <header className="border-b border-slate-800/80 bg-gradient-dark/95 backdrop-blur-sm">
+          <div className="mx-auto flex w-full max-w-6xl flex-col gap-5 px-4 py-5 sm:px-6 md:flex-row md:items-center md:justify-between md:px-8">
             <NavLink
               to="/"
-              className={({ isActive }) =>
-                `border-b-2 pb-2 text-lg font-semibold transition-colors duration-200 ${
-                  isActive
-                    ? 'border-accent-orange text-accent-orange'
-                    : 'border-transparent text-slate-300 hover:text-white'
-                }`
-              }
-              end
+              className="flex items-center transition-opacity hover:opacity-80"
+              title="Hjem"
             >
-              Undervisning
-            </NavLink>
-            <NavLink
-              to="/about"
-              className={({ isActive }) =>
-                `border-b-2 pb-2 text-lg font-semibold transition-colors duration-200 ${
-                  isActive
-                    ? 'border-accent-orange text-accent-orange'
-                    : 'border-transparent text-slate-300 hover:text-white'
-                }`
-              }
-            >
-              Om os
-            </NavLink>
-          </nav>
-        </div>
-      </header>
-
-      <div className="mx-auto flex w-full max-w-5xl flex-col gap-10 px-6 py-10 md:px-8 md:py-14">
-        <main>
-          {/* Definerer hvilke komponenter der vises for hver URL. */}
-          <Routes>
-            <Route path="/" element={<TeachingPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            {/* Fallback: ukendte routes sendes til forsiden. */}
-            <Route path="*" element={<TeachingPage />} />
-          </Routes>
-        </main>
-      </div>
-
-      <footer className="border-t border-slate-800/80 bg-slate-950/40">
-        <div className="mx-auto grid w-full max-w-5xl gap-8 px-6 py-10 md:grid-cols-[1.2fr_0.8fr_0.9fr] md:px-8">
-          <div className="space-y-4">
-            <div className="flex items-center gap-4">
               <img
                 src="/nordpixel-white-on-black.svg"
-                alt="NordPixel Development"
-                className="h-10 w-auto"
+                alt="NordPixel"
+                className="h-10 w-auto sm:h-12 md:h-14"
               />
-              <div>
-                <p className="text-lg font-semibold text-slate-100">NordPixel Development</p>
-                <p className="text-sm text-slate-400">Teknologiforståelse, web og digital undervisning</p>
+            </NavLink>
+
+            <nav className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:justify-end">
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  `inline-flex items-center justify-center rounded-full border px-4 py-2 text-center text-sm font-semibold uppercase tracking-[0.18em] transition-colors duration-200 ${
+                    isActive
+                      ? 'border-accent-orange bg-accent-orange/10 text-accent-orange'
+                      : 'border-slate-700 text-slate-300 hover:border-slate-500 hover:text-white'
+                  }`
+                }
+                end
+              >
+                Undervisning
+              </NavLink>
+              <NavLink
+                to="/about"
+                className={({ isActive }) =>
+                  `inline-flex items-center justify-center rounded-full border px-4 py-2 text-center text-sm font-semibold uppercase tracking-[0.18em] transition-colors duration-200 ${
+                    isActive
+                      ? 'border-accent-orange bg-accent-orange/10 text-accent-orange'
+                      : 'border-slate-700 text-slate-300 hover:border-slate-500 hover:text-white'
+                  }`
+                }
+              >
+                Om os
+              </NavLink>
+            </nav>
+          </div>
+        </header>
+
+        <main className="flex-1">
+          <div className="mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 py-8 sm:px-6 md:px-8 md:py-14">
+            {/* Definerer hvilke komponenter der vises for hver URL. */}
+            <Routes>
+              <Route path="/" element={<TeachingPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              {/* Fallback: ukendte routes sendes til forsiden. */}
+              <Route path="*" element={<TeachingPage />} />
+            </Routes>
+          </div>
+        </main>
+
+      <footer className="border-t border-slate-800/80 bg-[#020b0e]">
+        <div className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
+          <div className="grid gap-10 border-b border-slate-800/80 pb-8 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,0.85fr)_minmax(0,0.85fr)]">
+            <section className="space-y-5">
+              <img
+                src="/nordpixel-white-on-black.svg"
+                alt="NordPixel"
+                className="h-12 w-auto"
+              />
+              <div className="space-y-3">
+                <p className="text-xs font-semibold uppercase tracking-[0.26em] text-accent-orange">NordPixel</p>
+                <p className="max-w-xl text-sm leading-relaxed text-slate-300 sm:text-base">
+                  Praksisnære forløb i teknologiforståelse, web og digital undervisning til skoler, lærere og elever.
+                </p>
               </div>
-            </div>
-            <p className="max-w-md text-sm leading-relaxed text-slate-300">
-              NordPixel udvikler praksisnære forløb, workshops og materialer, der gør teknologi mere forståelig og anvendelig
-              for skoler, lærere og elever.
-            </p>
-          </div>
+              <div className="flex flex-wrap gap-2 text-xs text-slate-400">
+                <span className="rounded-full border border-slate-800 px-3 py-1.5">Folkeskole</span>
+                <span className="rounded-full border border-slate-800 px-3 py-1.5">Workshops</span>
+                <span className="rounded-full border border-slate-800 px-3 py-1.5">Webforløb</span>
+              </div>
+            </section>
 
-          <div className="space-y-3">
-            <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-400">Kontakt</h2>
-            <ul className="space-y-2 text-sm text-slate-300">
-              <li>
-                <a href={`mailto:${email}`} className="transition-colors hover:text-white">
+            <section className="space-y-4">
+              <h5 className="text-slate-500">Kontakt</h5>
+              <div className="space-y-3 text-sm text-slate-300">
+                <button
+                  type="button"
+                  onClick={copyEmail}
+                  className="text-left text-lg font-semibold text-accent-orange underline decoration-accent-orange/70 underline-offset-4 transition-opacity hover:opacity-85"
+                  title="Klik for at kopiere email"
+                >
                   {email}
-                </a>
-              </li>
-              <li>CVR: {cvr}</li>
-              <li>Emil G. Thomsen</li>
-            </ul>
-          </div>
+                </button>
+                <p className="text-xs text-slate-400">Klik på emailen for at kopiere den til udklipsholderen.</p>
+                {copyState === 'copied' && <p className="text-xs text-green-400">Email kopieret.</p>}
+                {copyState === 'failed' && <p className="text-xs text-red-400">Kunne ikke kopiere email.</p>}
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Kontaktperson</p>
+                  <p className="mt-1 text-base text-slate-100">Emil G. Thomsen</p>
+                </div>
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">CVR</p>
+                  <p className="mt-1 text-base text-slate-100">{cvr}</p>
+                </div>
+              </div>
+            </section>
 
-          <div className="space-y-3">
-            <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-400">Links</h2>
-            <ul className="space-y-2 text-sm text-slate-300">
-              <li>
-                <NavLink to="/" className="transition-colors hover:text-white">
+            <section className="space-y-4">
+              <h5 className="text-slate-500">Navigation</h5>
+              <nav className="grid gap-3 text-sm">
+                <NavLink to="/" className="text-slate-200 transition-colors hover:text-white">
                   Undervisning
                 </NavLink>
-              </li>
-              <li>
-                <NavLink to="/about" className="transition-colors hover:text-white">
+                <NavLink to="/about" className="text-slate-200 transition-colors hover:text-white">
                   Om os
                 </NavLink>
-              </li>
-              <li>
                 <a
                   href="https://www.linkedin.com/company/pordpixel-development/"
                   target="_blank"
                   rel="noreferrer"
-                  className="transition-colors hover:text-white"
+                  className="text-slate-200 transition-colors hover:text-white"
                 >
-                  LinkedIn · NordPixel Development
+                  LinkedIn · NordPixel
                 </a>
-              </li>
-              <li>
                 <a
                   href="https://www.linkedin.com/in/emil-gray-thomsen-845a8b33b/"
                   target="_blank"
                   rel="noreferrer"
-                  className="transition-colors hover:text-white"
+                  className="text-slate-200 transition-colors hover:text-white"
                 >
                   LinkedIn · Emil G. Thomsen
                 </a>
-              </li>
-            </ul>
+              </nav>
+            </section>
           </div>
         </div>
       </footer>

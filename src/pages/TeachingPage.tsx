@@ -73,38 +73,32 @@ const initialFormState: BookingFormState = {
 
 const teacherCourses: TeacherCourse[] = [
   {
-    title: 'Klasseværelseskursus (lærere)',
+    title: 'HTML & CSS for lærere',
     duration: '4 timer (inkl. pauser)',
     price: '1500,00 kr (ekskl. moms)',
     ctaLabel: 'Book kursus',
     description:
-      'Et praksisnært forløb til lærerteam, der vil kunne arbejde mere trygt med teknologiforståelse og digitale metoder i egne fag.',
-  },
-  {
-    title: 'Underviser-workshop',
-    duration: '6 timer (inkl. pauser)',
-    price: '2500,00 kr (ekskl. moms)',
-    ctaLabel: 'Book workshop',
-    description:
-      'Et udvidet workshopformat med tid til både fælles gennemgang, konkret afprøvning og plan for, hvordan indholdet omsættes direkte i undervisningen.',
+      'Et praksisnært kursus, der klæder lærere på til selv at arbejde videre med det materiale og de grundprincipper, eleverne møder i HTML & CSS-forløbene.',
     examples: [
-      'Digital manipulation (samfundsfag)',
-      'Design af interaktive medier (HDS)',
-      'Hvordan “tænker” lommeregneren (matematik)',
-      'Kildekritik og AI (dansk/engelsk)',
-      'Plakat- og printdesign (HDS)',
-      'Large Project Workflow (projektarbejde)',
+      'Gennemgang af elevmaterialet og den faglige progression',
+      'Introduktion til HTML, CSS og grundlæggende struktur',
+      'Didaktiske greb til at støtte elevernes egne hjemmesider',
+      'Forslag til, hvordan forløbet kan bruges i fremtidig undervisning',
     ],
   },
   {
-    title: 'Digitalt materiale',
-    duration: 'N/A',
-    price: '500,00 kr licens til skolen (ekskl. moms)',
-    ctaLabel: 'Køb materiale',
-    isAvailable: false,
-    unavailableNote: 'Materialet er på vej og er ikke tilgængeligt endnu.',
+    title: 'JavaScript for lærere',
+    duration: '4 timer (inkl. pauser)',
+    price: '1500,00 kr (ekskl. moms)',
+    ctaLabel: 'Book kursus',
     description:
-      'PDF-materiale med opgaver, forklaringer, eksempler og kode-snippets, som kan bruges selvstændigt i klassen og som støtte før eller efter et kursusforløb.',
+      'Et kursus for lærere, der vil forstå og selv kunne arbejde videre med det JavaScript-materiale, som eleverne bruger, så skolen kan løfte arbejdet videre bagefter.',
+    examples: [
+      'Forståelse af JavaScript som næste skridt efter HTML & CSS',
+      'Gennemgang af de elevnære øvelser og centrale begreber',
+      'Tryghed i at støtte eleverne i logik, funktioner og interaktion',
+      'Idéer til, hvordan arbejdet kan forankres i egne fag og forløb',
+    ],
   },
 ];
 
@@ -221,18 +215,18 @@ export default function TeachingPage() {
   };
 
   return (
-    <section className="space-y-8">
+    <section className="space-y-10 md:space-y-12">
       <header className="space-y-4">
-        <p className="text-sm uppercase tracking-[0.2em] text-accent-orange">NordPixel Development</p>
-        <h1 className="text-4xl md:text-5xl">Teknologiforståelse for Folkeskolen</h1>
-        <p className="max-w-3xl text-lg text-slate-300">
+        <p className="text-sm uppercase tracking-[0.2em] text-accent-orange">NordPixel</p>
+        <h1 className="leading-tight">Teknologiforståelse for Folkeskolen</h1>
+        <p className="max-w-3xl text-base text-slate-300 sm:text-lg">
           Kurser i webdesign og udvikling til udskolingen, hvor eleverne får hands-on erfaring med at bygge egne hjemmesider
           og forstå, hvad der sker bag skærmen i den digitale verden.
         </p>
       </header>
 
       <div>
-        <h2 className="mb-4 text-2xl">Kurser for elever</h2>
+        <h2 className="mb-4">Kurser for elever</h2>
         <p className="mb-6 text-slate-300">
           Alle elevkurser er planlagt som 4-timers forløb (inkl. pauser) med fokus på konkrete færdigheder, som kan bruges i
           skoleprojekter og videre læring.
@@ -241,7 +235,7 @@ export default function TeachingPage() {
           {studentCourses.map((course) => (
             <article key={course.title} className="flex h-full flex-col rounded-xl border border-slate-600 p-5">
               <div className="flex-1">
-                <h3 className="text-lg font-semibold text-accent-orange">{course.title}</h3>
+                <h3 className="text-accent-orange">{course.title}</h3>
                 <p className="mb-3 mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-semibold uppercase tracking-wide text-slate-200">
                   <span>{course.grade}</span>
                   <span aria-hidden="true" className="text-slate-400">|</span>
@@ -256,7 +250,7 @@ export default function TeachingPage() {
                 <button
                   type="button"
                   onClick={() => selectCourse(course.title)}
-                  className="mt-4 inline-flex items-center justify-center rounded-lg bg-accent-orange px-4 py-2 font-semibold text-black transition-opacity hover:opacity-90"
+                  className="mt-4 inline-flex w-full items-center justify-center rounded-lg bg-accent-orange px-4 py-2 font-semibold text-black transition-opacity hover:opacity-90 sm:w-auto"
                 >
                   {course.ctaLabel}
                 </button>
@@ -267,16 +261,16 @@ export default function TeachingPage() {
       </div>
 
       <div>
-        <h2 className="mb-4 text-2xl">Kurser for lærere</h2>
+        <h2 className="mb-4">Kurser for lærere</h2>
         <p className="mb-4 text-slate-300">
-          Forløb til lærerteam, der vil styrke teknologiforståelsen i egne fag og arbejde mere målrettet med elevernes digitale
-          hverdag.
+          Lærerkurserne er bygget som et supplement til elevforløbene, så lærere bliver klædt på til selv at kunne arbejde
+          videre med de samme materialer og principper i undervisningen efter kursusdagen.
         </p>
         <div className="grid gap-4 md:grid-cols-2">
           {teacherCourses.map((course) => (
             <article key={course.title} className="flex h-full flex-col rounded-xl border border-slate-600 p-5">
               <div className="flex-1">
-                <h3 className="text-lg font-semibold text-accent-orange">{course.title}</h3>
+                <h3 className="text-accent-orange">{course.title}</h3>
                 <p className="mb-3 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-200">{course.duration}</p>
                 <p className="text-sm leading-relaxed text-slate-200">{course.description}</p>
                 {course.examples && (
@@ -298,7 +292,7 @@ export default function TeachingPage() {
                     <button
                       type="button"
                       disabled
-                      className="inline-flex cursor-not-allowed items-center justify-center rounded-lg bg-slate-700 px-4 py-2 font-semibold text-slate-300"
+                      className="inline-flex w-full cursor-not-allowed items-center justify-center rounded-lg bg-slate-700 px-4 py-2 font-semibold text-slate-300 sm:w-auto"
                     >
                       {course.ctaLabel}
                     </button>
@@ -310,7 +304,7 @@ export default function TeachingPage() {
                   <button
                     type="button"
                     onClick={() => selectCourse(course.title)}
-                    className="mt-4 inline-flex items-center justify-center rounded-lg bg-accent-orange px-4 py-2 font-semibold text-black transition-opacity hover:opacity-90"
+                    className="mt-4 inline-flex w-full items-center justify-center rounded-lg bg-accent-orange px-4 py-2 font-semibold text-black transition-opacity hover:opacity-90 sm:w-auto"
                   >
                     {course.ctaLabel}
                   </button>
@@ -326,14 +320,14 @@ export default function TeachingPage() {
       </div>
 
       <div>
-        <h2 className="mb-4 text-2xl">Kontakt & Booking</h2>
+        <h2 className="mb-4">Kontakt & Booking</h2>
         <p className="mb-6 text-slate-300">
           Kontakt mig direkte for booking af elevkurser eller workshops til lærere.
         </p>
 
-        <form id="booking-form" onSubmit={handleSubmit} className="mt-8 space-y-4 rounded-xl border border-slate-700 p-5">
+        <form id="booking-form" onSubmit={handleSubmit} className="mt-8 space-y-4 rounded-xl border border-slate-700 p-4 sm:p-5 md:p-6">
           <div className="space-y-2">
-            <h3 className="text-xl font-semibold">Book en aftale</h3>
+            <h3>Book en aftale</h3>
             <p className="text-sm text-slate-300">
               Udfyld formularen, så vender jeg tilbage med svar om pris, muligheder og næste skridt.
             </p>
@@ -378,9 +372,7 @@ export default function TeachingPage() {
                 value={formState.school}
                 onChange={handleFormChange}
                 required
-                className={`w-full rounded-lg border bg-slate-950/60 px-4 py-3 text-slate-100 outline-none transition-colors ${
-                  formErrors.school ? 'border-red-400 focus:border-red-400' : 'border-slate-600 focus:border-accent-orange'
-                }`}
+                className="w-full rounded-lg border border-slate-600 bg-slate-950/60 px-4 py-3 text-slate-100 outline-none transition-colors focus:border-accent-orange"
               />
               {formErrors.school && <p className="text-xs text-red-400">{formErrors.school}</p>}
             </label>
@@ -428,7 +420,7 @@ export default function TeachingPage() {
             <button
               type="submit"
               disabled={submitState === 'sending'}
-              className="inline-flex items-center justify-center rounded-lg bg-accent-orange px-5 py-3 font-semibold text-black transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+              className="inline-flex w-full items-center justify-center rounded-lg bg-accent-orange px-5 py-3 font-semibold text-black transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
             >
               {submitState === 'sending' ? 'Sender...' : 'Send bookingforespørgsel'}
             </button>
@@ -453,7 +445,7 @@ export default function TeachingPage() {
           <button
             type="button"
             onClick={copyEmail}
-            className="mt-2 text-lg font-semibold text-accent-orange underline decoration-accent-orange/70 underline-offset-4 transition-opacity hover:opacity-85"
+            className="mt-2 text-left text-lg font-semibold text-accent-orange underline decoration-accent-orange/70 underline-offset-4 transition-opacity hover:opacity-85"
             title="Klik for at kopiere email"
           >
             {email}

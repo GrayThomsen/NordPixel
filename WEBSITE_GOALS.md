@@ -1,7 +1,7 @@
 # NordPixel Foundation – Marts 2026
 
 ## Formål
-Minimal hjemmeside for NordPixel Development – fokuseret på undervisning i teknologiforståelse.
+Minimal hjemmeside for NordPixel – fokuseret på undervisning i teknologiforståelse.
 
 Siden understøtter Emil's virksomhed som underviser i teknologiforståelse for folkeskoler, mens han uddanner sig til:
 - Multimediedesigner
