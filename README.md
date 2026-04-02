@@ -15,6 +15,8 @@ Minimal hjemmeside for NordPixel – fokuseret på undervisning i teknologiforst
 - React Router v6
 
 ## Kom i Gang
+Dette projekt bruger kun Node.js/npm (ingen Python eller `.venv` er nødvendig).
+
 1. `npm install`
 2. `npm run dev`
 3. Åbn `http://localhost:5173`

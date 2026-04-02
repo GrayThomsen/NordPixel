@@ -71,8 +71,8 @@ export default function FoundationLayout() {
           </div>
         </header>
 
-        <main className="flex-1 px-2 pb-8 sm:px-4 md:px-6 md:pb-12">
-          <div className="mx-auto w-full max-w-6xl border border-slate-200/80 bg-gradient-to-b from-white to-slate-100 shadow-[0_24px_56px_rgba(0,0,0,0.32)]">
+        <main className="flex-1 px-1 pb-8 sm:px-2 md:px-3 md:pb-12">
+          <div className="mx-auto w-full max-w-7xl border border-slate-300/80 bg-slate-200 shadow-[0_24px_56px_rgba(0,0,0,0.32)]">
             <div className="flex flex-col gap-10 px-5 py-8 text-slate-900 sm:px-8 md:px-10 md:py-14">
               {/* Definerer hvilke komponenter der vises for hver URL. */}
               <Routes>

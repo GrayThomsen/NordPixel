@@ -5,13 +5,13 @@ const email = 'thomsenwork@outlook.dk';
 
 const studentCourses = [
   {
-    title: "Computerens Sprog - Tegn og Symboler",
+    title: 'Computerens sprog - tegn og symboler',
     grade: "Fra 4. klasse",
     duration: "4 timer (inkl. pauser)",
     price: "1150,00 kr (ekskl. moms)",
     ctaLabel: "Book kursus",
-    description: "Eleverne præcenteres for de mange symboler og tegn, der udgør computerens sprog, og får en forståelse for, hvordan disse bruges til at kommunikere med maskiner.",
-    outcome: "Efter 4 timer (inkl. pauser) har eleverne en grundlæggende forståelse for, hvordan de kan bruge special-tegn og symboler til at kommunikere med maskiner.",
+    description: 'Eleverne præsenteres for de mange symboler og tegn, der udgør computerens sprog, og får en forståelse af, hvordan de bruges til at kommunikere med maskiner.',
+    outcome: 'Efter 4 timer (inkl. pauser) har eleverne en grundlæggende forståelse af, hvordan de kan bruge specialtegn og symboler til at kommunikere med maskiner.',
   },
 
   {
@@ -32,7 +32,7 @@ const studentCourses = [
     price: '1150,00 kr (ekskl. moms)',
     ctaLabel: 'Book kursus',
     description:
-      'Giver eleverne flere værktøjer til selvstændig benyttelse af HTML og CSS i skole- og privat arbejde ved brug af standard design- og udviklingsprincipper.',
+      'Giver eleverne flere værktøjer til selvstændig brug af HTML og CSS i skole- og privat arbejde med udgangspunkt i grundlæggende design- og udviklingsprincipper.',
     outcome:
       'Anbefales efter HTML & CSS 1. Efter 4 timer (inkl. pauser) har eleverne redskaberne til at producere egne hjemmesider til skoleprojekter og en bedre forståelse af den digitale verden bag skærmen.',
   },
@@ -43,7 +43,7 @@ const studentCourses = [
     price: '1150,00 kr (ekskl. moms)',
     ctaLabel: 'Book kursus',
     description: 'JavaScript er et centralt sprog på hjemmesider og et godt startpunkt for elever, der ønsker at lære programmering.',
-    outcome: 'Efter 4 timer (inkl. pauser) har eleverne en forståelse af, hvad programmering er, og kan bruge dokumentation til at skabe egne tråde og processer. Det anbefales at have arbejdet med HTML og CSS først.',
+    outcome: 'Efter 4 timer (inkl. pauser) har eleverne en forståelse af, hvad programmering er, og kan bruge dokumentation til at bygge egne funktioner og processer. Det anbefales at have arbejdet med HTML og CSS først.',
   },
 
   {
@@ -52,8 +52,8 @@ const studentCourses = [
     duration: '4 timer (inkl. pauser)',
     price: '1150,00 kr (ekskl. moms)',
     ctaLabel: 'Book kursus',
-    description: "Giv dine elever værktøjet til selvstændigt at arbejde videre med JavaScript i skoleprojekter og privat, og en bedre forståelse for, hvordan programmering kan bruges til at skabe digitale løsninger.",
-    outcome: "Anbefales efter JavaScript 1. Efter 4 timer (inkl. pauser) har eleverne redskaberne til at arbejde videre med JavaScript i reale programmerings-sammenhænge og en bedre forståelse for, hvordan man bedst udnytter den computationelle tankegang.",
+    description: 'Giver eleverne værktøjer til selvstændigt at arbejde videre med JavaScript i skoleprojekter og privat samt en bedre forståelse af, hvordan programmering kan bruges til at skabe digitale løsninger.',
+    outcome: 'Anbefales efter JavaScript 1. Efter 4 timer (inkl. pauser) har eleverne redskaberne til at arbejde videre med JavaScript i reelle programmeringssammenhænge og en bedre forståelse af, hvordan man udnytter computationel tankegang.',
   }
 ];
 
@@ -116,6 +116,32 @@ const teacherCourses: TeacherCourse[] = [
       'Tryghed i at støtte eleverne i logik, funktioner og interaktion',
       'Idéer til, hvordan arbejdet kan forankres i egne fag og forløb',
     ],
+  },
+  {
+    title: 'Underviserworkshops',
+    duration: '6 timer (inkl. pauser)',
+    price: '2500,00 kr (ekskl. moms)',
+    ctaLabel: 'Book workshop',
+    description:
+      'Et samlet workshopforløb, hvor lærerteamet får konkrete metoder, øvelser og materialer til at arbejde med digital dannelse og teknologiforståelse i egne fag.',
+    examples: [
+      'Digital manipulation (Samfundsfag)',
+      'Design af interaktive medier (HDS)',
+      'Hvordan “tænker” lommeregneren (Matematik)',
+      'Kildekritik og AI (Dansk/engelsk)',
+      'Plakat- og printdesign (HDS)',
+      'Large Project Workflow (LPW) (Projektarbejde)',
+    ],
+  },
+  {
+    title: 'Selvstændigt materiale',
+    duration: 'N/A',
+    price: '500,00 kr (licens til skolen)',
+    ctaLabel: 'Ikke tilgængelig endnu',
+    isAvailable: false,
+    unavailableNote: 'Materialepakken er under udvikling og kan ikke bestilles endnu.',
+    description:
+      'PDF-materiale med opgaver, eksempler, forklaringer og kodesnippets, der kan bruges til selvstændigt arbejde i klassen.',
   },
 ];
 
@@ -183,9 +209,9 @@ export default function TeachingPage() {
     }
 
     if (!formState.email.trim()) {
-      errors.email = 'Kontakt mail er påkrævet.';
+      errors.email = 'Kontaktmail er påkrævet.';
     } else if (!/^\S+@\S+\.\S+$/.test(formState.email.trim())) {
-      errors.email = 'Indtast en gyldig emailadresse.';
+      errors.email = 'Indtast en gyldig e-mailadresse.';
     }
 
     if (!formState.school.trim()) {
@@ -193,7 +219,7 @@ export default function TeachingPage() {
     }
 
     if (!formState.course.trim()) {
-      errors.course = 'Kursus/workshop er påkrævet.';
+      errors.course = 'Kursus eller workshop er påkrævet.';
     }
 
     setFormErrors(errors);
@@ -262,9 +288,9 @@ export default function TeachingPage() {
   return (
     <section className="space-y-10 md:space-y-12">
       <header className="space-y-4">
-        <h1 className="leading-tight">Teknologiforståelse for Folkeskolen</h1>
+        <h1 className="leading-tight">Teknologiforståelse i folkeskolen</h1>
         <p className="max-w-3xl text-base text-slate-700 sm:text-lg">
-          Kurser i webdesign og udvikling til udskolingen, hvor eleverne får hands-on erfaring med at bygge egne hjemmesider
+          Kurser i webdesign og udvikling til udskolingen, hvor eleverne får hands-on-erfaring med at bygge egne hjemmesider
           og forstå, hvad der sker bag skærmen i den digitale verden.
         </p>
       </header>
@@ -272,12 +298,12 @@ export default function TeachingPage() {
       <div>
         <h2 className="mb-4">Kurser for elever</h2>
         <p className="mb-6 text-slate-700">
-          Alle elevkurser er planlagt som 4-timers forløb (inkl. pauser) med fokus på konkrete færdigheder, som kan bruges i
+          Alle elevkurser er planlagt som 4-timers forløb (inkl. pauser) med fokus på konkrete færdigheder, der kan bruges i
           skoleprojekter og videre læring.
         </p>
         <div className="grid gap-4 md:grid-cols-2">
           {studentCourses.map((course) => (
-            <article key={course.title} className="flex h-full flex-col rounded-xl border border-[#1b4e61] bg-[#032633] p-5 shadow-[0_12px_28px_rgba(1,12,17,0.35)]">
+            <article key={course.title} className="flex h-full flex-col rounded-xl border border-[#1b4e61] bg-[#032633] p-5">
               <div className="flex-1">
                 <h3 className="text-accent-orange">{course.title}</h3>
                 <p className="mb-3 mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-semibold uppercase tracking-wide text-slate-200">
@@ -307,19 +333,19 @@ export default function TeachingPage() {
       <div>
         <h2 className="mb-4">Kurser for lærere</h2>
         <p className="mb-4 text-slate-700">
-          Lærerkurserne er bygget som et supplement til elevforløbene, så lærere bliver klædt på til selv at kunne arbejde
+          Lærerkurserne er bygget som et supplement til elevforløbene, så lærerne bliver klædt på til selv at kunne arbejde
           videre med de samme materialer og principper i undervisningen efter kursusdagen.
         </p>
         <div className="grid gap-4 md:grid-cols-2">
           {teacherCourses.map((course) => (
-            <article key={course.title} className="flex h-full flex-col rounded-xl border border-[#1b4e61] bg-[#032633] p-5 shadow-[0_12px_28px_rgba(1,12,17,0.35)]">
+            <article key={course.title} className="flex h-full flex-col rounded-xl border border-[#1b4e61] bg-[#032633] p-5">
               <div className="flex-1">
                 <h3 className="text-accent-orange">{course.title}</h3>
                 <p className="mb-3 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-200">{course.duration}</p>
                 <p className="text-sm leading-relaxed text-slate-200">{course.description}</p>
                 {course.examples && (
                   <div className="mt-4">
-                    <p className="mb-2 text-sm font-semibold text-slate-200">Eksempler på workshop-temaer:</p>
+                    <p className="mb-2 text-sm font-semibold text-slate-200">Eksempler på workshoptemaer:</p>
                     <ul className="grid gap-2 text-sm text-slate-300 md:grid-cols-2">
                       {course.examples.map((example) => (
                         <li key={example}>• {example}</li>
@@ -366,10 +392,10 @@ export default function TeachingPage() {
       <div>
         <h2 className="mb-4">Kontakt & Booking</h2>
         <p className="mb-6 text-slate-700">
-          Kontakt mig direkte for booking af elevkurser eller workshops til lærere.
+          Kontakt mig direkte for booking af elevkurser eller lærerworkshops.
         </p>
 
-        <form id="booking-form" onSubmit={handleSubmit} className="mt-8 space-y-6 rounded-xl border border-[#1b4e61] bg-[#032633] p-4 text-slate-100 shadow-[0_12px_28px_rgba(1,12,17,0.35)] sm:p-5 md:p-6">
+        <form id="booking-form" onSubmit={handleSubmit} className="mt-8 space-y-6 rounded-xl border border-[#1b4e61] bg-[#032633] p-4 text-slate-100 sm:p-5 md:p-6">
           <div className="space-y-3">
             <h3 className="text-slate-100">Book en aftale</h3>
             <p className="text-sm text-slate-300">
@@ -393,7 +419,7 @@ export default function TeachingPage() {
             </label>
 
             <label className="block space-y-2 text-sm text-slate-200">
-              <span className="block font-medium">Kontakt mail *</span>
+              <span className="block font-medium">Kontaktmail *</span>
               <input
                 type="email"
                 name="email"
@@ -433,14 +459,14 @@ export default function TeachingPage() {
 
           <div className="space-y-6">
             <label className="block space-y-2 text-sm text-slate-200">
-              <span className="block font-medium">Kursus/workshop *</span>
+              <span className="block font-medium">Kursus eller workshop *</span>
               <input
                 type="text"
                 name="course"
                 value={formState.course}
                 onChange={handleFormChange}
                 required
-                placeholder="Fx HTML & CSS 1 eller Underviser-workshop"
+                placeholder="F.eks. HTML & CSS 1 eller underviserworkshop"
                 className={`w-full rounded-lg border bg-slate-950/60 px-4 py-3 text-slate-100 outline-none transition-colors ${formErrors.course ? 'border-red-400 focus:border-red-400' : 'border-slate-600 focus:border-accent-orange'
                   }`}
               />
@@ -475,7 +501,7 @@ export default function TeachingPage() {
           )}
           {submitState === 'error' && (
             <p className="text-sm text-red-400">
-              Der opstod en fejl under afsendelse. Prøv igen eller skriv direkte til emailen nedenfor.
+              Der opstod en fejl under afsendelse. Prøv igen, eller skriv direkte til e-mailadressen nedenfor.
               {submitErrorMessage && <span className="block mt-1 text-xs text-red-300">{submitErrorMessage}</span>}
             </p>
           )}
@@ -487,7 +513,7 @@ export default function TeachingPage() {
         </form>
 
         <div className="mt-8 border-t border-slate-300 pt-6">
-          <p className="text-sm text-slate-700">Andre forespørgsler, skriv direkte til:</p>
+          <p className="text-sm text-slate-700">Ved andre forespørgsler kan du skrive direkte til:</p>
           <button
             type="button"
             onClick={copyEmail}
@@ -496,7 +522,7 @@ export default function TeachingPage() {
           >
             {email}
           </button>
-          <p className="mt-2 text-xs text-slate-500">Klik på emailen for at kopiere den til udklipsholderen.</p>
+          <p className="mt-2 text-xs text-slate-500">Klik på e-mailadressen for at kopiere den til udklipsholderen.</p>
           {copyState === 'copied' && <p className="mt-2 text-sm text-green-400">Email kopieret.</p>}
           {copyState === 'failed' && <p className="mt-2 text-sm text-red-400">Kunne ikke kopiere email.</p>}
         </div>
