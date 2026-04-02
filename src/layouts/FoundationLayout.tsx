@@ -71,15 +71,17 @@ export default function FoundationLayout() {
           </div>
         </header>
 
-        <main className="flex-1">
-          <div className="mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 py-8 sm:px-6 md:px-8 md:py-14">
-            {/* Definerer hvilke komponenter der vises for hver URL. */}
-            <Routes>
-              <Route path="/" element={<TeachingPage />} />
-              <Route path="/about" element={<AboutPage />} />
-              {/* Fallback: ukendte routes sendes til forsiden. */}
-              <Route path="*" element={<TeachingPage />} />
-            </Routes>
+        <main className="flex-1 px-2 pb-8 sm:px-4 md:px-6 md:pb-12">
+          <div className="mx-auto w-full max-w-6xl border border-slate-200/80 bg-gradient-to-b from-white to-slate-100 shadow-[0_24px_56px_rgba(0,0,0,0.32)]">
+            <div className="flex flex-col gap-10 px-5 py-8 text-slate-900 sm:px-8 md:px-10 md:py-14">
+              {/* Definerer hvilke komponenter der vises for hver URL. */}
+              <Routes>
+                <Route path="/" element={<TeachingPage />} />
+                <Route path="/about" element={<AboutPage />} />
+                {/* Fallback: ukendte routes sendes til forsiden. */}
+                <Route path="*" element={<TeachingPage />} />
+              </Routes>
+            </div>
           </div>
         </main>
 

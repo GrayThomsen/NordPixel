@@ -263,7 +263,7 @@ export default function TeachingPage() {
     <section className="space-y-10 md:space-y-12">
       <header className="space-y-4">
         <h1 className="leading-tight">Teknologiforståelse for Folkeskolen</h1>
-        <p className="max-w-3xl text-base text-slate-300 sm:text-lg">
+        <p className="max-w-3xl text-base text-slate-700 sm:text-lg">
           Kurser i webdesign og udvikling til udskolingen, hvor eleverne får hands-on erfaring med at bygge egne hjemmesider
           og forstå, hvad der sker bag skærmen i den digitale verden.
         </p>
@@ -271,13 +271,13 @@ export default function TeachingPage() {
 
       <div>
         <h2 className="mb-4">Kurser for elever</h2>
-        <p className="mb-6 text-slate-300">
+        <p className="mb-6 text-slate-700">
           Alle elevkurser er planlagt som 4-timers forløb (inkl. pauser) med fokus på konkrete færdigheder, som kan bruges i
           skoleprojekter og videre læring.
         </p>
         <div className="grid gap-4 md:grid-cols-2">
           {studentCourses.map((course) => (
-            <article key={course.title} className="flex h-full flex-col rounded-xl border border-slate-600 p-5">
+            <article key={course.title} className="flex h-full flex-col rounded-xl border border-[#1b4e61] bg-[#032633] p-5 shadow-[0_12px_28px_rgba(1,12,17,0.35)]">
               <div className="flex-1">
                 <h3 className="text-accent-orange">{course.title}</h3>
                 <p className="mb-3 mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-semibold uppercase tracking-wide text-slate-200">
@@ -306,13 +306,13 @@ export default function TeachingPage() {
 
       <div>
         <h2 className="mb-4">Kurser for lærere</h2>
-        <p className="mb-4 text-slate-300">
+        <p className="mb-4 text-slate-700">
           Lærerkurserne er bygget som et supplement til elevforløbene, så lærere bliver klædt på til selv at kunne arbejde
           videre med de samme materialer og principper i undervisningen efter kursusdagen.
         </p>
         <div className="grid gap-4 md:grid-cols-2">
           {teacherCourses.map((course) => (
-            <article key={course.title} className="flex h-full flex-col rounded-xl border border-slate-600 p-5">
+            <article key={course.title} className="flex h-full flex-col rounded-xl border border-[#1b4e61] bg-[#032633] p-5 shadow-[0_12px_28px_rgba(1,12,17,0.35)]">
               <div className="flex-1">
                 <h3 className="text-accent-orange">{course.title}</h3>
                 <p className="mb-3 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-200">{course.duration}</p>
@@ -357,7 +357,7 @@ export default function TeachingPage() {
             </article>
           ))}
         </div>
-        <p className="mt-4 text-sm leading-relaxed text-slate-300">
+        <p className="mt-4 text-sm leading-relaxed text-slate-700">
           Skoler bruger forskellige computere og IT-begrænsninger. Derfor afstemmes format hurtigt, så forløbet passer til
           skolens rammer og elevernes adgang.
         </p>
@@ -365,13 +365,13 @@ export default function TeachingPage() {
 
       <div>
         <h2 className="mb-4">Kontakt & Booking</h2>
-        <p className="mb-6 text-slate-300">
+        <p className="mb-6 text-slate-700">
           Kontakt mig direkte for booking af elevkurser eller workshops til lærere.
         </p>
 
-        <form id="booking-form" onSubmit={handleSubmit} className="mt-8 space-y-6 rounded-xl border border-slate-700 p-4 sm:p-5 md:p-6">
+        <form id="booking-form" onSubmit={handleSubmit} className="mt-8 space-y-6 rounded-xl border border-[#1b4e61] bg-[#032633] p-4 text-slate-100 shadow-[0_12px_28px_rgba(1,12,17,0.35)] sm:p-5 md:p-6">
           <div className="space-y-3">
-            <h3>Book en aftale</h3>
+            <h3 className="text-slate-100">Book en aftale</h3>
             <p className="text-sm text-slate-300">
               Udfyld formularen, så vender jeg tilbage med svar om pris, muligheder og næste skridt.
             </p>
@@ -486,8 +486,8 @@ export default function TeachingPage() {
           )}
         </form>
 
-        <div className="mt-8 border-t border-slate-700 pt-6">
-          <p className="text-sm text-slate-300">Andre forespørgsler, skriv direkte til:</p>
+        <div className="mt-8 border-t border-slate-300 pt-6">
+          <p className="text-sm text-slate-700">Andre forespørgsler, skriv direkte til:</p>
           <button
             type="button"
             onClick={copyEmail}
@@ -496,7 +496,7 @@ export default function TeachingPage() {
           >
             {email}
           </button>
-          <p className="mt-2 text-xs text-slate-400">Klik på emailen for at kopiere den til udklipsholderen.</p>
+          <p className="mt-2 text-xs text-slate-500">Klik på emailen for at kopiere den til udklipsholderen.</p>
           {copyState === 'copied' && <p className="mt-2 text-sm text-green-400">Email kopieret.</p>}
           {copyState === 'failed' && <p className="mt-2 text-sm text-red-400">Kunne ikke kopiere email.</p>}
         </div>

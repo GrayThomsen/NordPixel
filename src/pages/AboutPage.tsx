@@ -4,16 +4,16 @@ export default function AboutPage() {
     <section className="space-y-8 md:space-y-10">
       <header className="max-w-4xl space-y-4 md:space-y-5">
         <h1 className="leading-tight">Om os</h1>
-        <p className="max-w-4xl text-lg leading-relaxed text-slate-300 md:text-xl">
+        <p className="max-w-4xl text-lg leading-relaxed text-slate-800 md:text-xl">
           NordPixel arbejder i krydsfeltet mellem digital udvikling, undervisning og teknologiforståelse. Målet er at gøre
           den digitale verden mere konkret, anvendelig og relevant for skoler, lærere og elever.
         </p>
       </header>
 
       <div className="max-w-4xl space-y-10 md:space-y-12">
-        <section className="space-y-4 border-b border-slate-800/80 pb-8 md:space-y-5">
+        <section className="space-y-4 border-b border-slate-300 pb-8 md:space-y-5">
           <h2 className="text-accent-orange/90">Om NordPixel</h2>
-          <div className="space-y-4 text-base leading-relaxed text-slate-300 md:text-[1.05rem]">
+          <div className="space-y-4 text-base leading-8 text-slate-800 md:text-[1.05rem]">
             <p>
               NordPixel er bygget op omkring idéen om, at teknologi ikke bare skal forklares — den skal opleves, afprøves og
               bruges aktivt. Derfor udvikler virksomheden forløb, workshops og materialer, der omsætter web, programmering og
@@ -31,9 +31,9 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section className="space-y-4 border-b border-slate-800/80 pb-8 md:space-y-5">
+        <section className="space-y-4 border-b border-slate-300 pb-8 md:space-y-5">
           <h2 className="text-accent-orange/90">Om instruktøren</h2>
-          <div className="space-y-4 text-base leading-relaxed text-slate-300 md:text-[1.05rem]">
+          <div className="space-y-4 text-base leading-8 text-slate-800 md:text-[1.05rem]">
             <p>
               Jeg hedder Emil G. Thomsen, er webudvikler og multimediedesigner, og jeg hjælper folkeskoler med
               teknologiforståelse gennem praksisnære forløb.
@@ -52,7 +52,7 @@ export default function AboutPage() {
 
         <section className="space-y-4 md:space-y-5">
           <h2 className="text-accent-orange/90">Tilpasset forløb</h2>
-          <div className="space-y-4 text-base leading-relaxed text-slate-300 md:text-[1.05rem]">
+          <div className="space-y-4 text-base leading-8 text-slate-800 md:text-[1.05rem]">
             <p>
               Alle klasser er forskellige og har forskellige behov. Forløb tilpasses for at styrke elevernes digitale
               kompetencer og give dem en bedre forståelse af, hvordan en computer “tænker”.
