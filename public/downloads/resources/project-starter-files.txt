@@ -1,0 +1,3 @@
+Project Starter Files
+
+This placeholder download represents the starter project structure used in the course's hands-on exercises.

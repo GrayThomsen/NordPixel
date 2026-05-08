@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import { Heart, Target, Lightbulb, Users, Mail, Send, MessageSquare } from 'lucide-react';
 import { Card, CardContent, CardHeader } from '../components/ui/Card';
@@ -7,6 +9,7 @@ import { useLanguage } from '../components/LanguageProvider';
 
 export function AboutPage() {
   const { language } = useLanguage();
+  const [submissionState, setSubmissionState] = useState<'idle' | 'submitted'>('idle');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -16,10 +19,7 @@ export function AboutPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert(language === 'da'
-      ? 'Tak for din besked! Jeg vender tilbage inden for 24 timer.'
-      : 'Thank you for your message! I will get back to you within 24 hours.'
-    );
+    setSubmissionState('submitted');
     setFormData({ name: '', email: '', subject: '', message: '' });
   };
 
@@ -229,11 +229,21 @@ export function AboutPage() {
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-4">
+                  {submissionState === 'submitted' && (
+                    <div className="rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700 dark:border-green-900/50 dark:bg-green-950/30 dark:text-green-300">
+                      {language === 'da'
+                        ? 'Tak for din besked. Jeg vender tilbage inden for 24 timer.'
+                        : 'Thank you for your message. I will get back to you within 24 hours.'}
+                    </div>
+                  )}
                   <Input
                     label={language === 'da' ? 'Dit Navn' : 'Your Name'}
                     placeholder={language === 'da' ? 'Indtast dit navn' : 'Enter your name'}
                     value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    onChange={(e) => {
+                      setSubmissionState('idle');
+                      setFormData({ ...formData, name: e.target.value });
+                    }}
                     required
                   />
                   <Input
@@ -241,14 +251,20 @@ export function AboutPage() {
                     type="email"
                     placeholder={language === 'da' ? 'din@email.dk' : 'your@email.com'}
                     value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    onChange={(e) => {
+                      setSubmissionState('idle');
+                      setFormData({ ...formData, email: e.target.value });
+                    }}
                     required
                   />
                   <Input
                     label={language === 'da' ? 'Emne' : 'Subject'}
                     placeholder={language === 'da' ? 'Hvad drejer det sig om?' : 'What is this about?'}
                     value={formData.subject}
-                    onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                    onChange={(e) => {
+                      setSubmissionState('idle');
+                      setFormData({ ...formData, subject: e.target.value });
+                    }}
                     required
                   />
                   <div>
@@ -260,7 +276,10 @@ export function AboutPage() {
                       rows={6}
                       placeholder={language === 'da' ? 'Din besked...' : 'Your message...'}
                       value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      onChange={(e) => {
+                        setSubmissionState('idle');
+                        setFormData({ ...formData, message: e.target.value });
+                      }}
                       required
                     />
                   </div>

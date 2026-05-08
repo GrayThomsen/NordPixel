@@ -1,5 +1,9 @@
+"use client";
+
 import { useState, useRef, useEffect } from 'react';
-import { Link, useLocation } from 'react-router';
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Menu, X, Moon, Sun, Languages, Settings } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 import { useLanguage } from './LanguageProvider';
@@ -10,16 +14,21 @@ import logoWhite from '../../imports/WhiteLogoTrans.png';
 export function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const settingsRef = useRef<HTMLDivElement>(null);
+  const desktopSettingsRef = useRef<HTMLDivElement>(null);
+  const mobileSettingsRef = useRef<HTMLDivElement>(null);
   const { theme, toggleTheme } = useTheme();
   const { language, setLanguage, t } = useLanguage();
-  const location = useLocation();
+  const pathname = usePathname();
 
-  const isActive = (path: string) => location.pathname === path;
+  const isActive = (path: string) => pathname === path;
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (settingsRef.current && !settingsRef.current.contains(event.target as Node)) {
+      const target = event.target as Node;
+      const clickedInsideDesktop = desktopSettingsRef.current?.contains(target) ?? false;
+      const clickedInsideMobile = mobileSettingsRef.current?.contains(target) ?? false;
+
+      if (!clickedInsideDesktop && !clickedInsideMobile) {
         setSettingsOpen(false);
       }
     };
@@ -44,10 +53,12 @@ export function Navigation() {
     <nav className="sticky top-0 z-50 bg-white dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800 transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <Link to="/" className="flex items-center">
-            <img
+          <Link href="/" className="flex items-center">
+            <Image
               src={theme === 'dark' ? logoWhite : logoBlack}
               alt="NordPixel"
+              width={160}
+              height={40}
               className="h-10 w-auto"
             />
           </Link>
@@ -56,7 +67,7 @@ export function Navigation() {
             {navLinks.map((link) => (
               <Link
                 key={link.path}
-                to={link.path}
+                href={link.path}
                 className={`px-4 py-2 rounded-lg transition-colors ${
                   isActive(link.path)
                     ? 'bg-neutral-100 dark:bg-neutral-800 text-[#F5A623]'
@@ -69,7 +80,7 @@ export function Navigation() {
           </div>
 
           <div className="hidden lg:flex items-center space-x-4">
-            <div className="relative" ref={settingsRef}>
+            <div className="relative" ref={desktopSettingsRef}>
               <button
                 onClick={() => setSettingsOpen(!settingsOpen)}
                 className="p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
@@ -103,20 +114,20 @@ export function Navigation() {
                 </div>
               )}
             </div>
-            <Link to="/login">
-              <Button variant="ghost" size="sm">
+            <Button asChild variant="ghost" size="sm">
+              <Link href="/login">
                 {t('nav.login')}
-              </Button>
-            </Link>
-            <Link to="/signup">
-              <Button variant="primary" size="sm">
+              </Link>
+            </Button>
+            <Button asChild variant="primary" size="sm">
+              <Link href="/signup">
                 {t('nav.signup')}
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
 
           <div className="lg:hidden flex items-center space-x-2">
-            <div className="relative" ref={settingsRef}>
+            <div className="relative" ref={mobileSettingsRef}>
               <button
                 onClick={() => setSettingsOpen(!settingsOpen)}
                 className="p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
@@ -167,7 +178,7 @@ export function Navigation() {
             {navLinks.map((link) => (
               <Link
                 key={link.path}
-                to={link.path}
+                href={link.path}
                 onClick={() => setMobileMenuOpen(false)}
                 className={`block px-4 py-3 rounded-lg transition-colors ${
                   isActive(link.path)
@@ -179,16 +190,16 @@ export function Navigation() {
               </Link>
             ))}
             <div className="pt-4 border-t border-neutral-200 dark:border-neutral-800 space-y-2">
-              <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
-                <Button variant="ghost" size="md" className="w-full">
+              <Button asChild variant="ghost" size="md" className="w-full">
+                <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
                   {t('nav.login')}
-                </Button>
-              </Link>
-              <Link to="/signup" onClick={() => setMobileMenuOpen(false)}>
-                <Button variant="primary" size="md" className="w-full">
+                </Link>
+              </Button>
+              <Button asChild variant="primary" size="md" className="w-full">
+                <Link href="/signup" onClick={() => setMobileMenuOpen(false)}>
                   {t('nav.signup')}
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </div>
           </div>
         </div>

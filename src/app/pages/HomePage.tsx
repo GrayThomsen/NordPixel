@@ -1,4 +1,7 @@
-import { Link } from 'react-router';
+'use client';
+
+import { FormEvent, useState } from 'react';
+import Link from 'next/link';
 import { motion } from 'motion/react';
 import { Code, Users, BookOpen, Award, Star } from 'lucide-react';
 import { Button } from '../components/ui/Button';
@@ -8,6 +11,8 @@ import { useLanguage } from '../components/LanguageProvider';
 
 export function HomePage() {
   const { t, language } = useLanguage();
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [newsletterSubmitted, setNewsletterSubmitted] = useState(false);
 
   const features = [
     {
@@ -119,6 +124,12 @@ export function HomePage() {
     },
   ];
 
+  const handleNewsletterSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setNewsletterSubmitted(true);
+    setNewsletterEmail('');
+  };
+
   return (
     <div>
       <section className="relative overflow-hidden bg-gradient-to-br from-white via-neutral-50 to-[#FFF5E6] dark:from-neutral-950 dark:via-neutral-900 dark:to-neutral-950">
@@ -141,21 +152,21 @@ export function HomePage() {
               {t('home.hero.subtitle')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/courses">
-                <Button variant="primary" size="lg">
+              <Button asChild variant="primary" size="lg">
+                <Link href="/courses">
                   {t('home.hero.cta1')}
-                </Button>
-              </Link>
-              <Link to="/teaching-materials">
-                <Button variant="outline" size="lg">
+                </Link>
+              </Button>
+              <Button asChild variant="outline" size="lg">
+                <Link href="/teaching-materials">
                   {t('home.hero.cta2')}
-                </Button>
-              </Link>
-              <Link to="/workshops">
-                <Button variant="secondary" size="lg">
+                </Link>
+              </Button>
+              <Button asChild variant="secondary" size="lg">
+                <Link href="/workshops">
                   {t('home.hero.cta3')}
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </div>
           </motion.div>
         </div>
@@ -210,9 +221,7 @@ export function HomePage() {
                 {t('home.courses.subtitle')}
               </p>
             </div>
-            <Link to="/courses">
-              <Button variant="outline">{t('home.courses.viewAll')}</Button>
-            </Link>
+            <Button asChild variant="outline"><Link href="/courses">{t('home.courses.viewAll')}</Link></Button>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -224,7 +233,7 @@ export function HomePage() {
                 transition={{ duration: 0.4, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Link to={`/courses/${course.id}`}>
+                <Link href={`/courses/${course.id}`}>
                   <Card hover className="overflow-hidden">
                     <img
                       src={course.image}
@@ -300,11 +309,11 @@ export function HomePage() {
           <p className="text-xl mb-8 opacity-90">
             {t('home.cta.subtitle')}
           </p>
-          <Link to="/signup">
-            <Button variant="secondary" size="lg">
+          <Button asChild variant="secondary" size="lg">
+            <Link href="/signup">
               {t('home.cta.button')}
-            </Button>
-          </Link>
+            </Link>
+          </Button>
         </div>
       </section>
 
@@ -314,13 +323,26 @@ export function HomePage() {
           <p className="text-lg text-neutral-600 dark:text-neutral-400 mb-8">
             {t('home.newsletter.subtitle')}
           </p>
-          <form className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
+          {newsletterSubmitted && (
+            <p className="mb-4 rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700 dark:border-green-900/50 dark:bg-green-950/30 dark:text-green-300">
+              {language === 'da'
+                ? 'Tak. Du er nu skrevet op til opdateringer fra NordPixel.'
+                : 'Thanks. You are now subscribed to NordPixel updates.'}
+            </p>
+          )}
+          <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
             <input
               type="email"
               placeholder={t('home.newsletter.placeholder')}
+              value={newsletterEmail}
+              onChange={(event) => {
+                setNewsletterSubmitted(false);
+                setNewsletterEmail(event.target.value);
+              }}
               className="flex-1 px-6 py-4 rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#F5A623]"
+              required
             />
-            <Button variant="primary" size="lg">
+            <Button variant="primary" size="lg" type="submit">
               {t('home.newsletter.button')}
             </Button>
           </form>

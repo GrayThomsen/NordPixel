@@ -1,4 +1,6 @@
-import { createContext, useContext, useState } from 'react';
+'use client';
+
+import { createContext, useContext, useEffect, useState } from 'react';
 
 type Language = 'da' | 'en';
 
@@ -192,14 +194,19 @@ const translations: Record<Language, Record<string, string>> = {
 };
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguage] = useState<Language>(() => {
-    const saved = localStorage.getItem('nordpixel-language');
-    return (saved as Language) || 'da';
-  });
+  const [language, setLanguage] = useState<Language>('da');
+
+  useEffect(() => {
+    const saved = window.localStorage.getItem('nordpixel-language') as Language | null;
+
+    if (saved) {
+      setLanguage(saved);
+    }
+  }, []);
 
   const handleSetLanguage = (lang: Language) => {
     setLanguage(lang);
-    localStorage.setItem('nordpixel-language', lang);
+    window.localStorage.setItem('nordpixel-language', lang);
   };
 
   const t = (key: string): string => {

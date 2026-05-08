@@ -1,0 +1,12 @@
+Introduction to HTML - Lesson Plan
+
+- Audience: 11-14 years
+- Subject: Web Development
+- Duration: 12 pages
+- Goal: Introduce semantic HTML, document structure, links, and images.
+
+Suggested lesson flow:
+1. Explain what HTML is and how browsers read it.
+2. Build a simple page with headings, paragraphs, and lists.
+3. Add links and images.
+4. Review accessibility basics and clean structure.

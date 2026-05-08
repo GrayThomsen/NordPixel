@@ -1,17 +1,22 @@
+'use client';
+
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { LogIn } from 'lucide-react';
 import { Card, CardContent, CardHeader } from '../components/ui/Card';
 import { Input } from '../components/ui/Input';
 import { Button } from '../components/ui/Button';
+import { useLanguage } from '../components/LanguageProvider';
 
 export function LoginPage() {
-  const navigate = useNavigate();
+  const router = useRouter();
+  const { language } = useLanguage();
   const [formData, setFormData] = useState({ email: '', password: '' });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    navigate('/dashboard');
+    router.push('/dashboard');
   };
 
   return (
@@ -22,24 +27,24 @@ export function LoginPage() {
             <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-[#F5A623] to-[#E09612] rounded-full flex items-center justify-center">
               <LogIn className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-3xl mb-2">Welcome Back</h1>
+            <h1 className="text-3xl mb-2">{language === 'da' ? 'Velkommen tilbage' : 'Welcome Back'}</h1>
             <p className="text-neutral-600 dark:text-neutral-400">
-              Sign in to continue learning
+              {language === 'da' ? 'Log ind for at fortsætte læringen' : 'Sign in to continue learning'}
             </p>
           </div>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <Input
-              label="Email Address"
+              label={language === 'da' ? 'E-mailadresse' : 'Email Address'}
               type="email"
-              placeholder="your@email.com"
+              placeholder={language === 'da' ? 'din@email.com' : 'your@email.com'}
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               required
             />
             <Input
-              label="Password"
+              label={language === 'da' ? 'Adgangskode' : 'Password'}
               type="password"
               placeholder="••••••••"
               value={formData.password}
@@ -49,22 +54,22 @@ export function LoginPage() {
             <div className="flex items-center justify-between text-sm">
               <label className="flex items-center gap-2 cursor-pointer">
                 <input type="checkbox" className="rounded" />
-                <span className="text-neutral-600 dark:text-neutral-400">Remember me</span>
+                <span className="text-neutral-600 dark:text-neutral-400">{language === 'da' ? 'Husk mig' : 'Remember me'}</span>
               </label>
-              <a href="#" className="text-[#F5A623] hover:underline">
-                Forgot password?
+              <a href="mailto:kontakt@nordpixel.dk?subject=Password%20reset%20request" className="text-[#F5A623] hover:underline">
+                {language === 'da' ? 'Glemt adgangskode?' : 'Forgot password?'}
               </a>
             </div>
             <Button variant="primary" size="lg" type="submit" className="w-full">
-              Sign In
+              {language === 'da' ? 'Log ind' : 'Sign In'}
             </Button>
           </form>
 
           <div className="mt-6 text-center">
             <p className="text-neutral-600 dark:text-neutral-400">
-              Don't have an account?{' '}
-              <Link to="/signup" className="text-[#F5A623] hover:underline font-medium">
-                Sign up
+              {language === 'da' ? 'Har du ikke en konto? ' : "Don't have an account? "}
+              <Link href="/signup" className="text-[#F5A623] hover:underline font-medium">
+                {language === 'da' ? 'Opret dig' : 'Sign up'}
               </Link>
             </p>
           </div>

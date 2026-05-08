@@ -1,0 +1,10 @@
+CSS Fundamentals Worksheets
+
+- Audience: 11-14 years
+- Subject: Web Development
+- Goal: Practice selectors, colours, spacing, and layout basics.
+
+Included ideas:
+1. Match selectors to elements.
+2. Style a simple card layout.
+3. Compare margin, padding, and border use.

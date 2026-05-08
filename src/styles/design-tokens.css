@@ -1,0 +1,200 @@
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Typography foundation: use for global type sizing and base emphasis weights. */
+  --base-font-size: 16px;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+
+  /* Page and container surfaces: use page for the app background, panel for cards, and overlay for dialogs/popovers. */
+  --surface-page: #ffffff;
+  --surface-panel: #ffffff;
+  --surface-overlay: oklch(1 0 0);
+  --surface-muted: #ececf0;
+  --surface-accent: #e9ebef;
+  --surface-field: #f3f3f5;
+
+  /* Text colors: use primary for normal reading, muted for supporting text, and inverse/on-* tokens on filled surfaces. */
+  --text-primary: oklch(0.145 0 0);
+  --text-muted: #717182;
+  --text-on-primary: oklch(1 0 0);
+  --text-on-secondary: #030213;
+  --text-on-accent: #030213;
+  --text-on-danger: #ffffff;
+
+  /* Interactive and status colors: use primary for main CTA actions, secondary for softer fills, danger for destructive states, ring for focus. */
+  --action-primary: #030213;
+  --action-secondary: oklch(0.95 0.0058 264.53);
+  --status-danger: #d4183d;
+  --focus-ring: oklch(0.708 0 0);
+
+  /* Borders and control surfaces: use border-subtle for separators, field-border for inputs, and toggle-track for switches. */
+  --border-subtle: rgba(0, 0, 0, 0.1);
+  --field-border: transparent;
+  --toggle-track: #cbced4;
+
+  /* Data visualization palette: use these in order for multi-series charts. */
+  --data-viz-1: oklch(0.646 0.222 41.116);
+  --data-viz-2: oklch(0.6 0.118 184.704);
+  --data-viz-3: oklch(0.398 0.07 227.392);
+  --data-viz-4: oklch(0.828 0.189 84.429);
+  --data-viz-5: oklch(0.769 0.188 70.08);
+
+  /* Shape system: use radius-base as the source token for component corner sizes. */
+  --radius-base: 0.625rem;
+
+  /* Sidebar tokens: use these only inside sidebar/navigation surfaces. */
+  --sidebar-surface: oklch(0.985 0 0);
+  --sidebar-text: oklch(0.145 0 0);
+  --sidebar-primary-surface: #030213;
+  --sidebar-primary-text: oklch(0.985 0 0);
+  --sidebar-accent-surface: oklch(0.97 0 0);
+  --sidebar-accent-text: oklch(0.205 0 0);
+  --sidebar-border-subtle: oklch(0.922 0 0);
+  --sidebar-focus-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  /* Dark surfaces: use the same semantic intent as light mode, but with dark-adapted values. */
+  --surface-page: oklch(0.145 0 0);
+  --surface-panel: oklch(0.145 0 0);
+  --surface-overlay: oklch(0.145 0 0);
+  --surface-muted: oklch(0.269 0 0);
+  --surface-accent: oklch(0.269 0 0);
+  --surface-field: oklch(0.269 0 0);
+
+  /* Dark text colors: primary is the default readable text, muted is for lower-emphasis content. */
+  --text-primary: oklch(0.985 0 0);
+  --text-muted: oklch(0.708 0 0);
+  --text-on-primary: oklch(0.205 0 0);
+  --text-on-secondary: oklch(0.985 0 0);
+  --text-on-accent: oklch(0.985 0 0);
+  --text-on-danger: oklch(0.637 0.237 25.331);
+
+  /* Dark interactive and status colors. */
+  --action-primary: oklch(0.985 0 0);
+  --action-secondary: oklch(0.269 0 0);
+  --status-danger: oklch(0.396 0.141 25.723);
+  --focus-ring: oklch(0.439 0 0);
+
+  /* Dark borders and control surfaces. */
+  --border-subtle: oklch(0.269 0 0);
+  --field-border: oklch(0.269 0 0);
+  --toggle-track: #cbced4;
+
+  /* Dark data visualization palette. */
+  --data-viz-1: oklch(0.488 0.243 264.376);
+  --data-viz-2: oklch(0.696 0.17 162.48);
+  --data-viz-3: oklch(0.769 0.188 70.08);
+  --data-viz-4: oklch(0.627 0.265 303.9);
+  --data-viz-5: oklch(0.645 0.246 16.439);
+
+  /* Dark sidebar tokens: use only for sidebar/navigation UI. */
+  --sidebar-surface: oklch(0.205 0 0);
+  --sidebar-text: oklch(0.985 0 0);
+  --sidebar-primary-surface: oklch(0.488 0.243 264.376);
+  --sidebar-primary-text: oklch(0.985 0 0);
+  --sidebar-accent-surface: oklch(0.269 0 0);
+  --sidebar-accent-text: oklch(0.985 0 0);
+  --sidebar-border-subtle: oklch(0.269 0 0);
+  --sidebar-focus-ring: oklch(0.439 0 0);
+}
+
+@theme inline {
+  /* Tailwind semantic aliases: these are what component classes consume. */
+  --color-background: var(--surface-page);
+  --color-foreground: var(--text-primary);
+  --color-card: var(--surface-panel);
+  --color-card-foreground: var(--text-primary);
+  --color-popover: var(--surface-overlay);
+  --color-popover-foreground: var(--text-primary);
+  --color-primary: var(--action-primary);
+  --color-primary-foreground: var(--text-on-primary);
+  --color-secondary: var(--action-secondary);
+  --color-secondary-foreground: var(--text-on-secondary);
+  --color-muted: var(--surface-muted);
+  --color-muted-foreground: var(--text-muted);
+  --color-accent: var(--surface-accent);
+  --color-accent-foreground: var(--text-on-accent);
+  --color-destructive: var(--status-danger);
+  --color-destructive-foreground: var(--text-on-danger);
+  --color-border: var(--border-subtle);
+  --color-input: var(--field-border);
+  --color-input-background: var(--surface-field);
+  --color-switch-background: var(--toggle-track);
+  --color-ring: var(--focus-ring);
+  --color-chart-1: var(--data-viz-1);
+  --color-chart-2: var(--data-viz-2);
+  --color-chart-3: var(--data-viz-3);
+  --color-chart-4: var(--data-viz-4);
+  --color-chart-5: var(--data-viz-5);
+  --radius-sm: calc(var(--radius-base) - 4px);
+  --radius-md: calc(var(--radius-base) - 2px);
+  --radius-lg: var(--radius-base);
+  --radius-xl: calc(var(--radius-base) + 4px);
+  --color-sidebar: var(--sidebar-surface);
+  --color-sidebar-foreground: var(--sidebar-text);
+  --color-sidebar-primary: var(--sidebar-primary-surface);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-text);
+  --color-sidebar-accent: var(--sidebar-accent-surface);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-text);
+  --color-sidebar-border: var(--sidebar-border-subtle);
+  --color-sidebar-ring: var(--sidebar-focus-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Base element defaults: use utilities on components whenever you need a different scale or weight. */
+  html {
+    font-size: var(--base-font-size);
+  }
+
+  h1 {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  h2 {
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  h3 {
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  h4 {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  label {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  button {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  input {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-regular);
+    line-height: 1.5;
+  }
+}

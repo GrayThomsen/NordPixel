@@ -1,3 +1,5 @@
+'use client';
+
 import { createContext, useContext, useEffect, useState } from 'react';
 
 type Theme = 'light' | 'dark';
@@ -10,16 +12,21 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(() => {
-    const saved = localStorage.getItem('nordpixel-theme');
-    return (saved as Theme) || 'light';
-  });
+  const [theme, setTheme] = useState<Theme>('light');
+
+  useEffect(() => {
+    const saved = window.localStorage.getItem('nordpixel-theme') as Theme | null;
+
+    if (saved) {
+      setTheme(saved);
+    }
+  }, []);
 
   useEffect(() => {
     const root = document.documentElement;
     root.classList.remove('light', 'dark');
     root.classList.add(theme);
-    localStorage.setItem('nordpixel-theme', theme);
+    window.localStorage.setItem('nordpixel-theme', theme);
   }, [theme]);
 
   const toggleTheme = () => {

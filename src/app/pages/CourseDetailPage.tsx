@@ -1,17 +1,35 @@
+'use client';
+
 import { useState } from 'react';
-import { useParams, Link } from 'react-router';
+import Link from 'next/link';
 import { Play, BookOpen, Clock, Users, Award, CheckCircle, Lock } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { Card, CardContent, CardHeader } from '../components/ui/Card';
 import { Badge } from '../components/ui/Badge';
 import { Progress } from '../components/ui/Progress';
+import { useLanguage } from '../components/LanguageProvider';
 
-export function CourseDetailPage() {
-  const { id } = useParams();
+export function CourseDetailPage({ courseId }: { courseId?: string }) {
+  const { language } = useLanguage();
   const [activeTab, setActiveTab] = useState<'overview' | 'curriculum' | 'resources'>('overview');
+  const [enrolled, setEnrolled] = useState(false);
 
-  const course = {
-    id: id || 'html-css',
+  const course = language === 'da' ? {
+    id: courseId || 'html-css',
+    title: 'HTML & CSS Grundlæggende',
+    description: 'Lær webens byggesten gennem omfattende praktiske projekter og virkelighedsnære eksempler. Kurset dækker alt fra grundlæggende HTML-struktur til avancerede CSS-layouts og animationer.',
+    difficulty: 'Begynder',
+    duration: '6 timer',
+    lessons: 24,
+    students: 1243,
+    rating: 4.8,
+    enrolled,
+    progress: enrolled ? 12 : 0,
+    image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800',
+    instructor: 'Emma Hansen',
+    instructorBio: 'Senior webudvikler med mere end 10 års erfaring i at undervise i digitale færdigheder',
+  } : {
+    id: courseId || 'html-css',
     title: 'HTML & CSS Fundamentals',
     description: 'Master the building blocks of the web with comprehensive hands-on projects and real-world examples. This course covers everything from basic HTML structure to advanced CSS layouts and animations.',
     difficulty: 'Beginner',
@@ -19,14 +37,42 @@ export function CourseDetailPage() {
     lessons: 24,
     students: 1243,
     rating: 4.8,
-    enrolled: false,
-    progress: 0,
+    enrolled,
+    progress: enrolled ? 12 : 0,
     image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800',
     instructor: 'Emma Hansen',
     instructorBio: 'Senior Web Developer with 10+ years of experience teaching digital skills',
   };
 
-  const modules = [
+  const modules = language === 'da' ? [
+    {
+      title: 'Introduktion til HTML',
+      lessons: [
+        { id: 1, title: 'Hvad er HTML?', duration: '8 min', completed: false, locked: false },
+        { id: 2, title: 'HTML-dokumentets struktur', duration: '12 min', completed: false, locked: false },
+        { id: 3, title: 'Tekstelementer', duration: '15 min', completed: false, locked: false },
+        { id: 4, title: 'Links og billeder', duration: '18 min', completed: false, locked: false },
+      ],
+    },
+    {
+      title: 'Kom i gang med CSS',
+      lessons: [
+        { id: 5, title: 'Introduktion til CSS', duration: '10 min', completed: false, locked: !course.enrolled },
+        { id: 6, title: 'Selektorer og egenskaber', duration: '14 min', completed: false, locked: !course.enrolled },
+        { id: 7, title: 'Farver og typografi', duration: '16 min', completed: false, locked: !course.enrolled },
+        { id: 8, title: 'Boksmodellen', duration: '20 min', completed: false, locked: !course.enrolled },
+      ],
+    },
+    {
+      title: 'Layout-teknikker',
+      lessons: [
+        { id: 9, title: 'Flexbox Grundlæggende', duration: '22 min', completed: false, locked: !course.enrolled },
+        { id: 10, title: 'CSS Grid', duration: '25 min', completed: false, locked: !course.enrolled },
+        { id: 11, title: 'Responsivt Design', duration: '28 min', completed: false, locked: !course.enrolled },
+        { id: 12, title: 'Afsluttende Projekt', duration: '45 min', completed: false, locked: !course.enrolled },
+      ],
+    },
+  ] : [
     {
       title: 'Introduction to HTML',
       lessons: [
@@ -56,7 +102,14 @@ export function CourseDetailPage() {
     },
   ];
 
-  const whatYoullLearn = [
+  const whatYoullLearn = language === 'da' ? [
+    'Byg komplette websider fra bunden',
+    'Forstå HTML-dokumentets struktur',
+    'Style websites med moderne CSS',
+    'Skab responsive layouts',
+    'Brug Flexbox og Grid',
+    'Anvend best practices og tilgængelighed',
+  ] : [
     'Build complete web pages from scratch',
     'Understand HTML document structure',
     'Style websites with modern CSS',
@@ -65,12 +118,23 @@ export function CourseDetailPage() {
     'Apply best practices and accessibility',
   ];
 
-  const resources = [
-    { name: 'Course Slides (PDF)', type: 'PDF', size: '2.4 MB' },
-    { name: 'Code Examples', type: 'ZIP', size: '1.8 MB' },
-    { name: 'Cheat Sheet', type: 'PDF', size: '450 KB' },
-    { name: 'Project Starter Files', type: 'ZIP', size: '3.2 MB' },
+  const resources = language === 'da' ? [
+    { name: 'Kursusslides (PDF)', type: 'PDF', size: '2.4 MB', downloadPath: '/downloads/resources/course-slides.txt' },
+    { name: 'Kodeeksempler', type: 'ZIP', size: '1.8 MB', downloadPath: '/downloads/resources/code-examples.txt' },
+    { name: 'Cheat Sheet', type: 'PDF', size: '450 KB', downloadPath: '/downloads/resources/cheat-sheet.txt' },
+    { name: 'Projekt-startfiler', type: 'ZIP', size: '3.2 MB', downloadPath: '/downloads/resources/project-starter-files.txt' },
+  ] : [
+    { name: 'Course Slides (PDF)', type: 'PDF', size: '2.4 MB', downloadPath: '/downloads/resources/course-slides.txt' },
+    { name: 'Code Examples', type: 'ZIP', size: '1.8 MB', downloadPath: '/downloads/resources/code-examples.txt' },
+    { name: 'Cheat Sheet', type: 'PDF', size: '450 KB', downloadPath: '/downloads/resources/cheat-sheet.txt' },
+    { name: 'Project Starter Files', type: 'ZIP', size: '3.2 MB', downloadPath: '/downloads/resources/project-starter-files.txt' },
   ];
+
+  const tabLabels = {
+    overview: language === 'da' ? 'Oversigt' : 'Overview',
+    curriculum: language === 'da' ? 'Indhold' : 'Curriculum',
+    resources: language === 'da' ? 'Ressourcer' : 'Resources',
+  };
 
   return (
     <div className="min-h-screen bg-white dark:bg-neutral-950">
@@ -83,8 +147,8 @@ export function CourseDetailPage() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-black/40"></div>
         <div className="absolute inset-0 flex items-end">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
-            <Link to="/courses" className="text-white/80 hover:text-white mb-4 inline-block">
-              ← Back to Courses
+            <Link href="/courses" className="text-white/80 hover:text-white mb-4 inline-block">
+              {language === 'da' ? '← Tilbage til kurser' : '← Back to Courses'}
             </Link>
             <h1 className="text-4xl md:text-5xl text-white mb-4">{course.title}</h1>
             <div className="flex flex-wrap gap-3">
@@ -111,7 +175,7 @@ export function CourseDetailPage() {
                         : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
                     }`}
                   >
-                    {tab}
+                    {tabLabels[tab]}
                   </button>
                 ))}
               </div>
@@ -120,14 +184,14 @@ export function CourseDetailPage() {
             {activeTab === 'overview' && (
               <div className="space-y-6">
                 <div>
-                  <h2 className="text-2xl mb-4">About This Course</h2>
+                  <h2 className="text-2xl mb-4">{language === 'da' ? 'Om kurset' : 'About This Course'}</h2>
                   <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
                     {course.description}
                   </p>
                 </div>
 
                 <div>
-                  <h2 className="text-2xl mb-4">What You'll Learn</h2>
+                  <h2 className="text-2xl mb-4">{language === 'da' ? 'Det lærer du' : "What You'll Learn"}</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {whatYoullLearn.map((item, index) => (
                       <div key={index} className="flex items-start gap-3">
@@ -140,7 +204,7 @@ export function CourseDetailPage() {
 
                 <Card>
                   <CardHeader>
-                    <h3 className="text-xl mb-2">Instructor</h3>
+                    <h3 className="text-xl mb-2">{language === 'da' ? 'Underviser' : 'Instructor'}</h3>
                   </CardHeader>
                   <CardContent>
                     <div className="flex items-start gap-4">
@@ -165,7 +229,7 @@ export function CourseDetailPage() {
                   <Card key={moduleIndex}>
                     <CardHeader>
                       <h3 className="text-xl">
-                        Module {moduleIndex + 1}: {module.title}
+                        {language === 'da' ? 'Modul' : 'Module'} {moduleIndex + 1}: {module.title}
                       </h3>
                     </CardHeader>
                     <CardContent>
@@ -201,7 +265,7 @@ export function CourseDetailPage() {
 
             {activeTab === 'resources' && (
               <div>
-                <h2 className="text-2xl mb-6">Course Resources</h2>
+                <h2 className="text-2xl mb-6">{language === 'da' ? 'Kursusressourcer' : 'Course Resources'}</h2>
                 <div className="space-y-3">
                   {resources.map((resource, index) => (
                     <Card key={index} hover>
@@ -218,8 +282,8 @@ export function CourseDetailPage() {
                               </p>
                             </div>
                           </div>
-                          <Button variant="outline" size="sm">
-                            Download
+                          <Button asChild variant="outline" size="sm">
+                            <a href={resource.downloadPath} download>{language === 'da' ? 'Download' : 'Download'}</a>
                           </Button>
                         </div>
                       </CardContent>
@@ -238,19 +302,19 @@ export function CourseDetailPage() {
                     <>
                       <div>
                         <div className="flex justify-between text-sm mb-2">
-                          <span>Your Progress</span>
+                          <span>{language === 'da' ? 'Din fremdrift' : 'Your Progress'}</span>
                           <span>{course.progress}%</span>
                         </div>
                         <Progress value={course.progress} />
                       </div>
-                      <Button variant="primary" size="lg" className="w-full">
+                      <Button variant="primary" size="lg" className="w-full" onClick={() => setActiveTab('curriculum')}>
                         <Play className="w-5 h-5 mr-2" />
-                        Continue Learning
+                        {language === 'da' ? 'Fortsæt læringen' : 'Continue Learning'}
                       </Button>
                     </>
                   ) : (
-                    <Button variant="primary" size="lg" className="w-full">
-                      Enroll Now - Free
+                    <Button variant="primary" size="lg" className="w-full" onClick={() => setEnrolled(true)}>
+                      {language === 'da' ? 'Tilmeld dig gratis' : 'Enroll Now - Free'}
                     </Button>
                   )}
                 </div>
@@ -258,19 +322,19 @@ export function CourseDetailPage() {
               <CardContent className="space-y-4">
                 <div className="flex items-center gap-3 text-neutral-600 dark:text-neutral-400">
                   <Clock className="w-5 h-5" />
-                  <span>{course.duration} total</span>
+                  <span>{course.duration} {language === 'da' ? 'i alt' : 'total'}</span>
                 </div>
                 <div className="flex items-center gap-3 text-neutral-600 dark:text-neutral-400">
                   <BookOpen className="w-5 h-5" />
-                  <span>{course.lessons} lessons</span>
+                  <span>{course.lessons} {language === 'da' ? 'lektioner' : 'lessons'}</span>
                 </div>
                 <div className="flex items-center gap-3 text-neutral-600 dark:text-neutral-400">
                   <Users className="w-5 h-5" />
-                  <span>{course.students.toLocaleString()} students</span>
+                  <span>{course.students.toLocaleString()} {language === 'da' ? 'elever' : 'students'}</span>
                 </div>
                 <div className="flex items-center gap-3 text-neutral-600 dark:text-neutral-400">
                   <Award className="w-5 h-5" />
-                  <span>Certificate of completion</span>
+                  <span>{language === 'da' ? 'Kursusbevis ved gennemførelse' : 'Certificate of completion'}</span>
                 </div>
               </CardContent>
             </Card>
