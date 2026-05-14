@@ -13,6 +13,7 @@ export function HomePage() {
   const { t, language } = useLanguage();
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [newsletterSubmitted, setNewsletterSubmitted] = useState(false);
+  const studentCountFormatter = new Intl.NumberFormat(language === 'da' ? 'da-DK' : 'en-US');
 
   const features = [
     {
@@ -249,7 +250,7 @@ export function HomePage() {
                     </CardHeader>
                     <CardContent>
                       <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                        {course.students.toLocaleString()} {t('home.courses.students')}
+                        {studentCountFormatter.format(course.students)} {t('home.courses.students')}
                       </p>
                     </CardContent>
                   </Card>
