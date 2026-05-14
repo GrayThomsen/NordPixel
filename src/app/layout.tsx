@@ -1,7 +1,5 @@
 import type { Metadata } from 'next';
 import '../styles/index.css';
-import { RootLayout as Providers } from './components/RootLayout';
-import { Layout as SiteLayout } from './components/Layout';
 
 export const metadata: Metadata = {
   title: 'NordPixel',
@@ -11,11 +9,7 @@ export const metadata: Metadata = {
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="da" suppressHydrationWarning>
-      <body>
-        <Providers>
-          <SiteLayout>{children}</SiteLayout>
-        </Providers>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
