@@ -26,6 +26,7 @@ export function CoursesBookingContent({ initialAddId }: CoursesBookingContentPro
     phone: '',
     message: '',
   });
+  const [isCartHydrated, setIsCartHydrated] = useState(false);
   const [bookingStatus, setBookingStatus] = useState<'idle' | 'selection-error' | 'config-error' | 'send-error' | 'sending' | 'success'>('idle');
 
   const translate = (value: LocalizedText) => value[locale];
@@ -37,15 +38,21 @@ export function CoursesBookingContent({ initialAddId }: CoursesBookingContentPro
 
     if (hasValidAddId && addId) {
       setSelectedQuantities(addSelectionToBookingCart(addId, allowedIds));
+      setIsCartHydrated(true);
       return;
     }
 
     setSelectedQuantities(readBookingSelection(allowedIds));
+    setIsCartHydrated(true);
   }, [allowedIds, initialAddId]);
 
   useEffect(() => {
+    if (!isCartHydrated) {
+      return;
+    }
+
     writeBookingSelection(selectedQuantities);
-  }, [selectedQuantities]);
+  }, [isCartHydrated, selectedQuantities]);
 
   const setQuantity = (optionId: string, quantity: number) => {
     if (!Number.isFinite(quantity)) {
@@ -135,6 +142,8 @@ export function CoursesBookingContent({ initialAddId }: CoursesBookingContentPro
       <header className="booking-cart-page__hero">
         <h1>{copy.cartPageTitle}</h1>
         <p>{copy.cartPageIntro}</p>
+        <p>{copy.cartPageReminder1}</p>
+        <p>{copy.cartPageReminder2}</p>
         <Link href="/courses" className="booking-cart-page__back-link">
           {copy.cartBackToCourses}
         </Link>

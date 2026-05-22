@@ -6,8 +6,22 @@ import { useMemo, useState } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import { getCoursesCopy } from './courses/course-copy';
 import { BOOKABLE_OPTIONS, FOCUS_COURSES, PROGRAM_TRACKS } from './courses/course-catalog';
-import { addSelectionToBookingCart, BOOKING_TAB_TARGET } from './courses/booking-storage';
+import { addSelectionToBookingCart } from './courses/booking-storage';
 import { type LocalizedText } from './courses/course-types';
+
+let bookingTabRef: Window | null = null;
+const BOOKING_SOURCE_TAB_ID_KEY = 'nordpixel-booking-source-tab-id';
+
+function getBookingTabTarget() {
+  const existingId = window.sessionStorage.getItem(BOOKING_SOURCE_TAB_ID_KEY);
+  if (existingId) {
+    return `nordpixel-booking-cart-tab-${existingId}`;
+  }
+
+  const newId = `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+  window.sessionStorage.setItem(BOOKING_SOURCE_TAB_ID_KEY, newId);
+  return `nordpixel-booking-cart-tab-${newId}`;
+}
 
 export function CoursesContent() {
   const { dictionary, locale } = useLanguage();
@@ -55,12 +69,24 @@ export function CoursesContent() {
 
   const openBookingCart = (initialId: string) => {
     addSelectionToBookingCart(initialId, bookingOptionIds);
-    const bookingUrl = `/courses/booking?add=${encodeURIComponent(initialId)}&t=${Date.now()}`;
-    const newTab = window.open(bookingUrl, BOOKING_TAB_TARGET);
+    const bookingUrl = `${window.location.origin}/courses/booking?add=${encodeURIComponent(initialId)}&t=${Date.now()}`;
 
-    if (!newTab) {
-      window.location.href = bookingUrl;
+    if (bookingTabRef && !bookingTabRef.closed) {
+      bookingTabRef.location.href = bookingUrl;
+      bookingTabRef.focus();
+      return;
     }
+
+    const bookingTabTarget = getBookingTabTarget();
+    const openedTab = window.open(bookingUrl, bookingTabTarget);
+
+    if (!openedTab) {
+      window.location.href = bookingUrl;
+      return;
+    }
+
+    bookingTabRef = openedTab;
+    openedTab.focus();
   };
 
   return (

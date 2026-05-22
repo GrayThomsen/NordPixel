@@ -4,7 +4,10 @@ import { LanguageProvider } from '../context/LanguageContext';
 import '../styles/index.css';
 
 export const metadata: Metadata = {
-  title: 'NordPixel',
+  title: {
+    default: 'NordPixel',
+    template: '%s | NordPixel',
+  },
   description: 'Digital education, courses, workshops, and teaching materials from NordPixel.',
   icons: {
     icon: [

@@ -1,5 +1,4 @@
 export const BOOKING_STORAGE_KEY = 'nordpixel-booking-cart';
-export const BOOKING_TAB_TARGET = 'nordpixel-booking-cart-tab';
 export const BOOKING_CART_UPDATED_EVENT = 'nordpixel-booking-cart-updated';
 
 export type BookingSelection = Record<string, number>;

@@ -72,12 +72,14 @@ export function SiteHeader() {
         </nav>
 
         <div className="site-header__right">
-          {cartCount > 0 ? (
-            <Link href="/courses/booking" className="site-header__cart" aria-label={`${dictionary.nav.courses} cart (${cartCount})`}>
-              <ShoppingCart aria-hidden="true" />
-              <span>{cartCount}</span>
-            </Link>
-          ) : null}
+          <Link
+            href="/courses/booking"
+            className={`site-header__cart ${cartCount > 0 ? '' : 'is-empty'}`.trim()}
+            aria-label={cartCount > 0 ? `${dictionary.nav.courses} cart (${cartCount})` : `${dictionary.nav.courses} cart`}
+          >
+            <ShoppingCart aria-hidden="true" />
+            {cartCount > 0 ? <span>{cartCount}</span> : null}
+          </Link>
 
           <div className="site-header__language" role="group" aria-label={dictionary.nav.language}>
             <button

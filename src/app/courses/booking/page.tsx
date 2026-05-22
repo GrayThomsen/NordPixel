@@ -1,4 +1,9 @@
+import type { Metadata } from 'next';
 import { CoursesBookingContent } from '../../components/CoursesBookingContent';
+
+export const metadata: Metadata = {
+  title: 'Booking',
+};
 
 type CoursesBookingPageProps = {
   searchParams?: Promise<{
