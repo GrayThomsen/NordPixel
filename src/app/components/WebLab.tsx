@@ -1,6 +1,7 @@
 'use client';
 
 import Editor, { type OnMount } from '@monaco-editor/react';
+import type * as Monaco from 'monaco-editor';
 import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
 import { FilePlus2, Trash2 } from 'lucide-react';
 import { useCallback, useEffect, useMemo, useRef, useState, type ChangeEvent } from 'react';
@@ -670,7 +671,10 @@ export function WebLab() {
     if (!htmlCompletionProviderDisposableRef.current) {
       htmlCompletionProviderDisposableRef.current = monaco.languages.registerCompletionItemProvider('html', {
         triggerCharacters: ['<', '"', '\'', '/'],
-        provideCompletionItems(model, position) {
+        provideCompletionItems(
+          model: Monaco.editor.ITextModel,
+          position: Monaco.Position,
+        ): Monaco.languages.ProviderResult<Monaco.languages.CompletionList> {
           const linePrefix = model
             .getValueInRange({
               startLineNumber: position.lineNumber,

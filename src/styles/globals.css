@@ -141,6 +141,43 @@ html.light {
 	gap: 0.45rem;
 }
 
+.site-header__cart {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.1rem;
+	height: 2.1rem;
+	border-radius: 999px;
+	text-decoration: none;
+	color: var(--brand-orange);
+	background: color-mix(in oklab, #ffffff 10%, transparent 90%);
+	box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--brand-orange) 34%, transparent 66%);
+}
+
+.site-header__cart svg {
+	width: 1rem;
+	height: 1rem;
+}
+
+.site-header__cart span {
+	position: absolute;
+	top: -0.34rem;
+	right: -0.34rem;
+	min-width: 1.05rem;
+	height: 1.05rem;
+	padding: 0 0.25rem;
+	border-radius: 999px;
+	font-size: 0.64rem;
+	font-weight: 700;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--brand-orange);
+	color: var(--brand-navy);
+	box-shadow: 0 0 0 2px color-mix(in oklab, var(--brand-navy) 86%, #10233f 14%);
+}
+
 .site-header__menu-button {
 	display: none;
 	border: 0;
@@ -395,16 +432,15 @@ html {
 .contact-page {
 	margin: 0 auto;
 	width: min(1320px, 96vw);
-	padding: 1.4rem 0 2rem;
+	padding: 1.65rem 0 2.4rem;
 	display: grid;
-	gap: 1.2rem;
+	gap: 1.5rem;
 }
 
 .courses-page__hero,
 .contact-page__hero {
 	border: 0;
 	border-radius: 1rem;
-	padding: clamp(1rem, 2vw, 1.8rem);
 	background: var(--surface-page);
 }
 
@@ -418,17 +454,18 @@ html {
 	max-width: 78ch;
 	margin-top: 0.7rem;
 	margin-bottom: 0;
+	font-size: 0.97rem;
 	line-height: 1.55;
 }
 
 .courses-section {
 	display: grid;
-	gap: 0.7rem;
+	gap: 1rem;
 }
 
 .courses-section__header {
 	display: grid;
-	gap: 0.7rem;
+	gap: 0.95rem;
 }
 
 .courses-filters__heading {
@@ -452,18 +489,19 @@ html {
 
 .courses-filters {
 	display: grid;
-	grid-template-columns: repeat(2, minmax(0, 1fr)) auto;
+	grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr) auto;
 	gap: 0.65rem;
 	align-items: end;
-}
+	padding: 0.55rem;
+	}
 
 .courses-filters__field {
 	display: grid;
-	gap: 0.28rem;
+	gap: 0.24rem;
 }
 
 .courses-filters__field span {
-	font-size: 0.72rem;
+	font-size: 0.68rem;
 	letter-spacing: 0.08em;
 	text-transform: uppercase;
 	font-weight: 700;
@@ -473,9 +511,11 @@ html {
 .courses-filters__field input,
 .courses-filters__field select {
 	width: 100%;
-	padding: 0.62rem 0.75rem;
-	border-radius: 0.72rem;
-	border: 1px solid color-mix(in oklab, var(--brand-navy) 12%, transparent 88%);
+	padding: 0.54rem 0.72rem;
+	font-size: 0.93rem;
+	line-height: 1.25;
+	border-radius: 0.66rem;
+	border: 1px solid color-mix(in oklab, var(--brand-navy) 14%, transparent 86%);
 	background: var(--surface-page);
 	color: var(--text-primary);
 }
@@ -486,12 +526,21 @@ html {
 
 .courses-filters__reset {
 	height: fit-content;
-	padding: 0.62rem 0.85rem;
+	padding: 0.52rem 0.82rem;
+	font-size: 0.9rem;
+	font-weight: 600;
+	line-height: 1.2;
 	border-radius: 999px;
-	border: 1px solid color-mix(in oklab, var(--brand-orange) 20%, transparent 80%);
-	background: transparent;
+	border: 1px solid color-mix(in oklab, var(--brand-orange) 26%, transparent 74%);
+	background: color-mix(in oklab, var(--surface-page) 86%, var(--brand-orange-soft) 14%);
 	color: var(--brand-navy);
 	cursor: pointer;
+	transition: background 0.18s ease, border-color 0.18s ease;
+}
+
+.courses-filters__reset:hover {
+	background: color-mix(in oklab, var(--surface-page) 76%, var(--brand-orange-soft) 24%);
+	border-color: color-mix(in oklab, var(--brand-orange) 34%, transparent 66%);
 }
 
 .courses-filters__empty {
@@ -516,7 +565,7 @@ html {
 
 .courses-timelines {
 	display: grid;
-	gap: 1.4rem;
+	gap: 3rem;
 }
 
 .timeline-track {
@@ -524,25 +573,25 @@ html {
 	grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
 	gap: clamp(0.8rem, 2vw, 1.4rem);
 	align-items: stretch;
-	padding-top: clamp(0.8rem, 1.6vw, 1rem);
 	border-top: 1px solid color-mix(in oklab, var(--brand-orange) 20%, transparent 80%);
 }
 
 .timeline-track__content {
 	display: grid;
-	gap: 0.8rem;
+	gap: 1.05rem;
 	align-content: start;
 }
 
 .timeline-track__heading-row {
 	display: grid;
-	gap: 0.18rem;
+	gap: 0.35rem;
+	padding-top: 1rem;
 }
 
 .timeline-track h3 {
 	margin: 0;
 	font-family: 'Tomorrow', 'Arial Black', sans-serif;
-	font-size: clamp(1.2rem, 1.9vw, 1.6rem);
+	font-size: clamp(1.06rem, 1.45vw, 1.32rem);
 	line-height: 1.18;
 	letter-spacing: 0.01em;
 	color: color-mix(in oklab, var(--brand-navy) 93%, black 7%);
@@ -551,6 +600,7 @@ html {
 .timeline-track__summary {
 	margin: 0;
 	max-width: 72ch;
+	font-size: 0.96rem;
 	line-height: 1.52;
 }
 
@@ -619,7 +669,7 @@ html {
 
 .timeline-track__timeline {
 	display: grid;
-	gap: 0.6rem;
+	gap: 0.85rem;
 }
 
 .timeline-track__timeline-title {
@@ -634,18 +684,18 @@ html {
 .timeline-track__timeline ol {
 	list-style: none;
 	margin: 0;
-	padding: 0.35rem 0 0;
+	padding: 0.45rem 0 0;
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
-	gap: 0.7rem;
+	gap: 0.9rem;
 	position: relative;
 }
 
 .timeline-track__timeline li {
 	position: relative;
-	padding: 1.1rem 0.5rem 0.08rem 0;
+	padding: 1.1rem 0.5rem 0.3rem 0;
 	display: grid;
-	gap: 0.15rem;
+	gap: 0.28rem;
 }
 
 .timeline-track__timeline li::before {
@@ -747,10 +797,10 @@ html {
 }
 
 .focus-item {
-	padding: 1rem 0.6rem 1rem 0;
+	padding: 1.2rem 0.75rem 1.2rem 0;
 	border-bottom: 1px solid color-mix(in oklab, var(--brand-navy) 12%, transparent 88%);
 	display: grid;
-	gap: 0.42rem;
+	gap: 0.62rem;
 }
 
 .focus-item__top {
@@ -762,7 +812,7 @@ html {
 
 .focus-item__top h3 {
 	font-family: 'Tomorrow', 'Arial Black', sans-serif;
-	font-size: 1rem;
+	font-size: 0.93rem;
 	line-height: 1.2;
 }
 
@@ -817,6 +867,158 @@ html {
 
 .focus-item:nth-child(even) {
 	padding-left: 1rem;
+}
+
+.booking-cart-page {
+	margin: 0 auto;
+	width: min(1320px, 96vw);
+	padding: 1.65rem 0 2.4rem;
+	display: grid;
+	gap: 1.1rem;
+}
+
+.booking-cart-page__hero {
+	display: grid;
+	gap: 0.45rem;
+}
+
+.booking-cart-page__hero h1,
+.booking-cart-page__hero p {
+	margin: 0;
+}
+
+.booking-cart-page__hero p {
+	max-width: 72ch;
+	color: var(--text-muted);
+	line-height: 1.45;
+}
+
+.booking-cart-page__back-link {
+	justify-self: start;
+	text-decoration: none;
+	font-weight: 600;
+	color: color-mix(in oklab, var(--brand-navy) 88%, black 12%);
+	border-bottom: 1px solid color-mix(in oklab, var(--brand-orange) 34%, transparent 66%);
+}
+
+.booking-cart {
+	display: grid;
+	grid-template-columns: minmax(0, 1.25fr) minmax(290px, 0.75fr);
+	gap: 1rem;
+	align-items: start;
+}
+
+.booking-cart__catalog,
+.booking-cart__sidebar {
+	border-radius: 1rem;
+	padding: 0.9rem;
+	background: color-mix(in oklab, var(--surface-panel) 92%, var(--brand-orange-soft) 8%);
+	box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--brand-navy) 8%, transparent 92%);
+}
+
+.booking-cart__section-header {
+	display: grid;
+	gap: 0.25rem;
+	margin-bottom: 0.75rem;
+}
+
+.booking-cart__section-header h2,
+.booking-cart__section-header p {
+	margin: 0;
+}
+
+.booking-cart__section-header p {
+	color: var(--text-muted);
+	font-size: 0.92rem;
+}
+
+.booking-catalog-grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 0.65rem;
+}
+
+.booking-item {
+	display: grid;
+	gap: 0.6rem;
+	padding: 0.75rem;
+	border-radius: 0.9rem;
+	background: var(--surface-page);
+	box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--brand-navy) 10%, transparent 90%);
+}
+
+.booking-item.is-selected {
+	box-shadow:
+		inset 0 0 0 1px color-mix(in oklab, var(--brand-orange) 38%, transparent 62%),
+		0 6px 16px color-mix(in oklab, var(--brand-navy) 6%, transparent 94%);
+}
+
+.booking-item__kind {
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	font-size: 0.66rem;
+	font-weight: 700;
+	color: var(--text-muted);
+}
+
+.booking-item h3 {
+	margin: 0;
+	font-size: 0.95rem;
+	line-height: 1.3;
+	color: color-mix(in oklab, var(--brand-navy) 88%, black 12%);
+}
+
+.booking-item__qty {
+	display: inline-grid;
+	grid-template-columns: auto 70px auto;
+	gap: 0.35rem;
+	justify-self: start;
+	align-items: center;
+}
+
+.booking-item__qty button,
+.booking-item__qty input {
+	height: 2rem;
+	border-radius: 0.58rem;
+	border: 1px solid color-mix(in oklab, var(--brand-navy) 14%, transparent 86%);
+	background: var(--surface-page);
+	color: var(--text-primary);
+}
+
+.booking-item__qty button {
+	width: 2rem;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+
+.booking-item__qty button:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+.booking-item__qty button svg {
+	width: 0.9rem;
+	height: 0.9rem;
+}
+
+.booking-item__qty input {
+	width: 100%;
+	text-align: center;
+	padding: 0 0.25rem;
+}
+
+.booking-cart__sidebar {
+	display: grid;
+	gap: 0.85rem;
+	position: sticky;
+	top: 4.9rem;
+}
+
+.booking-contact {
+	display: grid;
+	gap: 0.8rem;
 }
 
 .booking-modal {
@@ -1051,6 +1253,11 @@ html {
 	color: var(--status-danger);
 }
 
+.booking-form__success {
+	margin: 0;
+	color: color-mix(in oklab, var(--status-success, #1f8f4d) 90%, black 10%);
+}
+
 .booking-form__submit {
 	justify-self: start;
 	display: inline-flex;
@@ -1062,6 +1269,11 @@ html {
 	background: var(--brand-navy);
 	color: var(--text-on-primary);
 	cursor: pointer;
+}
+
+.booking-form__submit:disabled {
+	opacity: 0.7;
+	cursor: not-allowed;
 }
 
 .contact-page__grid {
@@ -1783,6 +1995,19 @@ html {
 
 	.timeline-track {
 		grid-template-columns: 1fr;
+	}
+
+	.booking-cart {
+		grid-template-columns: 1fr;
+	}
+
+	.booking-catalog-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.booking-cart__sidebar {
+		position: static;
+		top: auto;
 	}
 
 	.timeline-track__timeline ol {
