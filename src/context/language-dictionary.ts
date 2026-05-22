@@ -22,10 +22,18 @@ export type Dictionary = {
   courses: {
     title: string;
     intro: string;
-    trackOne: string;
-    trackTwo: string;
-    trackThree: string;
-    placeholder: string;
+    programsTitle: string;
+    programsIntro: string;
+    durationLabel: string;
+    targetGroupLabel: string;
+    subjectsLabel: string;
+    presenceLabel: string;
+    timelineLabel: string;
+    focusTitle: string;
+    focusIntro: string;
+    ctaTitle: string;
+    ctaText: string;
+    ctaBadge: string;
   };
   contact: {
     title: string;
@@ -116,12 +124,23 @@ export const dictionaries: Record<Locale, Dictionary> = {
       ctaCourses: 'Se forløb',
     },
     courses: {
-      title: 'Forløb',
-      intro: 'Her kommer NordPixel forløb. Strukturen er klar, indholdet tilføjes i næste fase.',
-      trackOne: 'Begynder: Web og HTML',
-      trackTwo: 'Mellemtrin: CSS og design',
-      trackThree: 'AI og digital forståelse',
-      placeholder: 'Indhold kommer snart',
+      title: 'Forløb til skoler og klasser',
+      intro: 'Vælg et forløb og kom hurtigt i gang med tydelige materialer, struktur og undervisningsflow.',
+      programsTitle: 'Vælg et forløb',
+      programsIntro:
+        'Hvert forløb er bygget med en konkret tidslinje, så undervisere og elever kan se arbejdsrytme, faglig retning og forventet udbytte fra start.',
+      durationLabel: 'Varighed',
+      targetGroupLabel: 'Målgruppe',
+      subjectsLabel: 'Fagrelevans',
+      presenceLabel: 'NordPixel-tilstedeværelse',
+      timelineLabel: 'Modulopdeling',
+      focusTitle: 'Fokuskurser',
+      focusIntro:
+        'Fritstående fordybelsesmoduler, som kan bruges alene eller sammen med et af forløbene.',
+      ctaTitle: 'Næste skridt',
+      ctaText:
+        'Siden viser kun undervisningsindhold og struktur. Praktiske rammer og materialepakker deles direkte med skoler ved konkret henvendelse.',
+      ctaBadge: 'Planlægning og opstart aftales individuelt',
     },
     contact: {
       title: 'Kontakt og om os',
@@ -210,12 +229,23 @@ export const dictionaries: Record<Locale, Dictionary> = {
       ctaCourses: 'Open Courses',
     },
     courses: {
-      title: 'Courses',
-      intro: 'NordPixel course tracks will be listed here. The structure is ready and content will be added next.',
-      trackOne: 'Beginner: Web and HTML',
-      trackTwo: 'Intermediate: CSS and design',
-      trackThree: 'AI and digital literacy',
-      placeholder: 'Content coming soon',
+      title: 'Courses for Schools and Classrooms',
+      intro: 'Choose a track and get started quickly with clear materials, structure, and teaching flow.',
+      programsTitle: 'Choose a Track',
+      programsIntro:
+        'Each track includes a concrete timeline so teachers and students can see pace, subject relevance, and expected outcomes from day one.',
+      durationLabel: 'Duration',
+      targetGroupLabel: 'Target Group',
+      subjectsLabel: 'Subject Relevance',
+      presenceLabel: 'NordPixel Presence',
+      timelineLabel: 'Module Breakdown',
+      focusTitle: 'Focus Courses',
+      focusIntro:
+        'Standalone deep-dive modules that can run on their own or alongside one of the main tracks.',
+      ctaTitle: 'Next Step',
+      ctaText:
+        'This page only presents learning content and structure. Practical setup details and full material packages are shared directly with schools during dialogue.',
+      ctaBadge: 'Planning and launch are arranged individually',
     },
     contact: {
       title: 'Contact and about us',

@@ -33,6 +33,7 @@ pnpm-debug.log*
 .cache
 .parcel-cache
 .next
+.next-dev
 .nuxt
 .vite
 
