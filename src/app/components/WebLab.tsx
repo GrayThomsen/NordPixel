@@ -483,6 +483,9 @@ export function WebLab() {
   const [isHydrated, setIsHydrated] = useState(false);
   const [isDirty, setIsDirty] = useState(false);
   const [lastSavedAt, setLastSavedAt] = useState<string>('');
+  const [activeTimeZone, setActiveTimeZone] = useState(() =>
+    new Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC',
+  );
   const [previewRefreshNonce, setPreviewRefreshNonce] = useState(0);
   const [visiblePanes, setVisiblePanes] = useState({ explorer: true, editor: true, preview: true });
   const [isMobile, setIsMobile] = useState(false);
@@ -569,6 +572,23 @@ export function WebLab() {
 
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(project));
   }, [isHydrated, project]);
+
+  useEffect(() => {
+    const syncTimeZone = () => {
+      const nextTimeZone = new Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
+      setActiveTimeZone((current) => (current === nextTimeZone ? current : nextTimeZone));
+    };
+
+    const intervalId = window.setInterval(syncTimeZone, 30_000);
+    window.addEventListener('focus', syncTimeZone);
+    document.addEventListener('visibilitychange', syncTimeZone);
+
+    return () => {
+      window.clearInterval(intervalId);
+      window.removeEventListener('focus', syncTimeZone);
+      document.removeEventListener('visibilitychange', syncTimeZone);
+    };
+  }, []);
 
   const activeFile = useMemo(() => {
     return project.files.find((file) => file.id === activeFileId) ?? project.files[0];
@@ -829,29 +849,44 @@ export function WebLab() {
       return '--';
     }
 
-    const now = new Date();
     const localeTag = siteLocale === 'da' ? 'da-DK' : 'en-GB';
     const time = new Intl.DateTimeFormat(localeTag, {
       hour: '2-digit',
       minute: '2-digit',
       hour12: false,
+      timeZone: activeTimeZone,
     }).format(parsed);
 
-    const isToday =
-      parsed.getFullYear() === now.getFullYear() &&
-      parsed.getMonth() === now.getMonth() &&
-      parsed.getDate() === now.getDate();
+    const parts = new Intl.DateTimeFormat(localeTag, {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      timeZone: activeTimeZone,
+    }).formatToParts(parsed);
+
+    const todayParts = new Intl.DateTimeFormat(localeTag, {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      timeZone: activeTimeZone,
+    }).formatToParts(new Date());
+
+    const day = parts.find((part) => part.type === 'day')?.value ?? '--';
+    const month = parts.find((part) => part.type === 'month')?.value ?? '--';
+    const year = parts.find((part) => part.type === 'year')?.value ?? '----';
+
+    const todayDay = todayParts.find((part) => part.type === 'day')?.value;
+    const todayMonth = todayParts.find((part) => part.type === 'month')?.value;
+    const todayYear = todayParts.find((part) => part.type === 'year')?.value;
+
+    const isToday = day === todayDay && month === todayMonth && year === todayYear;
 
     if (isToday) {
-      return `${time} ${weblabText.updatedToday}`;
+      return time;
     }
 
-    const day = parsed.getDate();
-    const month = new Intl.DateTimeFormat(localeTag, { month: 'long' }).format(parsed).toLowerCase();
-    const year = parsed.getFullYear();
-
-    return `${weblabText.updatedAtDate} ${time} ${day}. ${month} ${year}.`;
-  }, [isHydrated, project.updatedAt, siteLocale, weblabText.updatedAtDate, weblabText.updatedToday]);
+    return `${time} (${day}.${month}.${year})`;
+  }, [activeTimeZone, isHydrated, project.updatedAt, siteLocale]);
 
   const formattedLastSave = useMemo(() => {
     if (!isHydrated || !lastSavedAt) {
@@ -1238,8 +1273,8 @@ export function WebLab() {
             />
           </div>
           <div className="weblab__meta">
-            <p>{weblabText.lastUpdate}: {formattedLastUpdate}</p>
-            <p>{weblabText.lastSave}: {formattedLastSave}</p>
+            <p>{weblabText.lastUpdate} {formattedLastUpdate}</p>
+            <p>{weblabText.lastSave} {formattedLastSave}</p>
           </div>
         </div>
       </header>

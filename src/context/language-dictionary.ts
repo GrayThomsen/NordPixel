@@ -35,6 +35,13 @@ export type Dictionary = {
     aboutTitle: string;
     aboutText: string;
   };
+  footer: {
+    email: string;
+    cvr: string;
+    linkedIn: string;
+    companyLinkedIn: string;
+    personalLinkedIn: string;
+  };
   weblab: {
     title: string;
     lead: string;
@@ -124,6 +131,13 @@ export const dictionaries: Record<Locale, Dictionary> = {
       aboutTitle: 'Om os',
       aboutText: 'NordPixel udvikler undervisning i digital kreativitet, web og AI for børn og unge.',
     },
+    footer: {
+      email: 'Email',
+      cvr: 'CVR',
+      linkedIn: 'LinkedIn',
+      companyLinkedIn: 'LinkedIn · NordPixel',
+      personalLinkedIn: 'LinkedIn · Emil G. Thomsen',
+    },
     weblab: {
       title: 'WebLab',
       lead: 'WebLab giver elever en VS Code-lignende explorer, så de selv skal forbinde filer, links og scripts.',
@@ -132,8 +146,8 @@ export const dictionaries: Record<Locale, Dictionary> = {
       newSite: 'Nyt site',
       save: 'Gem',
       import: 'Importer',
-      lastUpdate: 'Sidst opdateret',
-      lastSave: 'Sidst gemt',
+      lastUpdate: 'Sidst opdateret kl.',
+      lastSave: 'Gemt',
       notSavedYet: 'Ikke gemt endnu',
       view: 'Visning',
       explorer: 'Explorer',
@@ -211,6 +225,13 @@ export const dictionaries: Record<Locale, Dictionary> = {
       aboutTitle: 'About us',
       aboutText: 'NordPixel builds educational experiences in digital creativity, web development, and AI for children and young learners.',
     },
+    footer: {
+      email: 'Email',
+      cvr: 'CVR',
+      linkedIn: 'LinkedIn',
+      companyLinkedIn: 'LinkedIn · NordPixel',
+      personalLinkedIn: 'LinkedIn · Emil G. Thomsen',
+    },
     weblab: {
       title: 'WebLab',
       lead: 'WebLab gives students a VS Code-style explorer so they must wire files, links, and scripts themselves.',
@@ -219,8 +240,8 @@ export const dictionaries: Record<Locale, Dictionary> = {
       newSite: 'New site',
       save: 'Save',
       import: 'Import',
-      lastUpdate: 'Last update',
-      lastSave: 'Last save',
+      lastUpdate: 'Last updated at',
+      lastSave: 'Saved',
       notSavedYet: 'Not saved yet',
       view: 'View',
       explorer: 'Explorer',

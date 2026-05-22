@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { SiteHeader } from './components/SiteHeader';
+import { AppShell } from './components/AppShell';
 import { LanguageProvider } from '../context/LanguageContext';
 import '../styles/index.css';
 
@@ -21,8 +21,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     <html lang="da" className="light" suppressHydrationWarning>
       <body>
         <LanguageProvider>
-          <SiteHeader />
-          {children}
+          <AppShell>{children}</AppShell>
         </LanguageProvider>
       </body>
     </html>

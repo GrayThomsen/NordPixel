@@ -1,8 +1,8 @@
-/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/.pnpm/next@15.5.6_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[10].use[2]!./node_modules/.pnpm/next@15.5.6_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[10].use[3]!./src/styles/index.css ***!
-  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/.pnpm/next@15.5.18_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[10].use[2]!./node_modules/.pnpm/next@15.5.18_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[10].use[3]!./src/styles/index.css ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! tailwindcss v4.1.12 | MIT License | https://tailwindcss.com */
-@import url('https://fonts.googleapis.com/css2?family=Tomorrow:wght@700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tomorrow:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @layer properties;
 @layer theme, base, components, utilities;
 @layer theme {
@@ -572,6 +572,125 @@ html.light {
 .site-header__mobile-links a[aria-current='page'] {
   color: #ffffff;
   border-bottom-color: var(--brand-orange);
+}
+html, body {
+  min-height: 100%;
+}
+html {
+  scrollbar-gutter: auto;
+}
+@media (min-width: 881px) {
+  html,	body {
+    scrollbar-width: thin;
+    scrollbar-color: var(--brand-navy)	var(--surface-page);
+    @supports (color: color-mix(in lab, red, red)) {
+      scrollbar-color: color-mix(in oklab, var(--brand-navy) 62%, var(--surface-page) 38%)	color-mix(in oklab, var(--surface-page) 94%, var(--brand-orange-soft) 6%);
+    }
+  }
+  html::-webkit-scrollbar,	body::-webkit-scrollbar {
+    width: 10px;
+  }
+  html::-webkit-scrollbar-track,	body::-webkit-scrollbar-track {
+    background: var(--surface-page);
+    @supports (color: color-mix(in lab, red, red)) {
+      background: color-mix(in oklab, var(--surface-page) 94%, var(--brand-orange-soft) 6%);
+    }
+  }
+  html::-webkit-scrollbar-thumb,	body::-webkit-scrollbar-thumb {
+    background: var(--brand-navy);
+    @supports (color: color-mix(in lab, red, red)) {
+      background: color-mix(in oklab, var(--brand-navy) 62%, var(--surface-page) 38%);
+    }
+    border-radius: 999px;
+    border: 2px solid var(--surface-page);
+    @supports (color: color-mix(in lab, red, red)) {
+      border: 2px solid color-mix(in oklab, var(--surface-page) 94%, var(--brand-orange-soft) 6%);
+    }
+    background-clip: padding-box;
+  }
+  html::-webkit-scrollbar-thumb:hover,	body::-webkit-scrollbar-thumb:hover {
+    background: var(--brand-navy);
+    @supports (color: color-mix(in lab, red, red)) {
+      background: color-mix(	in oklab,	color-mix(in oklab, var(--brand-navy) 78%, var(--brand-orange) 22%) 62%,	var(--surface-page) 38%	);
+    }
+  }
+}
+.app-shell {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+.app-main {
+  flex: 1 0 auto;
+  width: 100%;
+}
+.site-footer {
+  margin-top: auto;
+  border-top: 0;
+  background: linear-gradient(	110deg,	var(--brand-navy),	var(--brand-navy)	);
+  @supports (color: color-mix(in lab, red, red)) {
+    background: linear-gradient(	110deg,	color-mix(in oklab, var(--brand-navy) 96%, #0f1f22 4%),	color-mix(in oklab, var(--brand-navy) 90%, #16353a 10%)	);
+  }
+  box-shadow: inset 0 1px 0 var(--brand-orange);
+  @supports (color: color-mix(in lab, red, red)) {
+    box-shadow: inset 0 1px 0 color-mix(in oklab, var(--brand-orange) 24%, transparent 76%);
+  }
+}
+.site-footer__inner {
+  margin: 0 auto;
+  width: min(1320px, 96vw);
+  padding: 1rem 0;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.95rem 1.25rem;
+}
+.site-footer__brand {
+  margin: 0;
+  font-family: 'Tomorrow', 'Arial Black', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: #f5f8ff;
+}
+.site-footer__details {
+  display: grid;
+  gap: 0.2rem;
+}
+.site-footer__details p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: color-mix(in oklab, #ffffff 86%, #8ea3a6 14%);
+}
+.site-footer__details span {
+  color: color-mix(in oklab, #ffffff 66%, #8ea3a6 34%);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.68rem;
+  font-weight: 700;
+  margin-right: 0.25rem;
+}
+.site-footer__details a, .site-footer__links a {
+  color: #ffffff;
+  @supports (color: color-mix(in lab, red, red)) {
+    color: color-mix(in oklab, #ffffff 90%, var(--brand-orange) 10%);
+  }
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.18s ease, color 0.18s ease;
+}
+.site-footer__details a:hover, .site-footer__links a:hover {
+  color: #ffffff;
+  border-bottom-color: var(--brand-orange);
+  @supports (color: color-mix(in lab, red, red)) {
+    border-bottom-color: color-mix(in oklab, var(--brand-orange) 70%, transparent 30%);
+  }
+}
+.site-footer__links {
+  display: grid;
+  gap: 0.3rem;
+  justify-items: end;
+  text-align: right;
 }
 .landing, .editor-page, .downloads-page {
   margin: 0 auto;
@@ -1336,6 +1455,14 @@ html.light {
   }
   .site-header__language button {
     padding: 0.2rem 0.45rem;
+  }
+  .site-footer__inner {
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+  .site-footer__links {
+    justify-items: start;
+    text-align: left;
   }
   .courses-page__grid,	.contact-page__grid {
     grid-template-columns: 1fr;
