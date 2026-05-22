@@ -4,7 +4,8 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "clean": "node -e \"require('fs').rmSync('.next', { recursive: true, force: true })\"",
+    "clean": "node -e \"import('node:fs').then(({rmSync}) => { rmSync('.next', { recursive: true, force: true }); rmSync('.next-dev', { recursive: true, force: true }); })\"",
+    "dev:clean": "npm run clean && npm run dev",
     "dev": "next dev",
     "build": "next build",
     "start": "next start"

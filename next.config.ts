@@ -1,6 +1,5 @@
 import type { NextConfig } from 'next';
 import path from 'node:path';
-import webpack from 'webpack';
 
 export default function createNextConfig(): NextConfig {
   return {
@@ -18,14 +17,6 @@ export default function createNextConfig(): NextConfig {
             'src/utils/next-devtools-segment-stub.tsx',
           ),
         };
-
-        config.plugins = config.plugins ?? [];
-        config.plugins.push(
-          new webpack.NormalModuleReplacementPlugin(
-            /next-devtools[\\/]userspace[\\/]app[\\/]segment-explorer-node\.js$/,
-            path.resolve(process.cwd(), 'src/utils/next-devtools-segment-stub.tsx'),
-          ),
-        );
       }
 
       return config;

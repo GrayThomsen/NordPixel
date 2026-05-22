@@ -4,9 +4,10 @@ import Editor, { type OnMount } from '@monaco-editor/react';
 import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
 import { FilePlus2, Trash2 } from 'lucide-react';
 import { useCallback, useEffect, useMemo, useRef, useState, type ChangeEvent } from 'react';
+import { dictionaries } from '../../context/language-dictionary';
+import { useLanguage } from '../../context/LanguageContext';
 
 type EditorTab = 'html' | 'css' | 'js';
-type EditorMode = 'full' | 'lite';
 
 type FileKind = EditorTab;
 
@@ -19,7 +20,7 @@ type ProjectFile = {
 
 type LabProject = {
   version: 2;
-  mode: EditorMode;
+  mode: 'full';
   name: string;
   updatedAt: string;
   files: ProjectFile[];
@@ -115,8 +116,6 @@ function createHtmlBoilerplate(fileName: string) {
 </html>`;
 }
 
-const FULL_STARTER_HTML = createHtmlBoilerplate('index.html');
-
 const CSS_BOILERPLATE = `*, *::before, *::after {
   box-sizing: border-box;
 }
@@ -131,10 +130,6 @@ img, video {
   max-width: 100%;
   display: block;
 }`;
-
-function normalizeProjectMode(mode: unknown): EditorMode {
-  return 'full';
-}
 
 function createFileId() {
   return globalThis.crypto?.randomUUID?.() ?? `file-${Date.now()}-${Math.random().toString(16).slice(2)}`;
@@ -151,13 +146,13 @@ function createFile(kind: FileKind, name: string, content: string): ProjectFile 
 
 function createFullStarterFiles() {
   return [
-    createFile('html', 'index.html', FULL_STARTER_HTML),
+    createFile('html', 'index.html', createHtmlBoilerplate('index.html')),
     createFile('css', 'styles.css', CSS_BOILERPLATE),
     createFile('js', 'script.js', ''),
   ];
 }
 
-function createStarterProject(mode: EditorMode): LabProject {
+function createStarterProject(): LabProject {
   return {
     version: 2,
     mode: 'full',
@@ -353,50 +348,6 @@ function buildFullPreviewDocument(project: LabProject, activeFile: ProjectFile |
   return injectNavInterceptor(withScripts);
 }
 
-function buildLitePreviewDocument(project: LabProject) {
-  const htmlContent = project.files
-    .filter((file) => file.kind === 'html')
-    .map((file) => file.content)
-    .find((content) => content.trim().length > 0) ?? createHtmlBoilerplate('index.html');
-
-  const cssContent = project.files
-    .filter((file) => file.kind === 'css')
-    .map((file) => file.content)
-    .filter((content) => content.trim().length > 0)
-    .join('\n\n');
-
-  const jsContent = project.files
-    .filter((file) => file.kind === 'js')
-    .map((file) => file.content)
-    .filter((content) => content.trim().length > 0)
-    .join('\n\n');
-
-  const liteSrc = `<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <style>${escapeInlineContent(cssContent, '</style>')}</style>
-  </head>
-  <body>
-    ${htmlContent}
-    <script>
-      try {
-        ${escapeInlineContent(jsContent, '</script>')}
-      } catch (error) {
-        const pre = document.createElement('pre');
-        pre.textContent = String(error);
-        pre.style.color = 'crimson';
-        pre.style.padding = '1rem';
-        document.body.appendChild(pre);
-      }
-    </script>
-  </body>
-</html>`;
-
-  return injectNavInterceptor(liteSrc);
-}
-
 const PREVIEW_TAB_HTML = `<!doctype html>
 <html lang="en">
   <head>
@@ -483,7 +434,7 @@ function safeParseProject(raw: string): LabProject | null {
 
       return {
         version: 2,
-        mode: normalizeProjectMode((parsed as Partial<LabProject>).mode),
+        mode: 'full',
         name: typeof parsed.name === 'string' && parsed.name.trim().length > 0 ? parsed.name : 'my-project',
         updatedAt:
           typeof parsed.updatedAt === 'string' && parsed.updatedAt.trim().length > 0
@@ -516,28 +467,70 @@ function safeParseProject(raw: string): LabProject | null {
   }
 }
 
-export function WebLab({ mode: initialMode = 'full' }: { mode?: EditorMode }) {
+export function WebLab() {
+  const { locale: siteLocale, dictionary } = useLanguage();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const previewTabRef = useRef<Window | null>(null);
   const htmlReferenceNamesRef = useRef<string[]>([]);
   const htmlCompletionProviderDisposableRef = useRef<{ dispose: () => void } | null>(null);
-  const hasLoadedRef = useRef(false);
-  const [mode, setMode] = useState<EditorMode>(initialMode);
-  const [activeFileId, setActiveFileId] = useState<string>(() => getInitialActiveFileId(createStarterProject(initialMode).files));
-  const [project, setProject] = useState<LabProject>(() => createStarterProject(initialMode));
+  const [activeFileId, setActiveFileId] = useState<string>(() => getInitialActiveFileId(createStarterProject().files));
+  const [project, setProject] = useState<LabProject>(() => createStarterProject());
   const [editingFileId, setEditingFileId] = useState<string | null>(null);
   const [editingFileName, setEditingFileName] = useState<string>('');
   const [pendingDeleteFileId, setPendingDeleteFileId] = useState<string | null>(null);
   const [isNewSiteConfirmOpen, setIsNewSiteConfirmOpen] = useState(false);
-  const [notice, setNotice] = useState<string>('Draft autosave is active in this browser.');
+  const [notice, setNotice] = useState<string>(() => dictionaries[siteLocale].weblab.statusDraftAutosave);
   const [isHydrated, setIsHydrated] = useState(false);
   const [isDirty, setIsDirty] = useState(false);
   const [lastSavedAt, setLastSavedAt] = useState<string>('');
-  const [isPreviewFullscreen, setIsPreviewFullscreen] = useState(false);
   const [previewRefreshNonce, setPreviewRefreshNonce] = useState(0);
   const [visiblePanes, setVisiblePanes] = useState({ explorer: true, editor: true, preview: true });
   const [isMobile, setIsMobile] = useState(false);
-  const isLiteMode = mode === 'lite';
+  const visiblePanesKey = `${visiblePanes.explorer ? '1' : '0'}${visiblePanes.editor ? '1' : '0'}${visiblePanes.preview ? '1' : '0'}`;
+  const weblabText = dictionary.weblab;
+  const panelDefaults = useMemo(() => {
+    const showExplorer = visiblePanes.explorer;
+    const showEditor = visiblePanes.editor;
+    const showPreview = visiblePanes.preview;
+
+    if (showExplorer && showEditor && showPreview) {
+      return { explorer: 20, editor: 40, preview: 40 };
+    }
+
+    if (showExplorer && showEditor) {
+      return { explorer: 35, editor: 65, preview: 0 };
+    }
+
+    if (showExplorer && showPreview) {
+      return { explorer: 35, editor: 0, preview: 65 };
+    }
+
+    if (showEditor && showPreview) {
+      return { explorer: 0, editor: 50, preview: 50 };
+    }
+
+    if (showExplorer) {
+      return { explorer: 100, editor: 0, preview: 0 };
+    }
+
+    if (showEditor) {
+      return { explorer: 0, editor: 100, preview: 0 };
+    }
+
+    if (showPreview) {
+      return { explorer: 0, editor: 0, preview: 100 };
+    }
+
+    return { explorer: 0, editor: 0, preview: 0 };
+  }, [visiblePanes]);
+
+  useEffect(() => {
+    setNotice((current) =>
+      current === dictionaries.en.weblab.statusDraftAutosave || current === dictionaries.da.weblab.statusDraftAutosave
+        ? weblabText.statusDraftAutosave
+        : current,
+    );
+  }, [weblabText.statusDraftAutosave]);
 
   useEffect(() => {
     const media = window.matchMedia('(max-width: 880px)');
@@ -551,10 +544,9 @@ export function WebLab({ mode: initialMode = 'full' }: { mode?: EditorMode }) {
     if (saved) {
       const parsed = safeParseProject(saved);
       if (parsed) {
-        setMode(parsed.mode);
         setProject(parsed);
         setActiveFileId(getInitialActiveFileId(parsed.files));
-        setNotice('Recovered your latest draft project.');
+        setNotice(weblabText.statusRecovered);
       }
     }
 
@@ -563,13 +555,12 @@ export function WebLab({ mode: initialMode = 'full' }: { mode?: EditorMode }) {
       setLastSavedAt(persistedSaveTime);
     }
 
-    hasLoadedRef.current = true;
     setIsHydrated(true);
 
     return () => {
       media.removeEventListener('change', applyViewportMode);
     };
-  }, []);
+  }, [weblabText.statusRecovered]);
 
   useEffect(() => {
     if (!isHydrated) {
@@ -584,8 +575,8 @@ export function WebLab({ mode: initialMode = 'full' }: { mode?: EditorMode }) {
   }, [activeFileId, project.files]);
 
   const srcDoc = useMemo(() => {
-    return mode === 'lite' ? buildLitePreviewDocument(project) : buildFullPreviewDocument(project, activeFile);
-  }, [activeFile, mode, project]);
+    return buildFullPreviewDocument(project, activeFile);
+  }, [activeFile, project]);
 
   useEffect(() => {
     if (project.files.some((file) => file.id === activeFileId)) {
@@ -839,7 +830,8 @@ export function WebLab({ mode: initialMode = 'full' }: { mode?: EditorMode }) {
     }
 
     const now = new Date();
-    const time = new Intl.DateTimeFormat('en-GB', {
+    const localeTag = siteLocale === 'da' ? 'da-DK' : 'en-GB';
+    const time = new Intl.DateTimeFormat(localeTag, {
       hour: '2-digit',
       minute: '2-digit',
       hour12: false,
@@ -851,36 +843,37 @@ export function WebLab({ mode: initialMode = 'full' }: { mode?: EditorMode }) {
       parsed.getDate() === now.getDate();
 
     if (isToday) {
-      return `${time} today`;
+      return `${time} ${weblabText.updatedToday}`;
     }
 
     const day = parsed.getDate();
-    const month = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(parsed).toLowerCase();
+    const month = new Intl.DateTimeFormat(localeTag, { month: 'long' }).format(parsed).toLowerCase();
     const year = parsed.getFullYear();
 
-    return `last updated at ${time} on the ${day} of ${month} ${year}.`;
-  }, [isHydrated, project.updatedAt]);
+    return `${weblabText.updatedAtDate} ${time} ${day}. ${month} ${year}.`;
+  }, [isHydrated, project.updatedAt, siteLocale, weblabText.updatedAtDate, weblabText.updatedToday]);
 
   const formattedLastSave = useMemo(() => {
     if (!isHydrated || !lastSavedAt) {
-      return 'Not saved yet';
+      return weblabText.notSavedYet;
     }
 
     const parsed = new Date(lastSavedAt);
     if (Number.isNaN(parsed.getTime())) {
-      return 'Not saved yet';
+      return weblabText.notSavedYet;
     }
 
-    return new Intl.DateTimeFormat('da-DK', {
+    return new Intl.DateTimeFormat(siteLocale === 'da' ? 'da-DK' : 'en-GB', {
       year: 'numeric',
       month: '2-digit',
       day: '2-digit',
       hour: '2-digit',
       minute: '2-digit',
     }).format(parsed);
-  }, [isHydrated, lastSavedAt]);
+  }, [isHydrated, lastSavedAt, siteLocale, weblabText.notSavedYet]);
 
-  const isRecoveredNotice = notice.startsWith('Recovered your latest draft project.');
+  const isRecoveredNotice =
+    notice === dictionaries.en.weblab.statusRecovered || notice === dictionaries.da.weblab.statusRecovered;
 
   function markProjectChanged(updater: (prev: LabProject) => LabProject) {
     setProject((prev) => {
@@ -941,7 +934,7 @@ export function WebLab({ mode: initialMode = 'full' }: { mode?: EditorMode }) {
     setActiveFileId(newFile.id);
     setEditingFileId(newFile.id);
     setEditingFileName(newFile.name);
-    setNotice(`Created ${nextName}. Rename it in the file list.`);
+    setNotice(`${weblabText.statusCreated} ${nextName}.`);
   }
 
   function handleRenameFile(fileId: string) {
@@ -968,7 +961,7 @@ export function WebLab({ mode: initialMode = 'full' }: { mode?: EditorMode }) {
     );
 
     if (!nextName) {
-      setNotice('Rename cancelled. Please provide a file name.');
+      setNotice(weblabText.statusRenameCancelled);
       return;
     }
 
@@ -978,7 +971,7 @@ export function WebLab({ mode: initialMode = 'full' }: { mode?: EditorMode }) {
         item.id === fileId ? { ...item, name: nextName, kind: nextKind } : item,
       ),
     }));
-    setNotice(`Renamed to ${nextName}`);
+    setNotice(`${weblabText.statusRenamed} ${nextName}`);
   }
 
   function cancelRenameFile() {
@@ -988,7 +981,7 @@ export function WebLab({ mode: initialMode = 'full' }: { mode?: EditorMode }) {
 
   function handleDeleteFile(fileId: string) {
     if (project.files.length === 1) {
-      setNotice('Keep at least one file in the project.');
+      setNotice(weblabText.statusKeepOneFile);
       setPendingDeleteFileId(null);
       return;
     }
@@ -1005,12 +998,12 @@ export function WebLab({ mode: initialMode = 'full' }: { mode?: EditorMode }) {
     }));
     setPendingDeleteFileId(null);
     setActiveFileId((current) => (current === fileId ? getInitialActiveFileId(nextFiles) : current));
-    setNotice(`Deleted ${file.name}`);
+    setNotice(`${weblabText.statusDeleted} ${file.name}`);
   }
 
   function requestDeleteFile(fileId: string) {
     if (project.files.length === 1) {
-      setNotice('Keep at least one file in the project.');
+      setNotice(weblabText.statusKeepOneFile);
       return;
     }
 
@@ -1018,17 +1011,28 @@ export function WebLab({ mode: initialMode = 'full' }: { mode?: EditorMode }) {
   }
 
   function handleNewProject() {
-    const nextProject = createStarterProject('full');
-    setMode('full');
+    const nextProject = createStarterProject();
+    const normalizedFiles = nextProject.files.map((file) => {
+      if (file.kind === 'html' && file.name.toLowerCase() === 'index.html') {
+        return {
+          ...file,
+          content: createHtmlBoilerplate('index.html'),
+        };
+      }
+
+      return file;
+    });
+
     setProject({
       ...nextProject,
+      files: normalizedFiles,
       updatedAt: new Date().toISOString(),
     });
-    setActiveFileId(nextProject.files[0]?.id ?? '');
+    setActiveFileId(getInitialActiveFileId(normalizedFiles));
     setIsNewSiteConfirmOpen(false);
     cancelRenameFile();
     setIsDirty(true);
-    setNotice('Started a fresh project. Save when you are ready.');
+    setNotice(weblabText.statusStartedFresh);
   }
 
   function requestNewProjectReset() {
@@ -1046,7 +1050,6 @@ export function WebLab({ mode: initialMode = 'full' }: { mode?: EditorMode }) {
   function handleSave() {
     const next: LabProject = {
       ...project,
-      mode,
       updatedAt: new Date().toISOString(),
     };
 
@@ -1063,7 +1066,7 @@ export function WebLab({ mode: initialMode = 'full' }: { mode?: EditorMode }) {
     setLastSavedAt(savedAt);
     window.localStorage.setItem(LAST_SAVE_KEY, savedAt);
     setIsDirty(false);
-    setNotice('Saved as .nordpixel.json');
+    setNotice(weblabText.statusSaved);
   }
 
   function handleImportRequest() {
@@ -1081,7 +1084,7 @@ export function WebLab({ mode: initialMode = 'full' }: { mode?: EditorMode }) {
       const content = typeof reader.result === 'string' ? reader.result : '';
       const parsed = safeParseProject(content);
       if (!parsed) {
-        setNotice('Import failed. File must be a valid .nordpixel.json project.');
+        setNotice(weblabText.statusImportFailedInvalid);
         return;
       }
 
@@ -1089,14 +1092,13 @@ export function WebLab({ mode: initialMode = 'full' }: { mode?: EditorMode }) {
         ...parsed,
         updatedAt: new Date().toISOString(),
       });
-      setMode(parsed.mode);
       setActiveFileId(getInitialActiveFileId(parsed.files));
       setIsDirty(true);
-      setNotice(`Imported project: ${parsed.name}`);
+      setNotice(`${weblabText.statusImported}: ${parsed.name}`);
     };
 
     reader.onerror = () => {
-      setNotice('Import failed while reading the file.');
+      setNotice(weblabText.statusImportFailedRead);
     };
 
     reader.readAsText(file);
@@ -1110,7 +1112,7 @@ export function WebLab({ mode: initialMode = 'full' }: { mode?: EditorMode }) {
     }
 
     if (!previewWindow) {
-      setNotice('Popup was blocked. Allow popups to open preview in a new tab.');
+      setNotice(weblabText.statusPopupBlocked);
       return;
     }
 
@@ -1129,7 +1131,7 @@ export function WebLab({ mode: initialMode = 'full' }: { mode?: EditorMode }) {
   function handleRefreshPreview() {
     setPreviewRefreshNonce((current) => current + 1);
     pushPreviewUpdate(previewTabRef.current);
-    setNotice('Preview refreshed.');
+    setNotice(weblabText.statusPreviewRefreshed);
   }
 
   function togglePane(pane: 'explorer' | 'editor' | 'preview') {
@@ -1202,30 +1204,30 @@ export function WebLab({ mode: initialMode = 'full' }: { mode?: EditorMode }) {
       <header className="weblab__toolbar">
         <div className="weblab__title-group">
           <div className="weblab__title-row">
-            <h1>WebLab</h1>
+            <h1>{weblabText.title}</h1>
           </div>
-          <p>WebLab gives students a VS Code-style explorer so they must wire files, links, and scripts themselves.</p>
+          <p>{weblabText.lead}</p>
         </div>
         <label className="weblab__name-field">
-          Project name
+          {weblabText.projectName}
           <input
             type="text"
             value={project.name}
             onChange={handleProjectNameChange}
-            placeholder="my-project"
+            placeholder={weblabText.projectPlaceholder}
             maxLength={80}
           />
         </label>
         <div className="weblab__controls">
           <div className="weblab__actions">
             <button type="button" className="weblab__new-button" onClick={requestNewProjectReset}>
-              New site
+              {weblabText.newSite}
             </button>
             <button type="button" onClick={handleSave} className={isDirty ? 'is-dirty' : ''}>
-              Save
+              {weblabText.save}
             </button>
             <button type="button" onClick={handleImportRequest}>
-              Import
+              {weblabText.import}
             </button>
             <input
               ref={fileInputRef}
@@ -1236,8 +1238,8 @@ export function WebLab({ mode: initialMode = 'full' }: { mode?: EditorMode }) {
             />
           </div>
           <div className="weblab__meta">
-            <p>Last update: {formattedLastUpdate}</p>
-            <p>Last save: {formattedLastSave}</p>
+            <p>{weblabText.lastUpdate}: {formattedLastUpdate}</p>
+            <p>{weblabText.lastSave}: {formattedLastSave}</p>
           </div>
         </div>
       </header>
@@ -1247,7 +1249,7 @@ export function WebLab({ mode: initialMode = 'full' }: { mode?: EditorMode }) {
           className={isRecoveredNotice ? 'weblab__status-note is-recovered' : 'weblab__status-note'}
           title={
             isRecoveredNotice
-              ? 'This means WebLab loaded your latest unsaved draft from local browser storage on this device.'
+              ? weblabText.recoveredHint
               : undefined
           }
         >
@@ -1256,7 +1258,7 @@ export function WebLab({ mode: initialMode = 'full' }: { mode?: EditorMode }) {
       </div>
 
       <div className="weblab__viewbar" aria-label="View panes">
-        <span className="weblab__viewbar-label">View</span>
+        <span className="weblab__viewbar-label">{weblabText.view}</span>
         <div className="weblab__viewbar-controls">
           <button
             type="button"
@@ -1264,7 +1266,7 @@ export function WebLab({ mode: initialMode = 'full' }: { mode?: EditorMode }) {
             onClick={() => togglePane('explorer')}
             aria-pressed={visiblePanes.explorer}
           >
-            Explorer
+            {weblabText.explorer}
           </button>
           <button
             type="button"
@@ -1272,7 +1274,7 @@ export function WebLab({ mode: initialMode = 'full' }: { mode?: EditorMode }) {
             onClick={() => togglePane('editor')}
             aria-pressed={visiblePanes.editor}
           >
-            Code
+            {weblabText.code}
           </button>
           <button
             type="button"
@@ -1280,147 +1282,31 @@ export function WebLab({ mode: initialMode = 'full' }: { mode?: EditorMode }) {
             onClick={() => togglePane('preview')}
             aria-pressed={visiblePanes.preview}
           >
-            Preview
+            {weblabText.preview}
           </button>
         </div>
       </div>
 
       <div className="weblab__workspace">
-        {isLiteMode ? (
-          <PanelGroup
-            key={isMobile ? 'lite-vertical' : 'lite-horizontal'}
-            autoSaveId={isMobile ? 'weblab-lite-mobile-layout' : 'weblab-lite-desktop-layout'}
-            direction={isMobile ? 'vertical' : 'horizontal'}
-          >
-            <Panel defaultSize={58} minSize={30}>
-              <div className="weblab__editor-shell">
-                <div className="weblab__tabs" role="tablist" aria-label="Project files">
-                  <div className="weblab__tabs-scroll">
-                    {project.files.map((file) => {
-                      if (editingFileId === file.id) {
-                        return (
-                          <input
-                            key={file.id}
-                            className="weblab__file-rename"
-                            type="text"
-                            value={editingFileName}
-                            autoFocus
-                            onChange={(event) => setEditingFileName(event.currentTarget.value)}
-                            onBlur={() => {
-                              const trimmed = editingFileName.trim();
-                              if (trimmed.length > 0 && trimmed !== file.name) {
-                                commitRenameFile(file.id, trimmed);
-                              }
-                              cancelRenameFile();
-                            }}
-                            onKeyDown={(event) => {
-                              if (event.key === 'Enter') {
-                                event.preventDefault();
-                                const trimmed = editingFileName.trim();
-                                if (trimmed.length > 0) {
-                                  commitRenameFile(file.id, trimmed);
-                                }
-                                cancelRenameFile();
-                              }
-
-                              if (event.key === 'Escape') {
-                                event.preventDefault();
-                                cancelRenameFile();
-                              }
-                            }}
-                          />
-                        );
-                      }
-
-                      return (
-                        <button
-                          key={file.id}
-                          type="button"
-                          role="tab"
-                          aria-selected={activeFileId === file.id}
-                          className={activeFileId === file.id ? 'is-active' : ''}
-                          onClick={() => handleSelectFile(file.id)}
-                          onDoubleClick={() => handleRenameFile(file.id)}
-                        >
-                          <span className="weblab__tab-name">{file.name}</span>
-                          <span className="weblab__tab-kind">{file.kind}</span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-                <div className="weblab__editor" role="tabpanel" aria-label={`${activeFile?.name ?? 'file'} editor`}>
-                  <Editor
-                    height="100%"
-                    defaultLanguage="html"
-                    language={currentLanguage}
-                    value={currentCode}
-                    onChange={updateCode}
-                    options={{
-                      minimap: { enabled: false },
-                      fontSize: 14,
-                      scrollBeyondLastLine: false,
-                      wordWrap: 'on',
-                      automaticLayout: true,
-                      tabSize: 2,
-                      acceptSuggestionOnEnter: 'on',
-                      linkedEditing: true,
-                    }}
-                    onMount={handleEditorMount}
-                    theme="vs"
-                  />
-                </div>
-              </div>
-            </Panel>
-
-            <PanelResizeHandle className="weblab__resize-handle" />
-
-            <Panel defaultSize={42} minSize={24}>
-              <div className="weblab__preview-wrap">
-                <div className="weblab__preview-topbar">
-                  <p className="weblab__preview-label">Preview</p>
-                  <div className="weblab__preview-actions">
-                    <button type="button" onClick={handleRefreshPreview}>
-                      Refresh
-                    </button>
-                    <button type="button" onClick={() => setIsPreviewFullscreen(true)}>
-                      Full page
-                    </button>
-                    <button type="button" onClick={openPreviewInNewTab}>
-                      Open tab
-                    </button>
-                  </div>
-                </div>
-                <iframe
-                  key={`inline-preview-${previewRefreshNonce}`}
-                  title="WebLab preview"
-                  className="weblab__preview"
-                  sandbox="allow-scripts"
-                  srcDoc={srcDoc}
-                />
-              </div>
-            </Panel>
-          </PanelGroup>
-        ) : (
-          visiblePanes.explorer || visiblePanes.editor || visiblePanes.preview ? (
+        {visiblePanes.explorer || visiblePanes.editor || visiblePanes.preview ? (
             <PanelGroup
-              key={isMobile ? 'full-vertical' : 'full-horizontal'}
-              autoSaveId={isMobile ? 'weblab-full-mobile-layout' : 'weblab-full-desktop-layout'}
+              key={`${isMobile ? 'full-vertical' : 'full-horizontal'}-${visiblePanesKey}`}
+              autoSaveId={`${isMobile ? 'weblab-full-mobile-layout-v2' : 'weblab-full-desktop-layout-v2'}-${visiblePanesKey}`}
               direction={isMobile ? 'vertical' : 'horizontal'}
             >
             {visiblePanes.explorer ? (
-            <Panel defaultSize={20} minSize={14} maxSize={30}>
+            <Panel id="full-explorer" order={1} defaultSize={panelDefaults.explorer} minSize={14} maxSize={40}>
               <div className="weblab__explorer-shell">
                 <div className="weblab__panel-topbar">
-                  <p className="weblab__panel-label">Explorer</p>
+                  <p className="weblab__panel-label">{weblabText.explorerPanel}</p>
                   <div className="weblab__panel-actions">
                     <button type="button" onClick={handleCreateFile} className="weblab__new-file-button">
                       <FilePlus2 size={14} />
-                      New File
+                      {weblabText.newFile}
                     </button>
                   </div>
                 </div>
-                <div className="weblab__file-list" role="list" aria-label="Project files">
+                <div className="weblab__file-list" role="list" aria-label={weblabText.projectFiles}>
                   {project.files.map((file) => (
                     <div
                       key={file.id}
@@ -1480,27 +1366,27 @@ export function WebLab({ mode: initialMode = 'full' }: { mode?: EditorMode }) {
                       )}
                       {pendingDeleteFileId === file.id ? (
                         <div className="weblab__file-delete-confirm" onClick={(event) => event.stopPropagation()}>
-                          <span>Are you sure?</span>
+                          <span>{weblabText.deletePrompt}</span>
                           <button
                             type="button"
                             className="weblab__file-delete-yes"
                             onClick={() => handleDeleteFile(file.id)}
                           >
-                            Yes
+                            {weblabText.yes}
                           </button>
                           <button
                             type="button"
                             className="weblab__file-delete-no"
                             onClick={() => setPendingDeleteFileId(null)}
                           >
-                            No
+                            {weblabText.no}
                           </button>
                         </div>
                       ) : (
                         <button
                           type="button"
                           className="weblab__file-delete"
-                          aria-label={`Delete ${file.name}`}
+                          aria-label={`${weblabText.deleteFile} ${file.name}`}
                           onClick={(event) => {
                             event.stopPropagation();
                             requestDeleteFile(file.id);
@@ -1521,17 +1407,12 @@ export function WebLab({ mode: initialMode = 'full' }: { mode?: EditorMode }) {
             ) : null}
 
             {visiblePanes.editor ? (
-            <Panel defaultSize={40} minSize={22}>
+            <Panel id="full-editor" order={2} defaultSize={panelDefaults.editor} minSize={22}>
               <div className="weblab__editor-shell">
                 <div className="weblab__panel-topbar">
-                  <p className="weblab__panel-label">{activeFile?.name ?? 'File'}</p>
-                  <div className="weblab__panel-actions">
-                    <span className="weblab__panel-subtitle">
-                      {activeFile?.kind === 'js' ? 'JavaScript' : activeFile?.kind === 'css' ? 'CSS' : 'HTML'}
-                    </span>
-                  </div>
+                  <p className="weblab__panel-label">{activeFile?.name ?? weblabText.code}</p>
                 </div>
-                <div className="weblab__editor" role="tabpanel" aria-label={`${activeFile?.name ?? 'file'} editor`}>
+                <div className="weblab__editor" role="tabpanel" aria-label={`${activeFile?.name ?? weblabText.code} ${weblabText.fileEditor}`}>
                   <Editor
                     height="100%"
                     defaultLanguage="html"
@@ -1561,19 +1442,16 @@ export function WebLab({ mode: initialMode = 'full' }: { mode?: EditorMode }) {
             ) : null}
 
             {visiblePanes.preview ? (
-            <Panel defaultSize={40} minSize={20}>
+            <Panel id="full-preview" order={3} defaultSize={panelDefaults.preview} minSize={20}>
               <div className="weblab__preview-wrap">
                 <div className="weblab__preview-topbar">
-                  <p className="weblab__preview-label">Preview</p>
+                  <p className="weblab__preview-label">{weblabText.preview}</p>
                   <div className="weblab__preview-actions">
                     <button type="button" onClick={handleRefreshPreview}>
-                      Refresh
-                    </button>
-                    <button type="button" onClick={() => setIsPreviewFullscreen(true)}>
-                      Full page
+                      {weblabText.refresh}
                     </button>
                     <button type="button" onClick={openPreviewInNewTab}>
-                      Open tab
+                      {weblabText.openTab}
                     </button>
                   </div>
                 </div>
@@ -1590,60 +1468,34 @@ export function WebLab({ mode: initialMode = 'full' }: { mode?: EditorMode }) {
             </PanelGroup>
           ) : (
             <div className="weblab__workspace-empty">
-              <p>All work areas are hidden.</p>
+              <p>{weblabText.allHidden}</p>
               <div className="weblab__workspace-empty-actions">
                 <button type="button" onClick={() => setVisiblePanes({ explorer: true, editor: true, preview: true })}>
-                  Show all panes
+                  {weblabText.showAllPanes}
                 </button>
               </div>
             </div>
           )
-        )}
+        }
       </div>
-
-      {isPreviewFullscreen ? (
-        <div className="weblab__preview-overlay" role="dialog" aria-modal="true" aria-label="Full page preview">
-          <div className="weblab__preview-overlay-bar">
-            <strong>Full page preview</strong>
-            <div className="weblab__preview-overlay-actions">
-              <button type="button" onClick={handleRefreshPreview}>
-                Refresh
-              </button>
-              <button type="button" onClick={openPreviewInNewTab}>
-                Open tab
-              </button>
-              <button type="button" onClick={() => setIsPreviewFullscreen(false)}>
-                Close
-              </button>
-            </div>
-          </div>
-          <iframe
-            key={`fullscreen-preview-${previewRefreshNonce}`}
-            title="WebLab full page preview"
-            className="weblab__preview weblab__preview--fullscreen"
-            sandbox="allow-scripts"
-            srcDoc={srcDoc}
-          />
-        </div>
-      ) : null}
 
       {isNewSiteConfirmOpen ? (
         <div
           className="weblab__confirm-overlay"
           role="dialog"
           aria-modal="true"
-          aria-label="Confirm new site"
+          aria-label={weblabText.dialogConfirmNewSite}
           onClick={() => setIsNewSiteConfirmOpen(false)}
         >
           <div className="weblab__confirm-modal" onClick={(event) => event.stopPropagation()}>
-            <h2>Start a new site?</h2>
-            <p>This will replace your current project files in the editor.</p>
+            <h2>{weblabText.dialogTitleNewSite}</h2>
+            <p>{weblabText.dialogTextNewSite}</p>
             <div className="weblab__confirm-actions">
               <button type="button" className="weblab__confirm-yes" onClick={handleNewProject}>
-                Confirm
+                {weblabText.confirm}
               </button>
               <button type="button" className="weblab__confirm-no" onClick={() => setIsNewSiteConfirmOpen(false)}>
-                Cancel
+                {weblabText.cancel}
               </button>
             </div>
           </div>
