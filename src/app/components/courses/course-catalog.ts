@@ -170,6 +170,89 @@ export const PROGRAM_TRACKS: ProgramTrack[] = [
     },
   },
   {
+    id: 'app-prototyper',
+    title: {
+      da: 'App Udvikling',
+      en: 'App Development',
+    },
+    summary: {
+      da: 'Fra idé til app-forløb: eleverne arbejder med brugerrejse, skærmflow, navigation og funktionelle prototyper på tre workshopdage.',
+      en: 'From idea to app track: students work with user journeys, screen flows, navigation, and functional prototypes across three workshop days.',
+    },
+    subjectKey: 'app',
+    targetKeys: ['udskoling', 'gymnasium'],
+    targetGroup: {
+      da: 'For klasser, der har arbejdet med JavaScript og basal webdesign. Typisk fra 9. klasse.',
+      en: 'For classes that have worked with JavaScript and basic web design. Typically from grade 9.',
+    },
+    duration: {
+      da: '3 workshopdage',
+      en: '3 workshop days',
+    },
+    subjects: {
+      da: 'Velegnet til design, programmering og innovationsforløb.',
+      en: 'Well suited for design, programming, and innovation tracks.',
+    },
+    image: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1200&q=80',
+    imageAlt: {
+      da: 'Kodevisning på en bærbar computer under appudvikling.',
+      en: 'Code editor on a laptop during app development.',
+    },
+    timeline: [
+      {
+        module: { da: 'Workshopdag 1', en: 'Workshop Day 1' },
+        duration: { da: 'Idé, flow og struktur', en: 'Idea, flow, and structure' },
+        focus: {
+          da: 'Eleverne udvikler idéer, brugerrejse og den første struktur for appen.',
+          en: 'Students develop ideas, user journeys, and the initial app structure.',
+        },
+        workload: {
+          da: 'Lærer: sikrer mål og rammer. Elever: afklarer funktioner og skaber første udkast.',
+          en: 'Teacher: secures goals and structure. Students: clarify features and create a first draft.',
+        },
+        format: {
+          da: 'Forløbsdag med fælles opstart og planlægning.',
+          en: 'Track day with shared kickoff and planning.',
+        },
+      },
+      {
+        module: { da: 'Workshopdag 2', en: 'Workshop Day 2' },
+        duration: { da: 'Prototyping og funktioner', en: 'Prototyping and features' },
+        focus: {
+          da: 'Eleverne bygger klikbar prototype, tester navigation og justerer design.',
+          en: 'Students build a clickable prototype, test navigation, and refine the design.',
+        },
+        workload: {
+          da: 'Lærer: understøtter proces og feedback. Elever: arbejder i grupper og forbedrer løsningen.',
+          en: 'Teacher: supports process and feedback. Students: work in groups and improve the solution.',
+        },
+        format: {
+          da: 'Arbejdsdag med løbende udvikling og feedback.',
+          en: 'Working day with ongoing development and feedback.',
+        },
+      },
+      {
+        module: { da: 'Workshopdag 3', en: 'Workshop Day 3' },
+        duration: { da: 'Afslutning og præsentation', en: 'Wrap-up and presentation' },
+        focus: {
+          da: 'Eleverne færdiggør, præsenterer og reflekterer over appens funktion og brugeroplevelse.',
+          en: 'Students finish, present, and reflect on app functionality and user experience.',
+        },
+        workload: {
+          da: 'Lærer: samler op og vurderer mål. Elever: færdiggør og præsenterer deres arbejde.',
+          en: 'Teacher: wraps up and reviews goals. Students: finish and present their work.',
+        },
+        format: {
+          da: 'Afsluttende workshopdag med præsentation.',
+          en: 'Final workshop day with presentation.',
+        },
+      },
+    ],
+    pricing: {
+      basePrice: 4500,
+    },
+  },
+  {
     id: 'kunstig-intelligens-forlob',
     title: {
       da: 'Kunstig Intelligens',
@@ -402,8 +485,8 @@ export const FOCUS_COURSES: FocusCourse[] = [
     },
     targetKeys: ['mellemtrin', 'udskoling', 'gymnasium'],
     duration: {
-      da: '2-3 moduler',
-      en: '2-3 modules',
+      da: '5-6 moduler',
+      en: '5-6 modules',
     },
     audience: {
       da: 'For klasser med fokus på designproces, innovation og brugerforståelse. Typisk fra 6. klasse.',
@@ -418,33 +501,6 @@ export const FOCUS_COURSES: FocusCourse[] = [
     },
   },
   {
-    id: 'app-prototyper',
-    title: {
-      da: 'App-prototyper',
-      en: 'App Prototyping',
-    },
-    description: {
-      da: 'Fra idé til klikbar app: eleverne bygger skærmflow, navigation og funktionelle prototyper med tydelig brugerretning.',
-      en: 'From idea to clickable app: students build screen flows, navigation, and functional prototypes with clear user direction.',
-    },
-    targetKeys: ['udskoling', 'gymnasium'],
-    duration: {
-      da: '2-3 moduler',
-      en: '2-3 modules',
-    },
-    audience: {
-      da: 'For klasser, der vil arbejde konkret med app-idé, funktioner og præsentation. Typisk fra 7. klasse.',
-      en: 'For classes that want practical work with app ideas, features, and presentation. Typically from grade 7.',
-    },
-    bookingHint: {
-      da: 'Velegnet som selvstændigt innovationsforløb eller efter UX-design.',
-      en: 'Well suited as a standalone innovation module or after UX Design.',
-    },
-    pricing: {
-      basePrice: 995,
-    },
-  },
-  {
     id: 'dataspor-og-kildekritik',
     title: {
       da: 'Dataspor og kildekritik',
@@ -456,8 +512,8 @@ export const FOCUS_COURSES: FocusCourse[] = [
     },
     targetKeys: ['mellemtrin', 'udskoling'],
     duration: {
-      da: '1-2 moduler',
-      en: '1-2 modules',
+      da: '1 workshopdag, ca. 5 timer',
+      en: '1 workshop day, approx. 5 hours',
     },
     audience: {
       da: 'Velegnet til klasser, der arbejder med nyheder, sociale medier og informationssøgning. Typisk fra 6. klasse.',
@@ -483,16 +539,16 @@ export const FOCUS_COURSES: FocusCourse[] = [
     },
     targetKeys: ['udskoling', 'gymnasium'],
     duration: {
-      da: '2-4 moduler',
-      en: '2-4 modules',
+      da: '2-8 moduler',
+      en: '2-8 modules',
     },
     audience: {
       da: 'For klasser, der vil arbejde med spilproduktion i et professionelt udviklingsmiljø. Typisk fra 8. klasse.',
       en: 'For classes that want to work with game production in a professional development environment. Typically from grade 8.',
     },
     bookingHint: {
-      da: 'Kræver typisk computere med grafisk kapacitet og introduktion til Unreal-workflow.',
-      en: 'Typically requires computers with graphics capacity and an introduction to Unreal workflow.',
+      da: 'Kræver typisk computere med grafisk kapacitet og egne tekniske remedier til spilproduktion.',
+      en: 'Typically requires computers with graphics capacity and the school’s own technical equipment for game production.',
     },
     pricing: {
       basePrice: 1295,

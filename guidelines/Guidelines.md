@@ -1,61 +1,50 @@
-**Add your own guidelines here**
-<!--
+# NordPixel Repository Guidelines
 
-System Guidelines
+## Scope
+- These guidelines apply to changes in this repository.
+- Keep changes minimal, focused, and consistent with existing structure.
 
-Use this file to provide the AI with rules and guidelines you want it to follow.
-This template outlines a few examples of things you can add. You can add your own sections and format it to suit your needs
+## Tech Stack And Structure
+- Framework: Next.js App Router with TypeScript.
+- Main app code lives under src/app.
+- Shared language state and dictionaries live under src/context.
+- Shared copy for major pages is centralized in src/context/page-copy.ts and consumed via src/context/language-dictionary.ts.
+- Course domain copy is centralized in src/app/components/courses/course-copy.ts.
 
-TIP: More context isn't always better. It can confuse the LLM. Try and add the most important rules you need
+## Localization And Copy Rules
+- Do not hardcode user-facing DA/EN copy directly in components when it can live in dictionary/copy modules.
+- Prefer dictionary keys for all UI text that appears in navigation, buttons, labels, hints, status text, and dialogs.
+- Prefer dictionary keys for accessibility microcopy too (aria-label, skip links, menu labels, footer labels).
+- Avoid inline locale conditionals for copy (for example locale === 'da' ? '...' : '...') unless there is a strong technical reason.
+- Keep DA and EN versions parallel in meaning and tone.
+- For Home, Contact, Editor intro, and cart prompt copy, keep source-of-truth in page-copy and dictionary wiring.
 
-# General guidelines
+## Accessibility
+- Keep interactive elements keyboard accessible.
+- Add clear aria-label text where visual labels are not sufficient.
+- Accessibility labels should follow the same localization rules as visible copy.
 
-Any general rules you want the AI to follow.
-For example:
+## Metadata And Routing Copy
+- Keep metadata titles/descriptions intentional and aligned with page intent.
+- If metadata is localized, use a single structured source to avoid drift across routes.
+- Canonical URLs must match the route.
 
-* Only use absolute positioning when necessary. Opt for responsive and well structured layouts that use flexbox and grid by default
-* Refactor code as you go to keep code clean
-* Keep file sizes small and put helper functions and components in their own files.
+## Component And Data Boundaries
+- Keep presentation components in src/app/components.
+- Keep content data in dedicated content modules, not embedded in JSX.
+- Keep constants and assets in existing asset/data files (for example src/assets/site-footer.ts, course catalog modules).
 
---------------
+## Styling And UI Implementation
+- Reuse existing design tokens and global styles in src/styles.
+- Avoid unnecessary one-off style patterns when an existing class/token can be reused.
+- Keep responsive behavior explicit for mobile and desktop layouts.
 
-# Design system guidelines
-Rules for how the AI should make generations look like your company's design system
+## Change Quality
+- Preserve existing naming patterns and folder structure.
+- Avoid broad refactors unless requested.
+- Ensure new copy keys are added to both da and en variants.
+- Keep implementation straightforward and readable.
 
-Additionally, if you select a design system to use in the prompt box, you can reference
-your design system's components, tokens, variables and components.
-For example:
-
-* Use a base font-size of 14px
-* Date formats should always be in the format “Jun 10”
-* The bottom toolbar should only ever have a maximum of 4 items
-* Never use the floating action button with the bottom toolbar
-* Chips should always come in sets of 3 or more
-* Don't use a dropdown if there are 2 or fewer options
-
-You can also create sub sections and add more specific details
-For example:
-
-
-## Button
-The Button component is a fundamental interactive element in our design system, designed to trigger actions or navigate
-users through the application. It provides visual feedback and clear affordances to enhance user experience.
-
-### Usage
-Buttons should be used for important actions that users need to take, such as form submissions, confirming choices,
-or initiating processes. They communicate interactivity and should have clear, action-oriented labels.
-
-### Variants
-* Primary Button
-  * Purpose : Used for the main action in a section or page
-  * Visual Style : Bold, filled with the primary brand color
-  * Usage : One primary button per section to guide users toward the most important action
-* Secondary Button
-  * Purpose : Used for alternative or supporting actions
-  * Visual Style : Outlined with the primary color, transparent background
-  * Usage : Can appear alongside a primary button for less important actions
-* Tertiary Button
-  * Purpose : Used for the least important actions
-  * Visual Style : Text-only with no border, using primary color
-  * Usage : For actions that should be available but not emphasized
--->
+## Current Known Gap To Avoid Repeating
+- Some header/footer and shell accessibility microcopy is currently hardcoded in components.
+- New work should not add more hardcoded microcopy; add keys to dictionary instead.
