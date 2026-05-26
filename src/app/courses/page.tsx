@@ -3,6 +3,16 @@ import { CoursesContent } from '../components/CoursesContent';
 
 export const metadata: Metadata = {
   title: 'Forløb',
+  description: 'Se NordPixels forløb i teknologiforståelse, web og AI til skoler. Filtrer efter målgruppe og gå direkte til booking.',
+  openGraph: {
+    title: 'Forløb | NordPixel',
+    description: 'Praktiske og skoleklare forløb i teknologiforståelse, web og AI.',
+    type: 'website',
+    url: 'https://nordpixel.dev/courses',
+  },
+  alternates: {
+    canonical: 'https://nordpixel.dev/courses',
+  },
 };
 
 export default function CoursesPage() {

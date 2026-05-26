@@ -1,3 +1,5 @@
+import { pageCopyByLocale } from './page-copy';
+
 export type Locale = 'da' | 'en';
 
 export type Dictionary = {
@@ -18,6 +20,26 @@ export type Dictionary = {
     lead: string;
     ctaWeblab: string;
     ctaCourses: string;
+  };
+  homePage: {
+    eyebrow: string;
+    title: string;
+    lead: string;
+    statusNote: string;
+    proofPoints: ReadonlyArray<{ value: string; label: string }>;
+    authorityTitle: string;
+    authorityCards: ReadonlyArray<{ title: string; text: string }>;
+    methodTitle: string;
+    methodSteps: ReadonlyArray<{ title: string; text: string }>;
+    heroCardTitle: string;
+    heroCardPoints: ReadonlyArray<string>;
+    trustTitle: string;
+    trustPoints: ReadonlyArray<string>;
+    ctaWeblab: string;
+    ctaCourses: string;
+    ctaContact: string;
+    weblabNote: string;
+    closing: string;
   };
   courses: {
     title: string;
@@ -42,6 +64,37 @@ export type Dictionary = {
     contactPlaceholder: string;
     aboutTitle: string;
     aboutText: string;
+  };
+  contactPage: {
+    eyebrow: string;
+    title: string;
+    intro: string;
+    proofPoints: ReadonlyArray<{ value: string; label: string }>;
+    partnershipTitle: string;
+    partnershipPoints: ReadonlyArray<string>;
+    methodTitle: string;
+    methodSteps: ReadonlyArray<{ title: string; text: string }>;
+    contactTitle: string;
+    contactIntro: string;
+    contactAction: string;
+    contactLabelEmail: string;
+    contactLabelCvr: string;
+    contactLabelLinkedin: string;
+    authorityTitle: string;
+    authorityCards: ReadonlyArray<{ title: string; text: string }>;
+    closing: string;
+  };
+  editorIntro: {
+    title: string;
+    text: string;
+    hint: string;
+  };
+  coursesCartPrompt: {
+    title: string;
+    text: string;
+    goToCart: string;
+    continueBrowsing: string;
+    close: string;
   };
   footer: {
     email: string;
@@ -123,6 +176,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       ctaWeblab: 'Åbn WebLab',
       ctaCourses: 'Se forløb',
     },
+    homePage: pageCopyByLocale.da.homePage,
     courses: {
       title: 'Forløb til skoler og klasser',
       intro: 'NordPixel leverer forløb i teknologiforståelse, der er praktiske, kreative og lette at gennemføre i undervisningen.',
@@ -150,6 +204,9 @@ export const dictionaries: Record<Locale, Dictionary> = {
       aboutTitle: 'Om os',
       aboutText: 'NordPixel udvikler undervisning i digital kreativitet, web og AI for børn og unge.',
     },
+    contactPage: pageCopyByLocale.da.contactPage,
+    editorIntro: pageCopyByLocale.da.editorIntro,
+    coursesCartPrompt: pageCopyByLocale.da.coursesCartPrompt,
     footer: {
       email: 'Email',
       cvr: 'CVR',
@@ -228,6 +285,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       ctaWeblab: 'Open WebLab',
       ctaCourses: 'Explore Courses',
     },
+    homePage: pageCopyByLocale.en.homePage,
     courses: {
       title: 'Courses for Schools and Classrooms',
       intro: 'NordPixel delivers technology literacy tracks that are practical, creative, and easy to run in real classrooms.',
@@ -255,6 +313,9 @@ export const dictionaries: Record<Locale, Dictionary> = {
       aboutTitle: 'About Us',
       aboutText: 'NordPixel builds educational experiences in digital creativity, web development, and AI for children and young learners.',
     },
+    contactPage: pageCopyByLocale.en.contactPage,
+    editorIntro: pageCopyByLocale.en.editorIntro,
+    coursesCartPrompt: pageCopyByLocale.en.coursesCartPrompt,
     footer: {
       email: 'Email',
       cvr: 'CVR',

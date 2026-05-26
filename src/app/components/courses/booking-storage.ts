@@ -1,5 +1,6 @@
 export const BOOKING_STORAGE_KEY = 'nordpixel-booking-cart';
 export const BOOKING_CART_UPDATED_EVENT = 'nordpixel-booking-cart-updated';
+export const BOOKING_CART_ATTENTION_EVENT = 'nordpixel-booking-cart-attention';
 
 export type BookingSelection = Record<string, number>;
 
@@ -56,10 +57,13 @@ export function addSelectionToBookingCart(optionId: string, allowedIds: string[]
   const selection = readBookingSelection(allowedIds);
   const next = {
     ...selection,
-    [optionId]: selection[optionId] ?? 1,
+    [optionId]: (selection[optionId] ?? 0) + 1,
   };
 
   writeBookingSelection(next);
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent(BOOKING_CART_ATTENTION_EVENT, { detail: { optionId } }));
+  }
   return next;
 }
 

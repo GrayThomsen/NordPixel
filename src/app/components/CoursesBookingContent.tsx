@@ -81,6 +81,38 @@ export function CoursesBookingContent({ initialAddId }: CoursesBookingContentPro
   const selectedItems = BOOKABLE_OPTIONS.filter((option) => selectedQuantities[option.id]);
   const bookingHeroReminders = [copy.cartPageReminder1, copy.cartPageReminder2, copy.cartPageReminder3].filter(Boolean);
 
+  const formatPrice = (value: number) =>
+    value.toLocaleString(locale === 'da' ? 'da-DK' : 'en-US', {
+      style: 'currency',
+      currency: 'DKK',
+      maximumFractionDigits: 0,
+    });
+
+  const pricingRows = selectedItems.map((option) => {
+    const quantity = selectedQuantities[option.id] ?? 0;
+    const subtotal = option.pricing.basePrice * quantity;
+    return {
+      id: option.id,
+      title: translate(option.title),
+      quantity,
+      basePrice: option.pricing.basePrice,
+      isByPlanning: option.pricing.isByPlanning ?? false,
+      subtotal,
+    };
+  });
+
+  const subtotalPrice = pricingRows.reduce((total, row) => total + row.subtotal, 0);
+  const hasPlanningPricedItems = pricingRows.some((row) => row.isByPlanning);
+
+  const pricingBreakdown = pricingRows
+    .map(
+      (row) =>
+        row.isByPlanning
+          ? `${row.title} x${row.quantity}: ${copy.pricingByPlanningShort}`
+          : `${row.title} x${row.quantity} (${formatPrice(row.basePrice)}) = ${formatPrice(row.subtotal)}`,
+    )
+    .join('\n');
+
   const submitBooking = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -120,6 +152,11 @@ export function CoursesBookingContent({ initialAddId }: CoursesBookingContentPro
       course: selectedCourses,
       message: form.message || '-',
       booking_lines: chosenLines,
+      pricing_breakdown: pricingBreakdown || '-',
+      subtotal_price: formatPrice(subtotalPrice),
+      discount_label: copy.bookingDiscountTierText,
+      discount_note: copy.pricingBundleText,
+      total_price: formatPrice(subtotalPrice),
       to_email: BOOKING_EMAIL,
       locale,
     };
@@ -185,6 +222,12 @@ export function CoursesBookingContent({ initialAddId }: CoursesBookingContentPro
                 <article key={option.id} className={`bookingItem ${itemKindClass} ${isSelected ? 'isSelected' : ''}`}>
                   <h3>{translate(option.title)}</h3>
 
+                  <p className="bookingItemPrice">
+                    {option.pricing.isByPlanning
+                      ? `${copy.pricingEstimatedLabel}: ${copy.pricingByPlanningShort}`
+                      : `${copy.pricingEstimatedLabel}: ${formatPrice(option.pricing.basePrice)}`}
+                  </p>
+
                   <p className="bookingItemQtyLabel">{copy.quantityLabel}</p>
 
                   <div className="bookingItemQty" role="group" aria-label={`${copy.quantityLabel} ${translate(option.title)}`}>
@@ -201,6 +244,7 @@ export function CoursesBookingContent({ initialAddId }: CoursesBookingContentPro
                       min={0}
                       value={quantity}
                       onChange={(event) => setQuantity(option.id, Number(event.target.value))}
+                      onFocus={(event) => event.target.select()}
                     />
                     <button
                       type="button"
@@ -246,6 +290,27 @@ export function CoursesBookingContent({ initialAddId }: CoursesBookingContentPro
             ) : (
               <p className="bookingSummaryEmpty">{copy.sectionEmpty}</p>
             )}
+
+            {selectedItems.length ? (
+              <div className="bookingSummaryPricing" aria-label={copy.bookingPricingTitle}>
+                <p className="bookingSummaryPricingTitle">{copy.bookingPricingTitle}</p>
+                {pricingRows.map((row) => (
+                  <p key={row.id} className="bookingSummaryPricingLine">
+                    <span>{row.title} x{row.quantity}</span>
+                    <strong>{row.isByPlanning ? copy.pricingByPlanningShort : formatPrice(row.subtotal)}</strong>
+                  </p>
+                ))}
+                <p className="bookingSummaryPricingMeta">{copy.pricingBundleText}</p>
+                <p className="bookingSummaryPricingLine bookingSummaryPricingTotal">
+                  <span>{copy.bookingSubtotalLabel}</span>
+                  <strong>{hasPlanningPricedItems ? `${formatPrice(subtotalPrice)} + ${copy.pricingByPlanningShort}` : formatPrice(subtotalPrice)}</strong>
+                </p>
+                <p className="bookingSummaryPricingLine bookingSummaryPricingDiscount">
+                  <span>{copy.bookingDiscountLabel}</span>
+                  <strong>{copy.bookingDiscountTierText}</strong>
+                </p>
+              </div>
+            ) : null}
           </section>
 
           <section className="bookingContact" aria-label={copy.cartContactTitle}>
@@ -298,16 +363,6 @@ export function CoursesBookingContent({ initialAddId }: CoursesBookingContentPro
                 />
               </label>
               <label>
-                <span>{copy.studentsLabel}</span>
-                <input
-                  type="number"
-                  min={0}
-                  value={form.students}
-                  onChange={(event) => setForm((prev) => ({ ...prev, students: event.target.value }))}
-                  placeholder={copy.studentsPlaceholder}
-                />
-              </label>
-              <label>
                 <span>{copy.classesLabel}</span>
                 <input
                   type="number"
@@ -318,6 +373,16 @@ export function CoursesBookingContent({ initialAddId }: CoursesBookingContentPro
                 />
               </label>
               <label>
+                <span>{copy.studentsLabel}</span>
+                <input
+                  type="number"
+                  min={0}
+                  value={form.students}
+                  onChange={(event) => setForm((prev) => ({ ...prev, students: event.target.value }))}
+                  placeholder={copy.studentsPlaceholder}
+                />
+              </label>
+              <label className="bookingFieldFullRow">
                 <span>{copy.messageLabel}</span>
                 <textarea
                   value={form.message}

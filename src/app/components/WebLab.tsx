@@ -40,6 +40,7 @@ type LegacyLabProject = {
 
 const STORAGE_KEY = 'nordpixel-weblab-current';
 const LAST_SAVE_KEY = 'nordpixel-weblab-last-save';
+const DIRTY_STATE_KEY = 'nordpixel-weblab-is-dirty';
 const HTML_VOID_TAGS = new Set([
   'area',
   'base',
@@ -559,6 +560,11 @@ export function WebLab() {
       setLastSavedAt(persistedSaveTime);
     }
 
+    const persistedDirtyState = window.localStorage.getItem(DIRTY_STATE_KEY);
+    if (persistedDirtyState === 'true' || persistedDirtyState === 'false') {
+      setIsDirty(persistedDirtyState === 'true');
+    }
+
     setIsHydrated(true);
 
     return () => {
@@ -923,6 +929,7 @@ export function WebLab() {
       };
     });
     setIsDirty(true);
+    window.localStorage.setItem(DIRTY_STATE_KEY, 'true');
   }
 
   function updateCode(value: string | undefined) {
@@ -1071,6 +1078,7 @@ export function WebLab() {
     setIsNewSiteConfirmOpen(false);
     cancelRenameFile();
     setIsDirty(true);
+    window.localStorage.setItem(DIRTY_STATE_KEY, 'true');
     setNotice(weblabText.statusStartedFresh);
   }
 
@@ -1105,6 +1113,7 @@ export function WebLab() {
     setLastSavedAt(savedAt);
     window.localStorage.setItem(LAST_SAVE_KEY, savedAt);
     setIsDirty(false);
+    window.localStorage.setItem(DIRTY_STATE_KEY, 'false');
     setNotice(weblabText.statusSaved);
   }
 
@@ -1133,6 +1142,7 @@ export function WebLab() {
       });
       setActiveFileId(getInitialActiveFileId(parsed.files));
       setIsDirty(true);
+      window.localStorage.setItem(DIRTY_STATE_KEY, 'true');
       setNotice(`${weblabText.statusImported}: ${parsed.name}`);
     };
 

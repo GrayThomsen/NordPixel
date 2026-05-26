@@ -11,6 +11,16 @@ export type TimelineStep = {
   format: LocalizedText;
 };
 
+export type PricingInfo = {
+  basePrice: number;
+  isByPlanning?: boolean;
+};
+
+export type DiscountTier = {
+  minCourses: number;
+  discountPercentage: number;
+};
+
 export type ProgramTrack = {
   id: string;
   title: LocalizedText;
@@ -23,6 +33,7 @@ export type ProgramTrack = {
   image: string;
   imageAlt: LocalizedText;
   timeline: TimelineStep[];
+  pricing: PricingInfo;
 };
 
 export type FocusCourse = {
@@ -33,10 +44,12 @@ export type FocusCourse = {
   duration: LocalizedText;
   audience: LocalizedText;
   bookingHint: LocalizedText;
+  pricing: PricingInfo;
 };
 
 export type BookableOption = {
   id: string;
   title: LocalizedText;
   kind: 'track' | 'focus';
+  pricing: PricingInfo;
 };

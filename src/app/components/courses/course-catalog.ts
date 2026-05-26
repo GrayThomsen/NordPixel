@@ -1,4 +1,6 @@
-import { type BookableOption, type FocusCourse, type ProgramTrack } from './course-types';
+import { type BookableOption, type DiscountTier, type FocusCourse, type ProgramTrack } from './course-types';
+
+const CUSTOM_TRACK_BASE_PRICE = 0;
 
 export const PROGRAM_TRACKS: ProgramTrack[] = [
   {
@@ -80,6 +82,9 @@ export const PROGRAM_TRACKS: ProgramTrack[] = [
         },
       },
     ],
+    pricing: {
+      basePrice: 1495,
+    },
   },
   {
     id: 'webdesign-forlob',
@@ -160,6 +165,9 @@ export const PROGRAM_TRACKS: ProgramTrack[] = [
         },
       },
     ],
+    pricing: {
+      basePrice: 1695,
+    },
   },
   {
     id: 'kunstig-intelligens-forlob',
@@ -240,6 +248,9 @@ export const PROGRAM_TRACKS: ProgramTrack[] = [
         },
       },
     ],
+    pricing: {
+      basePrice: 1595,
+    },
   },
 ];
 
@@ -260,12 +271,15 @@ export const FOCUS_COURSES: FocusCourse[] = [
       en: '1-2 modules',
     },
     audience: {
-      da: 'For elever, der allerede kan lidt HTML og CSS.',
-      en: 'For students who already know a little HTML and CSS.',
+      da: 'For elever, der allerede kan lidt HTML og CSS. Typisk fra 7. klasse.',
+      en: 'For students who already know a little HTML and CSS. Typically from grade 7.',
     },
     bookingHint: {
       da: 'God som hurtig udvidelse til et eksisterende webforløb.',
       en: 'A good quick extension to an existing web track.',
+    },
+    pricing: {
+      basePrice: 595,
     },
   },
   {
@@ -284,12 +298,15 @@ export const FOCUS_COURSES: FocusCourse[] = [
       en: '1 workshop day',
     },
     audience: {
-      da: 'For elever, der vil prøve programmering i praksis.',
-      en: 'For students who want to try coding in practice.',
+      da: 'For elever, der vil prøve programmering i praksis. Typisk fra 7. klasse.',
+      en: 'For students who want to try coding in practice. Typically from grade 7.',
     },
     bookingHint: {
       da: 'Kan bookes som selvstændig dag eller som del af et længere forløb.',
       en: 'Can be booked as a standalone day or as part of a longer track.',
+    },
+    pricing: {
+      basePrice: 995,
     },
   },
   {
@@ -308,12 +325,15 @@ export const FOCUS_COURSES: FocusCourse[] = [
       en: '1-3 modules',
     },
     audience: {
-      da: 'Passer til klasser, der arbejder med teknologi, etik og kildekritik.',
-      en: 'For classes working with technology, ethics, and source criticism.',
+      da: 'Passer til klasser, der arbejder med teknologi, etik og kildekritik. Typisk fra 6. klasse.',
+      en: 'For classes working with technology, ethics, and source criticism. Typically from grade 6.',
     },
     bookingHint: {
       da: 'Kan kobles direkte til fag, hvor eleverne undersøger medier og svarmaskiner.',
       en: 'Can be integrated directly into subjects where students examine media, source use, and AI-generated responses.',
+    },
+    pricing: {
+      basePrice: 795,
     },
   },
   {
@@ -332,14 +352,211 @@ export const FOCUS_COURSES: FocusCourse[] = [
       en: '1-2 modules',
     },
     audience: {
-      da: 'For de yngre klasser og forløb med fokus på logik og struktur.',
-      en: 'For younger classes and tracks with a focus on logic and structure.',
+      da: 'For de yngre klasser og forløb med fokus på logik og struktur. Typisk 3.-6. klasse.',
+      en: 'For younger classes and tracks with a focus on logic and structure. Typically grades 3-6.',
     },
     bookingHint: {
       da: 'Velegnet som kort faglig workshop eller som bro til andre forløb.',
       en: 'Well suited as a short workshop or as a bridge into other tracks.',
     },
+    pricing: {
+      basePrice: 545,
+    },
   },
+  {
+    id: 'dataetik-og-privatliv',
+    title: {
+      da: 'Dataetik og privatliv',
+      en: 'Data Ethics and Privacy',
+    },
+    description: {
+      da: 'Eleverne arbejder med samtykke, dataspor, algoritmiske beslutninger og ansvarlig brug af digitale tjenester.',
+      en: 'Students explore consent, digital footprints, algorithmic decisions, and responsible use of online services.',
+    },
+    targetKeys: ['udskoling', 'gymnasium'],
+    duration: {
+      da: '1-2 moduler',
+      en: '1-2 modules',
+    },
+    audience: {
+      da: 'For klasser, der arbejder med demokrati, samfund og digital myndiggørelse. Typisk fra 7. klasse.',
+      en: 'For classes working with democracy, society, and digital citizenship. Typically from grade 7.',
+    },
+    bookingHint: {
+      da: 'Godt supplement til AI- og medieforløb.',
+      en: 'A strong add-on to AI and media-related programs.',
+    },
+    pricing: {
+      basePrice: 695,
+    },
+  },
+  {
+    id: 'ux-design',
+    title: {
+      da: 'UX-design',
+      en: 'UX Design',
+    },
+    description: {
+      da: 'Eleverne arbejder med brugerrejser, wireframes, test og iteration for at skabe løsninger, der er nemme at bruge.',
+      en: 'Students work with user journeys, wireframes, testing, and iteration to create solutions that are easy to use.',
+    },
+    targetKeys: ['mellemtrin', 'udskoling', 'gymnasium'],
+    duration: {
+      da: '2-3 moduler',
+      en: '2-3 modules',
+    },
+    audience: {
+      da: 'For klasser med fokus på designproces, innovation og brugerforståelse. Typisk fra 6. klasse.',
+      en: 'For classes focused on design process, innovation, and user understanding. Typically from grade 6.',
+    },
+    bookingHint: {
+      da: 'Kan køres selvstændigt eller som forløb før app- og webudvikling.',
+      en: 'Can run standalone or as preparation before app and web development.',
+    },
+    pricing: {
+      basePrice: 895,
+    },
+  },
+  {
+    id: 'app-prototyper',
+    title: {
+      da: 'App-prototyper',
+      en: 'App Prototyping',
+    },
+    description: {
+      da: 'Fra idé til klikbar app: eleverne bygger skærmflow, navigation og funktionelle prototyper med tydelig brugerretning.',
+      en: 'From idea to clickable app: students build screen flows, navigation, and functional prototypes with clear user direction.',
+    },
+    targetKeys: ['udskoling', 'gymnasium'],
+    duration: {
+      da: '2-3 moduler',
+      en: '2-3 modules',
+    },
+    audience: {
+      da: 'For klasser, der vil arbejde konkret med app-idé, funktioner og præsentation. Typisk fra 7. klasse.',
+      en: 'For classes that want practical work with app ideas, features, and presentation. Typically from grade 7.',
+    },
+    bookingHint: {
+      da: 'Velegnet som selvstændigt innovationsforløb eller efter UX-design.',
+      en: 'Well suited as a standalone innovation module or after UX Design.',
+    },
+    pricing: {
+      basePrice: 995,
+    },
+  },
+  {
+    id: 'dataspor-og-kildekritik',
+    title: {
+      da: 'Dataspor og kildekritik',
+      en: 'Digital Footprints and Source Criticism',
+    },
+    description: {
+      da: 'Eleverne undersøger, hvordan data skabes og spredes online, og træner kildekritik i praksis.',
+      en: 'Students investigate how data is created and spread online, and practice source criticism in authentic tasks.',
+    },
+    targetKeys: ['mellemtrin', 'udskoling'],
+    duration: {
+      da: '1-2 moduler',
+      en: '1-2 modules',
+    },
+    audience: {
+      da: 'Velegnet til klasser, der arbejder med nyheder, sociale medier og informationssøgning. Typisk fra 6. klasse.',
+      en: 'Well suited for classes working with news, social media, and information literacy. Typically from grade 6.',
+    },
+    bookingHint: {
+      da: 'Kan afvikles som komprimeret workshop i dansk eller samfundsfag.',
+      en: 'Can be delivered as a compact workshop in language arts or civics.',
+    },
+    pricing: {
+      basePrice: 595,
+    },
+  },
+  {
+    id: 'spiludvikling-unreal-engine',
+    title: {
+      da: 'Spiludvikling i Unreal Engine',
+      en: 'Game Development in Unreal Engine',
+    },
+    description: {
+      da: 'Eleverne bygger spilscener i Unreal Engine med fokus på level design, logik, interaktion og test af gameplay.',
+      en: 'Students build game scenes in Unreal Engine with focus on level design, logic, interaction, and gameplay testing.',
+    },
+    targetKeys: ['udskoling', 'gymnasium'],
+    duration: {
+      da: '2-4 moduler',
+      en: '2-4 modules',
+    },
+    audience: {
+      da: 'For klasser, der vil arbejde med spilproduktion i et professionelt udviklingsmiljø. Typisk fra 8. klasse.',
+      en: 'For classes that want to work with game production in a professional development environment. Typically from grade 8.',
+    },
+    bookingHint: {
+      da: 'Kræver typisk computere med grafisk kapacitet og introduktion til Unreal-workflow.',
+      en: 'Typically requires computers with graphics capacity and an introduction to Unreal workflow.',
+    },
+    pricing: {
+      basePrice: 1295,
+    },
+  },
+  {
+    id: 'digital-fortaelling-worldbuilding',
+    title: {
+      da: 'Digital fortælling og worldbuilding',
+      en: 'Digital Storytelling and Worldbuilding',
+    },
+    description: {
+      da: 'Eleverne udvikler universer, karakterer og fortællestrukturer med fokus på worldbuilding, narrativ sammenhæng og formidling.',
+      en: 'Students develop worlds, characters, and narrative structures with focus on worldbuilding, coherence, and communication.',
+    },
+    targetKeys: ['mellemtrin', 'udskoling', 'gymnasium'],
+    duration: {
+      da: '2-3 moduler',
+      en: '2-3 modules',
+    },
+    audience: {
+      da: 'For klasser, der arbejder med kreativ skrivning, fortælling og universdesign. Typisk fra 6. klasse.',
+      en: 'For classes working with creative writing, storytelling, and world design. Typically from grade 6.',
+    },
+    bookingHint: {
+      da: 'Kan kobles til dansk, engelsk, spiludvikling eller tværfaglige projektuger.',
+      en: 'Can connect to language arts, game development, or interdisciplinary project weeks.',
+    },
+    pricing: {
+      basePrice: 895,
+    },
+  },
+  {
+    id: 'medieproduktion',
+    title: {
+      da: 'Medieproduktion',
+      en: 'Media Production',
+    },
+    description: {
+      da: 'Eleverne producerer egne medieformater med fokus på idé, målgruppe, produktion, redigering og ansvarlig publicering.',
+      en: 'Students produce their own media formats with focus on concept, audience, production, editing, and responsible publishing.',
+    },
+    targetKeys: ['udskoling', 'gymnasium'],
+    duration: {
+      da: '2-3 moduler',
+      en: '2-3 modules',
+    },
+    audience: {
+      da: 'For klasser, der vil arbejde praktisk med video, lyd, visuel formidling og publicering. Typisk fra 7. klasse.',
+      en: 'For classes that want practical work with video, audio, visual communication, and publishing. Typically from grade 7.',
+    },
+    bookingHint: {
+      da: 'Velegnet til temauger, fremlæggelser og autentiske elevproduktioner.',
+      en: 'Well suited for theme weeks, presentations, and authentic student productions.',
+    },
+    pricing: {
+      basePrice: 995,
+    },
+  },
+];
+
+export const DISCOUNT_TIERS: DiscountTier[] = [
+  { minCourses: 3, discountPercentage: 10 },
+  { minCourses: 5, discountPercentage: 15 },
 ];
 
 export const BOOKABLE_OPTIONS: BookableOption[] = [
@@ -350,16 +567,22 @@ export const BOOKABLE_OPTIONS: BookableOption[] = [
       en: 'My custom track',
     },
     kind: 'track',
+    pricing: {
+      basePrice: CUSTOM_TRACK_BASE_PRICE,
+      isByPlanning: true,
+    },
   },
   ...PROGRAM_TRACKS.map((track) => ({
     id: track.id,
     title: track.title,
     kind: 'track' as const,
+    pricing: track.pricing,
   })),
   ...FOCUS_COURSES.map((course) => ({
     id: course.id,
     title: course.title,
     kind: 'focus' as const,
+    pricing: course.pricing,
   })),
 ];
 

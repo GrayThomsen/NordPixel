@@ -1,31 +1,21 @@
 'use client';
 
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { Clock3, Layers3, Users } from 'lucide-react';
 import { useMemo, useState } from 'react';
+import { type MouseEvent } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import { getCoursesCopy } from './courses/course-copy';
 import { BOOKABLE_OPTIONS, FOCUS_COURSES, PROGRAM_TRACKS } from './courses/course-catalog';
 import { addSelectionToBookingCart } from './courses/booking-storage';
 import { type LocalizedText } from './courses/course-types';
 
-let bookingTabRef: Window | null = null;
-const BOOKING_SOURCE_TAB_ID_KEY = 'nordpixel-booking-source-tab-id';
-
-function getBookingTabTarget() {
-  const existingId = window.sessionStorage.getItem(BOOKING_SOURCE_TAB_ID_KEY);
-  if (existingId) {
-    return `nordpixel-booking-cart-tab-${existingId}`;
-  }
-
-  const newId = `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
-  window.sessionStorage.setItem(BOOKING_SOURCE_TAB_ID_KEY, newId);
-  return `nordpixel-booking-cart-tab-${newId}`;
-}
-
 export function CoursesContent() {
   const { dictionary, locale } = useLanguage();
+  const router = useRouter();
   const [targetFilter, setTargetFilter] = useState('all');
+  const [isCartPromptVisible, setIsCartPromptVisible] = useState(false);
 
   const translate = (value: LocalizedText) => value[locale];
   const bookingOptionIds = useMemo(() => BOOKABLE_OPTIONS.map((option) => option.id), []);
@@ -56,27 +46,36 @@ export function CoursesContent() {
     { id: 'gymnasium', label: copy.filterTargetGymnasium },
   ];
 
+  const animateBookButton = (button: HTMLButtonElement) => {
+    button.classList.remove('isClicked');
+    // Force reflow so the animation can restart on every click.
+    void button.offsetWidth;
+    button.classList.add('isClicked');
+    window.setTimeout(() => {
+      button.classList.remove('isClicked');
+    }, 260);
+  };
+
   const openBookingCart = (initialId: string) => {
     addSelectionToBookingCart(initialId, bookingOptionIds);
-    const bookingUrl = `${window.location.origin}/courses/booking?add=${encodeURIComponent(initialId)}&t=${Date.now()}`;
-
-    if (bookingTabRef && !bookingTabRef.closed) {
-      bookingTabRef.location.href = bookingUrl;
-      bookingTabRef.focus();
-      return;
-    }
-
-    const bookingTabTarget = getBookingTabTarget();
-    const openedTab = window.open(bookingUrl, bookingTabTarget);
-
-    if (!openedTab) {
-      window.location.href = bookingUrl;
-      return;
-    }
-
-    bookingTabRef = openedTab;
-    openedTab.focus();
+    setIsCartPromptVisible(true);
   };
+
+  const handleBookClick = (initialId: string, event: MouseEvent<HTMLButtonElement>) => {
+    animateBookButton(event.currentTarget);
+    openBookingCart(initialId);
+  };
+
+  const cartPromptCopy = dictionary.coursesCartPrompt;
+
+  const formatPrice = (value: number) =>
+    value.toLocaleString(locale === 'da' ? 'da-DK' : 'en-US', {
+      style: 'currency',
+      currency: 'DKK',
+      maximumFractionDigits: 0,
+    });
+
+  const getEstimatedPrice = (basePrice: number) => basePrice;
 
   return (
     <main className="coursesPage">
@@ -104,11 +103,13 @@ export function CoursesContent() {
           <div>
             <h3>{copy.customTrackTitle}</h3>
             <p>{copy.customTrackText}</p>
+            <p className="coursesCustomTrackOffer">{copy.customTrackOfferLine}</p>
+            <p className="coursesCustomTrackBundle">{copy.pricingBundleText}</p>
           </div>
           <button
             type="button"
             className="coursesCustomTrackButton"
-            onClick={() => openBookingCart('mit-eget-forlob')}
+            onClick={(event) => handleBookClick('mit-eget-forlob', event)}
           >
             {copy.customTrackButton}
           </button>
@@ -151,9 +152,6 @@ export function CoursesContent() {
               <div className="timelineTrackContent">
                 <div className="timelineTrackHeadingRow">
                   <h3>{translate(track.title)}</h3>
-                  <button type="button" className="timelineTrackBookButton timelineTrackBookButtonSubtle" onClick={() => openBookingCart(track.id)}>
-                    {copy.bookingOpenCartButton}
-                  </button>
                 </div>
                 <p className="timelineTrackSummary">{translate(track.summary)}</p>
 
@@ -181,6 +179,15 @@ export function CoursesContent() {
                   </li>
                 </ul>
 
+                <div className="timelineTrackPricing" aria-label={copy.pricingEstimatedLabel}>
+                  <p>{copy.pricingEstimatedLabel}</p>
+                  <strong>{formatPrice(getEstimatedPrice(track.pricing.basePrice))}</strong>
+                  <span>
+                    {copy.pricingHourlyRateLabel}: {formatPrice(track.pricing.basePrice)} · {copy.pricingEstimatedHoursLabel}:{' '}
+                    {copy.pricingDeliveryModelText}
+                  </span>
+                </div>
+
                 <div className="timelineTrackTimeline">
                   <p className="timelineTrackTimelineTitle">{dictionary.courses.timelineLabel}</p>
                   <ol>
@@ -196,7 +203,7 @@ export function CoursesContent() {
                 </div>
 
                 <div className="timelineTrackActions">
-                  <button type="button" className="timelineTrackBookButton" onClick={() => openBookingCart(track.id)}>
+                  <button type="button" className="timelineTrackBookButton" onClick={(event) => handleBookClick(track.id, event)}>
                     {copy.bookingButton}
                   </button>
                 </div>
@@ -233,6 +240,7 @@ export function CoursesContent() {
         <header className="coursesSectionHeader">
           <h2>{dictionary.courses.focusTitle}</h2>
           <p>{dictionary.courses.focusIntro}</p>
+          <p className="coursesPricingIntro">{copy.pricingBundleTitle}: {copy.pricingBundleText}</p>
         </header>
 
         <div className="focusGrid">
@@ -240,11 +248,19 @@ export function CoursesContent() {
             <article key={course.id} className="focusItem">
               <div className="focusItemTop">
                 <h3>{translate(course.title)}</h3>
-                <button type="button" className="timelineTrackBookButton timelineTrackBookButtonSubtle" onClick={() => openBookingCart(course.id)}>
-                  {copy.bookingOpenCartButton}
+                <button type="button" className="timelineTrackBookButton" onClick={(event) => handleBookClick(course.id, event)}>
+                  {copy.bookingButton}
                 </button>
               </div>
               <p>{translate(course.description)}</p>
+              <div className="focusItemPricing" aria-label={copy.pricingEstimatedLabel}>
+                <span>{copy.pricingEstimatedLabel}</span>
+                <strong>{formatPrice(getEstimatedPrice(course.pricing.basePrice))}</strong>
+                <em>
+                  {copy.pricingHourlyRateLabel}: {formatPrice(course.pricing.basePrice)} · {copy.pricingEstimatedHoursLabel}:{' '}
+                  {copy.pricingDeliveryModelText}
+                </em>
+              </div>
               <ul className="focusItemMeta">
                 <li>
                   <span>{dictionary.courses.durationLabel}</span>
@@ -269,6 +285,41 @@ export function CoursesContent() {
           )}
         </div>
       </section>
+
+      {isCartPromptVisible ? (
+        <div className="coursesCartPrompt" role="status" aria-live="polite">
+          <button
+            type="button"
+            className="coursesCartPromptClose"
+            aria-label={cartPromptCopy.close}
+            onClick={() => setIsCartPromptVisible(false)}
+          >
+            x
+          </button>
+          <p className="coursesCartPromptTitle">{cartPromptCopy.title}</p>
+          <p className="coursesCartPromptText">{cartPromptCopy.text}</p>
+          <div className="coursesCartPromptActions">
+            <button
+              type="button"
+              className="coursesCartPromptPrimary"
+              onClick={() => {
+                setIsCartPromptVisible(false);
+                router.push('/courses/booking');
+              }}
+            >
+              {cartPromptCopy.goToCart}
+            </button>
+            <button
+              type="button"
+              className="coursesCartPromptSecondary"
+              onClick={() => setIsCartPromptVisible(false)}
+            >
+              {cartPromptCopy.continueBrowsing}
+            </button>
+          </div>
+        </div>
+      ) : null}
+      <p className="coursesPriceDisclaimer">{copy.pricingTransportNote} {copy.pricingEstimateDisclaimer}</p>
     </main>
   );
 }

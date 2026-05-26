@@ -4,16 +4,19 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ShoppingCart } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import { BOOKABLE_OPTIONS } from './courses/course-catalog';
-import { BOOKING_CART_UPDATED_EVENT, getBookingCartCount } from './courses/booking-storage';
+import { BOOKING_CART_ATTENTION_EVENT, BOOKING_CART_UPDATED_EVENT, getBookingCartCount } from './courses/booking-storage';
 
 export function SiteHeader() {
   const pathname = usePathname();
   const { locale, setLocale, dictionary } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [cartCount, setCartCount] = useState(0);
+  const [isCartHighlighted, setIsCartHighlighted] = useState(false);
+  const cartHighlightTimerRef = useRef<number | null>(null);
+  const cartHighlightRafRef = useRef<number | null>(null);
 
   useEffect(() => {
     setIsMenuOpen(false);
@@ -22,14 +25,38 @@ export function SiteHeader() {
   useEffect(() => {
     const allowedIds = BOOKABLE_OPTIONS.map((option) => option.id);
     const updateCount = () => setCartCount(getBookingCartCount(allowedIds));
+    const highlightCart = () => {
+      // Reset class first so CSS animation can replay on every click.
+      setIsCartHighlighted(false);
+      if (cartHighlightRafRef.current) {
+        window.cancelAnimationFrame(cartHighlightRafRef.current);
+      }
+      cartHighlightRafRef.current = window.requestAnimationFrame(() => {
+        setIsCartHighlighted(true);
+      });
+      if (cartHighlightTimerRef.current) {
+        window.clearTimeout(cartHighlightTimerRef.current);
+      }
+      cartHighlightTimerRef.current = window.setTimeout(() => {
+        setIsCartHighlighted(false);
+      }, 850);
+    };
 
     updateCount();
     window.addEventListener('storage', updateCount);
     window.addEventListener(BOOKING_CART_UPDATED_EVENT, updateCount as EventListener);
+    window.addEventListener(BOOKING_CART_ATTENTION_EVENT, highlightCart as EventListener);
 
     return () => {
       window.removeEventListener('storage', updateCount);
       window.removeEventListener(BOOKING_CART_UPDATED_EVENT, updateCount as EventListener);
+      window.removeEventListener(BOOKING_CART_ATTENTION_EVENT, highlightCart as EventListener);
+      if (cartHighlightTimerRef.current) {
+        window.clearTimeout(cartHighlightTimerRef.current);
+      }
+      if (cartHighlightRafRef.current) {
+        window.cancelAnimationFrame(cartHighlightRafRef.current);
+      }
     };
   }, []);
 
@@ -83,7 +110,7 @@ export function SiteHeader() {
         <div className="siteHeaderRight">
           <Link
             href="/courses/booking"
-            className={`siteHeaderCart ${cartCount > 0 ? '' : 'isEmpty'}`.trim()}
+            className={`siteHeaderCart ${cartCount > 0 ? '' : 'isEmpty'} ${isCartHighlighted ? 'isHighlighted' : ''}`.trim()}
             aria-label={cartAriaLabel}
           >
             <ShoppingCart aria-hidden="true" />
@@ -96,6 +123,7 @@ export function SiteHeader() {
               className={locale === 'da' ? 'isActive' : ''}
               onClick={() => setLocale('da')}
               aria-pressed={locale === 'da'}
+              aria-label="Dansk"
             >
               DA
             </button>
@@ -104,6 +132,7 @@ export function SiteHeader() {
               className={locale === 'en' ? 'isActive' : ''}
               onClick={() => setLocale('en')}
               aria-pressed={locale === 'en'}
+              aria-label="English"
             >
               EN
             </button>

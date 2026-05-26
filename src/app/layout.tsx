@@ -9,6 +9,15 @@ export const metadata: Metadata = {
     template: '%s | NordPixel',
   },
   description: 'NordPixel delivers classroom-ready programs in technology literacy, web development, and AI for schools.',
+  openGraph: {
+    title: 'NordPixel',
+    description: 'Classroom-ready programs in technology literacy, web development, and AI for schools.',
+    type: 'website',
+    url: 'https://nordpixel.dev',
+  },
+  alternates: {
+    canonical: 'https://nordpixel.dev',
+  },
   icons: {
     icon: [
       { url: '/images/brand/black-logo.png', media: '(prefers-color-scheme: light)' },
