@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     default: 'NordPixel',
     template: '%s | NordPixel',
   },
-  description: 'Digital education, courses, workshops, and teaching materials from NordPixel.',
+  description: 'NordPixel delivers classroom-ready programs in technology literacy, web development, and AI for schools.',
   icons: {
     icon: [
       { url: '/images/brand/black-logo.png', media: '(prefers-color-scheme: light)' },

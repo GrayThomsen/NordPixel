@@ -25,7 +25,6 @@ function getBookingTabTarget() {
 
 export function CoursesContent() {
   const { dictionary, locale } = useLanguage();
-  const [subjectQuery, setSubjectQuery] = useState('');
   const [targetFilter, setTargetFilter] = useState('all');
 
   const translate = (value: LocalizedText) => value[locale];
@@ -33,29 +32,19 @@ export function CoursesContent() {
   const visibleTracks = useMemo(
     () =>
       PROGRAM_TRACKS.filter((track) => {
-        const subjectMatches =
-          !subjectQuery ||
-          [track.title.da, track.title.en, track.summary.da, track.summary.en, track.subjects.da, track.subjects.en]
-            .join(' ')
-            .toLowerCase()
-            .includes(subjectQuery.toLowerCase());
         const targetMatches = targetFilter === 'all' || track.targetKeys.includes(targetFilter);
-        return subjectMatches && targetMatches;
+        return targetMatches;
       }),
-    [subjectQuery, targetFilter],
+    [targetFilter],
   );
 
   const visibleFocusCourses = useMemo(
     () =>
       FOCUS_COURSES.filter((course) => {
-        const searchSpace = [course.title.da, course.title.en, course.description.da, course.description.en, course.audience.da, course.audience.en, course.bookingHint.da, course.bookingHint.en]
-          .join(' ')
-          .toLowerCase();
-        const subjectMatches = !subjectQuery || searchSpace.includes(subjectQuery.toLowerCase());
         const targetMatches = targetFilter === 'all' || course.targetKeys.includes(targetFilter);
-        return subjectMatches && targetMatches;
+        return targetMatches;
       }),
-    [subjectQuery, targetFilter],
+    [targetFilter],
   );
 
   const copy = getCoursesCopy(locale);
@@ -90,32 +79,54 @@ export function CoursesContent() {
   };
 
   return (
-    <main className="courses-page">
-      <section className="courses-page__hero">
+    <main className="coursesPage">
+      <section className="coursesPageHero">
         <h1>{dictionary.courses.title}</h1>
-        <p>{dictionary.courses.intro}</p>
       </section>
 
-      <section className="courses-section" aria-label={copy.filterTitle}>
-        <header className="courses-section__header">
-          <div className="courses-filters__heading">
-            <h2>{copy.filterTitle}</h2>
+      <div className="coursesIntroStack">
+        <section className="coursesUvm" aria-label={copy.uvmIntroTitle}>
+          <h2>{copy.uvmIntroTitle}</h2>
+          <p>{copy.uvmIntroText}</p>
+          <div className="coursesUvmRoles">
+            <article>
+              <h3>{copy.teacherRoleLabel}</h3>
+              <p>{copy.teacherRoleText}</p>
+            </article>
+            <article>
+              <h3>{copy.studentRoleLabel}</h3>
+              <p>{copy.studentRoleText}</p>
+            </article>
+          </div>
+        </section>
+
+        <section className="coursesCustomTrack" aria-label={copy.customTrackTitle}>
+          <div>
+            <h3>{copy.customTrackTitle}</h3>
+            <p>{copy.customTrackText}</p>
+          </div>
+          <button
+            type="button"
+            className="coursesCustomTrackButton"
+            onClick={() => openBookingCart('mit-eget-forlob')}
+          >
+            {copy.customTrackButton}
+          </button>
+        </section>
+      </div>
+
+      <section className="coursesSection coursesSectionTracks" aria-label={copy.filterTitle}>
+        <header className="coursesSectionHeader">
+          <div className="coursesFiltersHeading">
+            <h2>{copy.kindTrack}</h2>
             <p>
               {visibleTracks.length} {copy.filterTracksResult} · {visibleFocusCourses.length} {copy.filterFocusResult}
             </p>
           </div>
+          <p className="coursesFiltersTargetOnlyHint">{copy.filterTargetOnlyHint}</p>
 
-          <div className="courses-filters">
-            <label className="courses-filters__field">
-              <span>{copy.filterSubjectLabel}</span>
-              <input
-                type="search"
-                value={subjectQuery}
-                onChange={(event) => setSubjectQuery(event.target.value)}
-                placeholder={copy.filterSubjectPlaceholder}
-              />
-            </label>
-            <label className="courses-filters__field">
+          <div className="coursesFilters">
+            <label className="coursesFiltersField">
               <span>{copy.filterTargetLabel}</span>
               <select value={targetFilter} onChange={(event) => setTargetFilter(event.target.value)}>
                 <option value="all">{copy.filterAllTargets}</option>
@@ -126,8 +137,7 @@ export function CoursesContent() {
                 ))}
               </select>
             </label>
-            <button type="button" className="courses-filters__reset" onClick={() => {
-              setSubjectQuery('');
+            <button type="button" className="coursesFiltersReset" onClick={() => {
               setTargetFilter('all');
             }}>
               {copy.filterReset}
@@ -135,19 +145,19 @@ export function CoursesContent() {
           </div>
         </header>
 
-        <div className="courses-timelines">
+        <div className="coursesTimelines">
           {visibleTracks.length ? visibleTracks.map((track, index) => (
-            <article key={track.id} className="timeline-track" aria-label={translate(track.title)}>
-              <div className="timeline-track__content">
-                <div className="timeline-track__heading-row">
+            <article key={track.id} className="timelineTrack" aria-label={translate(track.title)}>
+              <div className="timelineTrackContent">
+                <div className="timelineTrackHeadingRow">
                   <h3>{translate(track.title)}</h3>
-                  <button type="button" className="timeline-track__book-button timeline-track__book-button--subtle" onClick={() => openBookingCart(track.id)}>
+                  <button type="button" className="timelineTrackBookButton timelineTrackBookButtonSubtle" onClick={() => openBookingCart(track.id)}>
                     {copy.bookingOpenCartButton}
                   </button>
                 </div>
-                <p className="timeline-track__summary">{translate(track.summary)}</p>
+                <p className="timelineTrackSummary">{translate(track.summary)}</p>
 
-                <ul className="timeline-track__meta" aria-label={dictionary.courses.programsTitle}>
+                <ul className="timelineTrackMeta" aria-label={dictionary.courses.programsTitle}>
                   <li>
                     <Clock3 aria-hidden="true" />
                     <div>
@@ -171,8 +181,8 @@ export function CoursesContent() {
                   </li>
                 </ul>
 
-                <div className="timeline-track__timeline">
-                  <p className="timeline-track__timeline-title">{dictionary.courses.timelineLabel}</p>
+                <div className="timelineTrackTimeline">
+                  <p className="timelineTrackTimelineTitle">{dictionary.courses.timelineLabel}</p>
                   <ol>
                     {track.timeline.map((step) => (
                       <li key={`${track.id}-${translate(step.module)}`}>
@@ -185,14 +195,14 @@ export function CoursesContent() {
                   </ol>
                 </div>
 
-                <div className="timeline-track__actions">
-                  <button type="button" className="timeline-track__book-button" onClick={() => openBookingCart(track.id)}>
+                <div className="timelineTrackActions">
+                  <button type="button" className="timelineTrackBookButton" onClick={() => openBookingCart(track.id)}>
                     {copy.bookingButton}
                   </button>
                 </div>
               </div>
 
-              <figure className="timeline-track__media">
+              <figure className="timelineTrackMedia">
                 <Image
                   src={track.image}
                   alt={translate(track.imageAlt)}
@@ -203,13 +213,12 @@ export function CoursesContent() {
               </figure>
             </article>
           )) : (
-            <div className="courses-filters__empty">
+            <div className="coursesFiltersEmpty">
               <p>{copy.filterNoResults}</p>
               <button
                 type="button"
-                className="courses-filters__reset"
+                className="coursesFiltersReset"
                 onClick={() => {
-                  setSubjectQuery('');
                   setTargetFilter('all');
                 }}
               >
@@ -220,23 +229,23 @@ export function CoursesContent() {
         </div>
       </section>
 
-      <section className="courses-section courses-section--focus" aria-label={dictionary.courses.focusTitle}>
-        <header className="courses-section__header">
+      <section className="coursesSection coursesSectionFocus" aria-label={dictionary.courses.focusTitle}>
+        <header className="coursesSectionHeader">
           <h2>{dictionary.courses.focusTitle}</h2>
           <p>{dictionary.courses.focusIntro}</p>
         </header>
 
-        <div className="focus-grid">
+        <div className="focusGrid">
           {visibleFocusCourses.length ? visibleFocusCourses.map((course) => (
-            <article key={course.id} className="focus-item">
-              <div className="focus-item__top">
+            <article key={course.id} className="focusItem">
+              <div className="focusItemTop">
                 <h3>{translate(course.title)}</h3>
-                <button type="button" className="timeline-track__book-button timeline-track__book-button--subtle" onClick={() => openBookingCart(course.id)}>
+                <button type="button" className="timelineTrackBookButton timelineTrackBookButtonSubtle" onClick={() => openBookingCart(course.id)}>
                   {copy.bookingOpenCartButton}
                 </button>
               </div>
               <p>{translate(course.description)}</p>
-              <ul className="focus-item__meta">
+              <ul className="focusItemMeta">
                 <li>
                   <span>{dictionary.courses.durationLabel}</span>
                   <strong>{translate(course.duration)}</strong>
@@ -246,13 +255,12 @@ export function CoursesContent() {
                   <strong>{translate(course.audience)}</strong>
                 </li>
               </ul>
-              <p className="focus-item__hint">{translate(course.bookingHint)}</p>
+              <p className="focusItemHint">{translate(course.bookingHint)}</p>
             </article>
           )) : (
-            <div className="courses-filters__empty">
+            <div className="coursesFiltersEmpty">
               <p>{copy.filterNoResults}</p>
-              <button type="button" className="courses-filters__reset" onClick={() => {
-                setSubjectQuery('');
+              <button type="button" className="coursesFiltersReset" onClick={() => {
                 setTargetFilter('all');
               }}>
                 {copy.filterReset}

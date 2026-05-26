@@ -9,7 +9,7 @@ export const PROGRAM_TRACKS: ProgramTrack[] = [
     },
     summary: {
       da: 'Eleverne arbejder med brugerundersøgelser, idéudvikling, visuel præsentation og konkret formidling i både print og digitale formater.',
-      en: 'Students work with user research, ide development, visual presentation, and clear communication in both print and digital formats.',
+      en: 'Students work with user research, idea development, visual presentation, and clear communication in both print and digital formats.',
     },
     subjectKey: 'design',
     targetKeys: ['mellemtrin', 'udskoling'],
@@ -76,7 +76,7 @@ export const PROGRAM_TRACKS: ProgramTrack[] = [
         },
         format: {
           da: 'Afrunding kan gennemføres fuldt lokalt på skolen.',
-          en: 'Wrap-up can run fully local at the school.',
+          en: 'The wrap-up can be delivered fully on-site at the school.',
         },
       },
     ],
@@ -88,7 +88,7 @@ export const PROGRAM_TRACKS: ProgramTrack[] = [
       en: 'Web Design',
     },
     summary: {
-      da: 'Eleverne lærer at opbygge enkle hjemmesider i WebLab med HTML og CSS, hvor struktur, layout og funktion tænkes sammen.',
+      da: 'Et praktisk forløb hvor eleverne bygger egne hjemmesider i WebLab med HTML og CSS, og arbejder med både design og funktion.',
       en: 'Students learn to build simple websites in WebLab with HTML and CSS, combining structure, layout, and function.',
     },
     subjectKey: 'web',
@@ -103,7 +103,7 @@ export const PROGRAM_TRACKS: ProgramTrack[] = [
     },
     subjects: {
       da: 'Velegnet i projektforløb på tværs af dansk, engelsk, samfundsfag og IT.',
-      en: 'Great for project-based work across language, social studies, and IT.',
+      en: 'Well suited for project-based learning across language arts, social studies, and IT.',
     },
     image: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1200&q=80',
     imageAlt: {
@@ -119,8 +119,8 @@ export const PROGRAM_TRACKS: ProgramTrack[] = [
           en: 'About 2 lessons of teacher-led prep material in class.',
         },
         workload: {
-          da: 'Lærer: gennemgang af mål og begreber. Elever: planlægger sider, indhold og visuel retning.',
-          en: 'Teacher: reviews goals and concepts. Students: plan pages, content, and visual direction.',
+          da: 'Lærerens rolle er at skabe tydelige rammer. Eleverne planlægger sider, indhold og visuel retning.',
+          en: 'Teacher: establishes clear structure. Students: plan pages, content, and visual direction.',
         },
         format: {
           da: 'Forberedelse i klassen før workshop.',
@@ -135,7 +135,7 @@ export const PROGRAM_TRACKS: ProgramTrack[] = [
           en: 'NordPixel-led workshop and shared kick-off of student sites.',
         },
         workload: {
-          da: 'Lærer: koordinerer klassen og følger op. Elever: bygger første struktur og arbejder med HTML/CSS i fællesskab.',
+          da: 'Lærerens rolle er at koordinere og følge op. Eleverne bygger første struktur og arbejder med HTML/CSS i fællesskab.',
           en: 'Teacher: coordinates the class and follows up. Students: build the first structure and work together in HTML/CSS.',
         },
         format: {
@@ -151,7 +151,7 @@ export const PROGRAM_TRACKS: ProgramTrack[] = [
           en: 'Follow-up where students build, test, and improve their own websites.',
         },
         workload: {
-          da: 'Lærer: giver feedback og hjælper med prioritering. Elever: itererer, retter fejl og færdiggør projektet.',
+          da: 'Lærerens rolle er at give feedback og hjælpe med prioritering. Eleverne itererer, retter fejl og færdiggør projektet.',
           en: 'Teacher: gives feedback and helps prioritise. Students: iterate, fix issues, and finish the project.',
         },
         format: {
@@ -168,14 +168,14 @@ export const PROGRAM_TRACKS: ProgramTrack[] = [
       en: 'Artificial Intelligence',
     },
     summary: {
-      da: 'Et kort forløb der giver eleverne en grundlæggende forståelse af kunstig intelligens, promptarbejde og ansvarlig anvendelse.',
+      da: 'Et kort forløb om AI i elevernes hverdag, hvor de lærer at teste, vurdere og bruge teknologien ansvarligt.',
       en: 'A short track that gives students a basic understanding of artificial intelligence, prompt work, and responsible use.',
     },
     subjectKey: 'ai',
     targetKeys: ['mellemtrin', 'udskoling', 'gymnasium'],
     targetGroup: {
       da: 'Kan tilpasses mellemtrin og udskoling.',
-      en: 'Can be adapted for middle and upper grades.',
+      en: 'Can be adapted for middle grades, lower secondary, and upper secondary.',
     },
     duration: {
       da: '3 moduler, i alt ca. 8 lektioner.',
@@ -204,7 +204,7 @@ export const PROGRAM_TRACKS: ProgramTrack[] = [
         },
         format: {
           da: 'Kan gennemføres uden fysisk deltagelse fra NordPixel.',
-          en: 'Can run without physical NordPixel presence.',
+          en: 'Can be delivered without on-site NordPixel participation.',
         },
       },
       {
@@ -313,7 +313,7 @@ export const FOCUS_COURSES: FocusCourse[] = [
     },
     bookingHint: {
       da: 'Kan kobles direkte til fag, hvor eleverne undersøger medier og svarmaskiner.',
-      en: 'Can be tied directly to subjects where students examine media and response tools.',
+      en: 'Can be integrated directly into subjects where students examine media, source use, and AI-generated responses.',
     },
   },
   {
@@ -324,7 +324,7 @@ export const FOCUS_COURSES: FocusCourse[] = [
     },
     description: {
       da: 'Arbejdsmateriale til naturfag, matematik og fag med videnskabelige metoder. Fokus på fejl, systemer og hvordan apparater tænker.',
-      en: 'Learning material for science, mathematics, and method-based subjects. Focus on errors, systems, and how devices think.',
+      en: 'Learning materials for science, mathematics, and inquiry-based subjects. Focus on debugging, systems thinking, and how digital systems process information.',
     },
     targetKeys: ['indskoling', 'mellemtrin'],
     duration: {
@@ -343,6 +343,14 @@ export const FOCUS_COURSES: FocusCourse[] = [
 ];
 
 export const BOOKABLE_OPTIONS: BookableOption[] = [
+  {
+    id: 'mit-eget-forlob',
+    title: {
+      da: 'Mit eget forløb',
+      en: 'My custom track',
+    },
+    kind: 'track',
+  },
   ...PROGRAM_TRACKS.map((track) => ({
     id: track.id,
     title: track.title,

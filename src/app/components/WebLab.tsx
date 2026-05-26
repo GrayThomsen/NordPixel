@@ -358,12 +358,12 @@ const PREVIEW_TAB_HTML = `<!doctype html>
     <style>
       :root { color-scheme: light; }
       body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif; }
-      .preview-shell {
+      .previewShell {
         display: grid;
         grid-template-rows: auto 1fr;
         min-height: 100vh;
       }
-      .preview-shell__bar {
+      .previewShellBar {
         padding: 0.5rem 0.75rem;
         border-bottom: 1px solid #d8d8d8;
         font-size: 0.85rem;
@@ -378,8 +378,8 @@ const PREVIEW_TAB_HTML = `<!doctype html>
     </style>
   </head>
   <body>
-    <div class="preview-shell">
-      <div class="preview-shell__bar">Live preview from NordPixel WebLab</div>
+    <div class="previewShell">
+      <div class="previewShellBar">Live preview from NordPixel WebLab</div>
       <iframe id="preview-frame" title="Live preview frame"></iframe>
     </div>
     <script>
@@ -1239,15 +1239,15 @@ export function WebLab() {
   }, [project.files]);
 
   return (
-    <section className="weblab weblab--full">
-      <header className="weblab__toolbar">
-        <div className="weblab__title-group">
-          <div className="weblab__title-row">
+    <section className="weblab weblabFull">
+      <header className="weblabToolbar">
+        <div className="weblabTitleGroup">
+          <div className="weblabTitleRow">
             <h1>{weblabText.title}</h1>
           </div>
           <p>{weblabText.lead}</p>
         </div>
-        <label className="weblab__name-field">
+        <label className="weblabNameField">
           {weblabText.projectName}
           <input
             type="text"
@@ -1257,12 +1257,12 @@ export function WebLab() {
             maxLength={80}
           />
         </label>
-        <div className="weblab__controls">
-          <div className="weblab__actions">
-            <button type="button" className="weblab__new-button" onClick={requestNewProjectReset}>
+        <div className="weblabControls">
+          <div className="weblabActions">
+            <button type="button" className="weblabNewButton" onClick={requestNewProjectReset}>
               {weblabText.newSite}
             </button>
-            <button type="button" onClick={handleSave} className={isDirty ? 'is-dirty' : ''}>
+            <button type="button" onClick={handleSave} className={isDirty ? 'isDirty' : ''}>
               {weblabText.save}
             </button>
             <button type="button" onClick={handleImportRequest}>
@@ -1276,32 +1276,28 @@ export function WebLab() {
               hidden
             />
           </div>
-          <div className="weblab__meta">
+          <div className="weblabMeta">
             <p>{weblabText.lastUpdate} {formattedLastUpdate}</p>
             <p>{weblabText.lastSave} {formattedLastSave}</p>
+            {isRecoveredNotice ? (
+              <p className="weblabMetaHint" title={weblabText.recoveredHint}>{notice}</p>
+            ) : null}
           </div>
         </div>
       </header>
 
-      <div className="weblab__status">
-        <p
-          className={isRecoveredNotice ? 'weblab__status-note is-recovered' : 'weblab__status-note'}
-          title={
-            isRecoveredNotice
-              ? weblabText.recoveredHint
-              : undefined
-          }
-        >
-          {notice}
-        </p>
-      </div>
+      {!isRecoveredNotice ? (
+        <div className="weblabStatus">
+          <p className="weblabStatusNote">{notice}</p>
+        </div>
+      ) : null}
 
-      <div className="weblab__viewbar" aria-label="View panes">
-        <span className="weblab__viewbar-label">{weblabText.view}</span>
-        <div className="weblab__viewbar-controls">
+      <div className="weblabViewbar" aria-label="View panes">
+        <span className="weblabViewbarLabel">{weblabText.view}</span>
+        <div className="weblabViewbarControls">
           <button
             type="button"
-            className={visiblePanes.explorer ? 'weblab__pane-toggle is-on' : 'weblab__pane-toggle is-off'}
+            className={visiblePanes.explorer ? 'weblabPaneToggle isOn' : 'weblabPaneToggle isOff'}
             onClick={() => togglePane('explorer')}
             aria-pressed={visiblePanes.explorer}
           >
@@ -1309,7 +1305,7 @@ export function WebLab() {
           </button>
           <button
             type="button"
-            className={visiblePanes.editor ? 'weblab__pane-toggle is-on' : 'weblab__pane-toggle is-off'}
+            className={visiblePanes.editor ? 'weblabPaneToggle isOn' : 'weblabPaneToggle isOff'}
             onClick={() => togglePane('editor')}
             aria-pressed={visiblePanes.editor}
           >
@@ -1317,7 +1313,7 @@ export function WebLab() {
           </button>
           <button
             type="button"
-            className={visiblePanes.preview ? 'weblab__pane-toggle is-on' : 'weblab__pane-toggle is-off'}
+            className={visiblePanes.preview ? 'weblabPaneToggle isOn' : 'weblabPaneToggle isOff'}
             onClick={() => togglePane('preview')}
             aria-pressed={visiblePanes.preview}
           >
@@ -1326,7 +1322,7 @@ export function WebLab() {
         </div>
       </div>
 
-      <div className="weblab__workspace">
+      <div className="weblabWorkspace">
         {visiblePanes.explorer || visiblePanes.editor || visiblePanes.preview ? (
             <PanelGroup
               key={`${isMobile ? 'full-vertical' : 'full-horizontal'}-${visiblePanesKey}`}
@@ -1335,22 +1331,22 @@ export function WebLab() {
             >
             {visiblePanes.explorer ? (
             <Panel id="full-explorer" order={1} defaultSize={panelDefaults.explorer} minSize={14} maxSize={40}>
-              <div className="weblab__explorer-shell">
-                <div className="weblab__panel-topbar">
-                  <p className="weblab__panel-label">{weblabText.explorerPanel}</p>
-                  <div className="weblab__panel-actions">
-                    <button type="button" onClick={handleCreateFile} className="weblab__new-file-button">
+              <div className="weblabExplorerShell">
+                <div className="weblabPanelTopbar">
+                  <p className="weblabPanelLabel">{weblabText.explorerPanel}</p>
+                  <div className="weblabPanelActions">
+                    <button type="button" onClick={handleCreateFile} className="weblabNewFileButton">
                       <FilePlus2 size={14} />
                       {weblabText.newFile}
                     </button>
                   </div>
                 </div>
-                <div className="weblab__file-list" role="list" aria-label={weblabText.projectFiles}>
+                <div className="weblabFileList" role="list" aria-label={weblabText.projectFiles}>
                   {project.files.map((file) => (
                     <div
                       key={file.id}
                       role="listitem"
-                      className={activeFileId === file.id ? 'weblab__file-row is-active' : 'weblab__file-row'}
+                      className={activeFileId === file.id ? 'weblabFileRow isActive' : 'weblabFileRow'}
                       tabIndex={0}
                       onClick={() => handleSelectFile(file.id)}
                       onKeyDown={(event) => {
@@ -1362,7 +1358,7 @@ export function WebLab() {
                     >
                       {editingFileId === file.id ? (
                         <input
-                          className="weblab__file-rename"
+                          className="weblabFileRename"
                           type="text"
                           value={editingFileName}
                           autoFocus
@@ -1393,29 +1389,29 @@ export function WebLab() {
                       ) : (
                       <button
                         type="button"
-                        className="weblab__file-entry"
+                        className="weblabFileEntry"
                         aria-selected={activeFileId === file.id}
                         onDoubleClick={() => handleRenameFile(file.id)}
                       >
-                        <span className={`weblab__file-icon is-${file.kind}`}>{file.kind.toUpperCase()}</span>
-                        <span className="weblab__file-text">
-                          <span className="weblab__file-name">{file.name}</span>
+                        <span className={`weblabFileIcon is-${file.kind}`}>{file.kind.toUpperCase()}</span>
+                        <span className="weblabFileText">
+                          <span className="weblabFileName">{file.name}</span>
                         </span>
                       </button>
                       )}
                       {pendingDeleteFileId === file.id ? (
-                        <div className="weblab__file-delete-confirm" onClick={(event) => event.stopPropagation()}>
+                        <div className="weblabFileDeleteConfirm" onClick={(event) => event.stopPropagation()}>
                           <span>{weblabText.deletePrompt}</span>
                           <button
                             type="button"
-                            className="weblab__file-delete-yes"
+                            className="weblabFileDeleteYes"
                             onClick={() => handleDeleteFile(file.id)}
                           >
                             {weblabText.yes}
                           </button>
                           <button
                             type="button"
-                            className="weblab__file-delete-no"
+                            className="weblabFileDeleteNo"
                             onClick={() => setPendingDeleteFileId(null)}
                           >
                             {weblabText.no}
@@ -1424,7 +1420,7 @@ export function WebLab() {
                       ) : (
                         <button
                           type="button"
-                          className="weblab__file-delete"
+                          className="weblabFileDelete"
                           aria-label={`${weblabText.deleteFile} ${file.name}`}
                           onClick={(event) => {
                             event.stopPropagation();
@@ -1442,16 +1438,16 @@ export function WebLab() {
             ) : null}
 
             {visiblePanes.explorer && (visiblePanes.editor || visiblePanes.preview) ? (
-            <PanelResizeHandle className="weblab__resize-handle" />
+            <PanelResizeHandle className="weblabResizeHandle" />
             ) : null}
 
             {visiblePanes.editor ? (
             <Panel id="full-editor" order={2} defaultSize={panelDefaults.editor} minSize={22}>
-              <div className="weblab__editor-shell">
-                <div className="weblab__panel-topbar">
-                  <p className="weblab__panel-label">{activeFile?.name ?? weblabText.code}</p>
+              <div className="weblabEditorShell">
+                <div className="weblabPanelTopbar">
+                  <p className="weblabPanelLabel">{activeFile?.name ?? weblabText.code}</p>
                 </div>
-                <div className="weblab__editor" role="tabpanel" aria-label={`${activeFile?.name ?? weblabText.code} ${weblabText.fileEditor}`}>
+                <div className="weblabEditor" role="tabpanel" aria-label={`${activeFile?.name ?? weblabText.code} ${weblabText.fileEditor}`}>
                   <Editor
                     height="100%"
                     defaultLanguage="html"
@@ -1477,15 +1473,15 @@ export function WebLab() {
             ) : null}
 
             {visiblePanes.editor && visiblePanes.preview ? (
-            <PanelResizeHandle className="weblab__resize-handle" />
+            <PanelResizeHandle className="weblabResizeHandle" />
             ) : null}
 
             {visiblePanes.preview ? (
             <Panel id="full-preview" order={3} defaultSize={panelDefaults.preview} minSize={20}>
-              <div className="weblab__preview-wrap">
-                <div className="weblab__preview-topbar">
-                  <p className="weblab__preview-label">{weblabText.preview}</p>
-                  <div className="weblab__preview-actions">
+              <div className="weblabPreviewWrap">
+                <div className="weblabPreviewTopbar">
+                  <p className="weblabPreviewLabel">{weblabText.preview}</p>
+                  <div className="weblabPreviewActions">
                     <button type="button" onClick={handleRefreshPreview}>
                       {weblabText.refresh}
                     </button>
@@ -1497,7 +1493,7 @@ export function WebLab() {
                 <iframe
                   key={`inline-preview-${previewRefreshNonce}`}
                   title="WebLab preview"
-                  className="weblab__preview"
+                  className="weblabPreview"
                   sandbox="allow-scripts"
                   srcDoc={srcDoc}
                 />
@@ -1506,9 +1502,9 @@ export function WebLab() {
             ) : null}
             </PanelGroup>
           ) : (
-            <div className="weblab__workspace-empty">
+            <div className="weblabWorkspaceEmpty">
               <p>{weblabText.allHidden}</p>
-              <div className="weblab__workspace-empty-actions">
+              <div className="weblabWorkspaceEmptyActions">
                 <button type="button" onClick={() => setVisiblePanes({ explorer: true, editor: true, preview: true })}>
                   {weblabText.showAllPanes}
                 </button>
@@ -1520,20 +1516,20 @@ export function WebLab() {
 
       {isNewSiteConfirmOpen ? (
         <div
-          className="weblab__confirm-overlay"
+          className="weblabConfirmOverlay"
           role="dialog"
           aria-modal="true"
           aria-label={weblabText.dialogConfirmNewSite}
           onClick={() => setIsNewSiteConfirmOpen(false)}
         >
-          <div className="weblab__confirm-modal" onClick={(event) => event.stopPropagation()}>
+          <div className="weblabConfirmModal" onClick={(event) => event.stopPropagation()}>
             <h2>{weblabText.dialogTitleNewSite}</h2>
             <p>{weblabText.dialogTextNewSite}</p>
-            <div className="weblab__confirm-actions">
-              <button type="button" className="weblab__confirm-yes" onClick={handleNewProject}>
+            <div className="weblabConfirmActions">
+              <button type="button" className="weblabConfirmYes" onClick={handleNewProject}>
                 {weblabText.confirm}
               </button>
-              <button type="button" className="weblab__confirm-no" onClick={() => setIsNewSiteConfirmOpen(false)}>
+              <button type="button" className="weblabConfirmNo" onClick={() => setIsNewSiteConfirmOpen(false)}>
                 {weblabText.cancel}
               </button>
             </div>

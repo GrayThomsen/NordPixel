@@ -102,15 +102,15 @@ export function ContactContent() {
   const copy = CONTACT_COPY[locale];
 
   return (
-    <main className="contact-page">
-      <section className="contact-page__hero">
-        <span className="contact-page__eyebrow">{copy.eyebrow}</span>
+    <main className="contactPage">
+      <section className="contactPageHero">
+        <span className="contactPageEyebrow">{copy.eyebrow}</span>
         <h1>{copy.title}</h1>
         <p>{copy.intro}</p>
 
-        <div className="contact-page__proof" role="list" aria-label={copy.authorityTitle}>
+        <div className="contactPageProof" role="list" aria-label={copy.authorityTitle}>
           {copy.proofPoints.map((point) => (
-            <article key={point.value} className="contact-proof" role="listitem">
+            <article key={point.value} className="contactProof" role="listitem">
               <strong>{point.value}</strong>
               <span>{point.label}</span>
             </article>
@@ -118,16 +118,16 @@ export function ContactContent() {
         </div>
       </section>
 
-      <section className="contact-page__grid">
-        <article className="contact-card">
+      <section className="contactPageGrid">
+        <article className="contactCard">
           <h2>{copy.partnershipTitle}</h2>
-          <ul className="contact-card__list">
+          <ul className="contactCardList">
             {copy.partnershipPoints.map((point) => (
               <li key={point}>{point}</li>
             ))}
           </ul>
 
-          <div className="contact-card__method">
+          <div className="contactCardMethod">
             <h3>{copy.methodTitle}</h3>
             <ol>
               {copy.methodSteps.map((step) => (
@@ -140,11 +140,11 @@ export function ContactContent() {
           </div>
         </article>
 
-        <aside className="contact-card contact-card--cta">
+        <aside className="contactCard contactCardCta">
           <h2>{copy.contactTitle}</h2>
           <p>{copy.contactIntro}</p>
 
-          <dl className="contact-card__details">
+          <dl className="contactCardDetails">
             <div>
               <dt>{copy.contactLabelEmail}</dt>
               <dd>
@@ -165,22 +165,22 @@ export function ContactContent() {
             </div>
           </dl>
 
-          <div className="contact-card__actions">
-            <a className="contact-action" href={`mailto:${SITE_FOOTER.contactEmail}`}>
+          <div className="contactCardActions">
+            <a className="contactAction" href={`mailto:${SITE_FOOTER.contactEmail}`}>
               {copy.contactAction}
             </a>
-            <Link className="contact-action contact-action--secondary" href="/courses">
+            <Link className="contactAction contactActionSecondary" href="/courses">
               {copy.coursesLink}
             </Link>
           </div>
         </aside>
       </section>
 
-      <section className="contact-authority" aria-label={copy.authorityTitle}>
+      <section className="contactAuthority" aria-label={copy.authorityTitle}>
         <h2>{copy.authorityTitle}</h2>
-        <div className="contact-authority__grid">
+        <div className="contactAuthorityGrid">
           {copy.authorityCards.map((card) => (
-            <article key={card.title} className="contact-authority__card">
+            <article key={card.title} className="contactAuthorityCard">
               <h3>{card.title}</h3>
               <p>{card.text}</p>
             </article>
@@ -188,7 +188,7 @@ export function ContactContent() {
         </div>
       </section>
 
-      <section className="contact-page__closing" aria-label={copy.contactTitle}>
+      <section className="contactPageClosing" aria-label={copy.contactTitle}>
         <p>
           {locale === 'da'
             ? 'NordPixel hjælper skoler med at gøre digital læring konkret, kreativ og implementerbar fra første undervisningsgang.'

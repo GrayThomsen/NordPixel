@@ -22,8 +22,11 @@ export function CoursesBookingContent({ initialAddId }: CoursesBookingContentPro
   const [form, setForm] = useState({
     name: '',
     school: '',
+    ean: '',
     email: '',
     phone: '',
+    students: '',
+    classes: '',
     message: '',
   });
   const [isCartHydrated, setIsCartHydrated] = useState(false);
@@ -76,6 +79,7 @@ export function CoursesBookingContent({ initialAddId }: CoursesBookingContentPro
   };
 
   const selectedItems = BOOKABLE_OPTIONS.filter((option) => selectedQuantities[option.id]);
+  const bookingHeroReminders = [copy.cartPageReminder1, copy.cartPageReminder2, copy.cartPageReminder3].filter(Boolean);
 
   const submitBooking = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -109,7 +113,10 @@ export function CoursesBookingContent({ initialAddId }: CoursesBookingContentPro
       from_name: form.name,
       from_email: form.email,
       school: form.school,
+      ean: form.ean || '-',
       phone: form.phone || '-',
+      students: form.students || '-',
+      classes: form.classes || '-',
       course: selectedCourses,
       message: form.message || '-',
       booking_lines: chosenLines,
@@ -127,8 +134,11 @@ export function CoursesBookingContent({ initialAddId }: CoursesBookingContentPro
       setForm({
         name: '',
         school: '',
+        ean: '',
         email: '',
         phone: '',
+        students: '',
+        classes: '',
         message: '',
       });
       writeBookingSelection({});
@@ -138,35 +148,46 @@ export function CoursesBookingContent({ initialAddId }: CoursesBookingContentPro
   };
 
   return (
-    <main className="booking-cart-page">
-      <header className="booking-cart-page__hero">
-        <h1>{copy.cartPageTitle}</h1>
-        <p>{copy.cartPageIntro}</p>
-        <p>{copy.cartPageReminder1}</p>
-        <p>{copy.cartPageReminder2}</p>
-        <Link href="/courses" className="booking-cart-page__back-link">
-          {copy.cartBackToCourses}
-        </Link>
+    <main className="bookingCartPage">
+      <header className="bookingCartPageHero">
+        <div className="bookingCartPageHeroMain">
+          <h1>{copy.cartPageTitle}</h1>
+          <p>{copy.cartPageIntro}</p>
+          {bookingHeroReminders.map((reminder) => (
+            <p key={reminder}>{reminder}</p>
+          ))}
+          <Link href="/courses" className="bookingCartPageBackLink">
+            {copy.cartBackToCourses}
+          </Link>
+        </div>
+        <section className="bookingCartPageTopSummary" aria-label={copy.cartSummaryTopTitle}>
+          <p className="bookingCartPageTopSummaryTitle">{copy.cartSummaryTopTitle}</p>
+          <p className="bookingCartPageTopSummaryHint">{copy.cartSummaryTopHint}</p>
+          <p className="bookingCartPageTopSummaryCount">
+            {selectedItems.length} {copy.bookingSummaryCountUnit}
+          </p>
+        </section>
       </header>
 
-      <form className="booking-cart" onSubmit={submitBooking}>
-        <section className="booking-cart__catalog" aria-label={copy.cartCatalogTitle}>
-          <header className="booking-cart__section-header">
+      <form className="bookingCart" onSubmit={submitBooking}>
+        <section className="bookingCartCatalog" aria-label={copy.cartCatalogTitle}>
+          <header className="bookingCartSectionHeader">
             <h2>{copy.cartCatalogTitle}</h2>
             <p>{copy.cartCatalogHint}</p>
           </header>
 
-          <div className="booking-catalog-grid">
+          <div className="bookingCatalogGrid">
             {BOOKABLE_OPTIONS.map((option) => {
               const quantity = selectedQuantities[option.id] ?? 0;
               const isSelected = quantity > 0;
+              const itemKindClass = option.kind === 'track' ? 'bookingItemTrack' : 'bookingItemFocus';
               return (
-                <article key={option.id} className={`booking-item ${isSelected ? 'is-selected' : ''}`}>
-                  <span className="booking-item__kind">{option.kind === 'track' ? copy.kindTrack : copy.kindFocus}</span>
-
+                <article key={option.id} className={`bookingItem ${itemKindClass} ${isSelected ? 'isSelected' : ''}`}>
                   <h3>{translate(option.title)}</h3>
 
-                  <div className="booking-item__qty" role="group" aria-label={`${copy.quantityLabel} ${translate(option.title)}`}>
+                  <p className="bookingItemQtyLabel">{copy.quantityLabel}</p>
+
+                  <div className="bookingItemQty" role="group" aria-label={`${copy.quantityLabel} ${translate(option.title)}`}>
                     <button
                       type="button"
                       onClick={() => setQuantity(option.id, quantity - 1)}
@@ -195,25 +216,25 @@ export function CoursesBookingContent({ initialAddId }: CoursesBookingContentPro
           </div>
         </section>
 
-        <aside className="booking-cart__sidebar">
-          <section className="booking-summary" aria-label={copy.modalSelectionLabel}>
-            <div className="booking-summary__header">
+        <aside className="bookingCartSidebar">
+          <section className="bookingSummary" aria-label={copy.modalSelectionLabel}>
+            <div className="bookingSummaryHeader">
               <div>
                 <p>{copy.modalSelectionLabel}</p>
                 <span>{copy.modalSelectionHint}</span>
               </div>
-              <p className="booking-summary__count">
+              <p className="bookingSummaryCount">
                 {selectedItems.length} {copy.bookingSummaryCountUnit}
               </p>
             </div>
 
             {selectedItems.length ? (
-              <div className="booking-summary__chips">
+              <div className="bookingSummaryChips">
                 {selectedItems.map((option) => (
                   <button
                     key={option.id}
                     type="button"
-                    className="booking-summary__chip"
+                    className="bookingSummaryChip"
                     onClick={() => setQuantity(option.id, 0)}
                   >
                     <span>{translate(option.title)}</span>
@@ -223,13 +244,13 @@ export function CoursesBookingContent({ initialAddId }: CoursesBookingContentPro
                 ))}
               </div>
             ) : (
-              <p className="booking-summary__empty">{copy.sectionEmpty}</p>
+              <p className="bookingSummaryEmpty">{copy.sectionEmpty}</p>
             )}
           </section>
 
-          <section className="booking-contact" aria-label={copy.cartContactTitle}>
-            <p className="booking-form__section-label">{copy.cartContactTitle}</p>
-            <div className="booking-fields">
+          <section className="bookingContact" aria-label={copy.cartContactTitle}>
+            <p className="bookingFormSectionLabel">{copy.cartContactTitle}</p>
+            <div className="bookingFields">
               <label>
                 <span>{copy.nameLabel}</span>
                 <input
@@ -246,6 +267,15 @@ export function CoursesBookingContent({ initialAddId }: CoursesBookingContentPro
                   value={form.school}
                   onChange={(event) => setForm((prev) => ({ ...prev, school: event.target.value }))}
                   required
+                />
+              </label>
+              <label>
+                <span>{copy.eanLabel}</span>
+                <input
+                  type="text"
+                  value={form.ean}
+                  onChange={(event) => setForm((prev) => ({ ...prev, ean: event.target.value }))}
+                  placeholder={copy.eanPlaceholder}
                 />
               </label>
               <label>
@@ -268,6 +298,26 @@ export function CoursesBookingContent({ initialAddId }: CoursesBookingContentPro
                 />
               </label>
               <label>
+                <span>{copy.studentsLabel}</span>
+                <input
+                  type="number"
+                  min={0}
+                  value={form.students}
+                  onChange={(event) => setForm((prev) => ({ ...prev, students: event.target.value }))}
+                  placeholder={copy.studentsPlaceholder}
+                />
+              </label>
+              <label>
+                <span>{copy.classesLabel}</span>
+                <input
+                  type="number"
+                  min={0}
+                  value={form.classes}
+                  onChange={(event) => setForm((prev) => ({ ...prev, classes: event.target.value }))}
+                  placeholder={copy.classesPlaceholder}
+                />
+              </label>
+              <label>
                 <span>{copy.messageLabel}</span>
                 <textarea
                   value={form.message}
@@ -278,12 +328,12 @@ export function CoursesBookingContent({ initialAddId }: CoursesBookingContentPro
               </label>
             </div>
 
-            {bookingStatus === 'selection-error' ? <p className="booking-form__error">{copy.selectError}</p> : null}
-            {bookingStatus === 'config-error' ? <p className="booking-form__error">{copy.configError}</p> : null}
-            {bookingStatus === 'send-error' ? <p className="booking-form__error">{copy.sendError}</p> : null}
-            {bookingStatus === 'success' ? <p className="booking-form__success">{copy.sendSuccess}</p> : null}
+            {bookingStatus === 'selection-error' ? <p className="bookingFormError">{copy.selectError}</p> : null}
+            {bookingStatus === 'config-error' ? <p className="bookingFormError">{copy.configError}</p> : null}
+            {bookingStatus === 'send-error' ? <p className="bookingFormError">{copy.sendError}</p> : null}
+            {bookingStatus === 'success' ? <p className="bookingFormSuccess">{copy.sendSuccess}</p> : null}
 
-            <button type="submit" className="booking-form__submit" disabled={bookingStatus === 'sending'}>
+            <button type="submit" className="bookingFormSubmit" disabled={bookingStatus === 'sending'}>
               <Send aria-hidden="true" />
               {bookingStatus === 'sending' ? copy.submitSendingLabel : copy.submitLabel}
             </button>

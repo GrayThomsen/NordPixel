@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function EditorPage() {
   return (
-    <main className="editor-page">
+    <main className="editorPage">
       <WebLab />
     </main>
   );

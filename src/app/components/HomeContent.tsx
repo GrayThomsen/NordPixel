@@ -1,81 +1,89 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useLanguage } from '../../context/LanguageContext';
 
 const HOME_COPY = {
   da: {
-    eyebrow: 'Digital læring med professionel leverance',
-    title: 'NordPixel gør digital læring konkret for skoler, lærere og elever.',
+    eyebrow: 'Praktisk valgfag i teknologiforståelse',
+    title: 'Gør elever til aktive skabere i en digital hverdag.',
     lead:
-      'Vi udvikler og leverer undervisningsforløb i web, kreativ teknologi og AI med tydelig progression, stærke materialer og en implementering, der fungerer i praksis.',
+      'NordPixel leverer en klar løsning til teknologiforståelse: mindre teori, mere skaben, undersøgelse og kritisk refleksion i klassen.',
+    statusNote:
+      'Udviklet til skoler, der vil have et praktisk og gennemførligt valgfagsforløb med tydelig progression.',
     proofPoints: [
-      { value: 'Skoleklar', label: 'Designet til virkelige klasselokaler og planlægning' },
-      { value: 'Didaktisk stærk', label: 'Klar faglig retning og tydelige læringsmål' },
-      { value: 'Leveringssikker', label: 'Professionel opstart, afvikling og opfølgning' },
+      { value: 'Praktisk klogskab', label: 'Eleverne bygger, tester og forbedrer med teknologi i praksis' },
+      { value: 'Plads til fejl', label: 'Fejl bruges aktivt som læring i kreative processer' },
+      { value: 'For alle elevtyper', label: 'Inkluderende forløb med tydelig progression og rammer' },
     ],
-    authorityTitle: 'Hvorfor NordPixel',
+    authorityTitle: 'Hvorfor lærere vælger NordPixel',
     authorityCards: [
       {
-        title: 'Undervisning med retning',
-        text: 'Forløb bygges med progression, så eleverne løfter sig trin for trin med tydelige mål.',
+        title: 'Klar opstart uden overteori',
+        text: 'Materialer og forløb er gjort enkle, så du hurtigt kan gå i gang uden at være specialist på forhånd.',
       },
       {
-        title: 'Struktur der skaber ro',
-        text: 'Undervisere får klare rammer og materialer, så implementering bliver enkel og stabil.',
+        title: 'Lærerens rolle er tydelig',
+        text: 'Du faciliterer, rammesætter og støtter. Vi leverer struktur, så du kan fokusere på klassen.',
       },
       {
-        title: 'Kvalitet der kan mærkes',
-        text: 'Vi kombinerer kreativitet og faglighed, så eleverne arbejder meningsfuldt med teknologi.',
+        title: 'Eleverne er aktive skabere',
+        text: 'Eleverne undersøger digitale fænomener, bygger egne løsninger og diskuterer konsekvenser.',
       },
     ],
-    methodTitle: 'Sådan skaber vi effekt',
+    methodTitle: 'Fra plan til stærk undervisning',
     methodSteps: [
-      { title: 'Afklaring', text: 'Målgruppe, ambition og rammer defineres sammen med skolen.' },
-      { title: 'Tilpasning', text: 'Indhold og materialer justeres, så de matcher undervisningens kontekst.' },
-      { title: 'Gennemførsel', text: 'Forløbet leveres med tydelig opfølgning og konkret læringsudbytte.' },
+      { title: '1. Vælg målgruppe', text: 'Start med den klasse, I vil løfte i 7.-9. og vælg et forløb, der passer til niveauet.' },
+      { title: '2. Sammensæt forløb', text: 'Kombiner kerneforløb og fokusmoduler, så indhold passer til tid, udstyr og lokal kontekst.' },
+      { title: '3. Gennemfør i praksis', text: 'Korte moduler, tydelige roller og konkrete elevprodukter giver fremdrift fra lektion til lektion.' },
     ],
+    heroCardTitle: 'I undervisningen arbejder I med',
+    heroCardPoints: ['Digitale fænomener fra elevernes hverdag', 'Kreativt design, kodning og undersøgelse', 'Kritisk refleksion over teknologiens betydning'],
     ctaWeblab: 'Åbn WebLab',
     ctaCourses: 'Se forløb',
     ctaContact: 'Kontakt os',
-    closing: 'Vil I løfte digital læring med en partner, der leverer med både faglig tyngde og driftsmæssig kvalitet?',
+    closing: 'Klar til at planlægge et valgfagsforløb, hvor eleverne går fra brugere til skabere?',
   },
   en: {
-    eyebrow: 'Digital learning with professional delivery',
-    title: 'NordPixel makes digital learning concrete for schools, teachers, and students.',
+    eyebrow: 'Practical technology literacy elective',
+    title: 'Help students become active creators in a digital world.',
     lead:
-      'We design and deliver educational programs in web, creative technology, and AI with clear progression, strong materials, and implementation that works in real classrooms.',
+      'NordPixel delivers a clear technology literacy solution: less theory, more creation, investigation, and critical reflection in class.',
+    statusNote:
+      'Built for schools that want a practical, classroom-ready elective with clear progression.',
     proofPoints: [
-      { value: 'Classroom-ready', label: 'Built for real teaching schedules and school realities' },
-      { value: 'Pedagogically strong', label: 'Clear educational direction and measurable outcomes' },
-      { value: 'Reliable delivery', label: 'Professional onboarding, execution, and follow-up' },
+      { value: 'Practical agency', label: 'Students build, test, and improve digital ideas hands-on' },
+      { value: 'Room for mistakes', label: 'Iteration and debugging are treated as core learning moments' },
+      { value: 'Inclusive by design', label: 'Tracks are built to engage diverse learners and classrooms' },
     ],
-    authorityTitle: 'Why NordPixel',
+    authorityTitle: 'Why teachers choose NordPixel',
     authorityCards: [
       {
-        title: 'Teaching with direction',
-        text: 'Programs are built around progression so students improve step by step with clear goals.',
+        title: 'Fast start without overload',
+        text: 'Teaching plans and materials are simplified so you can start quickly without being a specialist first.',
       },
       {
-        title: 'Structure that creates confidence',
-        text: 'Educators get practical frameworks and materials that make implementation smooth and stable.',
+        title: 'Teacher role is explicit',
+        text: 'You facilitate, frame, and guide. We provide structure so you can focus on student learning.',
       },
       {
-        title: 'Quality with impact',
-        text: 'We combine creativity and rigor so students engage meaningfully with technology.',
+        title: 'Students create, not only consume',
+        text: 'Learners investigate digital phenomena, build solutions, and discuss social impact.',
       },
     ],
-    methodTitle: 'How we create impact',
+    methodTitle: 'From planning to strong classroom delivery',
     methodSteps: [
-      { title: 'Discovery', text: 'We define goals, target groups, and practical constraints with your school.' },
-      { title: 'Adaptation', text: 'We tailor content and materials to your educational context and ambition.' },
-      { title: 'Delivery', text: 'We execute with clear follow-up and tangible learning outcomes.' },
+      { title: '1. Pick your target group', text: 'Start with the class level you want to support and choose a fitting track.' },
+      { title: '2. Compose your program', text: 'Combine core tracks and focus modules to match time, equipment, and local needs.' },
+      { title: '3. Deliver with momentum', text: 'Short modules, clear roles, and concrete student outputs keep progress visible.' },
     ],
+    heroCardTitle: 'In class, you work with',
+    heroCardPoints: ['Digital phenomena from students\' everyday lives', 'Creative design, coding, and investigation', 'Critical reflection on technology and society'],
     ctaWeblab: 'Open WebLab',
     ctaCourses: 'Explore Courses',
     ctaContact: 'Contact Us',
-    closing:
-      'Ready to elevate digital learning with a partner that combines educational authority and reliable execution?',
+    closing: 'Ready to plan an elective where students move from users to creators?',
   },
 } as const;
 
@@ -85,46 +93,39 @@ export function HomeContent() {
 
   return (
     <main className="landing">
-      <section className="landing__hero">
-        <p className="landing__eyebrow">{copy.eyebrow}</p>
-        <h1>{copy.title}</h1>
-        <p className="landing__lead">{copy.lead}</p>
+      <section className="landingHero">
+        <div className="landingHeroGrid">
+          <div className="landingHeroCopy">
+            <p className="landingEyebrow">{copy.eyebrow}</p>
+            <h1>{copy.title}</h1>
+            <p className="landingLead">{copy.lead}</p>
+            <p className="landingStatusNote">{copy.statusNote}</p>
 
-        <div className="landing__proof" role="list" aria-label={copy.authorityTitle}>
-          {copy.proofPoints.map((point) => (
-            <article key={point.value} className="landing__proof-card" role="listitem">
-              <strong>{point.value}</strong>
-              <span>{point.label}</span>
-            </article>
-          ))}
-        </div>
+            <div className="landingProof" role="list" aria-label={copy.authorityTitle}>
+              {copy.proofPoints.map((point) => (
+                <article key={point.value} className="landingProofCard" role="listitem">
+                  <strong>{point.value}</strong>
+                  <span>{point.label}</span>
+                </article>
+              ))}
+            </div>
 
-        <div className="landing__actions">
-          <Link href="/editor" className="landing__button landing__button--primary">
-            {copy.ctaWeblab}
-          </Link>
-          <Link href="/courses" className="landing__button landing__button--ghost">
-            {copy.ctaCourses}
-          </Link>
-          <Link href="/contact" className="landing__button landing__button--ghost">
-            {copy.ctaContact}
-          </Link>
-        </div>
-      </section>
-
-      <section className="landing__authority" aria-label={copy.authorityTitle}>
-        <h2>{copy.authorityTitle}</h2>
-        <div className="landing__authority-grid">
-          {copy.authorityCards.map((card) => (
-            <article key={card.title} className="landing__authority-card">
-              <h3>{card.title}</h3>
-              <p>{card.text}</p>
-            </article>
-          ))}
+            <div className="landingActions">
+              <Link href="/courses" className="landingButton landingButtonPrimary">
+                {copy.ctaCourses}
+              </Link>
+              <Link href="/editor" className="landingButton landingButtonGhost">
+                {copy.ctaWeblab}
+              </Link>
+              <Link href="/contact" className="landingButton landingButtonGhost">
+                {copy.ctaContact}
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section className="landing__method" aria-label={copy.methodTitle}>
+      <section className="landingMethod" aria-label={copy.methodTitle}>
         <h2>{copy.methodTitle}</h2>
         <ol>
           {copy.methodSteps.map((step) => (
@@ -134,18 +135,6 @@ export function HomeContent() {
             </li>
           ))}
         </ol>
-      </section>
-
-      <section className="landing__closing" aria-label={copy.ctaContact}>
-        <p>{copy.closing}</p>
-        <div className="landing__closing-actions">
-          <Link href="/courses" className="landing__button landing__button--primary">
-            {copy.ctaCourses}
-          </Link>
-          <Link href="/contact" className="landing__button landing__button--ghost">
-            {copy.ctaContact}
-          </Link>
-        </div>
       </section>
     </main>
   );

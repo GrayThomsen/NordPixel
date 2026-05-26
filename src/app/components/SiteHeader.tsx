@@ -39,18 +39,27 @@ export function SiteHeader() {
     { href: '/courses', label: dictionary.nav.courses },
     { href: '/contact', label: dictionary.nav.contact },
   ];
+  const homeAriaLabel = locale === 'da' ? 'NordPixel forside' : 'NordPixel home';
+  const cartAriaLabel =
+    locale === 'da'
+      ? cartCount > 0
+        ? `Bookingkurv (${cartCount})`
+        : 'Bookingkurv'
+      : cartCount > 0
+        ? `Booking cart (${cartCount})`
+        : 'Booking cart';
 
   return (
-    <header className="site-header">
-      <div className="site-header__inner">
-        <Link href="/" className="site-header__brand" aria-label="NordPixel frontpage">
+    <header className="siteHeader">
+      <div className="siteHeaderInner">
+        <Link href="/" className="siteHeaderBrand" aria-label={homeAriaLabel}>
           <Image
             src="/images/brand/black-logo.png"
             alt="NordPixel logo"
             width={42}
             height={42}
             priority
-            className="site-header__brand-logo site-header__brand-logo--light"
+            className="siteHeaderBrandLogo siteHeaderBrandLogoLight"
           />
           <Image
             src="/images/brand/white-logo.png"
@@ -58,12 +67,12 @@ export function SiteHeader() {
             width={42}
             height={42}
             priority
-            className="site-header__brand-logo site-header__brand-logo--dark"
+            className="siteHeaderBrandLogo siteHeaderBrandLogoDark"
           />
           <span>NordPixel.dev</span>
         </Link>
 
-        <nav className="site-header__nav site-header__nav--desktop" aria-label="Primary">
+        <nav className="siteHeaderNav siteHeaderNavDesktop" aria-label="Primary">
           {navItems.map((item) => (
             <Link key={item.href} href={item.href} aria-current={pathname === item.href ? 'page' : undefined}>
               {item.label}
@@ -71,20 +80,20 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="site-header__right">
+        <div className="siteHeaderRight">
           <Link
             href="/courses/booking"
-            className={`site-header__cart ${cartCount > 0 ? '' : 'is-empty'}`.trim()}
-            aria-label={cartCount > 0 ? `${dictionary.nav.courses} cart (${cartCount})` : `${dictionary.nav.courses} cart`}
+            className={`siteHeaderCart ${cartCount > 0 ? '' : 'isEmpty'}`.trim()}
+            aria-label={cartAriaLabel}
           >
             <ShoppingCart aria-hidden="true" />
             {cartCount > 0 ? <span>{cartCount}</span> : null}
           </Link>
 
-          <div className="site-header__language" role="group" aria-label={dictionary.nav.language}>
+          <div className="siteHeaderLanguage" role="group" aria-label={dictionary.nav.language}>
             <button
               type="button"
-              className={locale === 'da' ? 'is-active' : ''}
+              className={locale === 'da' ? 'isActive' : ''}
               onClick={() => setLocale('da')}
               aria-pressed={locale === 'da'}
             >
@@ -92,7 +101,7 @@ export function SiteHeader() {
             </button>
             <button
               type="button"
-              className={locale === 'en' ? 'is-active' : ''}
+              className={locale === 'en' ? 'isActive' : ''}
               onClick={() => setLocale('en')}
               aria-pressed={locale === 'en'}
             >
@@ -101,18 +110,18 @@ export function SiteHeader() {
           </div>
           <button
             type="button"
-            className={isMenuOpen ? 'site-header__menu-button is-open' : 'site-header__menu-button'}
+            className={isMenuOpen ? 'siteHeaderMenuButton isOpen' : 'siteHeaderMenuButton'}
             onClick={() => setIsMenuOpen((current) => !current)}
             aria-expanded={isMenuOpen}
-            aria-controls="mobile-site-nav"
+            aria-controls="mobileSiteNav"
           >
             Menu
           </button>
         </div>
       </div>
 
-      <div id="mobile-site-nav" className={isMenuOpen ? 'site-header__mobile-nav is-open' : 'site-header__mobile-nav'}>
-        <nav className="site-header__mobile-links" aria-label="Primary mobile">
+      <div id="mobileSiteNav" className={isMenuOpen ? 'siteHeaderMobileNav isOpen' : 'siteHeaderMobileNav'}>
+        <nav className="siteHeaderMobileLinks" aria-label="Primary mobile">
           {navItems.map((item) => (
             <Link key={item.href} href={item.href} aria-current={pathname === item.href ? 'page' : undefined}>
               {item.label}

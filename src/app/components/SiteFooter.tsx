@@ -8,11 +8,11 @@ export function SiteFooter() {
   const { dictionary } = useLanguage();
 
   return (
-    <footer className="site-footer" aria-label="Site footer">
-      <div className="site-footer__inner">
-        <p className="site-footer__brand">{SITE_FOOTER.brandName}</p>
+    <footer className="siteFooter" aria-label="Site footer">
+      <div className="siteFooterInner">
+        <p className="siteFooterBrand">{SITE_FOOTER.brandName}</p>
 
-        <div className="site-footer__details">
+        <div className="siteFooterDetails">
           <p>
             <span>{dictionary.footer.email}:</span>{' '}
             <a href={`mailto:${SITE_FOOTER.contactEmail}`}>{SITE_FOOTER.contactEmail}</a>
@@ -22,7 +22,7 @@ export function SiteFooter() {
           </p>
         </div>
 
-        <nav className="site-footer__links" aria-label={dictionary.footer.linkedIn}>
+        <nav className="siteFooterLinks" aria-label={dictionary.footer.linkedIn}>
           <Link href={SITE_FOOTER.linkedinCompanyUrl} target="_blank" rel="noreferrer">
             {dictionary.footer.companyLinkedIn}
           </Link>
