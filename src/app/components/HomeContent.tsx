@@ -6,14 +6,15 @@ import { useLanguage } from '../../context/LanguageContext';
 export function HomeContent() {
   const { dictionary } = useLanguage();
   const copy = dictionary.homePage;
+  const workspaceCopy = dictionary.editorIntro;
 
   return (
     <main className="landing">
       <section className="landingHero">
         <div className="landingHeroGrid">
           <div className="landingHeroCopy">
-            <p className="landingEyebrow">{copy.eyebrow}</p>
             <h1>{copy.title}</h1>
+            <p className="landingEyebrow">{copy.eyebrow}</p>
             <p className="landingLead">{copy.lead}</p>
             <p className="landingStatusNote">{copy.statusNote}</p>
 
@@ -37,8 +38,13 @@ export function HomeContent() {
                 {copy.ctaContact}
               </Link>
             </div>
-            <p className="landingWeblabNote">{copy.weblabNote}</p>
+            <section className="landingWeblabWorkspace" aria-label={workspaceCopy.title}>
+              <h2>{workspaceCopy.title}</h2>
+              <p>{workspaceCopy.text}</p>
+              <p className="landingWeblabWorkspaceHint">{workspaceCopy.hint}</p>
+            </section>
           </div>
+
         </div>
       </section>
 

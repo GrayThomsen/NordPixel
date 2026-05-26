@@ -1,16 +1,25 @@
 export const pageCopyByLocale = {
   da: {
     homePage: {
-      eyebrow: 'Praktisk valgfag i teknologiforståelse',
-      title: 'Gør elever til aktive skabere i en digital hverdag.',
+      eyebrow: 'Digital teknologiforståelse for skoler',
+      title: 'Teknologiforståelse i praksis: gør elever til aktive digitale skabere.',
       lead:
         'NordPixel leverer en klar løsning til teknologiforståelse: mindre teori, mere skaben, undersøgelse og kritisk refleksion i klassen.',
       statusNote:
         'Udviklet til skoler, der vil have et praktisk og gennemførligt valgfagsforløb med tydelig progression.',
       proofPoints: [
-        { value: 'Praktisk klogskab', label: 'Eleverne bygger, tester og forbedrer med teknologi i praksis' },
-        { value: 'Plads til fejl', label: 'Fejl bruges aktivt som læring i kreative processer' },
-        { value: 'For alle elevtyper', label: 'Inkluderende forløb med tydelig progression og rammer' },
+        {
+          value: 'Praksisnær kompetenceudvikling',
+          label: 'Eleverne arbejder systematisk med at udvikle, afprøve og forbedre digitale løsninger i autentiske læringssituationer.',
+        },
+        {
+          value: 'Reflekteret læring gennem iteration',
+          label: 'Fejl og justeringer anvendes aktivt som en del af den faglige proces, så eleverne opbygger robust problemløsningskompetence.',
+        },
+        {
+          value: 'Inkluderende didaktisk progression',
+          label: 'Forløbene er struktureret med tydelige trin, så forskellige elevforudsætninger understøttes med høj faglig kvalitet.',
+        },
       ],
       authorityTitle: 'Hvorfor lærere vælger NordPixel',
       authorityCards: [
@@ -121,16 +130,25 @@ export const pageCopyByLocale = {
   },
   en: {
     homePage: {
-      eyebrow: 'Practical technology literacy elective',
-      title: 'Help students become active creators in a digital world.',
+      eyebrow: 'Digital technology literacy for schools',
+      title: 'Technology literacy in practice: help students become active digital creators.',
       lead:
         'NordPixel delivers a clear technology literacy solution: less theory, more creation, investigation, and critical reflection in class.',
       statusNote:
         'Built for schools that want a practical, classroom-ready elective with clear progression.',
       proofPoints: [
-        { value: 'Practical agency', label: 'Students build, test, and improve digital ideas hands-on' },
-        { value: 'Room for mistakes', label: 'Iteration and debugging are treated as core learning moments' },
-        { value: 'Inclusive by design', label: 'Tracks are built to engage diverse learners and classrooms' },
+        {
+          value: 'Practice-based competence development',
+          label: 'Students systematically develop, test, and refine digital solutions in authentic classroom contexts.',
+        },
+        {
+          value: 'Reflective learning through iteration',
+          label: 'Mistakes and revisions are used deliberately as part of the academic process to strengthen problem-solving capacity.',
+        },
+        {
+          value: 'Inclusive pedagogical progression',
+          label: 'Programs are structured in clear stages that support diverse learner profiles while maintaining strong academic quality.',
+        },
       ],
       authorityTitle: 'Why teachers choose NordPixel',
       authorityCards: [

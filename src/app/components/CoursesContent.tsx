@@ -104,7 +104,6 @@ export function CoursesContent() {
             <h3>{copy.customTrackTitle}</h3>
             <p>{copy.customTrackText}</p>
             <p className="coursesCustomTrackOffer">{copy.customTrackOfferLine}</p>
-            <p className="coursesCustomTrackBundle">{copy.pricingBundleText}</p>
           </div>
           <button
             type="button"
@@ -125,6 +124,7 @@ export function CoursesContent() {
             </p>
           </div>
           <p className="coursesFiltersTargetOnlyHint">{copy.filterTargetOnlyHint}</p>
+          <p className="coursesPricingIntro">{copy.pricingBundleTitle}: {copy.pricingBundleText}</p>
 
           <div className="coursesFilters">
             <label className="coursesFiltersField">
@@ -182,10 +182,6 @@ export function CoursesContent() {
                 <div className="timelineTrackPricing" aria-label={copy.pricingEstimatedLabel}>
                   <p>{copy.pricingEstimatedLabel}</p>
                   <strong>{formatPrice(getEstimatedPrice(track.pricing.basePrice))}</strong>
-                  <span>
-                    {copy.pricingHourlyRateLabel}: {formatPrice(track.pricing.basePrice)} · {copy.pricingEstimatedHoursLabel}:{' '}
-                    {copy.pricingDeliveryModelText}
-                  </span>
                 </div>
 
                 <div className="timelineTrackTimeline">
@@ -240,7 +236,6 @@ export function CoursesContent() {
         <header className="coursesSectionHeader">
           <h2>{dictionary.courses.focusTitle}</h2>
           <p>{dictionary.courses.focusIntro}</p>
-          <p className="coursesPricingIntro">{copy.pricingBundleTitle}: {copy.pricingBundleText}</p>
         </header>
 
         <div className="focusGrid">
@@ -256,10 +251,6 @@ export function CoursesContent() {
               <div className="focusItemPricing" aria-label={copy.pricingEstimatedLabel}>
                 <span>{copy.pricingEstimatedLabel}</span>
                 <strong>{formatPrice(getEstimatedPrice(course.pricing.basePrice))}</strong>
-                <em>
-                  {copy.pricingHourlyRateLabel}: {formatPrice(course.pricing.basePrice)} · {copy.pricingEstimatedHoursLabel}:{' '}
-                  {copy.pricingDeliveryModelText}
-                </em>
               </div>
               <ul className="focusItemMeta">
                 <li>

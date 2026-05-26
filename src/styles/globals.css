@@ -312,6 +312,20 @@ body {
 	min-height: 100%;
 }
 
+body {
+	background:
+		radial-gradient(circle at 15% 25%, color-mix(in oklab, var(--brand-orange-soft) 72%, white 28%) 0%, transparent 48%),
+		radial-gradient(circle at 88% 15%, color-mix(in oklab, #dff3ef 70%, #ffffff 30%) 0%, transparent 52%),
+		linear-gradient(170deg, color-mix(in oklab, var(--surface-page) 94%, #ffffff 6%), color-mix(in oklab, var(--surface-panel) 90%, var(--brand-orange-soft) 10%));
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+/* WebLab page should use a calm neutral canvas, not the global branded body background. */
+body:has(.editorPage) {
+	background: linear-gradient(180deg, color-mix(in oklab, var(--surface-page) 98%, #ffffff 2%), color-mix(in oklab, var(--surface-panel) 96%, #ffffff 4%));
+}
+
 html {
 	scrollbar-gutter: auto;
 }
@@ -456,57 +470,112 @@ html {
 }
 
 .landing,
-.editorPage,
 .downloadsPage {
 	margin: 0 auto;
 	width: min(1320px, 94vw);
 	padding: 1.8rem 0 2.8rem;
 }
 
+.editorPage {
+	margin: 0 auto;
+	width: min(1320px, 94vw);
+	padding: 1.4rem 0 1.8rem;
+	display: grid;
+	gap: 0.9rem;
+	background: color-mix(in oklab, var(--surface-page) 97%, #ffffff 3%);
+}
+
 .landing {
 	display: grid;
 	gap: 1.8rem;
+	padding-top: 0;
+	padding-bottom: 1.8rem;
+	border-radius: 0;
+	overflow: hidden;
+	background: color-mix(in oklab, var(--surface-page) 90%, #ffffff 10%);
+	box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--brand-navy) 10%, transparent 90%);
 }
 
 .landingHero {
 	display: grid;
 	gap: 1.2rem;
 	border: 0;
-	border-radius: 1rem;
+	border-radius: 0;
 	padding: clamp(1.8rem, 3vw, 3.3rem);
-	background:
-		radial-gradient(circle at 15% 25%, color-mix(in oklab, var(--brand-orange-soft) 72%, white 28%) 0%, transparent 48%),
+	position: relative;
+	overflow: hidden;
+	background: transparent;
+	box-shadow: none;
+}
+
+.landingHero::before,
+.landingHero::after {
+	content: '';
+	position: absolute;
+	border-radius: 999px;
+	pointer-events: none;
+}
+
+.landingHero::before {
+	width: clamp(180px, 22vw, 320px);
+	height: clamp(180px, 22vw, 320px);
+	right: -6%;
+	top: -18%;
+	background: radial-gradient(circle, color-mix(in oklab, #c8efe6 54%, transparent 46%) 0%, transparent 70%);
+	opacity: 0.55;
+}
+
+.landingHero::after {
+	width: clamp(140px, 18vw, 260px);
+	height: clamp(140px, 18vw, 260px);
+	left: -6%;
+	bottom: -20%;
+	background: radial-gradient(circle, color-mix(in oklab, var(--brand-orange-soft) 48%, transparent 52%) 0%, transparent 70%);
+	opacity: 0.45;
 }
 
 .landingHeroGrid {
 	display: grid;
-	grid-template-columns: minmax(0, 1.2fr) minmax(240px, 0.8fr);
+	grid-template-columns: minmax(0, 1fr);
 	gap: clamp(1rem, 2.4vw, 2rem);
 	align-items: stretch;
+	max-width: min(980px, 100%);
+	margin-inline: auto;
+	position: relative;
+	z-index: 1;
 }
 
 .landingHeroCopy {
 	display: grid;
 	gap: 1rem;
+	justify-items: center;
+	text-align: center;
 }
 
 .landingEyebrow {
 	margin: 0;
-	text-transform: uppercase;
-	font-size: 0.8rem;
-	letter-spacing: 0.1em;
-	color: var(--text-muted);
+	font-size: 0.95rem;
+	font-weight: 600;
+	line-height: 1.4;
+	letter-spacing: 0.01em;
+	color: color-mix(in oklab, var(--brand-navy) 72%, var(--text-muted) 28%);
+	background: color-mix(in oklab, var(--surface-panel) 86%, #ffffff 14%);
+	padding: 0.35rem 0.7rem;
+	border-radius: 999px;
+	box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--brand-orange) 22%, transparent 78%);
 }
 
 .landingHero h1 {
 	margin: 0;
-	max-width: 24ch;
+	width: min(100%, 34ch);
+	max-width: 34ch;
 	color: color-mix(in oklab, var(--brand-navy) 92%, black 8%);
+	text-wrap: balance;
 }
 
 .landingLead {
 	margin: 0;
-	max-width: 70ch;
+	max-width: 62ch;
 	line-height: 1.6;
 	color: color-mix(in oklab, var(--text-primary) 84%, var(--text-muted) 16%);
 }
@@ -523,6 +592,7 @@ html {
 	grid-template-columns: repeat(3, minmax(0, 1fr));
 	gap: 0.9rem;
 	margin-top: 0.1rem;
+	width: 100%;
 }
 
 .landingProofCard {
@@ -531,6 +601,7 @@ html {
 	padding: 1rem 1.1rem;
 	border-radius: 0.8rem;
 	background: color-mix(in oklab, var(--surface-page) 88%, #ffffff 12%);
+	text-align: left;
 }
 
 .landingProofCard strong {
@@ -548,20 +619,28 @@ html {
 	display: grid;
 	gap: 0.7rem;
 	align-content: start;
-	padding: 1rem;
+	padding: 1.2rem;
 	border-radius: 1rem;
-	background: linear-gradient(160deg, color-mix(in oklab, var(--surface-page) 82%, #ffffff 18%), color-mix(in oklab, var(--surface-panel) 88%, var(--brand-orange-soft) 12%));
-	box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--brand-navy) 8%, transparent 92%);
+	background: linear-gradient(160deg, color-mix(in oklab, var(--surface-page) 86%, #ffffff 14%), color-mix(in oklab, #dff3ef 20%, var(--surface-panel) 80%));
+	box-shadow:
+		0 0.7rem 1.8rem color-mix(in oklab, #0c4d46 10%, transparent 90%),
+		inset 0 0 0 1px color-mix(in oklab, #2f9d8f 24%, transparent 76%);
 }
 
 .landingHeroLogoWrap {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	width: 4.8rem;
-	height: 4.8rem;
+	width: 5.4rem;
+	height: 5.4rem;
 	border-radius: 999px;
-	background: color-mix(in oklab, white 76%, var(--brand-orange-soft) 24%);
+	background: linear-gradient(155deg, color-mix(in oklab, #ffffff 70%, #dff3ef 30%), color-mix(in oklab, var(--brand-orange-soft) 46%, white 54%));
+}
+
+.landingHeroVisualLogo {
+	width: auto;
+	height: auto;
+	filter: drop-shadow(0 0.25rem 0.5rem color-mix(in oklab, #000000 8%, transparent 92%));
 }
 
 .landingHeroVisual h2 {
@@ -580,7 +659,7 @@ html {
 
 .landingHeroVisual li {
 	position: relative;
-	padding-left: 1rem;
+	padding-left: 1.1rem;
 	font-size: 0.9rem;
 	line-height: 1.5;
 	color: color-mix(in oklab, var(--text-primary) 78%, var(--text-muted) 22%);
@@ -602,6 +681,7 @@ html {
 	flex-wrap: wrap;
 	gap: 0.8rem;
 	margin-top: 1.4rem;
+	justify-content: center;
 }
 
 .landingButton {
@@ -618,14 +698,47 @@ html {
 	color: color-mix(in oklab, var(--text-primary) 76%, var(--text-muted) 24%);
 }
 
+.landingWeblabWorkspace {
+	display: grid;
+	gap: 0.35rem;
+	padding: 0.8rem 0.9rem;
+	border-radius: 0.85rem;
+	background: linear-gradient(
+		145deg,
+		color-mix(in oklab, var(--surface-page) 88%, #ffffff 12%),
+		color-mix(in oklab, var(--surface-panel) 88%, var(--brand-orange-soft) 12%)
+	);
+	box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--brand-orange) 16%, transparent 84%);
+}
+
+.landingWeblabWorkspace h2,
+.landingWeblabWorkspace p {
+	margin: 0;
+}
+
+.landingWeblabWorkspace h2 {
+	font-size: 1rem;
+	line-height: 1.25;
+	color: color-mix(in oklab, var(--brand-navy) 90%, black 10%);
+}
+
+.landingWeblabWorkspace p {
+	font-size: 0.95rem;
+	line-height: 1.45;
+	color: color-mix(in oklab, var(--text-primary) 82%, var(--text-muted) 18%);
+}
+
+.landingWeblabWorkspaceHint {
+	font-size: 0.82rem;
+	color: var(--text-muted);
+}
+
 .landingTrust {
 	display: grid;
 	gap: 0.8rem;
 	border-radius: 1rem;
 	padding: 1.3rem 1.5rem;
-	background: linear-gradient(140deg, color-mix(in oklab, var(--surface-page) 86%, #ffffff 14%), color-mix(in oklab, var(--brand-orange-soft) 26%, var(--surface-panel) 74%));
-	box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--brand-orange) 20%, transparent 80%);
-}
+	}
 
 .landingTrust h2 {
 	margin: 0;
@@ -707,7 +820,8 @@ html {
 .landingMethod {
 	display: grid;
 	gap: 1.2rem;
-	background: linear-gradient(145deg, color-mix(in oklab, var(--surface-panel) 88%, var(--brand-orange-soft) 12%), var(--surface-panel));
+	border-radius: 0;
+	background: transparent;
 }
 
 .landingMethod ol {
@@ -777,21 +891,41 @@ html {
 .coursesPage,
 .contactPage {
 	margin: 0 auto;
-	width: min(1320px, 96vw);
-	padding: 1.6rem 0 2.4rem;
+	width: min(1320px, 94vw);
+	padding: 0;
 	display: grid;
-	gap: 1.1rem;
+	gap: 1.3rem;
+	border-radius: 0;
+	position: relative;
+	isolation: isolate;
+	background: color-mix(in oklab, var(--surface-page) 90%, #ffffff 10%);
+}
+
+.coursesPage {
+	padding: 0 clamp(0.9rem, 1.6vw, 1.4rem) 1.8rem;
+}
+
+.coursesPage::after,
+.contactPage::after,
+.bookingCartPage::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	border: 1px solid color-mix(in oklab, var(--brand-navy) 10%, transparent 90%);
+	pointer-events: none;
+	z-index: 2;
 }
 
 .coursesPageHero,
 .contactPageHero {
 	border: 0;
-	border-radius: 1rem;
-	background: var(--surface-page);
+	border-radius: 0;
+	padding: clamp(1.3rem, 2.2vw, 2rem) clamp(1rem, 2vw, 1.5rem) 0;
+	background: transparent;
 }
 
 .coursesPageHero {
-	padding-bottom: 0.1rem;
+	padding-bottom: 0.2rem;
 }
 
 .coursesPageHero h1,
@@ -803,7 +937,8 @@ html {
 .contactPageHero {
 	display: grid;
 	gap: 0.8rem;
-	padding: 0.3rem 0;
+	padding-top: clamp(1.3rem, 2.2vw, 2rem);
+	padding-bottom: 0.2rem;
 }
 
 .contactPageEyebrow {
@@ -899,10 +1034,13 @@ html {
 
 .coursesFilters {
 	display: grid;
-	grid-template-columns: minmax(0, 1fr) auto;
-	gap: 0.6rem;
+	grid-template-columns: minmax(14rem, 30rem) auto;
+	gap: 0.45rem;
 	align-items: end;
-	padding: 0.6rem;
+	justify-content: start;
+	width: fit-content;
+	max-width: 100%;
+	padding: 0.35rem;
 	}
 
 .coursesUvm {
@@ -984,11 +1122,6 @@ html {
 	color: color-mix(in oklab, var(--brand-navy) 86%, black 14%);
 }
 
-.coursesCustomTrackBundle {
-	font-size: 0.74rem;
-	color: color-mix(in oklab, var(--text-primary) 72%, var(--text-muted) 28%);
-}
-
 .coursesCustomTrackButton {
 	cursor: pointer;
 	border: 0;
@@ -1018,11 +1151,11 @@ html {
 
 .coursesFiltersField {
 	display: grid;
-	gap: 0.2rem;
+	gap: 0.16rem;
 }
 
 .coursesFiltersField span {
-	font-size: 0.7rem;
+	font-size: 0.64rem;
 	letter-spacing: 0em;
 	text-transform: uppercase;
 	font-weight: 700;
@@ -1032,10 +1165,10 @@ html {
 .coursesFiltersField input,
 .coursesFiltersField select {
 	width: 100%;
-	padding: 0.5rem 0.7rem;
-	font-size: 0.9rem;
+	padding: 0.42rem 0.62rem;
+	font-size: 0.82rem;
 	line-height: 1.2;
-	border-radius: 0.7rem;
+	border-radius: 0.62rem;
 	border: 1px solid color-mix(in oklab, var(--brand-navy) 14%, transparent 86%);
 	background: var(--surface-page);
 	color: var(--text-primary);
@@ -1047,8 +1180,8 @@ html {
 
 .coursesFiltersReset {
 	height: fit-content;
-	padding: 0.5rem 0.8rem;
-	font-size: 0.9rem;
+	padding: 0.42rem 0.74rem;
+	font-size: 0.82rem;
 	font-weight: 600;
 	line-height: 1.2;
 	border-radius: 999px;
@@ -1630,10 +1763,14 @@ html {
 
 .bookingCartPage {
 	margin: 0 auto;
-	width: min(1240px, 92vw);
-	padding: 1.2rem 0 1.8rem;
+	width: min(1320px, 94vw);
+	padding: 0 clamp(0.9rem, 1.6vw, 1.4rem) 1.8rem;
 	display: grid;
-	gap: 0.9rem;
+	gap: 1rem;
+	border-radius: 0;
+	position: relative;
+	isolation: isolate;
+	background: color-mix(in oklab, var(--surface-page) 90%, #ffffff 10%);
 }
 
 .bookingCartPageHero {
@@ -1641,6 +1778,7 @@ html {
 	grid-template-columns: minmax(0, 1fr) minmax(220px, 0.5fr);
 	gap: 0.6rem;
 	align-items: start;
+	padding: clamp(1.3rem, 2.2vw, 2rem) clamp(1rem, 2vw, 1.5rem) 0;
 }
 
 .bookingCartPageHeroMain {
@@ -1748,6 +1886,7 @@ html {
 	border-radius: 0.8rem;
 	background: var(--surface-page);
 	box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--brand-navy) 10%, transparent 90%);
+	transition: background 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease, filter 0.2s ease;
 }
 
 .bookingItemTrack {
@@ -1758,6 +1897,31 @@ html {
 .bookingItemFocus {
 	background: linear-gradient(145deg, color-mix(in oklab, var(--surface-page) 80%, #dff3ef 20%), color-mix(in oklab, white 84%, #dff3ef 16%));
 	box-shadow: inset 0 0 0 1px color-mix(in oklab, #2f9d8f 36%, transparent 64%);
+}
+
+.bookingItemTrack:not(.isSelected),
+.bookingItemFocus:not(.isSelected) {
+	background: color-mix(in oklab, var(--surface-muted) 68%, var(--surface-page) 32%);
+	box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--brand-navy) 12%, transparent 88%);
+	opacity: 0.78;
+	filter: saturate(0.55);
+}
+
+.bookingItem:not(.isSelected) h3,
+.bookingItem:not(.isSelected) .bookingItemPrice,
+.bookingItem:not(.isSelected) .bookingItemQtyLabel {
+	color: color-mix(in oklab, var(--text-muted) 90%, var(--text-primary) 10%);
+}
+
+.bookingItem:not(.isSelected) .bookingItemQty button,
+.bookingItem:not(.isSelected) .bookingItemQty input {
+	background: color-mix(in oklab, var(--surface-page) 76%, var(--surface-muted) 24%);
+	border-color: color-mix(in oklab, var(--brand-navy) 10%, transparent 90%);
+}
+
+.bookingItem.isSelected {
+	opacity: 1;
+	filter: none;
 }
 
 .bookingItem.isSelected {
@@ -2361,7 +2525,6 @@ html {
 	justify-content: space-between;
 	gap: 0.8rem;
 	padding: 1rem 1rem;
-	border-radius: 1rem;
 	background: linear-gradient(135deg, color-mix(in oklab, var(--brand-orange-soft) 72%, var(--surface-panel) 28%), color-mix(in oklab, var(--surface-page) 88%, #ffffff 12%));
 }
 
@@ -3091,6 +3254,7 @@ html {
 	.contactPage,
 	.bookingCartPage {
 		width: min(1320px, 92vw);
+	}
 
 	.editorPage {
 		display: grid;
@@ -3126,7 +3290,6 @@ html {
 	.editorIntroHint {
 		font-size: 0.82rem;
 		color: var(--text-muted);
-	}
 	}
 
 	.landing {

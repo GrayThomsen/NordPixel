@@ -261,7 +261,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       statusImported: 'Importerede projekt',
       refresh: 'Opdater',
       fullPage: 'Fuld side',
-      openTab: 'Åbn i fane',
+      openTab: 'Åbn i ny fane',
       updatedToday: 'i dag',
       updatedAtDate: 'sidst opdateret kl.',
     },

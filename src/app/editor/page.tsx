@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { EditorIntro } from '../components/EditorIntro';
 import { WebLab } from '../components/WebLab';
 
 export const metadata: Metadata = {
@@ -19,7 +18,6 @@ export const metadata: Metadata = {
 export default function EditorPage() {
   return (
     <main className="editorPage">
-      <EditorIntro />
       <WebLab />
     </main>
   );
