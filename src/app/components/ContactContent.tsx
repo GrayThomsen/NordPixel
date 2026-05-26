@@ -55,7 +55,9 @@ export function ContactContent() {
             <div>
               <dt>{copy.contactLabelEmail}</dt>
               <dd>
-                <a href={`mailto:${SITE_FOOTER.contactEmail}`}>{SITE_FOOTER.contactEmail}</a>
+                <a href={`mailto:${SITE_FOOTER.contactEmail}`} target="_blank" rel="noopener noreferrer">
+                  {SITE_FOOTER.contactEmail}
+                </a>
               </dd>
             </div>
             <div>
@@ -73,7 +75,7 @@ export function ContactContent() {
           </dl>
 
           <div className="contactCardActions">
-            <a className="contactAction" href={`mailto:${SITE_FOOTER.contactEmail}`}>
+            <a className="contactAction" href={`mailto:${SITE_FOOTER.contactEmail}`} target="_blank" rel="noopener noreferrer">
               {copy.contactAction}
             </a>
           </div>
@@ -94,7 +96,9 @@ export function ContactContent() {
 
       <section className="contactPageClosing" aria-label={copy.contactTitle}>
         <p>{copy.closing}</p>
-        <a href={`mailto:${SITE_FOOTER.contactEmail}`}>{copy.contactAction}</a>
+        <a href={`mailto:${SITE_FOOTER.contactEmail}`} target="_blank" rel="noopener noreferrer">
+          {copy.contactAction}
+        </a>
       </section>
     </main>
   );

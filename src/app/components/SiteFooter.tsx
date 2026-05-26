@@ -15,7 +15,9 @@ export function SiteFooter() {
         <div className="siteFooterDetails">
           <p>
             <span>{dictionary.footer.email}:</span>{' '}
-            <a href={`mailto:${SITE_FOOTER.contactEmail}`}>{SITE_FOOTER.contactEmail}</a>
+            <a href={`mailto:${SITE_FOOTER.contactEmail}`} target="_blank" rel="noopener noreferrer">
+              {SITE_FOOTER.contactEmail}
+            </a>
           </p>
           <p>
             <span>{dictionary.footer.cvr}:</span> {SITE_FOOTER.cvrNumber}
