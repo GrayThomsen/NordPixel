@@ -4,6 +4,7 @@
   --brand-orange: #fbb03b;
   --brand-navy: #000f11;
   --brand-orange-soft: #fff2db;
+  --font-family-body: 'Google Sans Text', 'Google Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
 
   /* Typography foundation: use for global type sizing and base emphasis weights. */
   --base-font-size: 16px;
@@ -170,6 +171,7 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-family-body);
   }
 
   /* Base element defaults: use utilities on components whenever you need a different scale or weight. */

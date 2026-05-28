@@ -25,7 +25,7 @@ export type Dictionary = {
     eyebrow: string;
     title: string;
     lead: string;
-    statusNote: string;
+    methodLead: string;
     proofPoints: ReadonlyArray<{ value: string; label: string }>;
     authorityTitle: string;
     authorityCards: ReadonlyArray<{ title: string; text: string }>;
@@ -64,6 +64,13 @@ export type Dictionary = {
     contactPlaceholder: string;
     aboutTitle: string;
     aboutText: string;
+  };
+  cookieConsent: {
+    title: string;
+    text: string;
+    accept: string;
+    necessary: string;
+    decline: string;
   };
   contactPage: {
     eyebrow: string;
@@ -204,6 +211,13 @@ export const dictionaries: Record<Locale, Dictionary> = {
       aboutTitle: 'Om os',
       aboutText: 'NordPixel udvikler undervisning i digital kreativitet, web og AI for børn og unge.',
     },
+    cookieConsent: {
+      title: 'Cookies og statistik',
+      text: 'Vi bruger Google Analytics til at forbedre hjemmesiden og give dig den bedst mulige brugeroplevelse. Du kan vælge kun nødvendige cookies eller acceptere statistik.',
+      accept: 'Accepter',
+      necessary: 'Kun nødvendige',
+      decline: 'Afvis',
+    },
     contactPage: pageCopyByLocale.da.contactPage,
     editorIntro: pageCopyByLocale.da.editorIntro,
     coursesCartPrompt: pageCopyByLocale.da.coursesCartPrompt,
@@ -312,6 +326,13 @@ export const dictionaries: Record<Locale, Dictionary> = {
       contactPlaceholder: 'Email, phone, and CVR',
       aboutTitle: 'About Us',
       aboutText: 'NordPixel builds educational experiences in digital creativity, web development, and AI for children and young learners.',
+    },
+    cookieConsent: {
+      title: 'Cookies and analytics',
+      text: 'We use Google Analytics to improve the website and give you the best possible user experience. You can choose necessary-only cookies or accept analytics.',
+      accept: 'Accept',
+      necessary: 'Necessary only',
+      decline: 'Decline',
     },
     contactPage: pageCopyByLocale.en.contactPage,
     editorIntro: pageCopyByLocale.en.editorIntro,

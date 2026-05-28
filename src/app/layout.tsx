@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { AppShell } from './components/AppShell';
+import { CookieConsent } from './components/CookieConsent';
 import { LanguageProvider } from '../context/LanguageContext';
 import '../styles/index.css';
 
@@ -33,6 +34,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     <html lang="da" className="light" suppressHydrationWarning>
       <body>
         <LanguageProvider>
+          <CookieConsent />
           <AppShell>{children}</AppShell>
         </LanguageProvider>
       </body>

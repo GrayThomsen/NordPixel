@@ -13,10 +13,9 @@ export function HomeContent() {
       <section className="landingHero">
         <div className="landingHeroGrid">
           <div className="landingHeroCopy">
-            <h1>{copy.title}</h1>
-            <p className="landingEyebrow">{copy.eyebrow}</p>
+            <h1 className="landingHeroTitle">{copy.eyebrow}</h1>
+            <p className="landingHeroSubtitle">{copy.title}</p>
             <p className="landingLead">{copy.lead}</p>
-            <p className="landingStatusNote">{copy.statusNote}</p>
 
             <div className="landingProof" role="list" aria-label={copy.authorityTitle}>
               {copy.proofPoints.map((point) => (
@@ -48,17 +47,12 @@ export function HomeContent() {
         </div>
       </section>
 
-      <section className="landingTrust" aria-label={copy.trustTitle}>
-        <h2>{copy.trustTitle}</h2>
-        <ul>
-          {copy.trustPoints.map((point) => (
-            <li key={point}>{point}</li>
-          ))}
-        </ul>
-      </section>
-
       <section className="landingMethod" aria-label={copy.methodTitle}>
-        <h2>{copy.methodTitle}</h2>
+        <header className="landingMethodHeader">
+          <h2>{copy.methodTitle}</h2>
+          <p className="landingMethodLead">{copy.methodLead}</p>
+        </header>
+
         <ol>
           {copy.methodSteps.map((step) => (
             <li key={step.title}>
@@ -67,6 +61,18 @@ export function HomeContent() {
             </li>
           ))}
         </ol>
+
+        <div className="landingMethodCta">
+          <p>{copy.closing}</p>
+          <div className="landingMethodActions">
+            <Link href="/contact" className="landingButton landingButtonGhost">
+              {copy.ctaContact}
+            </Link>
+            <Link href="/courses" className="landingButton landingButtonPrimary">
+              {copy.ctaCourses}
+            </Link>
+          </div>
+        </div>
       </section>
     </main>
   );
