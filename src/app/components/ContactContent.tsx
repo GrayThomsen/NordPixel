@@ -11,7 +11,6 @@ export function ContactContent() {
   return (
     <main className="contactPage">
       <section className="contactPageHero">
-        <span className="contactPageEyebrow">{copy.eyebrow}</span>
         <h1>{copy.title}</h1>
         <p>{copy.intro}</p>
 

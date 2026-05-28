@@ -79,13 +79,9 @@ export function CoursesContent() {
 
   return (
     <main className="coursesPage">
-      <section className="coursesPageHero">
-        <h1>{dictionary.courses.title}</h1>
-      </section>
-
       <div className="coursesIntroStack">
         <section className="coursesUvm" aria-label={copy.uvmIntroTitle}>
-          <h2>{copy.uvmIntroTitle}</h2>
+          <h1>{copy.uvmIntroTitle}</h1>
           <p>{copy.uvmIntroText}</p>
           <div className="coursesUvmRoles">
             <article>

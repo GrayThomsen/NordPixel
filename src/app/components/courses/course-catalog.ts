@@ -377,8 +377,8 @@ export const FOCUS_COURSES: FocusCourse[] = [
     },
     targetKeys: ['udskoling', 'gymnasium'],
     duration: {
-      da: '1 workshopdag',
-      en: '1 workshop day',
+      da: '1 workshopdag, ca. 5 timer',
+      en: '1 workshop day, approx. 5 hours',
     },
     audience: {
       da: 'For elever, der vil prøve programmering i praksis. Typisk fra 7. klasse.',
@@ -389,7 +389,7 @@ export const FOCUS_COURSES: FocusCourse[] = [
       en: 'Can be booked as a standalone day or as part of a longer track.',
     },
     pricing: {
-      basePrice: 995,
+      basePrice: 1500,
     },
   },
   {
@@ -524,7 +524,7 @@ export const FOCUS_COURSES: FocusCourse[] = [
       en: 'Can be delivered as a compact workshop in language arts or civics.',
     },
     pricing: {
-      basePrice: 595,
+      basePrice: 1500,
     },
   },
   {

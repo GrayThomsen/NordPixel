@@ -216,7 +216,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
     },
     weblab: {
       title: 'WebLab',
-      lead: 'WebLab giver elever en VS Code-lignende explorer, så de selv skal forbinde filer, links og scripts.',
+      lead: 'WebLab giver elever et praktisk arbejdsrum, hvor de bygger sider ved at forbinde filer, links og scripts.',
       projectName: 'Projektnavn',
       projectPlaceholder: 'mit-projekt',
       newSite: 'Nyt site',
@@ -325,7 +325,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
     },
     weblab: {
       title: 'WebLab',
-      lead: 'WebLab gives students a VS Code-style workspace where they connect files, links, and scripts themselves.',
+      lead: 'WebLab gives students a practical workspace where they build pages by connecting files, links, and scripts.',
       projectName: 'Project name',
       projectPlaceholder: 'my-project',
       newSite: 'New site',

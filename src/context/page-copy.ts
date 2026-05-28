@@ -71,9 +71,9 @@ export const pageCopyByLocale = {
     },
     contactPage: {
       eyebrow: 'NordPixel for skoler og uddannelse',
-      title: 'Kontakt NordPixel og lær teamet bag',
+      title: 'Kontakt NordPixel og lær teamet bag at kende',
       intro:
-        'Vi designer undervisningsforløb i digital kreativitet, web og AI, som fungerer i virkelige klasselokaler. NordPixel kombinerer tydelig didaktik, stærke materialer og en professionel leverancemodel, så skoler kan implementere med ro og kvalitet.',
+        'Vi designer undervisningsforløb i digital kreativitet, web og AI, der fungerer i virkelige klasselokaler. NordPixel kombinerer tydelig didaktik, stærke materialer og en professionel leverancemodel, så skoler kan implementere forløbene med ro og høj kvalitet.',
       proofPoints: [
         { value: 'Klar struktur', label: 'Forløb med tydelig progression og konkrete mål' },
         { value: 'Skoleklar drift', label: 'Planlagt onboarding og afstemt med lærernes hverdag' },
@@ -193,7 +193,7 @@ export const pageCopyByLocale = {
       eyebrow: 'NordPixel for schools and education',
       title: 'Contact NordPixel and meet the team',
       intro:
-        'We design educational programs in digital creativity, web development, and AI that work in real classrooms. NordPixel combines clear pedagogy, strong materials, and reliable delivery so schools can implement with confidence.',
+        'We design educational programs in digital creativity, web development, and AI that work in real classrooms. NordPixel combines clear pedagogy, strong materials, and a reliable delivery model, so schools can implement programs with confidence and high quality.',
       proofPoints: [
         { value: 'Clear structure', label: 'Programs with visible progression and concrete outcomes' },
         { value: 'Classroom-ready', label: 'Planned onboarding aligned with teachers and schedules' },

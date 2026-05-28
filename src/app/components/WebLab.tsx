@@ -1255,7 +1255,6 @@ export function WebLab() {
           <div className="weblabTitleRow">
             <h1>{weblabText.title}</h1>
           </div>
-          <p>{weblabText.lead}</p>
         </div>
         <label className="weblabNameField">
           {weblabText.projectName}
