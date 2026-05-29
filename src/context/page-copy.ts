@@ -4,7 +4,9 @@ export const pageCopyByLocale = {
       eyebrow: 'Digital teknologiforståelse for skoler',
       title: 'Teknologiforståelse i praksis: gør elever til aktive digitale skabere.',
       lead:
-        'NordPixel leverer en klar løsning til teknologiforståelse: mindre teori og langt mere praktisk udfoldelse, undersøgelse og kritisk refleksion i klassen. Eleverne arbejder med virkelige digitale problemstillinger, bygger egne løsninger og lærer at forbinde teknisk forståelse, kreative beslutninger og selvstændig kunnen.',
+        'NordPixel leverer en klar løsning til teknologiforståelse: mindre teori, mere skaben, undersøgelse og kritisk refleksion i klassen.',
+      statusNote:
+        'Udviklet til skoler, der vil have et praktisk og gennemførligt valgfagsforløb med tydelig progression.',
       proofPoints: [
         {
           value: 'Praksisnær kompetenceudvikling',
@@ -15,7 +17,7 @@ export const pageCopyByLocale = {
           label: 'Fejl og justeringer anvendes aktivt som en del af den faglige proces, så eleverne opbygger robust problemløsningskompetence.',
         },
         {
-          value: 'Inkluderende didaktisk fremgang',
+          value: 'Inkluderende didaktisk progression',
           label: 'Forløbene er struktureret med tydelige trin, så forskellige elevforudsætninger understøttes med høj faglig kvalitet.',
         },
       ],
@@ -34,21 +36,19 @@ export const pageCopyByLocale = {
           text: 'Eleverne undersøger digitale fænomener, bygger egne løsninger og diskuterer konsekvenser.',
         },
       ],
-      methodTitle: 'Klar til et forløb, der virker i praksis?',
-      methodLead:
-        'NordPixel er til skoler, der vil hurtigt fra ambition til handling. I får et tydeligt setup, skarpe materialer og et forløb, der skaber engagement hos eleverne fra første modul.',
+      methodTitle: 'Fra plan til stærk undervisning',
       methodSteps: [
         {
-          title: 'Tryg opstart uden ekstra støj',
-          text: 'Vi gør opstarten enkel med klare rammer, så lærerne kan fokusere på undervisningen frem for koordinering.',
+          title: '1. Vælg målgruppe',
+          text: 'Start med den klasse, I vil løfte i 7.-9. og vælg et forløb, der passer til niveauet.',
         },
         {
-          title: 'Undervisning eleverne mærker',
-          text: 'Eleverne bygger, undersøger og reflekterer i praksis, så teknologiforståelse bliver synlig i deres arbejde.',
+          title: '2. Sammensæt forløb',
+          text: 'Kombiner kerneforløb og fokusmoduler, så indhold passer til tid, udstyr og lokal kontekst.',
         },
         {
-          title: 'Resultater ledelsen kan stå på mål for',
-          text: 'Forløbet giver progression, tydelige elevprodukter og et stærkt grundlag for videre strategiske indsatser.',
+          title: '3. Gennemfør i praksis',
+          text: 'Korte moduler, tydelige roller og konkrete elevprodukter giver fremdrift fra lektion til lektion.',
         },
       ],
       heroCardTitle: 'I undervisningen arbejder I med',
@@ -71,27 +71,28 @@ export const pageCopyByLocale = {
     },
     contactPage: {
       eyebrow: 'NordPixel for skoler og uddannelse',
-      title: 'Kontakt NordPixel',
-      intro: 'Skriv til os for en uforpligtende dialog om forløb, opstart og samarbejde.',
+      title: 'Kontakt NordPixel og lær teamet bag at kende',
+      intro:
+        'Vi designer undervisningsforløb i digital kreativitet, web og AI, der fungerer i virkelige klasselokaler. NordPixel kombinerer tydelig didaktik, stærke materialer og en professionel leverancemodel, så skoler kan implementere forløbene med ro og høj kvalitet.',
       proofPoints: [
         { value: 'Klar struktur', label: 'Forløb med tydelig progression og konkrete mål' },
         { value: 'Skoleklar drift', label: 'Planlagt onboarding og afstemt med lærernes hverdag' },
         { value: 'Langsigtet værdi', label: 'Kompetenceløft for både elever og undervisere' },
       ],
-      partnershipTitle: 'Historien om NordPixel',
+      partnershipTitle: 'Hvorfor skoler vælger NordPixel',
       partnershipPoints: [
-        'NordPixel startede med et enkelt mål: at gøre teknologiforståelse konkret og anvendelig i virkelige klasselokaler.',
-        'Vi bygger bro mellem kreativitet, kodning og kritisk refleksion, så eleverne lærer at skabe med teknologi.',
-        'Vores samarbejder udvikles tæt med skoler, så forløb og materialer passer til lærernes praksis.',
+        'Vi oversætter komplekse teknologier til undervisning, der er fagligt stærk og let at anvende.',
+        'Vi leverer forløb, materialer og kommunikation med høj professionalisme fra første dialog.',
+        'Vi er tydelige på forventninger, tidsplan og læringsudbytte, så ledelse og lærere kan planlægge trygt.',
       ],
-      methodTitle: 'Vores mål i samarbejdet',
+      methodTitle: 'Sådan arbejder vi',
       methodSteps: [
-        { title: '1. Relevant undervisning', text: 'At skabe forløb, der passer til elevernes niveau og skolens rammer.' },
-        { title: '2. Tryg implementering', text: 'At gøre opstarten enkel med tydelige materialer og klare næste skridt.' },
-        { title: '3. Vedvarende værdi', text: 'At give lærere og elever et udbytte, der holder efter første forløb.' },
+        { title: '1. Afklaring', text: 'Vi kortlægger målgruppe, faglig retning og rammer på jeres skole.' },
+        { title: '2. Design', text: 'Vi tilpasser forløb og materialer, så de matcher jeres niveau og ambition.' },
+        { title: '3. Leverance', text: 'Vi gennemfører med tydelig opfølgning, så kvaliteten holder i praksis.' },
       ],
       contactTitle: 'Kontakt os direkte',
-      contactIntro: 'Skriv til os, hvis I har spørgsmål om forløb, opstart, pris eller samarbejde.',
+      contactIntro: 'Skriv til os for en uforpligtende afklaring af muligheder, pris og opstart.',
       contactAction: 'Skriv til NordPixel',
       contactLabelEmail: 'Email',
       contactLabelCvr: 'CVR',
@@ -99,19 +100,20 @@ export const pageCopyByLocale = {
       authorityTitle: 'Det I kan forvente af samarbejdet',
       authorityCards: [
         {
-          title: 'Fra idé til undervisning',
-          text: 'Vi omsætter idéer til konkrete undervisningsforløb, der virker i praksis.',
+          title: 'Faglig troværdighed',
+          text: 'Vi bygger undervisning med fokus på progression, relevans og høj didaktisk kvalitet.',
         },
         {
-          title: 'Tydelig retning',
-          text: 'I får en klar plan, hurtig opfølgning og et samarbejde uden støj.',
+          title: 'Professionel kommunikation',
+          text: 'I får klare beslutningspunkter, konkrete anbefalinger og hurtig opfølgning.',
         },
         {
-          title: 'Plads til udvikling',
-          text: 'Forløb kan udvikles videre til nye hold, årgange eller større indsatser.',
+          title: 'Skalerbar implementering',
+          text: 'Forløb kan tilpasses enkelthold, årgange eller tværgående indsatser på skolen.',
         },
       ],
-      closing: 'Skriv til os, hvis I vil høre, hvordan et forløb kan passe ind hos jer.',
+      closing:
+        'NordPixel hjælper skoler med at gøre digital læring konkret, kreativ og implementerbar fra første undervisningsgang.',
     },
     editorIntro: {
       title: 'WebLab i undervisningen',
@@ -131,7 +133,9 @@ export const pageCopyByLocale = {
       eyebrow: 'Digital technology literacy for schools',
       title: 'Technology literacy in practice: help students become active digital creators.',
       lead:
-        'NordPixel delivers a clear technology literacy solution: less theory and much more creation, investigation, and critical reflection in class. Students work on real digital challenges, build their own solutions, and connect technical understanding with responsible decision-making.',
+        'NordPixel delivers a clear technology literacy solution: less theory, more creation, investigation, and critical reflection in class.',
+      statusNote:
+        'Built for schools that want a practical, classroom-ready elective with clear progression.',
       proofPoints: [
         {
           value: 'Practice-based competence development',
@@ -161,22 +165,11 @@ export const pageCopyByLocale = {
           text: 'Learners investigate digital phenomena, build solutions, and discuss social impact.',
         },
       ],
-      methodTitle: 'Ready for a program that works in practice?',
-      methodLead:
-        'NordPixel is built for schools that want to move fast from ambition to action. You get a clear setup, strong materials, and delivery that creates student engagement from the first module.',
+      methodTitle: 'From planning to strong classroom delivery',
       methodSteps: [
-        {
-          title: 'Confident launch with low friction',
-          text: 'We keep implementation simple and structured, so teachers can focus on classroom delivery instead of logistics.',
-        },
-        {
-          title: 'Learning students can feel',
-          text: 'Students build, investigate, and reflect in practice, turning technology literacy into visible outcomes.',
-        },
-        {
-          title: 'Outcomes leadership can back',
-          text: 'The program delivers progression, clear student products, and a strong base for broader strategic initiatives.',
-        },
+        { title: '1. Pick your target group', text: 'Start with the class level you want to support and choose a fitting track.' },
+        { title: '2. Compose your program', text: 'Combine core tracks and focus modules to match time, equipment, and local needs.' },
+        { title: '3. Deliver with momentum', text: 'Short modules, clear roles, and concrete student outputs keep progress visible.' },
       ],
       heroCardTitle: 'In class, you work with',
       heroCardPoints: [
@@ -198,27 +191,28 @@ export const pageCopyByLocale = {
     },
     contactPage: {
       eyebrow: 'NordPixel for schools and education',
-      title: 'Contact NordPixel',
-      intro: 'Reach out for a no-obligation conversation about programs, launch, and collaboration.',
+      title: 'Contact NordPixel and meet the team',
+      intro:
+        'We design educational programs in digital creativity, web development, and AI that work in real classrooms. NordPixel combines clear pedagogy, strong materials, and a reliable delivery model, so schools can implement programs with confidence and high quality.',
       proofPoints: [
         { value: 'Clear structure', label: 'Programs with visible progression and concrete outcomes' },
         { value: 'Classroom-ready', label: 'Planned onboarding aligned with teachers and schedules' },
         { value: 'Long-term impact', label: 'Capability growth for both students and educators' },
       ],
-      partnershipTitle: 'The story behind NordPixel',
+      partnershipTitle: 'Why schools choose NordPixel',
       partnershipPoints: [
-        'NordPixel started with one clear ambition: make technology literacy practical in real classrooms.',
-        'We connect creativity, coding, and critical reflection so students learn to create with technology.',
-        'We shape each collaboration closely with schools so programs fit everyday teaching realities.',
+        'We translate complex technology into classroom learning that is both rigorous and practical.',
+        'We deliver programs, materials, and communication with high professional standards from day one.',
+        'We make expectations, timelines, and learning outcomes explicit so leadership and staff can plan confidently.',
       ],
-      methodTitle: 'Our collaboration goals',
+      methodTitle: 'How we work',
       methodSteps: [
-        { title: '1. Relevant learning', text: 'Create programs that match student level and school constraints.' },
-        { title: '2. Confident implementation', text: 'Make launch simple with clear materials and practical next steps.' },
-        { title: '3. Lasting value', text: 'Deliver outcomes that continue beyond the first program cycle.' },
+        { title: '1. Discovery', text: 'We map target groups, subject goals, and practical constraints with your team.' },
+        { title: '2. Design', text: 'We adapt program structure and materials to your level and ambitions.' },
+        { title: '3. Delivery', text: 'We execute with clear follow-up to ensure quality in real teaching contexts.' },
       ],
       contactTitle: 'Contact us directly',
-      contactIntro: 'Copy the contact details directly here, or email us for a quick clarification of next steps.',
+      contactIntro: 'Reach out for a no-obligation conversation about scope, pricing, and launch.',
       contactAction: 'Email NordPixel',
       contactLabelEmail: 'Email',
       contactLabelCvr: 'CVR',
@@ -226,19 +220,19 @@ export const pageCopyByLocale = {
       authorityTitle: 'What you can expect from the collaboration',
       authorityCards: [
         {
-          title: 'From idea to classroom',
-          text: 'We turn ideas into concrete teaching programs that work in practice.',
+          title: 'Educational authority',
+          text: 'We build programs around progression, relevance, and robust pedagogical quality.',
         },
         {
-          title: 'Clear direction',
-          text: 'You get a clear plan, quick follow-up, and focused collaboration.',
+          title: 'Professional communication',
+          text: 'You get clear decisions, actionable recommendations, and fast follow-up.',
         },
         {
-          title: 'Room to grow',
-          text: 'Programs can expand to new classes, year levels, or broader school initiatives.',
+          title: 'Scalable implementation',
+          text: 'Programs can be tailored for single classes, year groups, or school-wide initiatives.',
         },
       ],
-      closing: 'Contact us if you want to explore how a program could fit your school.',
+      closing: 'NordPixel helps schools make digital learning concrete, creative, and truly implementable from the first lesson.',
     },
     editorIntro: {
       title: 'WebLab for classroom work',

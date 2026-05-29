@@ -83,6 +83,16 @@ export function CoursesContent() {
         <section className="coursesUvm" aria-label={copy.uvmIntroTitle}>
           <h1>{copy.uvmIntroTitle}</h1>
           <p>{copy.uvmIntroText}</p>
+          <div className="coursesUvmRoles">
+            <article>
+              <h3>{copy.teacherRoleLabel}</h3>
+              <p>{copy.teacherRoleText}</p>
+            </article>
+            <article>
+              <h3>{copy.studentRoleLabel}</h3>
+              <p>{copy.studentRoleText}</p>
+            </article>
+          </div>
         </section>
 
         <section className="coursesCustomTrack" aria-label={copy.customTrackTitle}>

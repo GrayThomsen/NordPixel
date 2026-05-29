@@ -1,46 +1,27 @@
 'use client';
 
-import { Copy, Check } from 'lucide-react';
-import { useState } from 'react';
+import Link from 'next/link';
 import { useLanguage } from '../../context/LanguageContext';
 import { SITE_FOOTER } from '../../assets/site-footer';
 
 export function ContactContent() {
-  const { dictionary, locale } = useLanguage();
+  const { dictionary } = useLanguage();
   const copy = dictionary.contactPage;
-  const [copiedField, setCopiedField] = useState<'email' | 'cvr' | 'linkedin' | null>(null);
-
-  const copyValueToClipboard = async (value: string, field: 'email' | 'cvr' | 'linkedin') => {
-    try {
-      await navigator.clipboard.writeText(value);
-      setCopiedField(field);
-      window.setTimeout(() => {
-        setCopiedField((current) => (current === field ? null : current));
-      }, 1800);
-    } catch {
-      setCopiedField(null);
-    }
-  };
-
-  const handleCopyKeyDown = (
-    event: React.KeyboardEvent<HTMLDivElement>,
-    value: string,
-    field: 'email' | 'cvr' | 'linkedin',
-  ) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      void copyValueToClipboard(value, field);
-    }
-  };
-
-  const copyHint = locale === 'da' ? 'Klik for at kopiere' : 'Click to copy';
-  const copiedHint = locale === 'da' ? 'Kopieret' : 'Copied';
 
   return (
     <main className="contactPage">
       <section className="contactPageHero">
         <h1>{copy.title}</h1>
         <p>{copy.intro}</p>
+
+        <div className="contactPageProof" role="list" aria-label={copy.authorityTitle}>
+          {copy.proofPoints.map((point) => (
+            <article key={point.value} className="contactProof" role="listitem">
+              <strong>{point.value}</strong>
+              <span>{point.label}</span>
+            </article>
+          ))}
+        </div>
       </section>
 
       <section className="contactPageGrid">
@@ -70,65 +51,25 @@ export function ContactContent() {
           <p>{copy.contactIntro}</p>
 
           <dl className="contactCardDetails">
-            <div
-              className="contactDetailCopy"
-              role="button"
-              tabIndex={0}
-              onClick={() => {
-                void copyValueToClipboard(SITE_FOOTER.contactEmail, 'email');
-              }}
-              onKeyDown={(event) => handleCopyKeyDown(event, SITE_FOOTER.contactEmail, 'email')}
-              title={copiedField === 'email' ? copiedHint : copyHint}
-              aria-label={`${copy.contactLabelEmail}: ${SITE_FOOTER.contactEmail}. ${copyHint}`}
-            >
+            <div>
               <dt>{copy.contactLabelEmail}</dt>
               <dd>
-                <span className="contactDetailValue">
+                <a href={`mailto:${SITE_FOOTER.contactEmail}`} target="_blank" rel="noopener noreferrer">
                   {SITE_FOOTER.contactEmail}
-                  {copiedField === 'email' ? <Check className="contactDetailIcon" aria-hidden="true" /> : <Copy className="contactDetailIcon" aria-hidden="true" />}
-                </span>
+                </a>
               </dd>
-              {copiedField === 'email' ? <span className="contactDetailFeedback">{copiedHint}</span> : null}
             </div>
-            <div
-              className="contactDetailCopy"
-              role="button"
-              tabIndex={0}
-              onClick={() => {
-                void copyValueToClipboard(SITE_FOOTER.cvrNumber, 'cvr');
-              }}
-              onKeyDown={(event) => handleCopyKeyDown(event, SITE_FOOTER.cvrNumber, 'cvr')}
-              title={copiedField === 'cvr' ? copiedHint : copyHint}
-              aria-label={`${copy.contactLabelCvr}: ${SITE_FOOTER.cvrNumber}. ${copyHint}`}
-            >
+            <div>
               <dt>{copy.contactLabelCvr}</dt>
-              <dd>
-                <span className="contactDetailValue">
-                  {SITE_FOOTER.cvrNumber}
-                  {copiedField === 'cvr' ? <Check className="contactDetailIcon" aria-hidden="true" /> : <Copy className="contactDetailIcon" aria-hidden="true" />}
-                </span>
-              </dd>
-              {copiedField === 'cvr' ? <span className="contactDetailFeedback">{copiedHint}</span> : null}
+              <dd>{SITE_FOOTER.cvrNumber}</dd>
             </div>
-            <div
-              className="contactDetailCopy"
-              role="button"
-              tabIndex={0}
-              onClick={() => {
-                void copyValueToClipboard(SITE_FOOTER.linkedinCompanyUrl, 'linkedin');
-              }}
-              onKeyDown={(event) => handleCopyKeyDown(event, SITE_FOOTER.linkedinCompanyUrl, 'linkedin')}
-              title={copiedField === 'linkedin' ? copiedHint : copyHint}
-              aria-label={`${copy.contactLabelLinkedin}: NordPixel. ${copyHint}`}
-            >
+            <div>
               <dt>{copy.contactLabelLinkedin}</dt>
               <dd>
-                <span className="contactDetailValue">
+                <Link href={SITE_FOOTER.linkedinCompanyUrl} target="_blank" rel="noreferrer">
                   NordPixel
-                  {copiedField === 'linkedin' ? <Check className="contactDetailIcon" aria-hidden="true" /> : <Copy className="contactDetailIcon" aria-hidden="true" />}
-                </span>
+                </Link>
               </dd>
-              {copiedField === 'linkedin' ? <span className="contactDetailFeedback">{copiedHint}</span> : null}
             </div>
           </dl>
 

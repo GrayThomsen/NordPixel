@@ -25,7 +25,7 @@ export type Dictionary = {
     eyebrow: string;
     title: string;
     lead: string;
-    methodLead: string;
+    statusNote: string;
     proofPoints: ReadonlyArray<{ value: string; label: string }>;
     authorityTitle: string;
     authorityCards: ReadonlyArray<{ title: string; text: string }>;

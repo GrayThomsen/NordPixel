@@ -2814,11 +2814,18 @@ html {
 }
 
 .weblabToolbar {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(17rem, 24rem);
+	grid-template-areas:
+		'title name'
+		'title controls';
 	gap: 0.4rem 0.8rem;
 	align-items: flex-start;
+}
+
+.weblabTitleGroup {
+	grid-area: title;
+	min-width: 0;
 }
 
 .weblabTitleRow {
@@ -2917,7 +2924,9 @@ html {
 }
 
 .weblabControls {
+	grid-area: controls;
 	display: grid;
+	justify-self: end;
 	justify-items: end;
 	gap: 0.2rem;
 }
@@ -2944,8 +2953,11 @@ html {
 }
 
 .weblabNameField {
+	grid-area: name;
+	justify-self: end;
 	display: grid;
 	gap: 0.2rem;
+	width: min(100%, 26rem);
 	font-size: 0.8rem;
 	color: var(--text-muted);
 }
@@ -2956,7 +2968,8 @@ html {
 	background: var(--surface-panel);
 	color: var(--text-primary);
 	padding: 0.3rem 0.6rem;
-	min-width: min(18rem, 56vw);
+	min-width: 0;
+	width: 100%;
 	box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--brand-orange) 10%, transparent 90%);
 }
 
@@ -3742,6 +3755,19 @@ button,
 	.weblabControls,
 	.weblabMeta {
 		justify-items: start;
+	}
+
+	.weblabToolbar {
+		grid-template-columns: 1fr;
+		grid-template-areas:
+			'title'
+			'name'
+			'controls';
+	}
+
+	.weblabNameField,
+	.weblabControls {
+		justify-self: start;
 	}
 
 	.weblabResizeHandle {
