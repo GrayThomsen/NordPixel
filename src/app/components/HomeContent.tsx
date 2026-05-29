@@ -8,7 +8,7 @@ export function HomeContent() {
   const copy = dictionary.homePage;
 
   return (
-    <main className="landing">
+    <div className="landing">
       <section className="landingHero">
         <div className="landingHeroGrid">
           <div className="landingHeroCopy">
@@ -16,14 +16,14 @@ export function HomeContent() {
             <p className="landingHeroSubtitle">{copy.title}</p>
             <p className="landingLead">{copy.lead}</p>
 
-            <div className="landingProof" role="list" aria-label={copy.authorityTitle}>
+            <ul className="landingProof" aria-label={copy.authorityTitle}>
               {copy.proofPoints.map((point) => (
-                <article key={point.value} className="landingProofCard" role="listitem">
+                <li key={point.value} className="landingProofCard">
                   <strong>{point.value}</strong>
                   <span>{point.label}</span>
-                </article>
+                </li>
               ))}
-            </div>
+            </ul>
 
             <div className="landingActions">
               <Link href="/courses" className="landingButton landingButtonPrimary">
@@ -68,6 +68,6 @@ export function HomeContent() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

@@ -1224,6 +1224,14 @@ html {
 	font-size: 0.9rem;
 }
 
+.coursesFiltersOverview {
+	margin: 0;
+	font-size: 0.9rem;
+	line-height: 1.35;
+	font-weight: 500;
+	color: var(--text-muted);
+}
+
 .coursesFiltersTargetOnlyHint {
 	margin: 0;
 	font-size: var(--hint-size-primary);

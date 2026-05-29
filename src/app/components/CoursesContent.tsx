@@ -78,7 +78,7 @@ export function CoursesContent() {
   const getEstimatedPrice = (basePrice: number) => basePrice;
 
   return (
-    <main className="coursesPage">
+    <div className="coursesPage">
       <div className="coursesIntroStack">
         <section className="coursesUvm" aria-label={copy.uvmIntroTitle}>
           <h1>{copy.uvmIntroTitle}</h1>
@@ -115,11 +115,7 @@ export function CoursesContent() {
         <header className="coursesSectionHeader">
           <div className="coursesFiltersHeading">
             <h2>{copy.kindTrack}</h2>
-            <p>
-              {visibleTracks.length} {copy.filterTracksResult} · {visibleFocusCourses.length} {copy.filterFocusResult}
-            </p>
           </div>
-          <p className="coursesFiltersTargetOnlyHint">{copy.filterTargetOnlyHint}</p>
           <p className="coursesPricingIntro">{copy.pricingBundleTitle}: {copy.pricingBundleText}</p>
 
           <div className="coursesFilters">
@@ -140,6 +136,10 @@ export function CoursesContent() {
               {copy.filterReset}
             </button>
           </div>
+
+          <p className="coursesFiltersOverview">
+            {visibleTracks.length} {copy.filterTracksResult} · {visibleFocusCourses.length} {copy.filterFocusResult}
+          </p>
         </header>
 
         <div className="coursesTimelines">
@@ -307,6 +307,6 @@ export function CoursesContent() {
         </div>
       ) : null}
       <p className="coursesPriceDisclaimer">{copy.pricingTransportNote} {copy.pricingEstimateDisclaimer}</p>
-    </main>
+    </div>
   );
 }

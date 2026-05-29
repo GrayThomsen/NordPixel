@@ -110,7 +110,7 @@ function createHtmlBoilerplate(fileName: string) {
   </head>
   <body>
     <main>
-      <h1>Hello NordPixel</h1>
+      <h1>Hello Student</h1>
       <p>Start building your page.</p>
     </main>
     <script src="script.js"></script>

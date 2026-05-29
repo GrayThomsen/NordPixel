@@ -185,7 +185,7 @@ export function CoursesBookingContent({ initialAddId }: CoursesBookingContentPro
   };
 
   return (
-    <main className="bookingCartPage">
+    <div className="bookingCartPage">
       <header className="bookingCartPageHero">
         <div className="bookingCartPageHeroMain">
           <h1>{copy.cartPageTitle}</h1>
@@ -405,6 +405,6 @@ export function CoursesBookingContent({ initialAddId }: CoursesBookingContentPro
           </section>
         </aside>
       </form>
-    </main>
+    </div>
   );
 }

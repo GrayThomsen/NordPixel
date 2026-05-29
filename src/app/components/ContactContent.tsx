@@ -9,19 +9,19 @@ export function ContactContent() {
   const copy = dictionary.contactPage;
 
   return (
-    <main className="contactPage">
+    <div className="contactPage">
       <section className="contactPageHero">
         <h1>{copy.title}</h1>
         <p>{copy.intro}</p>
 
-        <div className="contactPageProof" role="list" aria-label={copy.authorityTitle}>
+        <ul className="contactPageProof" aria-label={copy.authorityTitle}>
           {copy.proofPoints.map((point) => (
-            <article key={point.value} className="contactProof" role="listitem">
+            <li key={point.value} className="contactProof">
               <strong>{point.value}</strong>
               <span>{point.label}</span>
-            </article>
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
 
       <section className="contactPageGrid">
@@ -99,6 +99,6 @@ export function ContactContent() {
           {copy.contactAction}
         </a>
       </section>
-    </main>
+    </div>
   );
 }
