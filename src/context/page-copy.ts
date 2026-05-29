@@ -119,7 +119,7 @@ export const pageCopyByLocale = {
     },
     editorIntro: {
       title: 'WebLab i undervisningen',
-      text: 'WebLab er et praktisk arbejdsrum til HTML og CSS, hvor eleverne kan bygge, teste og gemme deres projekter direkte i browseren.',
+      text: 'WebLab er et praktisk arbejdsrum til HTML og CSS, hvor du kan bygge, teste og gemme projekter direkte i browseren.',
       hint: 'Tip: Gem projektet som .nordpixel.json, så arbejdet kan hentes igen.',
     },
     coursesCartPrompt: {
