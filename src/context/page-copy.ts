@@ -37,6 +37,8 @@ export const pageCopyByLocale = {
         },
       ],
       methodTitle: 'Fra plan til stærk undervisning',
+      methodLead:
+        'En enkel, praksisnær struktur gør det let at komme i gang og sikrer progression i teknologiforståelse.',
       methodSteps: [
         {
           title: '1. Vælg målgruppe',
@@ -166,6 +168,8 @@ export const pageCopyByLocale = {
         },
       ],
       methodTitle: 'From planning to strong classroom delivery',
+      methodLead:
+        'A simple, classroom-ready structure makes it easy to start and maintain clear progression in technology literacy.',
       methodSteps: [
         { title: '1. Pick your target group', text: 'Start with the class level you want to support and choose a fitting track.' },
         { title: '2. Compose your program', text: 'Combine core tracks and focus modules to match time, equipment, and local needs.' },

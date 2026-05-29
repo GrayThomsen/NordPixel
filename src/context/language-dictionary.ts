@@ -30,6 +30,7 @@ export type Dictionary = {
     authorityTitle: string;
     authorityCards: ReadonlyArray<{ title: string; text: string }>;
     methodTitle: string;
+    methodLead: string;
     methodSteps: ReadonlyArray<{ title: string; text: string }>;
     heroCardTitle: string;
     heroCardPoints: ReadonlyArray<string>;
