@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useLanguage } from '../../context/LanguageContext';
-import { SITE_FOOTER } from '../../assets/data/site-footer';
+import { SITE_FOOTER } from '../../assets/headerAndFooter/site-branding';
 
 export function SiteFooter() {
   const { dictionary } = useLanguage();

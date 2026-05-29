@@ -48,18 +48,6 @@
 	letter-spacing: 0em;
 }
 
-.siteHeaderBrandLogoDark {
-	display: none;
-}
-
-.siteHeader .siteHeaderBrandLogoLight {
-	display: none;
-}
-
-.siteHeader .siteHeaderBrandLogoDark {
-	display: inline-block;
-}
-
 html.light {
 	color-scheme: light;
 }

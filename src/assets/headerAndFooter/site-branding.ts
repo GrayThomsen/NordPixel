@@ -1,3 +1,13 @@
+export const SITE_HEADER = {
+  brandName: 'NordPixel.dev',
+  brandHref: '/',
+  logoAlt: 'NordPixel logo',
+  logoSrc: '/images/brand/white-logo.png',
+  logoWidth: 42,
+  logoHeight: 42,
+  bookingHref: '/courses/booking',
+} as const;
+
 export const SITE_FOOTER = {
   brandName: 'NordPixel.dev',
   contactEmail: 'thomsenwork@outlook.dk',

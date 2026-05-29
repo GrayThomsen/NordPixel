@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { ShoppingCart } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
+import { SITE_HEADER } from '../../assets/headerAndFooter/site-branding';
 import { BOOKABLE_OPTIONS } from './courses/course-catalog';
 import { BOOKING_CART_ATTENTION_EVENT, BOOKING_CART_UPDATED_EVENT, getBookingCartCount } from './courses/booking-storage';
 
@@ -79,24 +80,16 @@ export function SiteHeader() {
   return (
     <header className="siteHeader">
       <div className="siteHeaderInner">
-        <Link href="/" className="siteHeaderBrand" aria-label={homeAriaLabel}>
+        <Link href={SITE_HEADER.brandHref} className="siteHeaderBrand" aria-label={homeAriaLabel}>
           <Image
-            src="/images/brand/black-logo.png"
-            alt="NordPixel logo"
-            width={42}
-            height={42}
+            src={SITE_HEADER.logoSrc}
+            alt={SITE_HEADER.logoAlt}
+            width={SITE_HEADER.logoWidth}
+            height={SITE_HEADER.logoHeight}
             priority
-            className="siteHeaderBrandLogo siteHeaderBrandLogoLight"
+            className="siteHeaderBrandLogo"
           />
-          <Image
-            src="/images/brand/white-logo.png"
-            alt="NordPixel logo"
-            width={42}
-            height={42}
-            priority
-            className="siteHeaderBrandLogo siteHeaderBrandLogoDark"
-          />
-          <span>NordPixel.dev</span>
+          <span>{SITE_HEADER.brandName}</span>
         </Link>
 
         <nav className="siteHeaderNav siteHeaderNavDesktop" aria-label="Primary">
@@ -109,7 +102,7 @@ export function SiteHeader() {
 
         <div className="siteHeaderRight">
           <Link
-            href="/courses/booking"
+            href={SITE_HEADER.bookingHref}
             className={`siteHeaderCart ${cartCount > 0 ? '' : 'isEmpty'} ${isCartHighlighted ? 'isHighlighted' : ''}`.trim()}
             aria-label={cartAriaLabel}
           >
