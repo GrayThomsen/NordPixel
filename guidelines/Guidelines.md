@@ -32,7 +32,7 @@
 ## Component And Data Boundaries
 - Keep presentation components in src/app/components.
 - Keep content data in dedicated content modules, not embedded in JSX.
-- Keep constants and assets in existing asset/data files (for example src/assets/site-footer.ts, course catalog modules).
+- Keep constants and assets in existing asset/data files (for example src/assets/data/site-footer.ts, course catalog modules).
 
 ## Styling And UI Implementation
 - Reuse existing design tokens and global styles in src/styles.
