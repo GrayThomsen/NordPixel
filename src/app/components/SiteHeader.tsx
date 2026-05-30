@@ -110,7 +110,7 @@ export function SiteHeader() {
             {cartCount > 0 ? <span>{cartCount}</span> : null}
           </Link>
 
-          <div className="siteHeaderLanguage" role="group" aria-label={dictionary.nav.language}>
+          <div className="siteHeaderLanguage siteHeaderLanguageDesktop" role="group" aria-label={dictionary.nav.language}>
             <button
               type="button"
               className={locale === 'da' ? 'isActive' : ''}
@@ -136,13 +136,38 @@ export function SiteHeader() {
             onClick={() => setIsMenuOpen((current) => !current)}
             aria-expanded={isMenuOpen}
             aria-controls="mobileSiteNav"
+            aria-label={locale === 'da' ? 'Åbn menu' : 'Open menu'}
           >
-            Menu
+            <span className="siteHeaderMenuIcon" aria-hidden="true">
+              <span />
+              <span />
+              <span />
+            </span>
           </button>
         </div>
       </div>
 
       <div id="mobileSiteNav" className={isMenuOpen ? 'siteHeaderMobileNav isOpen' : 'siteHeaderMobileNav'}>
+        <div className="siteHeaderLanguage siteHeaderMobileLanguage" role="group" aria-label={dictionary.nav.language}>
+          <button
+            type="button"
+            className={locale === 'da' ? 'isActive' : ''}
+            onClick={() => setLocale('da')}
+            aria-pressed={locale === 'da'}
+            aria-label="Dansk"
+          >
+            DA
+          </button>
+          <button
+            type="button"
+            className={locale === 'en' ? 'isActive' : ''}
+            onClick={() => setLocale('en')}
+            aria-pressed={locale === 'en'}
+            aria-label="English"
+          >
+            EN
+          </button>
+        </div>
         <nav className="siteHeaderMobileLinks" aria-label="Primary mobile">
           {navItems.map((item) => (
             <Link key={item.href} href={item.href} aria-current={pathname === item.href ? 'page' : undefined}>

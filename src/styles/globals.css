@@ -327,19 +327,163 @@ button:not(:disabled):active,
 
 .siteHeaderMenuButton {
 	display: none;
+	align-items: center;
+	justify-content: center;
 	border: 0;
-	background: color-mix(in oklab, var(--surface-panel) 85%, var(--brand-orange-soft) 15%);
-	color: var(--text-primary);
+	background: color-mix(in oklab, #ffffff 8%, transparent 92%);
+	color: color-mix(in oklab, #ffffff 84%, var(--brand-orange) 16%);
+	box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--brand-orange) 38%, transparent 62%);
 	border-radius: 999px;
-	padding: 0.3rem 0.7rem;
+	width: 2.25rem;
+	height: 2.25rem;
+	padding: 0;
 	font-size: 0.8rem;
 	font-weight: 700;
 	cursor: pointer;
 }
 
+.siteHeaderMenuButton:hover {
+	background: color-mix(in oklab, #ffffff 13%, transparent 87%);
+	color: #ffffff;
+	box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--brand-orange) 56%, transparent 44%);
+}
+
+.siteHeaderMenuButton:focus-visible {
+	outline: 2px solid color-mix(in oklab, #ffffff 36%, var(--brand-orange) 64%);
+	outline-offset: 2px;
+}
+
+.siteHeaderMenuIcon {
+	display: grid;
+	gap: 0.22rem;
+}
+
+.siteHeaderMenuIcon span {
+	display: block;
+	width: 1.02rem;
+	height: 2.2px;
+	border-radius: 999px;
+	background: currentColor;
+	transform-origin: center;
+	transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.siteHeaderMenuButton.isOpen .siteHeaderMenuIcon span:nth-child(1) {
+	transform: translateY(0.26rem) rotate(45deg);
+}
+
+.siteHeaderMenuButton.isOpen .siteHeaderMenuIcon span:nth-child(2) {
+	opacity: 0;
+}
+
+.siteHeaderMenuButton.isOpen .siteHeaderMenuIcon span:nth-child(3) {
+	transform: translateY(-0.26rem) rotate(-45deg);
+}
+
 .siteHeaderMenuButton.isOpen {
-	background: var(--brand-navy);
-	color: white;
+	background: color-mix(in oklab, #ffffff 14%, transparent 86%);
+	color: #ffffff;
+	box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--brand-orange) 46%, transparent 54%);
+}
+
+.siteHeaderMobileLanguage {
+	display: none;
+	justify-content: flex-start;
+	margin-bottom: 0.35rem;
+}
+
+@media (max-width: 640px) {
+	html,
+	body {
+		overflow-x: clip;
+	}
+
+	.appMain {
+		overflow-x: clip;
+	}
+
+	.appMain :where(section, article, div, header, footer, aside, nav) {
+		min-width: 0;
+	}
+
+	.siteHeaderInner,
+	.siteHeaderMobileNav,
+	.siteFooterInner,
+	.landing,
+	.editorPage,
+	.downloadsPage,
+	.coursesPage,
+	.contactPage,
+	.bookingCartPage {
+		width: 100%;
+		max-width: 100%;
+		padding-inline: 0.75rem;
+		box-sizing: border-box;
+	}
+
+	.siteHeaderInner {
+		padding-top: 0.55rem;
+		padding-bottom: 0.55rem;
+		column-gap: 0.45rem;
+	}
+
+	.siteHeaderBrand span {
+		display: none;
+	}
+
+	.siteHeaderBrand img {
+		width: 34px;
+		height: 34px;
+	}
+
+	.siteHeaderRight {
+		gap: 0.3rem;
+	}
+
+	.siteHeaderLanguage {
+		padding: 0.14rem;
+		gap: 0.2rem;
+	}
+
+	.siteHeaderLanguage button {
+		font-size: 0.52rem;
+		padding: 0.12rem 0.3rem;
+	}
+
+	.siteHeaderMobileNav {
+		margin-bottom: 0.5rem;
+		padding: 0.3rem;
+		border-radius: 0.6rem;
+	}
+
+	.siteHeaderMobileLinks a {
+		padding: 0.55rem 0.5rem;
+	}
+
+	.siteFooterInner,
+	.landing,
+	.editorPage,
+	.downloadsPage,
+	.coursesPage,
+	.contactPage,
+	.bookingCartPage {
+		padding-top: 1rem;
+		padding-bottom: 1.5rem;
+	}
+
+	img,
+	svg,
+	video,
+	canvas,
+	iframe {
+		max-width: 100%;
+	}
+
+	pre,
+	table {
+		max-width: 100%;
+		overflow-x: auto;
+	}
 }
 
 .siteHeaderMobileNav {
@@ -3477,6 +3621,14 @@ button,
 
 	.siteHeaderLanguage {
 		padding: 0.2rem;
+	}
+
+	.siteHeaderLanguageDesktop {
+		display: none;
+	}
+
+	.siteHeaderMobileLanguage {
+		display: inline-flex;
 	}
 
 	.siteHeaderLanguage button {

@@ -67,13 +67,7 @@ export function getCoursesCopy(locale: 'da' | 'en') {
       cartBackToCourses: 'Tilbage til forløb',
       uvmIntroTitle: 'Klar løsning til teknologiforståelse',
       uvmIntroText:
-        'Forløbene omsætter kravene i teknologiforståelse til konkret undervisning. Fokus er praktisk arbejde med digitale fænomener, kreativt design, programmering og kritisk undersøgelse.',
-      teacherRoleLabel: 'Lærerens rolle',
-      teacherRoleText:
-        'Du er facilitator: rammesætter, støtter og hjælper eleverne med at omsætte idéer til konkrete produkter.',
-      studentRoleLabel: 'Eleverne gør',
-      studentRoleText:
-        'Eleverne undersøger, bygger, tester og forbedrer. De lærer gennem eksperimenter, samarbejde og refleksion over teknologiens betydning.',
+        'Forløbene omsætter kravene i teknologiforståelse til konkret undervisning. Fokus er praktisk arbejde med digitale fænomener, kreativt design, programmering og kritisk undersøgelse. Samarbejdet er tydeligt i hverdagen: læreren rammesætter og støtter processen, mens eleverne undersøger, bygger, tester og forbedrer gennem eksperimenter, samarbejde og refleksion over teknologiens betydning.',
       pricingEstimatedLabel: 'Estimeret pris',
       pricingHourlyRateLabel: 'Kursuspris',
       pricingEstimatedHoursLabel: 'Leverance',
@@ -157,13 +151,7 @@ export function getCoursesCopy(locale: 'da' | 'en') {
       cartBackToCourses: 'Back to courses',
       uvmIntroTitle: 'Classroom-ready technology literacy solution',
       uvmIntroText:
-        'These programs translate technology literacy requirements into practical classroom delivery. The focus is on digital phenomena, creative design, coding, and critical inquiry.',
-      teacherRoleLabel: 'Teacher role',
-      teacherRoleText:
-        'You facilitate by framing the work, supporting students, and helping them turn ideas into concrete outcomes.',
-      studentRoleLabel: 'Students do',
-      studentRoleText:
-        'Students investigate, build, test, and improve. They learn through experimentation, collaboration, and reflection on the impact of technology.',
+        'These programs translate technology literacy requirements into practical classroom delivery. The focus is on digital phenomena, creative design, coding, and critical inquiry. Collaboration is built into the flow: the teacher frames and supports the process while students investigate, build, test, and improve through experimentation, collaboration, and reflection on the impact of technology.',
       pricingEstimatedLabel: 'Estimated price',
       pricingHourlyRateLabel: 'Course price',
       pricingEstimatedHoursLabel: 'Delivery model',
