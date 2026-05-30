@@ -1,6 +1,124 @@
-export function getCoursesCopy(locale: 'da' | 'en') {
-  return {
-    da: {
+import type { Locale } from './languageConfig';
+
+export const courseLanguage: Record<Locale, {
+  courses: {
+    programsTitle: string;
+    durationLabel: string;
+    targetGroupLabel: string;
+    subjectsLabel: string;
+    timelineLabel: string;
+    focusTitle: string;
+    focusIntro: string;
+  };
+  coursesCartPrompt: {
+    title: string;
+    text: string;
+    goToCart: string;
+    continueBrowsing: string;
+    close: string;
+  };
+  page: {
+    filterTitle: string;
+    filterSubjectLabel: string;
+    filterSubjectPlaceholder: string;
+    filterTargetLabel: string;
+    filterAllTargets: string;
+    filterTargetIndskoling: string;
+    filterTargetMellemtrin: string;
+    filterTargetUdskoling: string;
+    filterTargetGymnasium: string;
+    filterReset: string;
+    filterTracksResult: string;
+    filterFocusResult: string;
+    filterNoResults: string;
+    customTrackTitle: string;
+    customTrackText: string;
+    customTrackButton: string;
+    bookingButton: string;
+    bookingOpenCartButton: string;
+    modalTitle: string;
+    modalIntro: string;
+    modalSelectionLabel: string;
+    modalSelectionHint: string;
+    modalContactLabel: string;
+    bookingSummaryCountUnit: string;
+    sectionTitle: string;
+    sectionEmpty: string;
+    quantityLabel: string;
+    kindTrack: string;
+    kindFocus: string;
+    removeSelection: string;
+    nameLabel: string;
+    schoolLabel: string;
+    eanLabel: string;
+    eanPlaceholder: string;
+    emailLabel: string;
+    studentsLabel: string;
+    studentsPlaceholder: string;
+    classesLabel: string;
+    classesPlaceholder: string;
+    messageLabel: string;
+    messagePlaceholder: string;
+    submitLabel: string;
+    submitSendingLabel: string;
+    closeLabel: string;
+    selectError: string;
+    sendError: string;
+    configError: string;
+    sendSuccess: string;
+    sendSuccessNoAutoReply: string;
+    cartPageTitle: string;
+    cartPageIntro: string;
+    cartPageReminder1: string;
+    cartPageReminder2: string;
+    cartPageReminder3: string;
+    cartCatalogTitle: string;
+    cartCatalogHint: string;
+    cartSummaryTopTitle: string;
+    cartSummaryTopHint: string;
+    cartContactTitle: string;
+    phoneLabel: string;
+    phonePlaceholder: string;
+    quantityIncrease: string;
+    quantityDecrease: string;
+    cartBackToCourses: string;
+    uvmIntroTitle: string;
+    uvmIntroText: string;
+    pricingEstimatedLabel: string;
+    pricingHourlyRateLabel: string;
+    pricingEstimatedHoursLabel: string;
+    pricingDeliveryModelText: string;
+    pricingTransportNote: string;
+    pricingEstimateDisclaimer: string;
+    pricingBundleTitle: string;
+    pricingBundleText: string;
+    customTrackOfferLine: string;
+    pricingByPlanningShort: string;
+    bookingPricingTitle: string;
+    bookingSubtotalLabel: string;
+    bookingDiscountLabel: string;
+    bookingTotalLabel: string;
+    bookingDiscountTierText: string;
+  };
+}> = {
+  da: {
+    courses: {
+      programsTitle: 'Vælg et forløb',
+      durationLabel: 'Varighed',
+      targetGroupLabel: 'Målgruppe',
+      subjectsLabel: 'Læringsfokus',
+      timelineLabel: 'Modulopdeling',
+      focusTitle: 'Fokuskurser',
+      focusIntro: 'Fritstående fordybelsesmoduler, som kan bruges alene eller sammen med et af forløbene.',
+    },
+    coursesCartPrompt: {
+      title: 'Tilføjet til kurv',
+      text: 'Vil du gå til kurven nu eller fortsætte med at kigge?',
+      goToCart: 'Hop til kurv',
+      continueBrowsing: 'Fortsæt med at kigge',
+      close: 'Luk',
+    },
+    page: {
       filterTitle: 'Filtrér forløb',
       filterSubjectLabel: 'Søg på ord',
       filterSubjectPlaceholder: 'Skriv et emne, tema eller ord',
@@ -52,7 +170,7 @@ export function getCoursesCopy(locale: 'da' | 'en') {
       sendSuccessNoAutoReply: 'Bookingforespørgslen er sendt til NordPixel, men autosvar til kunden er ikke konfigureret endnu.',
       cartPageTitle: 'Bookingkurv',
       cartPageIntro: 'Vælg forløb, antal og kontaktoplysninger.',
-      cartPageReminder1: 'EAN er valgfri.',
+      cartPageReminder1: '',
       cartPageReminder2: '',
       cartPageReminder3: '',
       cartCatalogTitle: 'Vælg forløb og kurser',
@@ -66,8 +184,7 @@ export function getCoursesCopy(locale: 'da' | 'en') {
       quantityDecrease: 'Sænk antal',
       cartBackToCourses: 'Tilbage til forløb',
       uvmIntroTitle: 'Klar løsning til teknologiforståelse',
-      uvmIntroText:
-        'Forløbene omsætter kravene i teknologiforståelse til konkret undervisning. Fokus er praktisk arbejde med digitale fænomener, kreativt design, programmering og kritisk undersøgelse. Samarbejdet er tydeligt i hverdagen: læreren rammesætter og støtter processen, mens eleverne undersøger, bygger, tester og forbedrer gennem eksperimenter, samarbejde og refleksion over teknologiens betydning.',
+      uvmIntroText: 'Forløbene omsætter kravene i teknologiforståelse til konkret undervisning. Fokus er praktisk arbejde med digitale fænomener, kreativt design, programmering og kritisk undersøgelse. Samarbejdet er tydeligt i hverdagen: læreren rammesætter og støtter processen, mens eleverne undersøger, bygger, tester og forbedrer gennem eksperimenter, samarbejde og refleksion over teknologiens betydning.',
       pricingEstimatedLabel: 'Estimeret pris',
       pricingHourlyRateLabel: 'Kursuspris',
       pricingEstimatedHoursLabel: 'Leverance',
@@ -75,7 +192,7 @@ export function getCoursesCopy(locale: 'da' | 'en') {
       pricingTransportNote: 'Transport er ikke inkluderet og afregnes efter lokation.',
       pricingEstimateDisclaimer: 'Pris vises som tilbudsestimat og endelig pris aftales i tilbud.',
       pricingBundleTitle: 'Mængderabat ved flere kurser',
-      pricingBundleText: 'Rabat starter ved 3 bookinger (en standard årgang). Endelig rabat aftales ved anmodning pr. mail.',
+      pricingBundleText: 'Rabat starter ved 3 bookinger. Endelig rabat aftales ved anmodning pr. mail.',
       customTrackOfferLine: 'Pris aftales ved planlægning.',
       pricingByPlanningShort: 'Pris aftales ved planlægning',
       bookingPricingTitle: 'Prisoverslag',
@@ -84,7 +201,25 @@ export function getCoursesCopy(locale: 'da' | 'en') {
       bookingTotalLabel: 'Estimeret total',
       bookingDiscountTierText: 'Rabat aftales pr. mail',
     },
-    en: {
+  },
+  en: {
+    courses: {
+      programsTitle: 'Choose a Track',
+      durationLabel: 'Duration',
+      targetGroupLabel: 'Target Group',
+      subjectsLabel: 'Learning Focus',
+      timelineLabel: 'Module Breakdown',
+      focusTitle: 'Focus Courses',
+      focusIntro: 'Standalone deep-dive modules that can run on their own or alongside one of the main tracks.',
+    },
+    coursesCartPrompt: {
+      title: 'Added to cart',
+      text: 'Do you want to open the cart now or keep browsing?',
+      goToCart: 'Go to cart',
+      continueBrowsing: 'Keep browsing',
+      close: 'Close',
+    },
+    page: {
       filterTitle: 'Filter Programs',
       filterSubjectLabel: 'Search by word',
       filterSubjectPlaceholder: 'Search by topic, theme, or word',
@@ -150,8 +285,7 @@ export function getCoursesCopy(locale: 'da' | 'en') {
       quantityDecrease: 'Decrease quantity',
       cartBackToCourses: 'Back to courses',
       uvmIntroTitle: 'Classroom-ready technology literacy solution',
-      uvmIntroText:
-        'These programs translate technology literacy requirements into practical classroom delivery. The focus is on digital phenomena, creative design, coding, and critical inquiry. Collaboration is built into the flow: the teacher frames and supports the process while students investigate, build, test, and improve through experimentation, collaboration, and reflection on the impact of technology.',
+      uvmIntroText: 'These programs translate technology literacy requirements into practical classroom delivery. The focus is on digital phenomena, creative design, coding, and critical inquiry. Collaboration is built into the flow: the teacher frames and supports the process while students investigate, build, test, and improve through experimentation, collaboration, and reflection on the impact of technology.',
       pricingEstimatedLabel: 'Estimated price',
       pricingHourlyRateLabel: 'Course price',
       pricingEstimatedHoursLabel: 'Delivery model',
@@ -168,5 +302,5 @@ export function getCoursesCopy(locale: 'da' | 'en') {
       bookingTotalLabel: 'Estimated total',
       bookingDiscountTierText: 'Discount agreed by email',
     },
-  }[locale];
-}
+  },
+};

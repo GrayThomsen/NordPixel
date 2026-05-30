@@ -6,13 +6,13 @@ import { Clock3, Layers3, Users } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { type MouseEvent } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
-import { getCoursesCopy } from './courses/course-copy';
+import { courseLanguage } from '../../context/courseLanguage';
 import { BOOKABLE_OPTIONS, FOCUS_COURSES, PROGRAM_TRACKS } from './courses/course-catalog';
 import { addSelectionToBookingCart } from './courses/booking-storage';
 import { type LocalizedText } from './courses/course-types';
 
 export function CoursesContent() {
-  const { dictionary, locale } = useLanguage();
+  const { locale } = useLanguage();
   const router = useRouter();
   const [targetFilter, setTargetFilter] = useState('all');
   const [isCartPromptVisible, setIsCartPromptVisible] = useState(false);
@@ -37,7 +37,8 @@ export function CoursesContent() {
     [targetFilter],
   );
 
-  const copy = getCoursesCopy(locale);
+  const courseCopy = courseLanguage[locale];
+  const copy = courseCopy.page;
 
   const targetOptions = [
     { id: 'indskoling', label: copy.filterTargetIndskoling },
@@ -66,7 +67,7 @@ export function CoursesContent() {
     openBookingCart(initialId);
   };
 
-  const cartPromptCopy = dictionary.coursesCartPrompt;
+  const cartPromptCopy = courseCopy.coursesCartPrompt;
 
   const formatPrice = (value: number) =>
     value.toLocaleString(locale === 'da' ? 'da-DK' : 'en-US', {
@@ -141,25 +142,25 @@ export function CoursesContent() {
                 </div>
                 <p className="timelineTrackSummary">{translate(track.summary)}</p>
 
-                <ul className="timelineTrackMeta" aria-label={dictionary.courses.programsTitle}>
+                <ul className="timelineTrackMeta" aria-label={courseCopy.courses.programsTitle}>
                   <li>
                     <Clock3 aria-hidden="true" />
                     <div>
-                      <p>{dictionary.courses.durationLabel}</p>
+                      <p>{courseCopy.courses.durationLabel}</p>
                       <span>{translate(track.duration)}</span>
                     </div>
                   </li>
                   <li>
                     <Users aria-hidden="true" />
                     <div>
-                      <p>{dictionary.courses.targetGroupLabel}</p>
+                      <p>{courseCopy.courses.targetGroupLabel}</p>
                       <span>{translate(track.targetGroup)}</span>
                     </div>
                   </li>
                   <li>
                     <Layers3 aria-hidden="true" />
                     <div>
-                      <p>{dictionary.courses.subjectsLabel}</p>
+                      <p>{courseCopy.courses.subjectsLabel}</p>
                       <span>{translate(track.subjects)}</span>
                     </div>
                   </li>
@@ -171,7 +172,7 @@ export function CoursesContent() {
                 </div>
 
                 <div className="timelineTrackTimeline">
-                  <p className="timelineTrackTimelineTitle">{dictionary.courses.timelineLabel}</p>
+                  <p className="timelineTrackTimelineTitle">{courseCopy.courses.timelineLabel}</p>
                   <ol>
                     {track.timeline.map((step) => (
                       <li key={`${track.id}-${translate(step.module)}`}>
@@ -218,10 +219,10 @@ export function CoursesContent() {
         </div>
       </section>
 
-      <section className="coursesSection coursesSectionFocus" aria-label={dictionary.courses.focusTitle}>
+      <section className="coursesSection coursesSectionFocus" aria-label={courseCopy.courses.focusTitle}>
         <header className="coursesSectionHeader">
-          <h2>{dictionary.courses.focusTitle}</h2>
-          <p>{dictionary.courses.focusIntro}</p>
+          <h2>{courseCopy.courses.focusTitle}</h2>
+          <p>{courseCopy.courses.focusIntro}</p>
         </header>
 
         <div className="focusGrid">
@@ -240,11 +241,11 @@ export function CoursesContent() {
               </div>
               <ul className="focusItemMeta">
                 <li>
-                  <span>{dictionary.courses.durationLabel}</span>
+                  <span>{courseCopy.courses.durationLabel}</span>
                   <strong>{translate(course.duration)}</strong>
                 </li>
                 <li>
-                  <span>{dictionary.courses.targetGroupLabel}</span>
+                  <span>{courseCopy.courses.targetGroupLabel}</span>
                   <strong>{translate(course.audience)}</strong>
                 </li>
               </ul>

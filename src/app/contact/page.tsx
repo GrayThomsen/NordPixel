@@ -2,16 +2,16 @@ import type { Metadata } from 'next';
 import { ContactContent } from '../components/ContactContent';
 
 export const metadata: Metadata = {
-  title: 'Kontakt',
+  title: 'Kontakt om skoleforløb i teknologiforståelse',
   description: 'Kontakt NordPixel for en uforpligtende dialog om forløb, opstart og samarbejde med jeres skole.',
   openGraph: {
-    title: 'Kontakt | NordPixel',
+    title: 'Kontakt om skoleforløb i teknologiforståelse | NordPixel',
     description: 'Tag kontakt til NordPixel om teknologiforståelse, web og AI i undervisningen.',
     type: 'website',
-    url: 'https://nordpixel.dev/contact',
+    url: '/contact',
   },
   alternates: {
-    canonical: 'https://nordpixel.dev/contact',
+    canonical: '/contact',
   },
 };
 

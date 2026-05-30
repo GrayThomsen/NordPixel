@@ -2,16 +2,20 @@ import type { Metadata } from 'next';
 import { CoursesBookingContent } from '../../components/CoursesBookingContent';
 
 export const metadata: Metadata = {
-  title: 'Booking',
+  title: 'Booking af skoleforløb',
   description: 'Book NordPixel-forløb og fokuskurser til jeres skole. Vælg forløb, antal og kontaktoplysninger i bookingkurven.',
+  robots: {
+    index: false,
+    follow: true,
+  },
   openGraph: {
-    title: 'Booking | NordPixel',
+    title: 'Booking af skoleforløb | NordPixel',
     description: 'Book forløb og fokuskurser i NordPixels bookingkurv.',
     type: 'website',
-    url: 'https://nordpixel.dev/courses/booking',
+    url: '/courses/booking',
   },
   alternates: {
-    canonical: 'https://nordpixel.dev/courses/booking',
+    canonical: '/courses/booking',
   },
 };
 

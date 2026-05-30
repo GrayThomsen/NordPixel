@@ -5,8 +5,8 @@ import type * as Monaco from 'monaco-editor';
 import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
 import { FilePlus2, Trash2 } from 'lucide-react';
 import { useCallback, useEffect, useMemo, useRef, useState, type ChangeEvent } from 'react';
-import { dictionaries } from '../../context/language-dictionary';
 import { useLanguage } from '../../context/LanguageContext';
+import { weblabLanguage } from '../../context/weblabLanguage';
 
 type EditorTab = 'html' | 'css' | 'js';
 
@@ -470,7 +470,7 @@ function safeParseProject(raw: string): LabProject | null {
 }
 
 export function WebLab() {
-  const { locale: siteLocale, dictionary } = useLanguage();
+  const { locale: siteLocale } = useLanguage();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const previewTabRef = useRef<Window | null>(null);
   const htmlReferenceNamesRef = useRef<string[]>([]);
@@ -481,7 +481,7 @@ export function WebLab() {
   const [editingFileName, setEditingFileName] = useState<string>('');
   const [pendingDeleteFileId, setPendingDeleteFileId] = useState<string | null>(null);
   const [isNewSiteConfirmOpen, setIsNewSiteConfirmOpen] = useState(false);
-  const [notice, setNotice] = useState<string>(() => dictionaries[siteLocale].weblab.statusDraftAutosave);
+  const [notice, setNotice] = useState<string>(() => weblabLanguage[siteLocale].weblab.statusDraftAutosave);
   const [isHydrated, setIsHydrated] = useState(false);
   const [isDirty, setIsDirty] = useState(false);
   const [lastSavedAt, setLastSavedAt] = useState<string>('');
@@ -492,7 +492,8 @@ export function WebLab() {
   const [visiblePanes, setVisiblePanes] = useState({ explorer: true, editor: true, preview: true });
   const [isMobile, setIsMobile] = useState(false);
   const visiblePanesKey = `${visiblePanes.explorer ? '1' : '0'}${visiblePanes.editor ? '1' : '0'}${visiblePanes.preview ? '1' : '0'}`;
-  const weblabText = dictionary.weblab;
+  const weblabText = weblabLanguage[siteLocale].weblab;
+  const editorIntroCopy = weblabLanguage[siteLocale].editorIntro;
   const panelDefaults = useMemo(() => {
     const showExplorer = visiblePanes.explorer;
     const showEditor = visiblePanes.editor;
@@ -531,7 +532,7 @@ export function WebLab() {
 
   useEffect(() => {
     setNotice((current) =>
-      current === dictionaries.en.weblab.statusDraftAutosave || current === dictionaries.da.weblab.statusDraftAutosave
+      current === weblabLanguage.en.weblab.statusDraftAutosave || current === weblabLanguage.da.weblab.statusDraftAutosave
         ? weblabText.statusDraftAutosave
         : current,
     );
@@ -918,7 +919,7 @@ export function WebLab() {
   }, [isHydrated, lastSavedAt, siteLocale, weblabText.notSavedYet]);
 
   const isRecoveredNotice =
-    notice === dictionaries.en.weblab.statusRecovered || notice === dictionaries.da.weblab.statusRecovered;
+    notice === weblabLanguage.en.weblab.statusRecovered || notice === weblabLanguage.da.weblab.statusRecovered;
 
   function markProjectChanged(updater: (prev: LabProject) => LabProject) {
     setProject((prev) => {
@@ -1255,7 +1256,7 @@ export function WebLab() {
           <div className="weblabTitleRow">
             <h1>{weblabText.title}</h1>
           </div>
-          <p>{dictionary.editorIntro.text}</p>
+          <p>{editorIntroCopy.text}</p>
         </div>
         <label className="weblabNameField">
           {weblabText.projectName}

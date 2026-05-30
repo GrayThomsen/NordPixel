@@ -6,13 +6,15 @@ import { usePathname } from 'next/navigation';
 import { ShoppingCart } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
+import { componentLanguage } from '../../context/componentLanguage';
 import { SITE_HEADER } from '../../assets/headerAndFooter/site-branding';
 import { BOOKABLE_OPTIONS } from './courses/course-catalog';
 import { BOOKING_CART_ATTENTION_EVENT, BOOKING_CART_UPDATED_EVENT, getBookingCartCount } from './courses/booking-storage';
 
 export function SiteHeader() {
   const pathname = usePathname();
-  const { locale, setLocale, dictionary } = useLanguage();
+  const { locale, setLocale } = useLanguage();
+  const copy = componentLanguage[locale];
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [cartCount, setCartCount] = useState(0);
   const [isCartHighlighted, setIsCartHighlighted] = useState(false);
@@ -62,10 +64,10 @@ export function SiteHeader() {
   }, []);
 
   const navItems = [
-    { href: '/', label: dictionary.nav.home },
-    { href: '/editor', label: dictionary.nav.weblab },
-    { href: '/courses', label: dictionary.nav.courses },
-    { href: '/contact', label: dictionary.nav.contact },
+    { href: '/', label: copy.nav.home },
+    { href: '/editor', label: copy.nav.weblab },
+    { href: '/courses', label: copy.nav.courses },
+    { href: '/contact', label: copy.nav.contact },
   ];
   const homeAriaLabel = locale === 'da' ? 'NordPixel forside' : 'NordPixel home';
   const cartAriaLabel =
@@ -110,7 +112,7 @@ export function SiteHeader() {
             {cartCount > 0 ? <span>{cartCount}</span> : null}
           </Link>
 
-          <div className="siteHeaderLanguage siteHeaderLanguageDesktop" role="group" aria-label={dictionary.nav.language}>
+          <div className="siteHeaderLanguage siteHeaderLanguageDesktop" role="group" aria-label={copy.nav.language}>
             <button
               type="button"
               className={locale === 'da' ? 'isActive' : ''}
@@ -148,7 +150,7 @@ export function SiteHeader() {
       </div>
 
       <div id="mobileSiteNav" className={isMenuOpen ? 'siteHeaderMobileNav isOpen' : 'siteHeaderMobileNav'}>
-        <div className="siteHeaderLanguage siteHeaderMobileLanguage" role="group" aria-label={dictionary.nav.language}>
+        <div className="siteHeaderLanguage siteHeaderMobileLanguage" role="group" aria-label={copy.nav.language}>
           <button
             type="button"
             className={locale === 'da' ? 'isActive' : ''}

@@ -2,11 +2,12 @@
 
 import Link from 'next/link';
 import { useLanguage } from '../../context/LanguageContext';
+import { contactLanguage } from '../../context/contactLanguage';
 import { SITE_FOOTER } from '../../assets/headerAndFooter/site-branding';
 
 export function ContactContent() {
-  const { dictionary } = useLanguage();
-  const copy = dictionary.contactPage;
+  const { locale } = useLanguage();
+  const copy = contactLanguage[locale].contactPage;
 
   return (
     <div className="contactPage">

@@ -3,14 +3,15 @@
 import Script from 'next/script';
 import { useEffect, useState } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
+import { componentLanguage } from '../../context/componentLanguage';
 
 const CONSENT_KEY = 'nordpixel_cookie_consent';
 
 type ConsentState = 'accepted' | 'necessary' | 'declined' | null;
 
 export function CookieConsent() {
-  const { dictionary } = useLanguage();
-  const copy = dictionary.cookieConsent;
+  const { locale } = useLanguage();
+  const copy = componentLanguage[locale].cookieConsent;
   const [consent, setConsent] = useState<ConsentState>(null);
   const [mounted, setMounted] = useState(false);
 

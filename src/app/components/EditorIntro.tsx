@@ -1,10 +1,11 @@
 'use client';
 
 import { useLanguage } from '../../context/LanguageContext';
+import { weblabLanguage } from '../../context/weblabLanguage';
 
 export function EditorIntro() {
-  const { dictionary } = useLanguage();
-  const copy = dictionary.editorIntro;
+  const { locale } = useLanguage();
+  const copy = weblabLanguage[locale].editorIntro;
 
   return (
     <section className="editorIntro" aria-label={copy.title}>

@@ -4,20 +4,24 @@ import { CookieConsent } from './components/CookieConsent';
 import { LanguageProvider } from '../context/LanguageContext';
 import '../styles/index.css';
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
+  ?? (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://nordpixel.dev');
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
-    default: 'NordPixel',
+    default: 'NordPixel - Teknologiforståelse, web og AI for skoler',
     template: '%s | NordPixel',
   },
-  description: 'NordPixel delivers classroom-ready programs in technology literacy, web development, and AI for schools.',
+  description: 'NordPixel leverer skoleklare forløb i teknologiforståelse, webudvikling og AI med tydelig struktur, materialer og booking for skoler.',
   openGraph: {
-    title: 'NordPixel',
-    description: 'Classroom-ready programs in technology literacy, web development, and AI for schools.',
+    title: 'NordPixel - Teknologiforståelse, web og AI for skoler',
+    description: 'Skoleklare forløb i teknologiforståelse, webudvikling og AI med tydelig struktur, materialer og booking for skoler.',
     type: 'website',
-    url: 'https://nordpixel.dev',
+    url: '/',
   },
   alternates: {
-    canonical: 'https://nordpixel.dev',
+    canonical: '/',
   },
   icons: {
     icon: [

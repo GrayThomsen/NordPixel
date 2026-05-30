@@ -2,10 +2,11 @@
 
 import Link from 'next/link';
 import { useLanguage } from '../../context/LanguageContext';
+import { mainLanguage } from '../../context/mainLanguage';
 
 export function HomeContent() {
-  const { dictionary } = useLanguage();
-  const copy = dictionary.homePage;
+  const { locale } = useLanguage();
+  const copy = mainLanguage[locale].homePage;
 
   return (
     <div className="landing">
@@ -15,6 +16,7 @@ export function HomeContent() {
             <h1 className="landingHeroTitle">{copy.eyebrow}</h1>
             <p className="landingHeroSubtitle">{copy.title}</p>
             <p className="landingLead">{copy.lead}</p>
+            <p className="landingStatusNote">{copy.statusNote}</p>
 
             <ul className="landingProof" aria-label={copy.authorityTitle}>
               {copy.proofPoints.map((point) => (
@@ -38,6 +40,39 @@ export function HomeContent() {
             </div>
           </div>
 
+          <aside className="landingHeroVisual" aria-label={copy.heroCardTitle}>
+            <h2>{copy.heroCardTitle}</h2>
+            <ul>
+              {copy.heroCardPoints.map((point) => (
+                <li key={point}>{point}</li>
+              ))}
+            </ul>
+            <p className="landingWeblabNote">{copy.weblabNote}</p>
+          </aside>
+
+        </div>
+      </section>
+
+      <section className="landingTrust" aria-label={copy.trustTitle}>
+        <div className="landingTrustIntro">
+          <h2>{copy.trustTitle}</h2>
+        </div>
+        <ul>
+          {copy.trustPoints.map((point) => (
+            <li key={point}>{point}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="landingAuthority" aria-label={copy.authorityTitle}>
+        <h2>{copy.authorityTitle}</h2>
+        <div className="landingAuthorityGrid">
+          {copy.authorityCards.map((card) => (
+            <article key={card.title} className="landingAuthorityCard">
+              <h3>{card.title}</h3>
+              <p>{card.text}</p>
+            </article>
+          ))}
         </div>
       </section>
 

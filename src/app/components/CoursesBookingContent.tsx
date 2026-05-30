@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Minus, Plus, Send } from 'lucide-react';
 import { useEffect, useMemo, useState, type FormEvent } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
-import { getCoursesCopy } from './courses/course-copy';
+import { courseLanguage } from '../../context/courseLanguage';
 import { BOOKABLE_OPTIONS, BOOKING_EMAIL } from './courses/course-catalog';
 import { addSelectionToBookingCart, readBookingSelection, writeBookingSelection, type BookingSelection } from './courses/booking-storage';
 import { type LocalizedText } from './courses/course-types';
@@ -16,7 +16,7 @@ type CoursesBookingContentProps = {
 
 export function CoursesBookingContent({ initialAddId }: CoursesBookingContentProps) {
   const { locale } = useLanguage();
-  const copy = getCoursesCopy(locale);
+  const copy = courseLanguage[locale].page;
 
   const [selectedQuantities, setSelectedQuantities] = useState<BookingSelection>({});
   const [form, setForm] = useState({
@@ -197,13 +197,6 @@ export function CoursesBookingContent({ initialAddId }: CoursesBookingContentPro
             {copy.cartBackToCourses}
           </Link>
         </div>
-        <section className="bookingCartPageTopSummary" aria-label={copy.cartSummaryTopTitle}>
-          <p className="bookingCartPageTopSummaryTitle">{copy.cartSummaryTopTitle}</p>
-          <p className="bookingCartPageTopSummaryHint">{copy.cartSummaryTopHint}</p>
-          <p className="bookingCartPageTopSummaryCount">
-            {selectedItems.length} {copy.bookingSummaryCountUnit}
-          </p>
-        </section>
       </header>
 
       <form className="bookingCart" onSubmit={submitBooking}>
