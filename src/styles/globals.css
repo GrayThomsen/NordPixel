@@ -524,17 +524,12 @@ body {
 }
 
 body {
-	background:
-		radial-gradient(circle at 15% 25%, color-mix(in oklab, var(--brand-orange-soft) 72%, white 28%) 0%, transparent 48%),
-		radial-gradient(circle at 88% 15%, color-mix(in oklab, #dff3ef 70%, #ffffff 30%) 0%, transparent 52%),
-		linear-gradient(170deg, color-mix(in oklab, var(--surface-page) 94%, #ffffff 6%), color-mix(in oklab, var(--surface-panel) 90%, var(--brand-orange-soft) 10%));
-	background-repeat: no-repeat;
-	background-size: cover;
+	background: var(--surface-page);
 }
 
 /* WebLab page should use a calm neutral canvas, not the global branded body background. */
 body:has(.editorPage) {
-	background: linear-gradient(180deg, color-mix(in oklab, var(--surface-page) 98%, #ffffff 2%), color-mix(in oklab, var(--surface-panel) 96%, #ffffff 4%));
+	background: var(--surface-page);
 }
 
 html {
@@ -726,13 +721,17 @@ html {
 	pointer-events: none;
 }
 
-.landingHero::before {
+.landingHero::before,
+.landingHero::after {
 	width: clamp(180px, 22vw, 320px);
 	height: clamp(180px, 22vw, 320px);
+	background: none;
+	opacity: 0;
+}
+
+.landingHero::before {
 	right: -6%;
 	top: -18%;
-	background: radial-gradient(circle, color-mix(in oklab, #c8efe6 54%, transparent 46%) 0%, transparent 70%);
-	opacity: 0.55;
 }
 
 .landingHero::after {
@@ -740,8 +739,6 @@ html {
 	height: clamp(140px, 18vw, 260px);
 	left: -6%;
 	bottom: -20%;
-	background: radial-gradient(circle, color-mix(in oklab, var(--brand-orange-soft) 48%, transparent 52%) 0%, transparent 70%);
-	opacity: 0.45;
 }
 
 .landingHeroGrid {
