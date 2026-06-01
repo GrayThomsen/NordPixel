@@ -14,7 +14,7 @@ Formålet er at dokumentere:
 
 Projektet har udviklet sig i tre hovedfaser:
 1. Et tidligt fundament på main med branding, layout og grundlæggende sideindhold.
-2. En større videreudvikling på HovedOpgave-branchen med Next.js app-arkitektur, WebLab, forløb, bookingflow og internationalisering.
+2. En større videreudvikling på HovedOpgave-branchen med Next.js app-arkitektur, WebLab, forløb, bookingflow og LanguageSelector.
 3. Et samlet løft, hvor HovedOpgave blev merged ind i main med unrelated histories, efterfulgt af oprydning og deployment-tilpasning.
 
 Det store løft skete i commiten 707ebaf med beskeden: Merge HovedOpgave into main (allow unrelated histories).
@@ -41,14 +41,14 @@ Centrale commits på HovedOpgave:
 - a2ac0c2 Add editor and downloads pages and WebLab
 - 1928a3a Add course booking UI, EmailJS and deps cleanup
 - e416fb0 Add localized content, booking tab and UI styles
-- 0ae785f Add pricing, cart UX, and i18n dictionary updates
+- 0ae785f Add pricing, cart UX, and LanguageSelector dictionary updates
 - 710acfc Refine homepage/contact UX and add cookie consent-gated analytics
 
 Karakteristika i denne fase:
 - skifte til Next.js app router
 - introduktion af WebLab med browsernær læringsoplevelse
 - opbygning af forløbssider, kurv og bookingformular
-- i18n og tydeligere struktur for dansk/engelsk indhold
+- LanguageSelector og tydeligere struktur for dansk/engelsk indhold
 - samtykkestyret analytics
 
 ## 3.3 Integrationsfase på main (sammenlægning og stabilisering)
@@ -73,7 +73,7 @@ Beslutning:
 
 Begrundelse:
 - bedre struktur for sider, metadata og skalering
-- mere robust ramme for WebLab, forløb, booking og i18n
+- mere robust ramme for WebLab, forløb, booking og LanguageSelector
 
 Konsekvens:
 - hurtigere videreudvikling af features

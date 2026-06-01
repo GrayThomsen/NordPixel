@@ -10,6 +10,7 @@ import { componentLanguage } from '../../context/componentLanguage';
 import { SITE_HEADER } from '../../assets/headerAndFooter/site-branding';
 import { BOOKABLE_OPTIONS } from './courses/course-catalog';
 import { BOOKING_CART_ATTENTION_EVENT, BOOKING_CART_UPDATED_EVENT, getBookingCartCount } from './courses/booking-storage';
+import { LanguageSelector } from './LanguageSelector';
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -112,26 +113,12 @@ export function SiteHeader() {
             {cartCount > 0 ? <span>{cartCount}</span> : null}
           </Link>
 
-          <div className="siteHeaderLanguage siteHeaderLanguageDesktop" role="group" aria-label={copy.nav.language}>
-            <button
-              type="button"
-              className={locale === 'da' ? 'isActive' : ''}
-              onClick={() => setLocale('da')}
-              aria-pressed={locale === 'da'}
-              aria-label="Dansk"
-            >
-              DA
-            </button>
-            <button
-              type="button"
-              className={locale === 'en' ? 'isActive' : ''}
-              onClick={() => setLocale('en')}
-              aria-pressed={locale === 'en'}
-              aria-label="English"
-            >
-              EN
-            </button>
-          </div>
+          <LanguageSelector
+            className="siteHeaderLanguage siteHeaderLanguageDesktop"
+            ariaLabel={copy.nav.language}
+            locale={locale}
+            setLocale={setLocale}
+          />
           <button
             type="button"
             className={isMenuOpen ? 'siteHeaderMenuButton isOpen' : 'siteHeaderMenuButton'}
@@ -150,26 +137,12 @@ export function SiteHeader() {
       </div>
 
       <div id="mobileSiteNav" className={isMenuOpen ? 'siteHeaderMobileNav isOpen' : 'siteHeaderMobileNav'}>
-        <div className="siteHeaderLanguage siteHeaderMobileLanguage" role="group" aria-label={copy.nav.language}>
-          <button
-            type="button"
-            className={locale === 'da' ? 'isActive' : ''}
-            onClick={() => setLocale('da')}
-            aria-pressed={locale === 'da'}
-            aria-label="Dansk"
-          >
-            DA
-          </button>
-          <button
-            type="button"
-            className={locale === 'en' ? 'isActive' : ''}
-            onClick={() => setLocale('en')}
-            aria-pressed={locale === 'en'}
-            aria-label="English"
-          >
-            EN
-          </button>
-        </div>
+        <LanguageSelector
+          className="siteHeaderLanguage siteHeaderMobileLanguage"
+          ariaLabel={copy.nav.language}
+          locale={locale}
+          setLocale={setLocale}
+        />
         <nav className="siteHeaderMobileLinks" aria-label="Primary mobile">
           {navItems.map((item) => (
             <Link key={item.href} href={item.href} aria-current={pathname === item.href ? 'page' : undefined}>
