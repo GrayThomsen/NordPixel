@@ -1,13 +1,59 @@
 'use client';
 
-import Link from 'next/link';
+import { Check, Copy } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import { contactLanguage } from '../../context/contactLanguage';
 import { SITE_FOOTER } from '../../assets/headerAndFooter/site-branding';
 
+type CopyTarget = 'email' | 'cvr' | 'linkedin';
+
 export function ContactContent() {
   const { locale } = useLanguage();
   const copy = contactLanguage[locale].contactPage;
+  const [copiedTarget, setCopiedTarget] = useState<CopyTarget | null>(null);
+  const copyResetTimerRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (copyResetTimerRef.current) {
+        window.clearTimeout(copyResetTimerRef.current);
+      }
+    };
+  }, []);
+
+  const resetCopiedTarget = () => {
+    if (copyResetTimerRef.current) {
+      window.clearTimeout(copyResetTimerRef.current);
+    }
+
+    copyResetTimerRef.current = window.setTimeout(() => {
+      setCopiedTarget(null);
+    }, 1400);
+  };
+
+  const copyToClipboard = async (value: string, target: CopyTarget) => {
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(value);
+      } else {
+        const textarea = document.createElement('textarea');
+        textarea.value = value;
+        textarea.setAttribute('readonly', 'true');
+        textarea.style.position = 'fixed';
+        textarea.style.left = '-9999px';
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        textarea.remove();
+      }
+
+      setCopiedTarget(target);
+      resetCopiedTarget();
+    } catch {
+      setCopiedTarget(null);
+    }
+  };
 
   return (
     <div className="contactPage">
@@ -52,25 +98,53 @@ export function ContactContent() {
           <p>{copy.contactIntro}</p>
 
           <dl className="contactCardDetails">
-            <div>
+            <div className="contactDetailCopy">
               <dt>{copy.contactLabelEmail}</dt>
-              <dd>
-                <a href={`mailto:${SITE_FOOTER.contactEmail}`} target="_blank" rel="noopener noreferrer">
-                  {SITE_FOOTER.contactEmail}
-                </a>
+              <dd className="contactDetailValue">
+                <button
+                  type="button"
+                  className="contactDetailCopyRow"
+                  onClick={() => copyToClipboard(SITE_FOOTER.contactEmail, 'email')}
+                  aria-label={`${locale === 'da' ? 'Kopiér' : 'Copy'} ${copy.contactLabelEmail.toLowerCase()}`}
+                  title={locale === 'da' ? 'Kopiér emailadresse' : 'Copy email address'}
+                >
+                  <span className="contactDetailCopyText">{SITE_FOOTER.contactEmail}</span>
+                  {copiedTarget === 'email' ? <Check className="contactDetailIcon" aria-hidden="true" /> : <Copy className="contactDetailIcon" aria-hidden="true" />}
+                </button>
               </dd>
+              {copiedTarget === 'email' ? <span className="contactDetailFeedback">{locale === 'da' ? 'Kopieret til udklipsholder' : 'Copied to clipboard'}</span> : null}
             </div>
-            <div>
+            <div className="contactDetailCopy">
               <dt>{copy.contactLabelCvr}</dt>
-              <dd>{SITE_FOOTER.cvrNumber}</dd>
-            </div>
-            <div>
-              <dt>{copy.contactLabelLinkedin}</dt>
-              <dd>
-                <Link href={SITE_FOOTER.linkedinCompanyUrl} target="_blank" rel="noreferrer">
-                  NordPixel
-                </Link>
+              <dd className="contactDetailValue">
+                <button
+                  type="button"
+                  className="contactDetailCopyRow"
+                  onClick={() => copyToClipboard(SITE_FOOTER.cvrNumber, 'cvr')}
+                  aria-label={`${locale === 'da' ? 'Kopiér' : 'Copy'} ${copy.contactLabelCvr.toLowerCase()}`}
+                  title={locale === 'da' ? 'Kopiér CVR-nummer' : 'Copy CVR number'}
+                >
+                  <span className="contactDetailCopyText">{SITE_FOOTER.cvrNumber}</span>
+                  {copiedTarget === 'cvr' ? <Check className="contactDetailIcon" aria-hidden="true" /> : <Copy className="contactDetailIcon" aria-hidden="true" />}
+                </button>
               </dd>
+              {copiedTarget === 'cvr' ? <span className="contactDetailFeedback">{locale === 'da' ? 'Kopieret til udklipsholder' : 'Copied to clipboard'}</span> : null}
+            </div>
+            <div className="contactDetailCopy">
+              <dt>{copy.contactLabelLinkedin}</dt>
+              <dd className="contactDetailValue">
+                <button
+                  type="button"
+                  className="contactDetailCopyRow"
+                  onClick={() => copyToClipboard(SITE_FOOTER.linkedinCompanyUrl, 'linkedin')}
+                  aria-label={`${locale === 'da' ? 'Kopiér' : 'Copy'} LinkedIn-link`}
+                  title={locale === 'da' ? 'Kopiér LinkedIn-link' : 'Copy LinkedIn link'}
+                >
+                  <span className="contactDetailCopyText">NordPixel</span>
+                  {copiedTarget === 'linkedin' ? <Check className="contactDetailIcon" aria-hidden="true" /> : <Copy className="contactDetailIcon" aria-hidden="true" />}
+                </button>
+              </dd>
+              {copiedTarget === 'linkedin' ? <span className="contactDetailFeedback">{locale === 'da' ? 'Kopieret til udklipsholder' : 'Copied to clipboard'}</span> : null}
             </div>
           </dl>
 

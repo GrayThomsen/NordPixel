@@ -10,25 +10,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: siteUrl,
       lastModified,
-      changeFrequency: 'weekly',
+      changeFrequency: 'monthly',
       priority: 1,
     },
     {
       url: `${siteUrl}/courses`,
       lastModified,
-      changeFrequency: 'weekly',
+      changeFrequency: 'monthly',
       priority: 0.9,
     },
     {
       url: `${siteUrl}/contact`,
       lastModified,
-      changeFrequency: 'monthly',
+      changeFrequency: 'yearly',
       priority: 0.7,
     },
     {
       url: `${siteUrl}/editor`,
       lastModified,
-      changeFrequency: 'monthly',
+      changeFrequency: 'yearly',
       priority: 0.7,
     },
   ];

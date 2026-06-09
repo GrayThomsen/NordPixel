@@ -41,6 +41,8 @@ type LegacyLabProject = {
 const STORAGE_KEY = 'nordpixel-weblab-current';
 const LAST_SAVE_KEY = 'nordpixel-weblab-last-save';
 const DIRTY_STATE_KEY = 'nordpixel-weblab-is-dirty';
+
+// Taglister styrer autoudfyldning og auto-lukning i HTML-editoren.
 const HTML_VOID_TAGS = new Set([
   'area',
   'base',
@@ -216,6 +218,7 @@ function makeUniqueFileName(existingNames: string[], requestedName: string, kind
 }
 
 function getInitialActiveFileId(files: ProjectFile[]) {
+  // Foretræk en HTML-indgangsfil, hvis den findes, ellers bruges første fil.
   return files.find((file) => file.kind === 'html')?.id ?? files[0]?.id ?? '';
 }
 
@@ -245,9 +248,11 @@ function findProjectFileByReference(files: ProjectFile[], reference: string, kin
 }
 
 function isLocalReference(reference: string) {
+  // Indlejr kun lokale projektressourcer; lad eksterne/data/blob-URL'er være urørte.
   return !/^(?:https?:)?\/\//i.test(reference) && !reference.startsWith('data:') && !reference.startsWith('blob:');
 }
 
+// Indsat i forhåndsvisnings-HTML for at holde navigation inde i WebLab-filsystemet.
 const PREVIEW_NAV_INTERCEPTOR = `
 <script data-nordpixel-nav>
   (function () {
@@ -297,6 +302,8 @@ function extractDocumentTitle(html: string): string {
 }
 
 function buildFullPreviewDocument(project: LabProject, activeFile: ProjectFile | undefined) {
+  // Forhåndsvisningen bygges fra én HTML-fil, hvor lokale CSS/JS-referencer indlejres.
+  // Det gør iframe'en selvstændig og uafhængig af netværks- og filstier.
   const htmlFile = activeFile?.kind === 'html' ? activeFile : project.files.find((file) => file.kind === 'html');
   const htmlContent = htmlFile?.content ?? createHtmlBoilerplate(htmlFile?.name ?? 'index.html');
 
@@ -350,6 +357,7 @@ function buildFullPreviewDocument(project: LabProject, activeFile: ProjectFile |
   return injectNavInterceptor(withScripts);
 }
 
+// Selvstændig skal til forhåndsvisning i ny fane; modtager opdateringer via postMessage.
 const PREVIEW_TAB_HTML = `<!doctype html>
 <html lang="en">
   <head>
@@ -367,7 +375,7 @@ const PREVIEW_TAB_HTML = `<!doctype html>
       .previewShellBar {
         padding: 0.5rem 0.75rem;
         border-bottom: 1px solid #d8d8d8;
-        font-size: 0.85rem;
+        font-size: var(--font-size-body-xs);
         color: #4f4f4f;
         background: #fafafa;
       }
@@ -417,6 +425,7 @@ const PREVIEW_TAB_HTML = `<!doctype html>
 </html>`;
 
 function safeParseProject(raw: string): LabProject | null {
+  // Accepter både nuværende skema (v2) og ældre skema (v1), normaliser til v2.
   try {
     const parsed = JSON.parse(raw) as Partial<LabProject | LegacyLabProject>;
 
@@ -495,6 +504,7 @@ export function WebLab() {
   const weblabText = weblabLanguage[siteLocale].weblab;
   const editorIntroCopy = weblabLanguage[siteLocale].editorIntro;
   const panelDefaults = useMemo(() => {
+    // Bevar fornuftige panelbredder for alle synlighedskombinationer.
     const showExplorer = visiblePanes.explorer;
     const showEditor = visiblePanes.editor;
     const showPreview = visiblePanes.preview;
@@ -539,6 +549,7 @@ export function WebLab() {
   }, [weblabText.statusDraftAutosave]);
 
   useEffect(() => {
+    // Indledende hydrering: viewport-tilstand + gendannelse af lokalt kladdeindhold.
     const media = window.matchMedia('(max-width: 880px)');
     const applyViewportMode = () => {
       setIsMobile(media.matches);
@@ -578,10 +589,12 @@ export function WebLab() {
       return;
     }
 
+    // Persistér hele kladden efter hydrering, så genindlæsning ikke mister data.
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(project));
   }, [isHydrated, project]);
 
   useEffect(() => {
+    // Spor ændringer i tidszone, så tidsstempler forbliver korrekte efter fokus/systemopdateringer.
     const syncTimeZone = () => {
       const nextTimeZone = new Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
       setActiveTimeZone((current) => (current === nextTimeZone ? current : nextTimeZone));
@@ -675,6 +688,7 @@ export function WebLab() {
   );
 
   const handleEditorMount = useCallback<OnMount>((editor, monaco) => {
+    // Registrer brugerdefinerede HTML-fuldførelser én gang pr. komponentlivscyklus.
     if (!htmlCompletionProviderDisposableRef.current) {
       htmlCompletionProviderDisposableRef.current = monaco.languages.registerCompletionItemProvider('html', {
         triggerCharacters: ['<', '"', '\'', '/'],
@@ -744,6 +758,7 @@ export function WebLab() {
 
     let isApplyingAutoClose = false;
     const closeTagDisposable = editor.onDidChangeModelContent((changeEvent) => {
+      // Auto-luk tags ved accepteret fuldførelse eller skrevet ">", uden at skabe løkker.
       if (isApplyingAutoClose || changeEvent.isFlush) {
         return;
       }
@@ -830,6 +845,7 @@ export function WebLab() {
 
   const pushPreviewUpdate = useCallback(
     (targetWindow?: Window | null) => {
+      // Hold både indlejret iframe og separat fane synkroniseret med aktuel srcDoc.
       const target = targetWindow ?? previewTabRef.current;
       if (!target || target.closed) {
         previewTabRef.current = null;
@@ -922,6 +938,7 @@ export function WebLab() {
     notice === weblabLanguage.en.weblab.statusRecovered || notice === weblabLanguage.da.weblab.statusRecovered;
 
   function markProjectChanged(updater: (prev: LabProject) => LabProject) {
+    // Central hjælpefunktion til mutation: opdater projekt, tidsstempel og dirty-state samlet.
     setProject((prev) => {
       const next = updater(prev);
       return {
@@ -935,6 +952,7 @@ export function WebLab() {
 
   function updateCode(value: string | undefined) {
     const next = value ?? '';
+    // "!" udvides til start-boilerplate til hurtige klasseværelsesforløb.
     if (activeFile?.kind === 'css' && /^\s*!$/.test(next)) {
       markProjectChanged((prev) => ({
         ...prev,
@@ -1101,6 +1119,7 @@ export function WebLab() {
       updatedAt: new Date().toISOString(),
     };
 
+    // Eksportér aktuelt projekt som et portabelt .nordpixel.json-arkiv.
     const blob = new Blob([JSON.stringify(next, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const anchor = document.createElement('a');
@@ -1156,6 +1175,7 @@ export function WebLab() {
   }
 
   function openPreviewInNewTab() {
+    // Genbrug eksisterende forhåndsvisningsfane, når muligt, for at undgå popup-spam.
     let previewWindow = previewTabRef.current;
     if (!previewWindow || previewWindow.closed) {
       previewWindow = window.open('', '_blank');
@@ -1192,10 +1212,12 @@ export function WebLab() {
   }
 
   useEffect(() => {
+    // Send nyt forhåndsvisningsindhold, hver gang srcDoc ændrer sig.
     pushPreviewUpdate();
   }, [pushPreviewUpdate]);
 
   useEffect(() => {
+    // Den separate forhåndsvisningsfane melder klar, før den modtager opdateringer.
     const handlePreviewReady = (event: MessageEvent) => {
       if (event.origin !== window.location.origin) {
         return;
@@ -1213,6 +1235,7 @@ export function WebLab() {
   }, [pushPreviewUpdate]);
 
   useEffect(() => {
+    // Knyt opfanget navigation fra forhåndsvisningen til lokale HTML-filer i filoversigten.
     const handleNavMessage = (event: MessageEvent) => {
       if (!event.data || event.data.type !== 'nordpixel-navigate') {
         return;

@@ -29,7 +29,7 @@
 	gap: 0.5rem;
 	text-decoration: none;
 	color: #f9f9f9;
-	font-size: 1.1rem;
+	font-size: var(--font-size-brand-sm);
 	font-weight: bold;
 	letter-spacing: 0em;
 }
@@ -44,7 +44,7 @@
 	line-height: 0.9;
 	font-family: 'Tomorrow', 'Arial Black', sans-serif;
 	font-weight: bold;
-	font-size: 1.3rem;
+	font-size: var(--font-size-brand-lg);
 	letter-spacing: 0em;
 }
 
@@ -112,15 +112,15 @@ button:not(:disabled):active,
 
 .cookieConsentCopy h2 {
 	margin: 0;
-	font-size: 1rem;
-	line-height: 1.25;
+	font-size: var(--font-size-heading-4);
+	line-height: var(--line-height-tight);
 	color: color-mix(in oklab, var(--brand-navy) 92%, black 8%);
 }
 
 .cookieConsentCopy p {
 	margin: 0;
-	font-size: 0.9rem;
-	line-height: 1.45;
+	font-size: var(--font-size-body-sm);
+	line-height: var(--line-height-comfortable);
 	color: color-mix(in oklab, var(--text-primary) 80%, var(--text-muted) 20%);
 }
 
@@ -137,9 +137,9 @@ button:not(:disabled):active,
 	cursor: pointer;
 	border: 0;
 	padding: 0.55rem 0.9rem;
-	font-size: 0.85rem;
+	font-size: var(--font-size-body-sm);
 	font-weight: 700;
-	line-height: 1.1;
+	line-height: var(--line-height-tight);
 	transition: transform 0.14s ease, filter 0.14s ease, background-color 0.2s ease;
 }
 
@@ -153,11 +153,9 @@ button:not(:disabled):active,
 
 .cookieConsentButtonAccept {
 	border: 1px solid color-mix(in oklab, var(--brand-orange) 82%, #b56b07 18%);
-	background: linear-gradient(
-		130deg,
-		color-mix(in oklab, var(--brand-orange) 78%, #ffd07e 22%),
-		var(--brand-orange)
-	);
+	background: linear-gradient(130deg,
+			color-mix(in oklab, var(--brand-orange) 78%, #ffd07e 22%),
+			var(--brand-orange));
 	color: color-mix(in oklab, var(--brand-navy) 92%, black 8%);
 }
 
@@ -171,10 +169,12 @@ button:not(:disabled):active,
 		opacity: 0;
 		transform: translate3d(14px, 28px, 0) scale(0.94);
 	}
+
 	70% {
 		opacity: 1;
 		transform: translate3d(0, -2px, 0) scale(1.01);
 	}
+
 	100% {
 		opacity: 1;
 		transform: translate3d(0, 0, 0) scale(1);
@@ -239,7 +239,7 @@ button:not(:disabled):active,
 	color: color-mix(in oklab, #ffffff 72%, #8ea3a6 28%);
 	border-radius: 999px;
 	padding: 0.14rem 0.42rem;
-	font-size: 0.56rem;
+	font-size: var(--font-size-legal);
 	font-weight: 700;
 	cursor: pointer;
 }
@@ -291,7 +291,7 @@ button:not(:disabled):active,
 	height: 1rem;
 	padding: 0 0.2rem;
 	border-radius: 999px;
-	font-size: 0.6rem;
+	font-size: var(--font-size-legal);
 	font-weight: 700;
 	display: inline-flex;
 	align-items: center;
@@ -310,15 +310,18 @@ button:not(:disabled):active,
 		transform: scale(1);
 		box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--brand-orange) 34%, transparent 66%);
 	}
+
 	25% {
 		transform: scale(1.12);
 		box-shadow:
 			inset 0 0 0 1px color-mix(in oklab, var(--brand-orange) 76%, transparent 24%),
 			0 0 0.7rem color-mix(in oklab, var(--brand-orange) 60%, transparent 40%);
 	}
+
 	55% {
 		transform: scale(0.96);
 	}
+
 	100% {
 		transform: scale(1);
 		box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--brand-orange) 34%, transparent 66%);
@@ -393,6 +396,7 @@ button:not(:disabled):active,
 }
 
 @media (max-width: 640px) {
+
 	html,
 	body {
 		overflow-x: clip;
@@ -445,7 +449,7 @@ button:not(:disabled):active,
 	}
 
 	.siteHeaderLanguage button {
-		font-size: 0.52rem;
+		font-size: var(--font-size-legal);
 		padding: 0.12rem 0.3rem;
 	}
 
@@ -527,7 +531,7 @@ body {
 	background: var(--surface-page);
 }
 
-/* WebLab page should use a calm neutral canvas, not the global branded body background. */
+/* WebLab-siden skal bruge en rolig, neutral flade og ikke den globale, brandede body-baggrund. */
 body:has(.editorPage) {
 	background: var(--surface-page);
 }
@@ -536,14 +540,14 @@ html {
 	scrollbar-gutter: auto;
 }
 
-/* Branded scrollbar: subtle but visible on desktop, default on mobile. */
+/* Brandet scrollbar: diskret men synlig på desktop, standard på mobil. */
 @media (min-width: 881px) {
+
 	html,
 	body {
 		scrollbar-width: thin;
 		scrollbar-color:
-			color-mix(in oklab, var(--brand-navy) 62%, var(--surface-page) 38%)
-			color-mix(in oklab, var(--surface-page) 94%, var(--brand-orange-soft) 6%);
+			color-mix(in oklab, var(--brand-navy) 62%, var(--surface-page) 38%) color-mix(in oklab, var(--surface-page) 94%, var(--brand-orange-soft) 6%);
 	}
 
 	html::-webkit-scrollbar,
@@ -566,11 +570,9 @@ html {
 
 	html::-webkit-scrollbar-thumb:hover,
 	body::-webkit-scrollbar-thumb:hover {
-		background: color-mix(
-			in oklab,
-			color-mix(in oklab, var(--brand-navy) 78%, var(--brand-orange) 22%) 62%,
-			var(--surface-page) 38%
-		);
+		background: color-mix(in oklab,
+				color-mix(in oklab, var(--brand-navy) 78%, var(--brand-orange) 22%) 62%,
+				var(--surface-page) 38%);
 	}
 }
 
@@ -595,7 +597,7 @@ html {
 	background: var(--brand-navy);
 	color: #ffffff;
 	text-decoration: none;
-	font-size: 0.85rem;
+	font-size: var(--font-size-body-xs);
 	font-weight: 700;
 }
 
@@ -607,11 +609,9 @@ html {
 	margin-top: auto;
 	border-top: 0;
 	background:
-		linear-gradient(
-			110deg,
+		linear-gradient(110deg,
 			color-mix(in oklab, var(--brand-navy) 96%, #0f1f22 4%),
-			color-mix(in oklab, var(--brand-navy) 90%, #16353a 10%)
-		);
+			color-mix(in oklab, var(--brand-navy) 90%, #16353a 10%));
 	box-shadow: inset 0 1px 0 color-mix(in oklab, var(--brand-orange) 24%, transparent 76%);
 }
 
@@ -628,7 +628,7 @@ html {
 .siteFooterBrand {
 	margin: 0;
 	font-family: 'Tomorrow', 'Arial Black', sans-serif;
-	font-size: 1rem;
+	font-size: var(--font-size-body);
 	font-weight: 700;
 	letter-spacing: 0em;
 	color: #f5f8ff;
@@ -641,7 +641,7 @@ html {
 
 .siteFooterDetails p {
 	margin: 0;
-	font-size: 0.9rem;
+	font-size: var(--font-size-body-sm);
 	color: color-mix(in oklab, #ffffff 86%, #8ea3a6 14%);
 }
 
@@ -649,7 +649,7 @@ html {
 	color: color-mix(in oklab, #ffffff 66%, #8ea3a6 34%);
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
-	font-size: 0.7rem;
+	font-size: var(--font-size-legal);
 	font-weight: 700;
 	margin-right: 0.2rem;
 }
@@ -678,23 +678,23 @@ html {
 .landing {
 	margin: 0 auto;
 	width: min(1320px, 94vw);
-	padding: 1.8rem 0 2.8rem;
+	padding: var(--space-2xl) 0 var(--space-3xl);
 }
 
 .editorPage {
 	margin: 0 auto;
 	width: min(1320px, 94vw);
-	padding: 1.4rem 0 1.8rem;
+	padding: var(--space-xl) 0 var(--space-2xl);
 	display: grid;
-	gap: 0.9rem;
+	gap: var(--space-lg);
 	background: color-mix(in oklab, var(--surface-page) 97%, #ffffff 3%);
 }
 
 .landing {
 	display: grid;
-	gap: 1.8rem;
+	gap: var(--space-3xl);
 	padding-top: 0;
-	padding-bottom: 1.8rem;
+	padding-bottom: var(--space-2xl);
 	border-radius: 0;
 	overflow: hidden;
 	background: color-mix(in oklab, var(--surface-page) 90%, #ffffff 10%);
@@ -703,10 +703,10 @@ html {
 
 .landingHero {
 	display: grid;
-	gap: 1.2rem;
+	gap: var(--space-xl);
 	border: 0;
 	border-radius: 0;
-	padding: clamp(1.8rem, 3vw, 3.3rem);
+	padding: clamp(2rem, 3vw, 3.3rem);
 	position: relative;
 	overflow: hidden;
 	background: transparent;
@@ -744,7 +744,7 @@ html {
 .landingHeroGrid {
 	display: grid;
 	grid-template-columns: minmax(0, 1fr);
-	gap: clamp(1rem, 2.4vw, 2rem);
+	gap: clamp(var(--space-lg), 2.4vw, var(--space-3xl));
 	align-items: stretch;
 	max-width: min(980px, 100%);
 	margin-inline: auto;
@@ -754,7 +754,7 @@ html {
 
 .landingHeroCopy {
 	display: grid;
-	gap: 0.75rem;
+	gap: var(--space-sm);
 	justify-items: center;
 	text-align: center;
 }
@@ -763,9 +763,9 @@ html {
 	margin: 0;
 	width: auto;
 	max-width: none;
-	font-size: clamp(1.15rem, 3.2vw, 2.95rem);
+	font-size: var(--font-size-display);
 	font-weight: 700;
-	line-height: 1.12;
+	line-height: var(--line-height-tight);
 	letter-spacing: -0.01em;
 	white-space: nowrap;
 	position: relative;
@@ -783,11 +783,9 @@ html {
 	width: 100%;
 	height: 0.34rem;
 	border-radius: 999px;
-	background: linear-gradient(
-		90deg,
-		color-mix(in oklab, var(--brand-orange) 84%, #ffd58c 16%),
-		var(--brand-orange)
-	);
+	background: linear-gradient(90deg,
+			color-mix(in oklab, var(--brand-orange) 84%, #ffd58c 16%),
+			var(--brand-orange));
 	box-shadow: 0 0.18rem 0.45rem color-mix(in oklab, var(--brand-orange) 26%, transparent 74%);
 }
 
@@ -795,9 +793,9 @@ html {
 	margin: 0;
 	width: min(100%, 58ch);
 	max-width: 58ch;
-	font-size: clamp(1rem, 0.45vw + 0.92rem, 1.2rem);
+	font-size: var(--font-size-heading-2);
 	font-weight: 600;
-	line-height: 1.32;
+	line-height: var(--line-height-comfortable);
 	color: color-mix(in oklab, var(--brand-navy) 76%, var(--text-muted) 24%);
 	text-wrap: balance;
 }
@@ -805,8 +803,8 @@ html {
 .landingLead {
 	margin: 0;
 	max-width: 62ch;
-	font-size: 1rem;
-	line-height: 1.55;
+	font-size: var(--font-size-body);
+	line-height: var(--line-height-body);
 	color: color-mix(in oklab, var(--text-primary) 84%, var(--text-muted) 16%);
 }
 
@@ -820,15 +818,15 @@ html {
 .landingProof {
 	display: grid;
 	grid-template-columns: repeat(3, minmax(0, 1fr));
-	gap: 0.9rem;
+	gap: var(--space-lg);
 	margin-top: 0.1rem;
 	width: 100%;
 }
 
 .landingProofCard {
 	display: grid;
-	gap: 0.3rem;
-	padding: 1rem 1.1rem;
+	gap: var(--space-2xs);
+	padding: var(--space-md) 1.1rem;
 	border-radius: 0.8rem;
 	background: color-mix(in oklab, var(--surface-page) 88%, #ffffff 12%);
 	text-align: left;
@@ -836,26 +834,25 @@ html {
 }
 
 .landingProofCard strong {
-	font-size: 0.9rem;
+	font-size: var(--font-size-body-sm);
 	color: color-mix(in oklab, var(--brand-navy) 88%, black 12%);
 }
 
 .landingProofCard span {
-	font-size: 0.8rem;
-	line-height: 1.4;
+	font-size: var(--font-size-caption);
+	line-height: var(--line-height-heading);
 	color: var(--text-muted);
 }
 
 .landingHeroVisual {
 	display: grid;
-	gap: 0.7rem;
+	gap: var(--space-sm);
 	align-content: start;
-	padding: 1.2rem;
+	padding: var(--space-lg);
 	border-radius: 1rem;
 	background: linear-gradient(160deg, color-mix(in oklab, var(--surface-page) 86%, #ffffff 14%), color-mix(in oklab, #dff3ef 20%, var(--surface-panel) 80%));
-	box-shadow:
-		0 0.7rem 1.8rem color-mix(in oklab, #0c4d46 10%, transparent 90%),
-		inset 0 0 0 1px color-mix(in oklab, #2f9d8f 24%, transparent 76%);
+	border: 0;
+	box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--brand-orange) 80%, transparent 90%);
 }
 
 .landingHeroLogoWrap {
@@ -876,7 +873,7 @@ html {
 
 .landingHeroVisual h2 {
 	margin: 0;
-	font-size: 1rem;
+	font-size: var(--font-size-heading-4);
 	color: color-mix(in oklab, var(--brand-navy) 90%, black 10%);
 }
 
@@ -891,8 +888,8 @@ html {
 .landingHeroVisual li {
 	position: relative;
 	padding-left: 1.1rem;
-	font-size: 0.9rem;
-	line-height: 1.5;
+	font-size: var(--font-size-body-sm);
+	line-height: var(--line-height-body);
 	color: color-mix(in oklab, var(--text-primary) 78%, var(--text-muted) 22%);
 }
 
@@ -910,8 +907,8 @@ html {
 .landingActions {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 0.8rem;
-	margin-top: 1.4rem;
+	gap: var(--space-sm);
+	margin-top: var(--space-lg);
 	justify-content: center;
 }
 
@@ -924,21 +921,19 @@ html {
 
 .landingWeblabNote {
 	margin: 0;
-	font-size: 0.85rem;
-	line-height: 1.45;
+	font-size: var(--font-size-body-xs);
+	line-height: var(--line-height-comfortable);
 	color: color-mix(in oklab, var(--text-primary) 76%, var(--text-muted) 24%);
 }
 
 .landingWeblabWorkspace {
 	display: grid;
-	gap: 0.35rem;
-	padding: 0.8rem 0.9rem;
+	gap: var(--space-2xs);
+	padding: var(--space-sm) var(--space-md);
 	border-radius: 0.85rem;
-	background: linear-gradient(
-		145deg,
-		color-mix(in oklab, var(--surface-page) 88%, #ffffff 12%),
-		color-mix(in oklab, var(--surface-panel) 88%, var(--brand-orange-soft) 12%)
-	);
+	background: linear-gradient(145deg,
+			color-mix(in oklab, var(--surface-page) 88%, #ffffff 12%),
+			color-mix(in oklab, var(--surface-panel) 88%, var(--brand-orange-soft) 12%));
 	box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--brand-orange) 16%, transparent 84%);
 }
 
@@ -948,32 +943,29 @@ html {
 }
 
 .landingWeblabWorkspace h2 {
-	font-size: 1rem;
-	line-height: 1.25;
+	font-size: var(--font-size-heading-4);
+	line-height: var(--line-height-tight);
 	color: color-mix(in oklab, var(--brand-navy) 90%, black 10%);
 }
 
 .landingWeblabWorkspace p {
-	font-size: 0.95rem;
-	line-height: 1.45;
+	font-size: var(--font-size-body-sm);
+	line-height: var(--line-height-comfortable);
 	color: color-mix(in oklab, var(--text-primary) 82%, var(--text-muted) 18%);
 }
 
 .landingWeblabWorkspaceHint {
-	font-size: 0.82rem;
+	font-size: var(--font-size-body-xs);
 	color: var(--text-muted);
 }
 
 .landingTrust {
 	display: grid;
-	gap: 0.8rem;
-	border-radius: 1rem;
-	padding: 1.3rem 1.5rem;
-	background: linear-gradient(
-		145deg,
-		color-mix(in oklab, var(--surface-panel) 80%, #ffffff 20%),
-		color-mix(in oklab, var(--brand-orange-soft) 48%, var(--surface-panel) 52%)
-	);
+	gap: var(--space-lg);
+	padding: var(--space-lg) var(--space-xl);
+	background: linear-gradient(145deg,
+			color-mix(in oklab, var(--surface-panel) 80%, #ffffff 20%),
+			color-mix(in oklab, var(--brand-orange-soft) 48%, var(--surface-panel) 52%));
 	box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--brand-orange) 22%, transparent 78%);
 }
 
@@ -983,7 +975,7 @@ html {
 
 .landingTrust h2 {
 	margin: 0;
-	font-size: 0.98rem;
+	font-size: var(--font-size-body);
 	color: color-mix(in oklab, var(--brand-navy) 88%, black 12%);
 }
 
@@ -995,8 +987,8 @@ html {
 }
 
 .landingTrust li {
-	font-size: 0.88rem;
-	line-height: 1.5;
+	font-size: var(--font-size-body-sm);
+	line-height: var(--line-height-body);
 	color: color-mix(in oklab, var(--text-primary) 82%, var(--text-muted) 18%);
 }
 
@@ -1005,11 +997,9 @@ html {
 }
 
 .landingButtonPrimary {
-	background: linear-gradient(
-		130deg,
-		color-mix(in oklab, var(--brand-orange) 78%, #ffd07e 22%),
-		var(--brand-orange)
-	);
+	background: linear-gradient(130deg,
+			color-mix(in oklab, var(--brand-orange) 78%, #ffd07e 22%),
+			var(--brand-orange));
 	border: 1px solid color-mix(in oklab, var(--brand-orange) 82%, #b56b07 18%);
 	color: color-mix(in oklab, var(--brand-navy) 92%, black 8%);
 	box-shadow: 0 0.45rem 1.1rem color-mix(in oklab, var(--brand-orange) 30%, transparent 70%);
@@ -1025,13 +1015,12 @@ html {
 .landingMethod,
 .landingClosing {
 	border-radius: 1rem;
-	padding: 1.5rem;
+	padding: var(--space-xl);
 }
 
 .landingAuthority {
-	background: color-mix(in oklab, var(--surface-panel) 89%, #ffffff 11%);
 	display: grid;
-	gap: 1rem;
+	gap: var(--space-lg);
 }
 
 .landingAuthority h2,
@@ -1044,13 +1033,13 @@ html {
 .landingAuthorityGrid {
 	display: grid;
 	grid-template-columns: repeat(3, minmax(0, 1fr));
-	gap: 1rem;
+	gap: var(--space-lg);
 }
 
 .landingAuthorityCard {
 	display: grid;
-	gap: 0.5rem;
-	padding: 1rem;
+	gap: var(--space-xs);
+	padding: var(--space-md);
 	border-radius: 0.8rem;
 	background: color-mix(in oklab, var(--surface-page) 90%, #ffffff 10%);
 }
@@ -1070,20 +1059,18 @@ html {
 
 .landingMethod {
 	display: grid;
-	gap: 1.1rem;
+	gap: var(--space-xl);
 	border-radius: 0.45rem;
-	padding: 1.3rem;
+	padding: var(--space-xl);
 	margin-inline: clamp(0.8rem, 1.8vw, 1.6rem);
-	background: linear-gradient(
-		145deg,
-		color-mix(in oklab, var(--surface-panel) 86%, #ffffff 14%),
-		color-mix(in oklab, var(--brand-orange-soft) 38%, var(--surface-panel) 62%)
-	);
+	background: linear-gradient(145deg,
+			color-mix(in oklab, var(--surface-panel) 86%, #ffffff 14%),
+			color-mix(in oklab, var(--brand-orange-soft) 38%, var(--surface-panel) 62%));
 }
 
 .landingMethodHeader {
 	display: grid;
-	gap: 0.45rem;
+	gap: var(--space-xs);
 }
 
 .landingMethodLead {
@@ -1100,13 +1087,13 @@ html {
 	list-style: none;
 	display: grid;
 	grid-template-columns: repeat(3, minmax(0, 1fr));
-	gap: 0.85rem;
+	gap: var(--space-lg);
 }
 
 .landingMethod li {
 	display: grid;
-	gap: 0.45rem;
-	padding: 1rem;
+	gap: var(--space-xs);
+	padding: var(--space-md);
 	border-radius: 0.35rem;
 	background: color-mix(in oklab, var(--surface-page) 91%, #ffffff 9%);
 	border-left: 3px solid color-mix(in oklab, var(--brand-orange) 50%, transparent 50%);
@@ -1127,7 +1114,7 @@ html {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	gap: 0.9rem;
+	gap: var(--space-md);
 	flex-wrap: wrap;
 	padding-top: 0.3rem;
 	border-top: 1px solid color-mix(in oklab, var(--brand-orange) 24%, transparent 76%);
@@ -1153,7 +1140,7 @@ html {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	gap: 1.2rem;
+	gap: var(--space-xl);
 	flex-wrap: wrap;
 	background: linear-gradient(130deg, color-mix(in oklab, var(--brand-orange-soft) 70%, var(--surface-panel) 30%), color-mix(in oklab, #ffffff 86%, var(--surface-panel) 14%));
 }
@@ -1178,7 +1165,7 @@ html {
 	width: min(1320px, 94vw);
 	padding: 0;
 	display: grid;
-	gap: 1.3rem;
+	gap: var(--space-xl);
 	border-radius: 0;
 	position: relative;
 	isolation: isolate;
@@ -1186,7 +1173,7 @@ html {
 }
 
 .coursesPage {
-	padding: 0 clamp(0.9rem, 1.6vw, 1.4rem) 1.8rem;
+	padding: 0 clamp(0.9rem, 1.6vw, 1.4rem) var(--space-2xl);
 }
 
 .coursesPage::after,
@@ -1220,7 +1207,7 @@ html {
 
 .contactPageHero {
 	display: grid;
-	gap: 0.8rem;
+	gap: var(--space-sm);
 	padding-top: clamp(1.3rem, 2.2vw, 2rem);
 	padding-bottom: 0.2rem;
 }
@@ -1244,14 +1231,14 @@ html {
 .contactPageProof {
 	display: grid;
 	grid-template-columns: repeat(3, minmax(0, 1fr));
-	gap: 0.7rem;
-	margin-top: 0.3rem;
+	gap: var(--space-md);
+	margin-top: var(--space-xs);
 }
 
 .contactProof {
 	display: grid;
-	gap: 0.2rem;
-	padding: 0.8rem 0.8rem;
+	gap: var(--space-2xs);
+	padding: var(--space-md);
 	border-radius: 0.9rem;
 	background: color-mix(in oklab, var(--surface-panel) 90%, var(--brand-orange-soft) 10%);
 }
@@ -1269,7 +1256,7 @@ html {
 
 .coursesPageHero p {
 	max-width: 78ch;
-	margin-top: 0.7rem;
+	margin-top: var(--space-sm);
 	margin-bottom: 0;
 	font-size: 0.9rem;
 	line-height: 1.5;
@@ -1277,17 +1264,17 @@ html {
 
 .coursesIntroStack {
 	display: grid;
-	gap: 0.5rem;
+	gap: var(--space-md);
 }
 
 .coursesSection {
 	display: grid;
-	gap: 1rem;
+	gap: var(--space-lg);
 }
 
 .coursesSectionHeader {
 	display: grid;
-	gap: 1rem;
+	gap: var(--space-lg);
 }
 
 .coursesFiltersHeading {
@@ -1333,19 +1320,19 @@ html {
 	width: fit-content;
 	max-width: 100%;
 	padding: 0.35rem;
-	}
+}
 
 .coursesUvm {
 	display: grid;
-	gap: 0.7rem;
-	padding: 1rem 1.2rem;
+	gap: var(--space-md);
+	padding: var(--space-lg);
 	border-radius: 1rem;
 	background: linear-gradient(145deg, color-mix(in oklab, var(--surface-panel) 86%, var(--brand-orange-soft) 14%), color-mix(in oklab, #ffffff 90%, var(--surface-panel) 10%));
 }
 
 .coursesUvm h2 {
-	font-size: clamp(1.1rem, 1vw + 0.8rem, 1.4rem);
-	line-height: 1.2;
+	font-size: var(--font-size-heading-2);
+	line-height: var(--line-height-tight);
 }
 
 .coursesUvm h2,
@@ -1357,47 +1344,48 @@ html {
 .coursesUvmRoles {
 	display: grid;
 	grid-template-columns: repeat(2, minmax(0, 1fr));
-	gap: 0.8rem;
+	gap: var(--space-md);
 }
 
 .coursesUvmRoles article {
 	display: grid;
-	gap: 0.3rem;
-	padding: 0.8rem;
+	gap: var(--space-2xs);
+	padding: var(--space-md);
 	border-radius: 0.8rem;
 	background: color-mix(in oklab, var(--surface-page) 90%, white 10%);
 }
 
 .coursesUvmRoles h3 {
-	font-size: 0.8rem;
+	font-size: var(--font-size-legal);
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
+	line-height: var(--line-height-tight);
 	color: color-mix(in oklab, var(--brand-navy) 82%, var(--text-muted) 18%);
 }
 
 .coursesUvmRoles p {
-	font-size: 0.9rem;
-	line-height: 1.4;
+	font-size: var(--font-size-body-sm);
+	line-height: var(--line-height-comfortable);
 	color: color-mix(in oklab, var(--text-primary) 78%, var(--text-muted) 22%);
 }
 
 .coursesCustomTrack {
 	display: grid;
 	grid-template-columns: minmax(0, 1fr) auto;
-	gap: 0.85rem;
+	gap: var(--space-lg);
 	align-items: center;
 	width: min(100%, 980px);
 	margin-inline: auto;
-	padding: 0.9rem 1rem;
+	padding: var(--space-md);
 	border-radius: 1rem;
 	background: linear-gradient(145deg, color-mix(in oklab, var(--surface-page) 84%, #ffffff 16%), color-mix(in oklab, var(--brand-orange-soft) 30%, var(--surface-panel) 70%));
 	box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--brand-orange) 18%, transparent 82%);
 }
 
-.coursesCustomTrack > div {
+.coursesCustomTrack>div {
 	max-width: 64ch;
 	display: grid;
-	gap: 0.16rem;
+	gap: var(--space-2xs);
 }
 
 .coursesCustomTrack h3,
@@ -1406,15 +1394,15 @@ html {
 }
 
 .coursesCustomTrack h3 {
-	font-size: 1.02rem;
-	font-weight: 600;
-	line-height: 1.25;
+	font-size: var(--font-size-heading-4);
+	font-weight: 700;
+	line-height: var(--line-height-tight);
 	color: color-mix(in oklab, var(--brand-navy) 90%, black 10%);
 }
 
 .coursesCustomTrack p {
-	font-size: 0.92rem;
-	line-height: 1.45;
+	font-size: var(--font-size-body-sm);
+	line-height: var(--line-height-comfortable);
 	color: color-mix(in oklab, var(--text-primary) 76%, var(--text-muted) 24%);
 }
 
@@ -1428,51 +1416,50 @@ html {
 	border: 1px solid color-mix(in oklab, var(--brand-orange) 82%, #b56b07 18%);
 	border-radius: 999px;
 	padding: 0.55rem 0.95rem;
-	font-size: 0.9rem;
+	font-size: var(--font-size-body-sm);
 	font-weight: 600;
 	color: color-mix(in oklab, var(--brand-navy) 92%, black 8%);
-	background: linear-gradient(
-		130deg,
-		color-mix(in oklab, var(--brand-orange) 78%, #ffd07e 22%),
-		var(--brand-orange)
-	);
+	background: linear-gradient(130deg,
+			color-mix(in oklab, var(--brand-orange) 78%, #ffd07e 22%),
+			var(--brand-orange));
 }
 
 .coursesSectionTracks {
-	margin-top: 0.2rem;
-	padding-top: 0.8rem;
+	margin-top: var(--space-xs);
+	padding-top: var(--space-md);
 	border-top: 1px solid color-mix(in oklab, var(--brand-navy) 10%, transparent 90%);
 }
 
 .coursesSectionTracks .coursesFiltersHeading h2 {
-	font-size: clamp(1.2rem, 1vw + 0.9rem, 1.5rem);
-	line-height: 1.1;
+	font-size: var(--font-size-heading-2);
+	line-height: var(--line-height-tight);
 	color: color-mix(in oklab, var(--brand-navy) 92%, black 8%);
 }
 
 .coursesSectionTracks .coursesFiltersHeading p {
-	font-size: 0.8rem;
+	font-size: var(--font-size-caption);
 }
 
 .coursesFiltersField {
 	display: grid;
-	gap: 0.16rem;
+	gap: var(--space-2xs);
 }
 
 .coursesFiltersField span {
-	font-size: 0.64rem;
+	font-size: var(--font-size-legal);
 	letter-spacing: 0em;
 	text-transform: uppercase;
 	font-weight: 700;
+	line-height: var(--line-height-tight);
 	color: color-mix(in oklab, var(--brand-navy) 80%, var(--text-muted) 20%);
 }
 
 .coursesFiltersField input,
 .coursesFiltersField select {
 	width: 100%;
-	padding: 0.42rem 0.62rem;
-	font-size: 0.82rem;
-	line-height: 1.2;
+	padding: 0.5rem 0.7rem;
+	font-size: var(--font-size-body-xs);
+	line-height: var(--line-height-tight);
 	border-radius: 0.62rem;
 	border: 1px solid color-mix(in oklab, var(--brand-navy) 14%, transparent 86%);
 	background: var(--surface-page);
@@ -1485,10 +1472,10 @@ html {
 
 .coursesFiltersReset {
 	height: fit-content;
-	padding: 0.42rem 0.74rem;
-	font-size: 0.82rem;
+	padding: 0.5rem 0.85rem;
+	font-size: var(--font-size-body-xs);
 	font-weight: 600;
-	line-height: 1.2;
+	line-height: var(--line-height-tight);
 	border-radius: 999px;
 	border: 1px solid color-mix(in oklab, var(--brand-orange) 26%, transparent 74%);
 	background: color-mix(in oklab, var(--surface-page) 86%, var(--brand-orange-soft) 14%);
@@ -1505,35 +1492,35 @@ html {
 .coursesFiltersEmpty {
 	display: grid;
 	place-items: start;
-	gap: 0.8rem;
-	padding: 1.2rem 0;
+	gap: var(--space-md);
+	padding: var(--space-xl) 0;
 	color: var(--text-muted);
 	font-size: 1rem;
 }
 
 .coursesSectionHeader h2 {
-	font-size: clamp(1rem, 1.2vw, 1.2rem);
+	font-size: var(--font-size-heading-4);
 	color: color-mix(in oklab, var(--brand-navy) 90%, black 10%);
 }
 
 .coursesSectionHeader p {
 	max-width: 82ch;
-	font-size: 0.9rem;
-	line-height: 1.5;
+	font-size: var(--font-size-body-sm);
+	line-height: var(--line-height-body);
 	color: color-mix(in oklab, var(--text-primary) 74%, var(--text-muted) 26%);
 }
 
 .coursesTimelines {
 	display: grid;
-	gap: 3rem;
+	gap: var(--space-3xl);
 }
 
 .timelineTrack {
 	display: grid;
 	grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-	gap: clamp(0.8rem, 2vw, 1.4rem);
+	gap: clamp(var(--space-md), 2vw, var(--space-xl));
 	align-items: stretch;
-	padding: 0.9rem;
+	padding: var(--space-md);
 	border-radius: 1rem;
 	border: 1px solid color-mix(in oklab, var(--brand-orange) 32%, transparent 68%);
 	border-left: 0.4rem solid color-mix(in oklab, var(--brand-orange) 72%, transparent 28%);
@@ -1543,21 +1530,21 @@ html {
 
 .timelineTrackContent {
 	display: grid;
-	gap: 1rem;
+	gap: var(--space-lg);
 	align-content: start;
 }
 
 .timelineTrackHeadingRow {
 	display: grid;
-	gap: 0.4rem;
-	padding-top: 1rem;
+	gap: var(--space-xs);
+	padding-top: var(--space-md);
 }
 
 .timelineTrack h3 {
 	margin: 0;
 	font-family: 'Tomorrow', 'Arial Black', sans-serif;
-	font-size: clamp(1rem, 1.2vw, 1.2rem);
-	line-height: 1.2;
+	font-size: var(--font-size-heading-4);
+	line-height: var(--line-height-tight);
 	letter-spacing: 0em;
 	color: color-mix(in oklab, var(--brand-navy) 93%, black 7%);
 }
@@ -1565,14 +1552,14 @@ html {
 .timelineTrackSummary {
 	margin: 0;
 	max-width: 72ch;
-	font-size: 0.9rem;
-	line-height: 1.4;
+	font-size: var(--font-size-body-sm);
+	line-height: var(--line-height-comfortable);
 }
 
 .timelineTrackMeta {
 	display: grid;
 	grid-template-columns: repeat(3, minmax(0, 1fr));
-	gap: 0.6rem 0.8rem;
+	gap: var(--space-sm) var(--space-md);
 	list-style: none;
 	margin: 0;
 	padding: 0;
@@ -1581,9 +1568,9 @@ html {
 .timelineTrackMeta li {
 	display: grid;
 	grid-template-columns: auto minmax(0, 1fr);
-	gap: 0.5rem;
+	gap: var(--space-xs);
 	align-items: start;
-	padding: 0.4rem 0.6rem;
+	padding: var(--space-xs) var(--space-md);
 	border-radius: 0.8rem;
 	background: color-mix(in oklab, var(--surface-muted) 55%, transparent 45%);
 }
@@ -1602,22 +1589,23 @@ html {
 }
 
 .timelineTrackMeta p {
-	font-size: 0.7rem;
+	font-size: var(--font-size-legal);
 	letter-spacing: 0em;
 	text-transform: uppercase;
 	font-weight: 700;
+	line-height: var(--line-height-tight);
 	color: color-mix(in oklab, var(--brand-navy) 80%, var(--text-muted) 20%);
 }
 
 .timelineTrackMeta span {
-	font-size: 0.9rem;
+	font-size: var(--font-size-body-sm);
 	color: color-mix(in oklab, var(--text-primary) 87%, var(--text-muted) 13%);
 }
 
 .timelineTrackPricing {
 	display: grid;
-	gap: 0.2rem;
-	padding: 0.6rem 0.7rem;
+	gap: var(--space-2xs);
+	padding: var(--space-sm) var(--space-md);
 	border-radius: 0.8rem;
 	background: color-mix(in oklab, var(--surface-muted) 50%, transparent 50%);
 }
@@ -1630,20 +1618,21 @@ html {
 }
 
 .timelineTrackPricing p {
-	font-size: 0.7rem;
+	font-size: var(--font-size-legal);
 	font-weight: 700;
 	letter-spacing: 0em;
 	text-transform: uppercase;
+	line-height: var(--line-height-tight);
 	color: color-mix(in oklab, var(--brand-navy) 80%, var(--text-muted) 20%);
 }
 
 .timelineTrackPricing strong {
-	font-size: 1rem;
+	font-size: var(--font-size-body);
 	color: color-mix(in oklab, var(--brand-navy) 72%, var(--brand-orange) 28%);
 }
 
 .timelineTrackPricing span {
-	font-size: 0.75rem;
+	font-size: var(--font-size-caption-sm);
 	color: color-mix(in oklab, var(--text-primary) 74%, var(--text-muted) 26%);
 }
 
@@ -1651,7 +1640,7 @@ html {
 	justify-self: start;
 	margin-top: 0.1rem;
 	padding: 0.3rem 0.6rem;
-	font-size: 0.7rem;
+	font-size: var(--font-size-legal);
 	font-weight: 600;
 	opacity: 0.7;
 	background: transparent;
@@ -1667,33 +1656,34 @@ html {
 
 .timelineTrackTimeline {
 	display: grid;
-	gap: 0.8rem;
+	gap: var(--space-md);
 }
 
 .timelineTrackTimelineTitle {
 	margin: 0;
-	font-size: 0.7rem;
+	font-size: var(--font-size-legal);
 	letter-spacing: 0.1em;
 	text-transform: uppercase;
 	font-weight: 700;
+	line-height: var(--line-height-tight);
 	color: color-mix(in oklab, var(--brand-navy) 72%, var(--brand-orange) 28%);
 }
 
 .timelineTrackTimeline ol {
 	list-style: none;
 	margin: 0;
-	padding: 0.4rem 0 0;
+	padding: var(--space-xs) 0 0;
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
-	gap: 0.9rem;
+	gap: var(--space-lg);
 	position: relative;
 }
 
 .timelineTrackTimeline li {
 	position: relative;
-	padding: 1.1rem 0.5rem 0.3rem 0;
+	padding: var(--space-lg) var(--space-xs) var(--space-xs) 0;
 	display: grid;
-	gap: 0.3rem;
+	gap: var(--space-2xs);
 }
 
 .timelineTrackTimeline li::before {
@@ -1732,7 +1722,7 @@ html {
 }
 
 .timelineTrackTimeline li strong {
-	font-size: 0.9rem;
+	font-size: var(--font-size-body-sm);
 	font-weight: 700;
 	color: color-mix(in oklab, var(--brand-navy) 70%, var(--brand-orange) 30%);
 }
@@ -1742,8 +1732,8 @@ html {
 .timelineTrackTimeline li em {
 	margin: 0;
 	font-style: normal;
-	font-size: 0.8rem;
-	line-height: 1.3;
+	font-size: var(--font-size-caption);
+	line-height: var(--line-height-comfortable);
 	color: color-mix(in oklab, var(--text-primary) 70%, var(--text-muted) 30%);
 }
 
@@ -1769,8 +1759,8 @@ html {
 	align-items: center;
 	gap: 0.4rem;
 	padding: 0.3rem 0.45rem;
-	font-size: 0.8rem;
-	line-height: 1.1;
+	font-size: var(--font-size-caption);
+	line-height: var(--line-height-tight);
 	font-weight: 700;
 	border: 1px solid color-mix(in oklab, var(--brand-orange) 88%, #000000 12%);
 	border-radius: 999px;
@@ -1807,9 +1797,11 @@ html {
 	0% {
 		transform: scale(1);
 	}
+
 	45% {
 		transform: scale(0.95);
 	}
+
 	100% {
 		transform: scale(1);
 	}
@@ -1838,25 +1830,25 @@ html {
 }
 
 .coursesPricingIntro {
-	font-size: 0.8rem;
+	font-size: var(--font-size-caption);
 	color: color-mix(in oklab, var(--brand-navy) 78%, var(--text-muted) 22%);
 }
 
 .focusGrid {
 	display: grid;
 	grid-template-columns: repeat(2, minmax(0, 1fr));
-	gap: 0.6rem;
+	gap: var(--space-md);
 	border-top: 0;
 }
 
 .focusItem {
-	padding: 1rem;
+	padding: var(--space-md);
 	border-radius: 0.9rem;
 	border: 1px solid color-mix(in oklab, #4fb3a1 38%, transparent 62%);
 	border-left: 0.4rem solid color-mix(in oklab, #2f9d8f 72%, transparent 28%);
 	background: linear-gradient(145deg, color-mix(in oklab, #dff3ef 68%, white 32%), color-mix(in oklab, var(--surface-page) 88%, #dff3ef 12%));
 	display: grid;
-	gap: 0.6rem;
+	gap: var(--space-md);
 	box-shadow: 0 0.5rem 1.4rem color-mix(in oklab, #0c4d46 10%, transparent 90%);
 }
 
@@ -1864,19 +1856,19 @@ html {
 	display: flex;
 	justify-content: space-between;
 	align-items: start;
-	gap: 0.8rem;
+	gap: var(--space-md);
 }
 
 .focusItemTop h3 {
 	font-family: 'Tomorrow', 'Arial Black', sans-serif;
-	font-size: 0.9rem;
-	line-height: 1.2;
+	font-size: var(--font-size-body-sm);
+	line-height: var(--line-height-tight);
 }
 
 .focusItemPricing {
 	display: grid;
-	gap: 0.2rem;
-	padding: 0.55rem 0.65rem;
+	gap: var(--space-2xs);
+	padding: var(--space-sm) var(--space-md);
 	border-radius: 0.75rem;
 	background: color-mix(in oklab, var(--surface-muted) 46%, transparent 54%);
 }
@@ -1890,35 +1882,36 @@ html {
 }
 
 .focusItemPricing span {
-	font-size: 0.68rem;
+	font-size: var(--font-size-legal);
 	text-transform: uppercase;
 	font-weight: 700;
+	line-height: var(--line-height-tight);
 	color: color-mix(in oklab, var(--brand-navy) 78%, var(--text-muted) 22%);
 }
 
 .focusItemPricing strong {
-	font-size: 0.95rem;
+	font-size: var(--font-size-body-sm);
 	color: color-mix(in oklab, #0c4d46 80%, var(--brand-navy) 20%);
 }
 
 .focusItemPricing em {
-	font-size: 0.72rem;
+	font-size: var(--font-size-caption-sm);
 	color: color-mix(in oklab, var(--text-primary) 74%, var(--text-muted) 26%);
 }
 
 .focusItemMeta {
 	list-style: none;
-	margin: 0.2rem 0 0;
+	margin: var(--space-2xs) 0 0;
 	padding: 0;
 	display: grid;
 	grid-template-columns: repeat(2, minmax(0, 1fr));
-	gap: 0.5rem;
+	gap: var(--space-sm);
 }
 
 .focusItemMeta li {
 	display: grid;
-	gap: 0.2rem;
-	padding: 0.6rem 0.6rem;
+	gap: var(--space-2xs);
+	padding: var(--space-sm);
 	border-radius: 0.8rem;
 	background: color-mix(in oklab, var(--surface-muted) 48%, transparent 52%);
 }
@@ -1930,15 +1923,16 @@ html {
 }
 
 .focusItemMeta span {
-	font-size: 0.7rem;
+	font-size: var(--font-size-legal);
 	letter-spacing: 0em;
 	text-transform: uppercase;
 	font-weight: 700;
+	line-height: var(--line-height-tight);
 	color: color-mix(in oklab, var(--brand-navy) 78%, var(--text-muted) 22%);
 }
 
 .focusItemMeta strong {
-	font-size: 0.9rem;
+	font-size: var(--font-size-body-sm);
 	font-weight: 600;
 	color: color-mix(in oklab, var(--text-primary) 86%, var(--text-muted) 14%);
 }
@@ -1959,7 +1953,7 @@ html {
 }
 
 .coursesPriceDisclaimer {
-	margin: 0.6rem 0 0;
+	margin: var(--space-sm) 0 0;
 	font-size: var(--hint-size-primary);
 	line-height: var(--hint-line-height);
 	color: color-mix(in oklab, var(--text-muted) 84%, transparent 16%);
@@ -1971,7 +1965,7 @@ html {
 	bottom: 1rem;
 	z-index: 120;
 	width: min(360px, calc(100vw - 2rem));
-	padding: 0.9rem;
+	padding: var(--space-md);
 	border-radius: 0.9rem;
 	background: color-mix(in oklab, var(--surface-panel) 92%, #ffffff 8%);
 	border: 1px solid color-mix(in oklab, var(--brand-orange) 36%, transparent 64%);
@@ -2009,31 +2003,31 @@ html {
 }
 
 .coursesCartPromptTitle {
-	font-size: 0.95rem;
+	font-size: var(--font-size-body-sm);
 	font-weight: 700;
 	color: color-mix(in oklab, var(--brand-navy) 90%, black 10%);
 }
 
 .coursesCartPromptText {
-	margin-top: 0.25rem;
-	font-size: 0.85rem;
-	line-height: 1.4;
+	margin-top: var(--space-2xs);
+	font-size: var(--font-size-body-xs);
+	line-height: var(--line-height-comfortable);
 	color: color-mix(in oklab, var(--text-primary) 78%, var(--text-muted) 22%);
 }
 
 .coursesCartPromptActions {
-	margin-top: 0.7rem;
+	margin-top: var(--space-md);
 	display: flex;
 	justify-content: flex-end;
-	gap: 0.45rem;
+	gap: var(--space-sm);
 	flex-wrap: wrap;
 }
 
 .coursesCartPromptPrimary,
 .coursesCartPromptSecondary {
 	border-radius: 999px;
-	padding: 0.45rem 0.75rem;
-	font-size: 0.82rem;
+	padding: 0.55rem 0.85rem;
+	font-size: var(--font-size-body-xs);
 	font-weight: 700;
 	cursor: pointer;
 }
@@ -2060,6 +2054,7 @@ html {
 		opacity: 0;
 		transform: translateY(8px) scale(0.98);
 	}
+
 	100% {
 		opacity: 1;
 		transform: translateY(0) scale(1);
@@ -2069,9 +2064,9 @@ html {
 .bookingCartPage {
 	margin: 0 auto;
 	width: min(1320px, 94vw);
-	padding: 0 clamp(0.9rem, 1.6vw, 1.4rem) 1.8rem;
+	padding: 0 clamp(0.9rem, 1.6vw, 1.4rem) var(--space-2xl);
 	display: grid;
-	gap: 1rem;
+	gap: var(--space-lg);
 	border-radius: 0;
 	position: relative;
 	isolation: isolate;
@@ -2081,19 +2076,19 @@ html {
 .bookingCartPageHero {
 	display: grid;
 	grid-template-columns: minmax(0, 1fr) minmax(220px, 0.5fr);
-	gap: 0.6rem;
+	gap: var(--space-md);
 	align-items: start;
 	padding: clamp(1.3rem, 2.2vw, 2rem) clamp(1rem, 2vw, 1.5rem) 0;
 }
 
 .bookingCartPageHeroMain {
 	display: grid;
-	gap: 0.3rem;
+	gap: var(--space-xs);
 }
 
 .bookingCartPageHero h1 {
-	font-size: clamp(1.6rem, 1.2vw + 1.2rem, 1.9rem);
-	line-height: 1.1;
+	font-size: var(--font-size-heading-1);
+	line-height: var(--line-height-tight);
 	letter-spacing: 0;
 }
 
@@ -2105,8 +2100,8 @@ html {
 .bookingCartPageHero p {
 	max-width: 72ch;
 	color: var(--text-muted);
-	font-size: 0.8rem;
-	line-height: 1.3;
+	font-size: var(--font-size-caption);
+	line-height: var(--line-height-comfortable);
 }
 
 .bookingCartPageBackLink {
@@ -2122,22 +2117,22 @@ html {
 .bookingCart {
 	display: grid;
 	grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
-	gap: 0.8rem;
+	gap: var(--space-lg);
 	align-items: start;
 }
 
 .bookingCartCatalog,
 .bookingCartSidebar {
 	border-radius: 0.9rem;
-	padding: 0.7rem;
+	padding: var(--space-md);
 	background: color-mix(in oklab, var(--surface-panel) 94%, var(--brand-orange-soft) 6%);
 	box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--brand-navy) 9%, transparent 91%);
 }
 
 .bookingCartSectionHeader {
 	display: grid;
-	gap: 0.2rem;
-	margin-bottom: 0.6rem;
+	gap: var(--space-2xs);
+	margin-bottom: var(--space-md);
 }
 
 .bookingCartSectionHeader h2,
@@ -2147,19 +2142,19 @@ html {
 
 .bookingCartSectionHeader p {
 	color: var(--text-muted);
-	font-size: 0.8rem;
+	font-size: var(--font-size-caption);
 }
 
 .bookingCatalogGrid {
 	display: grid;
 	grid-template-columns: repeat(2, minmax(0, 1fr));
-	gap: 0.5rem;
+	gap: var(--space-sm);
 }
 
 .bookingItem {
 	display: grid;
-	gap: 0.5rem;
-	padding: 0.6rem;
+	gap: var(--space-sm);
+	padding: var(--space-sm);
 	border-radius: 0.8rem;
 	background: var(--surface-page);
 	box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--brand-navy) 10%, transparent 90%);
@@ -2215,21 +2210,21 @@ html {
 
 .bookingItem h3 {
 	margin: 0;
-	font-size: 0.8rem;
-	line-height: 1.3;
+	font-size: var(--font-size-body-sm);
+	line-height: var(--line-height-tight);
 	color: color-mix(in oklab, var(--brand-navy) 88%, black 12%);
 }
 
 .bookingItemPrice {
 	margin: 0;
-	font-size: 0.72rem;
+	font-size: var(--font-size-caption-sm);
 	font-weight: 700;
 	color: color-mix(in oklab, var(--brand-navy) 74%, var(--brand-orange) 26%);
 }
 
 .bookingItemQtyLabel {
 	margin: 0;
-	font-size: 0.7rem;
+	font-size: var(--font-size-legal);
 	font-weight: 700;
 	letter-spacing: 0em;
 	text-transform: uppercase;
@@ -2239,7 +2234,7 @@ html {
 .bookingItemQty {
 	display: inline-grid;
 	grid-template-columns: auto 62px auto;
-	gap: 0.3rem;
+	gap: var(--space-2xs);
 	justify-self: start;
 	align-items: center;
 }
@@ -2275,19 +2270,19 @@ html {
 	width: 100%;
 	text-align: center;
 	padding: 0 0.1rem;
-	font-size: 0.9rem;
+	font-size: var(--font-size-body-sm);
 }
 
 .bookingCartSidebar {
 	display: grid;
-	gap: 0.6rem;
+	gap: var(--space-md);
 	position: sticky;
 	top: 4.6rem;
 }
 
 .bookingContact {
 	display: grid;
-	gap: 0.8rem;
+	gap: var(--space-lg);
 }
 
 .bookingModal {
@@ -2311,7 +2306,7 @@ html {
 	width: min(780px, 100%);
 	max-height: min(84svh, 920px);
 	overflow: auto;
-	padding: 1rem;
+	padding: var(--space-lg);
 	border-radius: 1rem;
 	background: var(--surface-page);
 	box-shadow: 0 20px 80px rgba(0, 0, 0, 0.2);
@@ -2321,7 +2316,7 @@ html {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	gap: 1rem;
+	gap: var(--space-lg);
 }
 
 .bookingModalClose {
@@ -2337,7 +2332,7 @@ html {
 }
 
 .bookingModalIntro {
-	margin: 0.5rem 0 1rem;
+	margin: var(--space-xs) 0 var(--space-lg);
 	color: var(--text-muted);
 }
 
@@ -2363,8 +2358,8 @@ html {
 .bookingSummaryHeader span,
 .bookingSummaryEmpty {
 	color: var(--text-muted);
-	font-size: 0.8rem;
-	line-height: 1.3;
+	font-size: var(--font-size-caption);
+	line-height: var(--line-height-comfortable);
 }
 
 .bookingSummaryHeader span {
@@ -2406,17 +2401,17 @@ html {
 	max-width: 18ch;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	font-size: 0.8rem;
+	font-size: var(--font-size-caption);
 }
 
 .bookingSummaryChip strong {
-	font-size: 0.72rem;
+	font-size: var(--font-size-caption-sm);
 	font-weight: 700;
 	color: var(--brand-navy);
 }
 
 .bookingSummaryChip em {
-	font-size: 0.6rem;
+	font-size: var(--font-size-legal);
 	color: var(--text-muted);
 }
 
@@ -2429,10 +2424,11 @@ html {
 
 .bookingSummaryPricingTitle {
 	margin: 0;
-	font-size: 0.7rem;
+	font-size: var(--font-size-legal);
 	font-weight: 700;
 	letter-spacing: 0.08em;
 	text-transform: uppercase;
+	line-height: var(--line-height-tight);
 	color: color-mix(in oklab, var(--brand-navy) 78%, var(--text-muted) 22%);
 }
 
@@ -2441,8 +2437,8 @@ html {
 	display: flex;
 	justify-content: space-between;
 	gap: 0.6rem;
-	font-size: 0.78rem;
-	line-height: 1.3;
+	font-size: var(--font-size-caption);
+	line-height: var(--line-height-comfortable);
 }
 
 .bookingSummaryPricingLine strong {
@@ -2452,7 +2448,7 @@ html {
 
 .bookingSummaryPricingMeta {
 	margin: 0.1rem 0;
-	font-size: 0.68rem;
+	font-size: var(--font-size-legal);
 	color: color-mix(in oklab, var(--text-primary) 72%, var(--text-muted) 28%);
 }
 
@@ -2467,21 +2463,21 @@ html {
 
 .bookingSummaryPricingDiscount strong {
 	font-weight: 600;
-	font-size: 0.72rem;
+	font-size: var(--font-size-caption-sm);
 	text-align: right;
 	max-width: 15ch;
 	white-space: normal;
 }
 
 .bookingSummaryPricingFinal {
-	font-size: 0.85rem;
+	font-size: var(--font-size-body-xs);
 	font-weight: 700;
 	color: color-mix(in oklab, var(--brand-navy) 86%, black 14%);
 }
 
 .bookingFormSectionLabel {
 	margin: 0.2rem 0 -0.1rem;
-	font-size: 0.8rem;
+	font-size: var(--font-size-caption);
 	font-weight: 700;
 	letter-spacing: 0.1em;
 	text-transform: uppercase;
@@ -2507,15 +2503,15 @@ html {
 .bookingOptions {
 	display: grid;
 	grid-template-columns: repeat(2, minmax(0, 1fr));
-	gap: 0.6rem;
+	gap: var(--space-md);
 }
 
 .bookingOption {
 	display: grid;
 	grid-template-columns: auto minmax(0, 1fr) auto auto;
-	gap: 0.5rem;
+	gap: var(--space-sm);
 	align-items: center;
-	padding: 0.7rem 0.8rem;
+	padding: var(--space-md);
 	border-radius: 0.8rem;
 	background: color-mix(in oklab, var(--surface-muted) 55%, transparent 45%);
 }
@@ -2526,7 +2522,7 @@ html {
 
 .bookingOption input[type='number'] {
 	width: 4.5rem;
-	padding: 0.3rem 0.4rem;
+	padding: 0.35rem 0.45rem;
 	border-radius: 0.6rem;
 	border: 1px solid color-mix(in oklab, var(--brand-navy) 18%, transparent 82%);
 	background: var(--surface-page);
@@ -2537,7 +2533,7 @@ html {
 }
 
 .bookingOptionKind {
-	font-size: 0.8rem;
+	font-size: var(--font-size-caption);
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
 	color: var(--text-muted);
@@ -2546,7 +2542,7 @@ html {
 .bookingFields {
 	display: grid;
 	grid-template-columns: repeat(2, minmax(0, 1fr));
-	gap: 0.6rem;
+	gap: var(--space-md);
 }
 
 .bookingFields label {
@@ -2559,7 +2555,7 @@ html {
 }
 
 .bookingFields span {
-	font-size: 0.64rem;
+	font-size: var(--font-size-legal);
 	font-weight: 700;
 	letter-spacing: 0.1em;
 	text-transform: uppercase;
@@ -2569,8 +2565,8 @@ html {
 .bookingFields input,
 .bookingFields textarea {
 	width: 100%;
-	padding: 0.48rem 0.62rem;
-	font-size: 0.82rem;
+	padding: 0.5rem 0.7rem;
+	font-size: var(--font-size-body-xs);
 	border-radius: 0.7rem;
 	border: 1px solid color-mix(in oklab, var(--brand-navy) 16%, transparent 84%);
 	background: var(--surface-page);
@@ -2596,16 +2592,14 @@ html {
 	display: inline-flex;
 	align-items: center;
 	gap: 0.4rem;
-	padding: 0.5rem 0.9rem;
+	padding: 0.6rem 1rem;
 	border: 1px solid color-mix(in oklab, var(--brand-orange) 82%, #b56b07 18%);
 	border-radius: 999px;
-	background: linear-gradient(
-		130deg,
-		color-mix(in oklab, var(--brand-orange) 78%, #ffd07e 22%),
-		var(--brand-orange)
-	);
+	background: linear-gradient(130deg,
+			color-mix(in oklab, var(--brand-orange) 78%, #ffd07e 22%),
+			var(--brand-orange));
 	color: color-mix(in oklab, var(--brand-navy) 92%, black 8%);
-	font-size: 0.9rem;
+	font-size: var(--font-size-body-sm);
 	cursor: pointer;
 }
 
@@ -2617,28 +2611,95 @@ html {
 .contactPageGrid {
 	display: grid;
 	grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.6fr);
-	gap: 0.8rem;
+	gap: 1.2rem;
+}
+
+.contactPageHero,
+.contactAuthority,
+.contactPageClosing {
+	gap: 1rem;
+}
+
+.contactPageHero {
+	display: grid;
+	gap: 0.75rem;
+}
+
+.contactPageHero h1,
+.contactPageHero p,
+.contactPageClosing p,
+.contactAuthority h2,
+.contactCard h2,
+.contactCardMethod h3 {
+	margin: 0;
+}
+
+.contactPageHero h1 {
+	font-size: var(--font-size-heading-1);
+	line-height: var(--line-height-heading);
+	font-weight: 700;
+	letter-spacing: -0.01em;
+	color: color-mix(in oklab, var(--brand-navy) 94%, black 6%);
+}
+
+.contactPageHero > p {
+	max-width: 72ch;
+	font-size: var(--font-size-body);
+	line-height: var(--line-height-body);
+	color: color-mix(in oklab, var(--text-primary) 84%, var(--text-muted) 16%);
+}
+
+.contactPageProof {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 0.85rem;
+	margin: 0.25rem 0 0;
+	padding: 0;
+	list-style: none;
+}
+
+.contactProof {
+	display: grid;
+	gap: 0.2rem;
+	padding: 0.85rem 0.9rem;
+	border-radius: 0.8rem;
+	background: color-mix(in oklab, var(--surface-panel) 90%, #ffffff 10%);
+	box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--brand-orange) 12%, transparent 88%);
+}
+
+.contactProof strong {
+	font-size: var(--font-size-body-sm);
+	line-height: var(--line-height-tight);
+	font-weight: 700;
+	color: color-mix(in oklab, var(--brand-navy) 92%, black 8%);
+}
+
+.contactProof span {
+	font-size: var(--font-size-caption);
+	line-height: var(--line-height-comfortable);
+	color: var(--text-muted);
 }
 
 .contactCard {
 	display: grid;
-	gap: 0.8rem;
+	gap: 1rem;
 	border: 0;
 	border-radius: 1rem;
-	padding: 1rem;
+	padding: 1.15rem;
 	background: linear-gradient(145deg, color-mix(in oklab, var(--surface-panel) 91%, var(--brand-orange-soft) 9%), var(--surface-panel));
 }
 
 .contactCard h2 {
-	margin-top: 0;
-	margin-bottom: 0;
-	font-size: 1.1rem;
+	font-size: var(--font-size-heading-3);
+	line-height: var(--line-height-heading);
+	font-weight: 700;
 	color: color-mix(in oklab, var(--brand-navy) 92%, black 8%);
 }
 
 .contactCard p {
 	margin: 0;
-	line-height: 1.6;
+	font-size: var(--font-size-body-sm);
+	line-height: var(--line-height-comfortable);
 	color: color-mix(in oklab, var(--text-primary) 86%, var(--text-muted) 14%);
 }
 
@@ -2646,26 +2707,26 @@ html {
 	margin: 0;
 	padding-left: 1.1rem;
 	display: grid;
-	gap: 0.4rem;
+	gap: 0.55rem;
 }
 
 .contactCardList li {
-	line-height: 1.5;
+	font-size: var(--font-size-body-sm);
+	line-height: var(--line-height-body);
 }
 
 .contactCardMethod {
 	display: grid;
-	gap: 0.4rem;
-	padding: 0.8rem;
+	gap: 0.55rem;
+	padding: 0.95rem;
 	border-radius: 0.8rem;
 	background: color-mix(in oklab, var(--surface-page) 88%, #ffffff 12%);
 }
 
 .contactCardMethod h3 {
-	margin: 0;
-	font-size: 1rem;
-	font-weight: 600;
-	line-height: 1.3;
+	font-size: var(--font-size-body);
+	font-weight: 700;
+	line-height: var(--line-height-tight);
 	color: color-mix(in oklab, var(--brand-navy) 90%, black 10%);
 }
 
@@ -2679,17 +2740,19 @@ html {
 
 .contactCardMethod li {
 	display: grid;
-	gap: 0.2rem;
+	gap: 0.3rem;
 }
 
 .contactCardMethod strong {
-	font-size: 0.9rem;
+	font-size: var(--font-size-body-sm);
+	line-height: var(--line-height-tight);
+	font-weight: 700;
 	color: color-mix(in oklab, var(--brand-navy) 88%, black 12%);
 }
 
 .contactCardMethod span {
-	font-size: 0.9rem;
-	line-height: 1.4;
+	font-size: var(--font-size-body-xs);
+	line-height: var(--line-height-comfortable);
 	color: var(--text-muted);
 }
 
@@ -2701,32 +2764,33 @@ html {
 .contactCardDetails {
 	margin: 0;
 	display: grid;
-	gap: 0.6rem;
+	gap: 0.85rem;
 }
 
 .contactCardDetails div {
 	display: grid;
-	gap: 0.1rem;
-	padding: 0.5rem 0.6rem;
+	gap: 0.3rem;
+	padding: 0.65rem 0.75rem;
 	border-radius: 0.6rem;
 	background: color-mix(in oklab, #ffffff 48%, transparent 52%);
 }
 
 .contactCardDetails div:last-child {
-	padding-bottom: 0.5rem;
+	padding-bottom: 0.65rem;
 }
 
 .contactCardDetails dt {
-	font-size: 0.7rem;
+	font-size: var(--font-size-legal);
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
 	font-weight: 700;
+	line-height: var(--line-height-tight);
 	color: color-mix(in oklab, var(--brand-navy) 78%, var(--text-muted) 22%);
 }
 
 .contactCardDetails dd {
 	margin: 0;
-	font-size: 0.9rem;
+	font-size: var(--font-size-body-sm);
 	font-weight: 600;
 }
 
@@ -2735,59 +2799,88 @@ html {
 }
 
 .contactDetailCopy {
-	cursor: pointer;
 	transition: background-color 0.16s ease;
-}
-
-.contactDetailCopy:hover {
-	background: color-mix(in oklab, #ffffff 62%, var(--brand-orange-soft) 38%);
-}
-
-.contactDetailCopy:focus-visible {
-	outline: 2px solid color-mix(in oklab, var(--brand-orange) 60%, transparent 40%);
-	outline-offset: 2px;
 }
 
 .contactDetailValue {
 	display: inline-flex;
 	align-items: center;
-	gap: 0.4rem;
+	gap: 0.55rem;
+}
+
+.contactDetailCopyRow {
+	display: inline-flex;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 0.5rem;
+	padding: 0;
+	border: 0;
+	background: transparent;
+	color: inherit;
+	font: inherit;
+	font-weight: 600;
+	font-size: inherit;
+	cursor: pointer;
+	text-align: left;
+	transition:
+		background-color 0.16s ease,
+		transform 0.16s ease,
+		color 0.16s ease;
+}
+
+.contactDetailCopyRow:hover {
+	color: color-mix(in oklab, var(--brand-navy) 94%, black 6%);
+	transform: translateY(-1px);
+}
+
+.contactDetailCopyRow:focus-visible {
+	outline: 2px solid color-mix(in oklab, var(--brand-orange) 60%, transparent 40%);
+	outline-offset: 2px;
+	border-radius: 0.35rem;
+}
+
+.contactDetailCopyRow:active {
+	transform: translateY(0);
+}
+
+.contactDetailCopyText {
+	display: inline-block;
 }
 
 .contactDetailIcon {
-	width: 0.95rem;
-	height: 0.95rem;
+	width: 0.85rem;
+	height: 0.85rem;
 	color: color-mix(in oklab, var(--text-muted) 74%, var(--brand-navy) 26%);
 	opacity: 0.72;
 }
 
 .contactDetailFeedback {
-	font-size: 0.75rem;
+	font-size: var(--font-size-caption-sm);
 	font-weight: 600;
-	line-height: 1.2;
+	line-height: var(--line-height-tight);
 	color: color-mix(in oklab, var(--brand-navy) 78%, var(--text-muted) 22%);
 }
 
 .contactCardActions {
 	display: grid;
 	grid-template-columns: 1fr;
-	gap: 0.5rem;
-	margin-top: 0.4rem;
+	gap: 0.75rem;
+	margin-top: 0.25rem;
 }
 
 .contactAction {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	padding: 0.7rem 0.9rem;
+	padding: 0.8rem 1rem;
 	border-radius: 999px;
 	border: 1px solid color-mix(in oklab, var(--brand-orange) 82%, #b56b07 18%);
-	background: linear-gradient(
-		130deg,
-		color-mix(in oklab, var(--brand-orange) 78%, #ffd07e 22%),
-		var(--brand-orange)
-	);
+	background: linear-gradient(130deg,
+			color-mix(in oklab, var(--brand-orange) 78%, #ffd07e 22%),
+			var(--brand-orange));
 	color: color-mix(in oklab, var(--brand-navy) 92%, black 8%);
+	font-size: var(--font-size-body-sm);
+	line-height: var(--line-height-tight);
 	font-weight: 700;
 	text-decoration: none;
 }
@@ -2799,42 +2892,46 @@ html {
 
 .contactAuthority {
 	display: grid;
-	gap: 0.7rem;
-	padding: 1rem;
+	gap: 0.9rem;
+	padding: 1.1rem;
 	border-radius: 1rem;
 	background: color-mix(in oklab, var(--surface-panel) 90%, #ffffff 10%);
 }
 
 .contactAuthority h2 {
 	margin: 0;
-	font-size: 1rem;
+	font-size: var(--font-size-heading-4);
+	line-height: var(--line-height-tight);
+	font-weight: 700;
 	color: color-mix(in oklab, var(--brand-navy) 88%, black 12%);
 }
 
 .contactAuthorityGrid {
 	display: grid;
 	grid-template-columns: repeat(3, minmax(0, 1fr));
-	gap: 0.6rem;
+	gap: 0.85rem;
 }
 
 .contactAuthorityCard {
-	padding: 0.8rem;
+	padding: 0.95rem;
 	border-radius: 0.8rem;
 	background: color-mix(in oklab, var(--surface-page) 90%, #ffffff 10%);
 	display: grid;
-	gap: 0.3rem;
+	gap: 0.35rem;
 }
 
 .contactAuthorityCard h3 {
 	margin: 0;
-	font-size: 0.9rem;
+	font-size: var(--font-size-body-sm);
+	line-height: var(--line-height-tight);
+	font-weight: 700;
 	color: color-mix(in oklab, var(--brand-navy) 87%, black 13%);
 }
 
 .contactAuthorityCard p {
 	margin: 0;
-	font-size: 0.8rem;
-	line-height: 1.5;
+	font-size: var(--font-size-caption);
+	line-height: var(--line-height-body);
 	color: var(--text-muted);
 }
 
@@ -2843,16 +2940,17 @@ html {
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: space-between;
-	gap: 0.8rem;
-	padding: 1rem 1rem;
+	gap: 1rem;
+	padding: 1.15rem 1rem;
 	background: linear-gradient(135deg, color-mix(in oklab, var(--brand-orange-soft) 72%, var(--surface-panel) 28%), color-mix(in oklab, var(--surface-page) 88%, #ffffff 12%));
 }
 
 .contactPageClosing p {
 	margin: 0;
 	max-width: 72ch;
+	font-size: var(--font-size-body);
 	font-weight: 600;
-	line-height: 1.5;
+	line-height: var(--line-height-body);
 	color: color-mix(in oklab, var(--brand-navy) 86%, black 14%);
 }
 
@@ -2860,16 +2958,16 @@ html {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	padding: 0.6rem 1rem;
+	padding: 0.75rem 1.1rem;
 	border-radius: 999px;
 	text-decoration: none;
+	font-size: var(--font-size-body-sm);
+	line-height: var(--line-height-tight);
 	font-weight: 700;
 	border: 1px solid color-mix(in oklab, var(--brand-orange) 82%, #b56b07 18%);
-	background: linear-gradient(
-		130deg,
-		color-mix(in oklab, var(--brand-orange) 78%, #ffd07e 22%),
-		var(--brand-orange)
-	);
+	background: linear-gradient(130deg,
+			color-mix(in oklab, var(--brand-orange) 78%, #ffd07e 22%),
+			var(--brand-orange));
 	color: color-mix(in oklab, var(--brand-navy) 92%, black 8%);
 }
 
@@ -3541,7 +3639,7 @@ html {
 	background: color-mix(in oklab, var(--brand-orange) 58%, var(--border-subtle) 42%);
 }
 
-/* Keep button corners consistent across CTA links and native buttons. */
+/* Hold knaphjørner konsistente på tværs af CTA-links og native knapper. */
 button,
 .landingButton,
 .contactAction,
@@ -3638,19 +3736,19 @@ button,
 	}
 
 	.editorIntro h1 {
-		font-size: clamp(1rem, 1vw + 0.7rem, 1.3rem);
-		line-height: 1.25;
+		font-size: var(--font-size-heading-4);
+		line-height: var(--line-height-tight);
 		color: color-mix(in oklab, var(--brand-navy) 92%, black 8%);
 	}
 
 	.editorIntro p {
-		font-size: 0.9rem;
-		line-height: 1.5;
+		font-size: var(--font-size-body-sm);
+		line-height: var(--line-height-body);
 		color: color-mix(in oklab, var(--text-primary) 80%, var(--text-muted) 20%);
 	}
 
 	.editorIntroHint {
-		font-size: 0.82rem;
+		font-size: var(--font-size-body-xs);
 		color: var(--text-muted);
 	}
 

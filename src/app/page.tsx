@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { HomeContent } from './components/HomeContent';
 import { SITE_FOOTER } from '../assets/headerAndFooter/site-branding';
 
+// Struktureret data for organisation og website til SEO.
 const homeJsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -27,6 +28,7 @@ const homeJsonLd = {
   ],
 };
 
+// Side-metadata til søgning, deling og canonical URL.
 export const metadata: Metadata = {
   title: 'Digital teknologiforståelse for skoler',
   description: 'NordPixel tilbyder digital teknologiforståelse for skoler med praksisnære forløb, tydelig progression, WebLab og konkrete undervisningsmaterialer.',
@@ -44,10 +46,12 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
+      {/* JSON-LD indlejres som script, så søgemaskiner kan læse dataene. */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(homeJsonLd) }}
       />
+      {/* Primært sideindhold renderes her. */}
       <HomeContent />
     </>
   );

@@ -9,15 +9,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Dark mode palette
+        // Farvepalet til mørk tilstand
         'gradient-dark': '#00181D',
         'gradient-darker': '#000E11',
         'neutral-gray': '#DFDFD',
         'accent-orange': '#FBB03B',
-        // Light mode palette
+        // Farvepalet til lys tilstand
         'light-bg': '#ffffff',
         'light-text': '#000000',
-        // Legacy colors (kept for compatibility)
+        // Ældre farver (bevares for kompatibilitet)
         'primary-dark': '#0a0e27',
         'primary-bright': '#00c599',
         'primary-light': '#1a2342',

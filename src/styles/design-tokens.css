@@ -5,13 +5,33 @@
   --brand-navy: #000f11;
   --brand-orange-soft: #fff2db;
   --font-family-body: 'Google Sans Text', 'Google Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  --font-size-body: 1rem;
+  --font-size-body-sm: 0.9rem;
+  --font-size-body-xs: 0.85rem;
+  --font-size-caption: 0.8rem;
+  --font-size-legal: 0.7rem;
+  --font-size-ui: 0.9rem;
+  --font-size-brand-lg: 1.3rem;
+  --font-size-heading-1: 1.5rem;
+  --font-size-heading-2: 1.25rem;
+  --font-size-heading-3: 1.125rem;
+  --font-size-heading-4: 1rem;
+  --font-size-display: clamp(1.15rem, 3.2vw, 2.95rem);
+  --line-height-body: 1.5;
+  --line-height-heading: 1.4;
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.25rem;
+  --space-xl: 1.5rem;
+  --space-2xl: 1.8rem;
+  --space-3xl: 2.4rem;
 
-  /* Typography foundation: use for global type sizing and base emphasis weights. */
-  --base-font-size: 16px;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
 
-  /* Page and container surfaces: use page for the app background, panel for cards, and overlay for dialogs/popovers. */
+  /* Side- og containerflader: brug page til app-baggrund, panel til kort og overlay til dialoger/popovers. */
   --surface-page: #f9f9f9;
   --surface-panel: #f9f9f9;
   --surface-overlay: oklch(1 0 0);
@@ -19,7 +39,7 @@
   --surface-accent: #ececec;
   --surface-field: #f5f5f5;
 
-  /* Text colors: use primary for normal reading, muted for supporting text, and inverse/on-* tokens on filled surfaces. */
+  /* Tekstfarver: brug primary til normal læsning, muted til hjælpetekst og inverse/on-* på fyldte flader. */
   --text-primary: oklch(0.1 0 0);
   --text-muted: #717182;
   --text-on-primary: oklch(1 0 0);
@@ -27,36 +47,36 @@
   --text-on-accent: var(--brand-navy);
   --text-on-danger: #ffffff;
 
-  /* Interactive and status colors: use primary for main CTA actions, secondary for softer fills, danger for destructive states, ring for focus. */
-  /* NOTE: --action-secondary er endnu ikke i aktiv brug i UI-komponenterne. */
+  /* Interaktive- og statusfarver: brug primary til primære CTA-handlinger, secondary til blødere flader, danger til destruktive tilstande og ring til fokus. */
+  /* BEMÆRK: --action-secondary er endnu ikke i aktiv brug i UI-komponenterne. */
   --action-primary: var(--brand-navy);
   --action-secondary: oklch(1 0 264.5);
   --status-danger: #d4183d;
   --focus-ring: oklch(0.7 0 0);
 
-  /* Borders and control surfaces: use border-subtle for separators, field-border for inputs, and toggle-track for switches. */
+  /* Kanter og kontrolflader: brug border-subtle til separatorer, field-border til inputfelter og toggle-track til kontakter. */
   --border-subtle: rgba(0, 0, 0, 0.1);
   --field-border: transparent;
   --toggle-track: #cbced4;
 
-  /* Supporting text scale: use for helper hints and low-emphasis status messages. */
-  --hint-size-primary: 0.8rem;
-  --hint-size-secondary: 0.8rem;
-  --hint-line-height: 1.4;
+  /* Hjælpetekst-skala: bruges til hints og statusbeskeder med lav vægt. */
+  --hint-size-primary: var(--font-size-caption);
+  --hint-size-secondary: var(--font-size-caption);
+  --hint-line-height: var(--line-height-heading);
 
-  /* Data visualization palette: use these in order for multi-series charts. */
-  /* NOTE: --data-viz-* bruges ikke endnu, da siden ikke har chart-komponenter. */
+  /* Datavisualiseringspalette: brug disse i rækkefølge til grafer med flere serier. */
+  /* BEMÆRK: --data-viz-* bruges ikke endnu, da siden ikke har diagramkomponenter. */
   --data-viz-1: oklch(0.6 0.2 41.1);
   --data-viz-2: oklch(0.6 0.1 184.7);
   --data-viz-3: oklch(0.4 0.1 227.4);
   --data-viz-4: oklch(0.8 0.2 84.4);
   --data-viz-5: oklch(0.8 0.2 70.1);
 
-  /* Shape system: use radius-base as the source token for component corner sizes. */
+  /* Formsystem: brug radius-base som kildetoken for komponenters hjørnestørrelser. */
   --radius-base: 0.6rem;
 
-  /* Sidebar tokens: use these only inside sidebar/navigation surfaces. */
-  /* NOTE: --sidebar-* bruges ikke endnu, da der ikke er en dedikeret sidebar på siden. */
+  /* Sidebar-tokens: brug disse kun i sidebar-/navigationsflader. */
+  /* BEMÆRK: --sidebar-* bruges ikke endnu, da der ikke er en dedikeret sidepanel-løsning på siden. */
   --sidebar-surface: oklch(1 0 0);
   --sidebar-text: oklch(0.1 0 0);
   --sidebar-primary-surface: var(--brand-navy);
@@ -68,7 +88,7 @@
 }
 
 .dark {
-  /* Dark surfaces: use the same semantic intent as light mode, but with dark-adapted values. */
+  /* Mørke flader: brug samme semantiske hensigt som i lys tilstand, men med mørketilpassede værdier. */
   --surface-page: oklch(0.1 0 0);
   --surface-panel: oklch(0.1 0 0);
   --surface-overlay: oklch(0.1 0 0);
@@ -76,7 +96,7 @@
   --surface-accent: oklch(0.3 0 0);
   --surface-field: oklch(0.3 0 0);
 
-  /* Dark text colors: primary is the default readable text, muted is for lower-emphasis content. */
+  /* Mørke tekstfarver: primary er standard læsbar tekst, muted er til indhold med lavere vægt. */
   --text-primary: oklch(1 0 0);
   --text-muted: oklch(0.7 0 0);
   --text-on-primary: oklch(0.2 0 0);
@@ -84,33 +104,33 @@
   --text-on-accent: oklch(1 0 0);
   --text-on-danger: oklch(0.6 0.2 25.3);
 
-  /* Dark interactive and status colors. */
-  /* NOTE: --action-secondary (dark) er endnu ikke i aktiv brug i UI-komponenterne. */
+  /* Mørke interaktive- og statusfarver. */
+  /* BEMÆRK: --action-secondary (mørk) er endnu ikke i aktiv brug i UI-komponenterne. */
   --action-primary: oklch(1 0 0);
   --action-secondary: oklch(0.3 0 0);
   --status-danger: oklch(0.4 0.1 25.7);
   --focus-ring: oklch(0.4 0 0);
 
-  /* Dark borders and control surfaces. */
+  /* Mørke kanter og kontrolflader. */
   --border-subtle: oklch(0.3 0 0);
   --field-border: oklch(0.3 0 0);
   --toggle-track: #cbced4;
 
-  /* Supporting text scale in dark mode keeps the same sizing for consistency. */
-  --hint-size-primary: 0.8rem;
-  --hint-size-secondary: 0.8rem;
-  --hint-line-height: 1.4;
+  /* Hjælpetekst-skala i mørk tilstand beholder samme størrelse for konsistens. */
+  --hint-size-primary: var(--font-size-caption);
+  --hint-size-secondary: var(--font-size-caption);
+  --hint-line-height: var(--line-height-heading);
 
-  /* Dark data visualization palette. */
-  /* NOTE: --data-viz-* (dark) bruges ikke endnu, da siden ikke har chart-komponenter. */
+  /* Mørk datavisualiseringspalette. */
+  /* BEMÆRK: --data-viz-* (mørk) bruges ikke endnu, da siden ikke har diagramkomponenter. */
   --data-viz-1: oklch(0.5 0.2 264.4);
   --data-viz-2: oklch(0.7 0.2 162.5);
   --data-viz-3: oklch(0.8 0.2 70.1);
   --data-viz-4: oklch(0.6 0.3 303.9);
   --data-viz-5: oklch(0.6 0.2 16.4);
 
-  /* Dark sidebar tokens: use only for sidebar/navigation UI. */
-  /* NOTE: --sidebar-* (dark) bruges ikke endnu, da der ikke er en dedikeret sidebar på siden. */
+  /* Mørke sidebar-tokens: bruges kun til sidebar-/navigations-UI. */
+  /* BEMÆRK: --sidebar-* (mørk) bruges ikke endnu, da der ikke er en dedikeret sidepanel-løsning på siden. */
   --sidebar-surface: oklch(0.2 0 0);
   --sidebar-text: oklch(1 0 0);
   --sidebar-primary-surface: oklch(0.5 0.2 264.4);
@@ -122,8 +142,8 @@
 }
 
 @theme inline {
-  /* Tailwind semantic aliases: these are what component classes consume. */
-  /* NOTE: --color-popover*, --color-destructive*, --color-switch-background, --color-chart-* og --color-sidebar-* er endnu ikke i direkte brug i siden. */
+  /* Tailwind-semantiske aliaser: disse bruges af komponentklasserne. */
+  /* BEMÆRK: --color-popover*, --color-destructive*, --color-switch-background, --color-chart-* og --color-sidebar-* er endnu ikke i direkte brug på siden. */
   --color-background: var(--surface-page);
   --color-foreground: var(--text-primary);
   --color-card: var(--surface-panel);
@@ -172,52 +192,53 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-family-body);
+    line-height: var(--line-height-body);
   }
 
-  /* Base element defaults: use utilities on components whenever you need a different scale or weight. */
+  /* Basiselement-defaults: brug utilities på komponenter, når der ønskes anden skala eller vægt. */
   html {
-    font-size: var(--base-font-size);
+    font-size: var(--font-size-root);
   }
 
   h1 {
-    font-size: var(--text-2xl);
+    font-size: var(--font-size-heading-1);
     font-weight: var(--font-weight-medium);
-    line-height: 1.5;
+    line-height: var(--line-height-heading);
   }
 
   h2 {
-    font-size: var(--text-xl);
+    font-size: var(--font-size-heading-2);
     font-weight: var(--font-weight-medium);
-    line-height: 1.5;
+    line-height: var(--line-height-heading);
   }
 
   h3 {
-    font-size: var(--text-lg);
+    font-size: var(--font-size-heading-3);
     font-weight: var(--font-weight-medium);
-    line-height: 1.5;
+    line-height: var(--line-height-heading);
   }
 
   h4 {
-    font-size: var(--text-base);
+    font-size: var(--font-size-heading-4);
     font-weight: var(--font-weight-medium);
-    line-height: 1.5;
+    line-height: var(--line-height-heading);
   }
 
   label {
-    font-size: var(--text-base);
+    font-size: var(--font-size-ui);
     font-weight: var(--font-weight-medium);
-    line-height: 1.5;
+    line-height: var(--line-height-body);
   }
 
   button {
-    font-size: var(--text-base);
+    font-size: var(--font-size-ui);
     font-weight: var(--font-weight-medium);
-    line-height: 1.5;
+    line-height: var(--line-height-body);
   }
 
   input {
-    font-size: var(--text-base);
+    font-size: var(--font-size-body);
     font-weight: var(--font-weight-regular);
-    line-height: 1.5;
+    line-height: var(--line-height-body);
   }
 }

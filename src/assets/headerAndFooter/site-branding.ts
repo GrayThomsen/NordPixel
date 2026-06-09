@@ -1,5 +1,5 @@
 export const SITE_HEADER = {
-  brandName: 'NordPixel.dev',
+  brandName: 'NordPixel',
   brandHref: '/',
   logoAlt: 'NordPixel logo',
   logoSrc: '/images/brand/white-logo.png',
@@ -9,7 +9,7 @@ export const SITE_HEADER = {
 } as const;
 
 export const SITE_FOOTER = {
-  brandName: 'NordPixel.dev',
+  brandName: 'NordPixel',
   contactEmail: 'thomsenwork@outlook.dk',
   cvrNumber: '45551695',
   linkedinCompanyUrl: 'https://www.linkedin.com/company/107025728/',
