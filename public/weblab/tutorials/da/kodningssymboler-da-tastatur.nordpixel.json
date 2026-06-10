@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "mode": "full",
+  "name": "kodningssymboler-da-tastatur",
+  "updatedAt": "2026-06-10T09:00:00.000Z",
+  "files": [
+    {
+      "id": "t4-index",
+      "name": "index.html",
+      "kind": "html",
+      "content": "<!doctype html>\n<html lang=\"da\">\n  <head>\n    <meta charset=\"utf-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n    <title>Kodningssymboler på dansk tastatur</title>\n    <link rel=\"stylesheet\" href=\"styles.css\" />\n  </head>\n  <body>\n    <main>\n      <h1>Kodningssymboler</h1>\n      <p>Klik på et tegn for at se tast og modifiere på dansk Windows-layout.</p>\n\n      <div id=\"symbol-grid\" class=\"symbol-grid\" aria-label=\"Symboler\"></div>\n\n      <section class=\"detail\" aria-live=\"polite\">\n        <p><strong>Tegn:</strong> <span id=\"out-symbol\">&lt;</span></p>\n        <p><strong>Tast:</strong> <span id=\"out-key\">&lt;&gt;-tast</span></p>\n        <p><strong>Shift:</strong> <span id=\"out-shift\">Nej</span></p>\n        <p><strong>AltGr:</strong> <span id=\"out-altgr\">Nej</span></p>\n      </section>\n    </main>\n    <script src=\"script.js\"></script>\n  </body>\n</html>"
+    },
+    {
+      "id": "t4-css",
+      "name": "styles.css",
+      "kind": "css",
+      "content": "body {\n  margin: 0;\n  font-family: 'Segoe UI', sans-serif;\n  background: #f4f7fb;\n  color: #152230;\n}\n\nmain {\n  width: min(860px, 92vw);\n  margin: 2rem auto;\n  padding: 1.2rem;\n  border-radius: 0.9rem;\n  background: #ffffff;\n  box-shadow: 0 12px 30px rgba(11, 31, 50, 0.08);\n}\n\n.symbol-grid {\n  display: grid;\n  grid-template-columns: repeat(7, minmax(0, 1fr));\n  gap: 0.45rem;\n}\n\n.symbol-grid button {\n  border: 0;\n  border-radius: 0.5rem;\n  padding: 0.45rem;\n  background: #11263a;\n  color: #f7fbff;\n  font-size: 1.05rem;\n  font-weight: 700;\n  cursor: pointer;\n}\n\n.symbol-grid button.is-active {\n  background: #f3ad3b;\n  color: #191200;\n}\n\n.detail {\n  margin-top: 1rem;\n  padding: 0.8rem;\n  border-radius: 0.7rem;\n  background: #eff4fb;\n}\n"
+    },
+    {
+      "id": "t4-js",
+      "name": "script.js",
+      "kind": "js",
+      "content": "const map = [\n  { symbol: '<', key: '<>-tast', shift: false, altgr: false },\n  { symbol: '>', key: '<>-tast', shift: true, altgr: false },\n  { symbol: '|', key: 'AltGr + ´', shift: false, altgr: true },\n  { symbol: '?', key: 'Shift + +', shift: true, altgr: false },\n  { symbol: '!', key: 'Shift + 1', shift: true, altgr: false },\n  { symbol: '\"', key: 'Shift + 2', shift: true, altgr: false },\n  { symbol: ':', key: 'Shift + .', shift: true, altgr: false },\n  { symbol: ';', key: 'Shift + ,', shift: true, altgr: false },\n  { symbol: '%', key: 'Shift + 5', shift: true, altgr: false },\n  { symbol: '&', key: 'Shift + 6', shift: true, altgr: false },\n  { symbol: '/', key: 'Shift + 7', shift: true, altgr: false },\n  { symbol: '(', key: 'Shift + 8', shift: true, altgr: false },\n  { symbol: ')', key: 'Shift + 9', shift: true, altgr: false },\n  { symbol: '[', key: 'AltGr + 8', shift: false, altgr: true },\n  { symbol: ']', key: 'AltGr + 9', shift: false, altgr: true },\n  { symbol: '{', key: 'AltGr + 7', shift: false, altgr: true },\n  { symbol: '}', key: 'AltGr + 0', shift: false, altgr: true },\n  { symbol: '#', key: 'Shift + 3', shift: true, altgr: false },\n  { symbol: '-', key: '-tast', shift: false, altgr: false },\n  { symbol: '_', key: 'Shift + -', shift: true, altgr: false },\n  { symbol: '*', key: 'Shift + apostrof', shift: true, altgr: false }\n];\n\nconst grid = document.getElementById('symbol-grid');\nconst outSymbol = document.getElementById('out-symbol');\nconst outKey = document.getElementById('out-key');\nconst outShift = document.getElementById('out-shift');\nconst outAltgr = document.getElementById('out-altgr');\n\nfunction show(entry, btn) {\n  if (!outSymbol || !outKey || !outShift || !outAltgr) return;\n\n  outSymbol.textContent = entry.symbol;\n  outKey.textContent = entry.key;\n  outShift.textContent = entry.shift ? 'Ja' : 'Nej';\n  outAltgr.textContent = entry.altgr ? 'Ja' : 'Nej';\n\n  document.querySelectorAll('.symbol-grid button').forEach((button) => {\n    button.classList.remove('is-active');\n  });\n  btn.classList.add('is-active');\n}\n\nfor (const entry of map) {\n  const button = document.createElement('button');\n  button.type = 'button';\n  button.textContent = entry.symbol;\n  button.addEventListener('click', () => show(entry, button));\n  grid?.append(button);\n}\n\nconst firstButton = document.querySelector('.symbol-grid button');\nif (map[0] && firstButton instanceof HTMLButtonElement) {\n  show(map[0], firstButton);\n}\n"
+    }
+  ]
+}

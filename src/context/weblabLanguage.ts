@@ -56,6 +56,27 @@ export const weblabLanguage: Record<Locale, {
     openTab: string;
     updatedToday: string;
     updatedAtDate: string;
+    mobileBlockedLabel: string;
+    mobileBlockedTitle: string;
+    mobileBlockedText: string;
+    mobileBlockedHint: string;
+    learningTitle: string;
+    learningLead: string;
+    learningQuestion: string;
+    learningTabLabel: string;
+    learningDownload: string;
+    learningFeedback: string;
+    tutorialFileTypes: string;
+    tutorialPreview: string;
+    tutorialSemantic: string;
+    tutorialSymbols: string;
+    symbolGuideTitle: string;
+    symbolGuideSymbolLabel: string;
+    symbolGuideComboLabel: string;
+    symbolGuideKeyLabel: string;
+    symbolGuideShift: string;
+    symbolGuideAltGr: string;
+    statusTutorialDownload: string;
   };
 }> = {
   da: {
@@ -114,6 +135,27 @@ export const weblabLanguage: Record<Locale, {
       openTab: 'Åbn i ny fane',
       updatedToday: 'i dag',
       updatedAtDate: 'sidst opdateret kl.',
+      mobileBlockedLabel: 'WebLab er ikke tilgængelig på mobil eller tablet i denne version.',
+      mobileBlockedTitle: 'WebLab kræver en større skærm',
+      mobileBlockedText: 'Editoren er midlertidigt låst på enheder under 1024 px for at sikre den fulde undervisningsoplevelse.',
+      mobileBlockedHint: 'Åbn WebLab på laptop eller desktop for at bruge editor, preview og filhåndtering.',
+      learningTitle: 'WebLab Learning',
+      learningLead: 'Tag dit første skridt mod digital læring.',
+      learningQuestion: 'Klik på det du ønsker at træne og importer filen direkte i WebLab.',
+      learningTabLabel: 'Tutorial emner',
+      learningDownload: 'Hent valgt tutorial',
+      learningFeedback: 'Feedback',
+      tutorialFileTypes: 'Filtyper & File Explorer',
+      tutorialPreview: 'Preview',
+      tutorialSemantic: 'Semantisk HTML og Meta',
+      tutorialSymbols: 'Kodningssymboler',
+      symbolGuideTitle: 'Kodningssymboler pa dansk tastatur',
+      symbolGuideSymbolLabel: 'Tegn',
+      symbolGuideComboLabel: 'Tastekombination',
+      symbolGuideKeyLabel: 'Primar tast',
+      symbolGuideShift: 'Shift',
+      symbolGuideAltGr: 'AltGr',
+      statusTutorialDownload: 'Tutorial klar til download.',
     },
   },
   en: {
@@ -172,6 +214,27 @@ export const weblabLanguage: Record<Locale, {
       openTab: 'Open in new tab',
       updatedToday: 'today',
       updatedAtDate: 'last updated at',
+      mobileBlockedLabel: 'WebLab is unavailable on mobile and tablet in this version.',
+      mobileBlockedTitle: 'WebLab requires a larger screen',
+      mobileBlockedText: 'The editor is temporarily locked on devices below 1024 px to preserve the full classroom experience.',
+      mobileBlockedHint: 'Open WebLab on a laptop or desktop to use editor, preview, and file management.',
+      learningTitle: 'WebLab Learning',
+      learningLead: 'Take your first step into digital learning.',
+      learningQuestion: 'Choose what you want to practice and import the file directly in WebLab.',
+      learningTabLabel: 'Tutorial topics',
+      learningDownload: 'Download selected tutorial',
+      learningFeedback: 'Feedback',
+      tutorialFileTypes: 'File types & File Explorer',
+      tutorialPreview: 'Preview',
+      tutorialSemantic: 'Semantic HTML and Meta',
+      tutorialSymbols: 'Coding symbols',
+      symbolGuideTitle: 'Coding symbols on Danish keyboard',
+      symbolGuideSymbolLabel: 'Symbol',
+      symbolGuideComboLabel: 'Key combination',
+      symbolGuideKeyLabel: 'Primary key',
+      symbolGuideShift: 'Shift',
+      symbolGuideAltGr: 'AltGr',
+      statusTutorialDownload: 'Tutorial ready for download.',
     },
   },
 };

@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "mode": "full",
+  "name": "semantisk-html-og-meta",
+  "updatedAt": "2026-06-10T09:00:00.000Z",
+  "files": [
+    {
+      "id": "t3-index",
+      "name": "index.html",
+      "kind": "html",
+      "content": "<!doctype html>\n<html lang=\"da\">\n  <head>\n    <meta charset=\"utf-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n    <meta name=\"description\" content=\"Eksempel på semantisk HTML med to undersider\" />\n    <title>Semantisk HTML eksempel</title>\n    <link rel=\"stylesheet\" href=\"styles.css\" />\n  </head>\n  <body>\n    <header class=\"site-header\">\n      <h1>NordPixel Demo Site</h1>\n      <nav aria-label=\"Hovedmenu\">\n        <a href=\"index.html\">Forside</a>\n        <a href=\"kontakt.html\">Kontakt</a>\n      </nav>\n    </header>\n\n    <main>\n      <article>\n        <h2>Semantisk struktur</h2>\n        <p>Her bruger vi header, nav, main, article, section og footer i stedet for kun div.</p>\n      </article>\n\n      <section>\n        <h3>Interaktiv detalje</h3>\n        <button id=\"theme-btn\" type=\"button\">Skift tema</button>\n      </section>\n    </main>\n\n    <footer>\n      <small>Bygget i WebLab tutorial</small>\n    </footer>\n\n    <script src=\"script.js\"></script>\n  </body>\n</html>"
+    },
+    {
+      "id": "t3-contact",
+      "name": "kontakt.html",
+      "kind": "html",
+      "content": "<!doctype html>\n<html lang=\"da\">\n  <head>\n    <meta charset=\"utf-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n    <meta name=\"description\" content=\"Kontakt underside i semantisk tutorial\" />\n    <title>Kontakt | Semantisk HTML</title>\n    <link rel=\"stylesheet\" href=\"styles.css\" />\n  </head>\n  <body>\n    <header class=\"site-header\">\n      <h1>Kontakt</h1>\n      <nav aria-label=\"Hovedmenu\">\n        <a href=\"index.html\">Forside</a>\n        <a href=\"kontakt.html\" aria-current=\"page\">Kontakt</a>\n      </nav>\n    </header>\n\n    <main>\n      <section>\n        <h2>Skriv til os</h2>\n        <p>mail@nordpixel.dev</p>\n      </section>\n    </main>\n\n    <footer>\n      <small>Underside med samme designfil og script</small>\n    </footer>\n\n    <script src=\"script.js\"></script>\n  </body>\n</html>"
+    },
+    {
+      "id": "t3-css",
+      "name": "styles.css",
+      "kind": "css",
+      "content": ":root {\n  --bg: #f4f7fb;\n  --text: #112033;\n  --surface: #ffffff;\n  --accent: #f3ad3b;\n}\n\nbody {\n  margin: 0;\n  font-family: 'Segoe UI', sans-serif;\n  background: var(--bg);\n  color: var(--text);\n}\n\n.site-header,\nmain,\nfooter {\n  width: min(860px, 92vw);\n  margin-inline: auto;\n}\n\n.site-header {\n  margin-top: 1.4rem;\n  padding: 1rem 1.2rem;\n  border-radius: 0.8rem;\n  background: var(--surface);\n}\n\nnav {\n  display: flex;\n  gap: 0.8rem;\n}\n\nmain {\n  margin-top: 1rem;\n  padding: 1rem 1.2rem;\n  border-radius: 0.8rem;\n  background: var(--surface);\n}\n\nbutton {\n  border: 0;\n  border-radius: 0.6rem;\n  padding: 0.6rem 0.9rem;\n  background: var(--accent);\n  font-weight: 700;\n  cursor: pointer;\n}\n"
+    },
+    {
+      "id": "t3-js",
+      "name": "script.js",
+      "kind": "js",
+      "content": "const button = document.getElementById('theme-btn');\n\nbutton?.addEventListener('click', () => {\n  const root = document.documentElement;\n  const isDark = root.dataset.theme === 'dark';\n\n  if (isDark) {\n    root.dataset.theme = '';\n    root.style.setProperty('--bg', '#f4f7fb');\n    root.style.setProperty('--text', '#112033');\n    root.style.setProperty('--surface', '#ffffff');\n    root.style.setProperty('--accent', '#f3ad3b');\n    return;\n  }\n\n  root.dataset.theme = 'dark';\n  root.style.setProperty('--bg', '#101a24');\n  root.style.setProperty('--text', '#eef6ff');\n  root.style.setProperty('--surface', '#172534');\n  root.style.setProperty('--accent', '#ffc668');\n});\n"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "mode": "full",
+  "name": "preview-begraensninger",
+  "updatedAt": "2026-06-10T09:00:00.000Z",
+  "files": [
+    {
+      "id": "t2-index",
+      "name": "index.html",
+      "kind": "html",
+      "content": "<!doctype html>\n<html lang=\"da\">\n  <head>\n    <meta charset=\"utf-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n    <title>Preview i WebLab</title>\n    <link rel=\"stylesheet\" href=\"styles.css\" />\n  </head>\n  <body>\n    <main>\n      <h1>Preview: hvad kan det, og hvad kan det ikke?</h1>\n      <p>Preview viser din side lokalt i WebLab. Du kan teste HTML, CSS og JavaScript hurtigt.</p>\n\n      <h2>Det kan Preview</h2>\n      <ul>\n        <li>Vise lokale links mellem HTML-filer i projektet.</li>\n        <li>Køre JavaScript fra script.js.</li>\n        <li>Indlæse styles fra styles.css.</li>\n      </ul>\n\n      <h2>Begrænsninger</h2>\n      <ul>\n        <li>Eksterne links skal åbnes uden for WebLab.</li>\n        <li>Lokale medier (f.eks. billede.jpg) virker ikke, medmindre filen findes i projektet.</li>\n        <li>Nogle browser-API'er er blokeret i sandbox.</li>\n      </ul>\n\n      <p><a href=\"underside.html\">Gå til underside i projektet</a></p>\n      <p><a href=\"https://example.com\">Eksternt link (forlader Preview)</a></p>\n\n      <figure>\n        <img src=\"lokalt-billede.jpg\" alt=\"Eksempel på manglende lokal mediefil\" />\n        <figcaption>Hvis filen ikke findes i projektet, kan billedet ikke vises.</figcaption>\n      </figure>\n    </main>\n    <script src=\"script.js\"></script>\n  </body>\n</html>"
+    },
+    {
+      "id": "t2-under",
+      "name": "underside.html",
+      "kind": "html",
+      "content": "<!doctype html>\n<html lang=\"da\">\n  <head>\n    <meta charset=\"utf-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n    <title>Underside i Preview</title>\n    <link rel=\"stylesheet\" href=\"styles.css\" />\n  </head>\n  <body>\n    <main>\n      <h1>Underside</h1>\n      <p>Dette viser navigation mellem lokale HTML-filer i samme projekt.</p>\n      <p><a href=\"index.html\">Tilbage til forside</a></p>\n    </main>\n  </body>\n</html>"
+    },
+    {
+      "id": "t2-css",
+      "name": "styles.css",
+      "kind": "css",
+      "content": "body {\n  margin: 0;\n  font-family: 'Segoe UI', sans-serif;\n  background: #f7f8fb;\n  color: #17212c;\n}\n\nmain {\n  width: min(860px, 92vw);\n  margin: 2rem auto;\n  padding: 1.25rem;\n  border-radius: 0.9rem;\n  background: #ffffff;\n  box-shadow: 0 12px 30px rgba(15, 33, 51, 0.08);\n}\n\nimg {\n  width: min(100%, 420px);\n  min-height: 120px;\n  border: 1px dashed #8ea0b5;\n  background: #f1f4f9;\n}\n"
+    },
+    {
+      "id": "t2-js",
+      "name": "script.js",
+      "kind": "js",
+      "content": "console.log('Preview tutorial indlæst. Test både lokale og eksterne links.');\n"
+    }
+  ]
+}

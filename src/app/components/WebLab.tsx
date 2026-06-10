@@ -38,6 +38,14 @@ type LegacyLabProject = {
   };
 };
 
+type TutorialTopicId = 'fileTypes' | 'preview' | 'semantic' | 'symbols';
+
+type TutorialTopic = {
+  id: TutorialTopicId;
+  label: string;
+  href: string;
+};
+
 const STORAGE_KEY = 'nordpixel-weblab-current';
 const LAST_SAVE_KEY = 'nordpixel-weblab-last-save';
 const DIRTY_STATE_KEY = 'nordpixel-weblab-is-dirty';
@@ -500,9 +508,54 @@ export function WebLab() {
   const [previewRefreshNonce, setPreviewRefreshNonce] = useState(0);
   const [visiblePanes, setVisiblePanes] = useState({ explorer: true, editor: true, preview: true });
   const [isMobile, setIsMobile] = useState(false);
+  const [isViewportBlocked, setIsViewportBlocked] = useState(false);
+  const [isLearningOpen, setIsLearningOpen] = useState(false);
+  const [downloadedTutorialIds, setDownloadedTutorialIds] = useState<TutorialTopicId[]>([]);
   const visiblePanesKey = `${visiblePanes.explorer ? '1' : '0'}${visiblePanes.editor ? '1' : '0'}${visiblePanes.preview ? '1' : '0'}`;
   const weblabText = weblabLanguage[siteLocale].weblab;
   const editorIntroCopy = weblabLanguage[siteLocale].editorIntro;
+  const tutorialTopics = useMemo<TutorialTopic[]>(
+    () => [
+      {
+        id: 'fileTypes',
+        label: weblabText.tutorialFileTypes,
+        href: '/weblab/tutorials/da/filtyper-file-explorer.nordpixel.json',
+      },
+      {
+        id: 'preview',
+        label: weblabText.tutorialPreview,
+        href: '/weblab/tutorials/da/preview-begraensninger.nordpixel.json',
+      },
+      {
+        id: 'semantic',
+        label: weblabText.tutorialSemantic,
+        href: '/weblab/tutorials/da/semantisk-html-og-meta.nordpixel.json',
+      },
+      {
+        id: 'symbols',
+        label: weblabText.tutorialSymbols,
+        href: '/weblab/tutorials/da/kodningssymboler-da-tastatur.nordpixel.json',
+      },
+    ],
+    [
+      weblabText.tutorialFileTypes,
+      weblabText.tutorialPreview,
+      weblabText.tutorialSemantic,
+      weblabText.tutorialSymbols,
+    ],
+  );
+  const triggerTutorialDownload = useCallback((topic: TutorialTopic) => {
+    const anchor = document.createElement('a');
+    anchor.href = topic.href;
+    anchor.download = '';
+    document.body.append(anchor);
+    anchor.click();
+    anchor.remove();
+    setDownloadedTutorialIds((current) =>
+      current.includes(topic.id) ? current : [...current, topic.id],
+    );
+    setNotice(weblabText.statusTutorialDownload);
+  }, [weblabText.statusTutorialDownload]);
   const panelDefaults = useMemo(() => {
     // Bevar fornuftige panelbredder for alle synlighedskombinationer.
     const showExplorer = visiblePanes.explorer;
@@ -550,12 +603,15 @@ export function WebLab() {
 
   useEffect(() => {
     // Indledende hydrering: viewport-tilstand + gendannelse af lokalt kladdeindhold.
-    const media = window.matchMedia('(max-width: 880px)');
+    const mobileMedia = window.matchMedia('(max-width: 880px)');
+    const blockedViewportMedia = window.matchMedia('(max-width: 1023px)');
     const applyViewportMode = () => {
-      setIsMobile(media.matches);
+      setIsMobile(mobileMedia.matches);
+      setIsViewportBlocked(blockedViewportMedia.matches);
     };
     applyViewportMode();
-    media.addEventListener('change', applyViewportMode);
+    mobileMedia.addEventListener('change', applyViewportMode);
+    blockedViewportMedia.addEventListener('change', applyViewportMode);
 
     const saved = window.localStorage.getItem(STORAGE_KEY);
     if (saved) {
@@ -580,7 +636,8 @@ export function WebLab() {
     setIsHydrated(true);
 
     return () => {
-      media.removeEventListener('change', applyViewportMode);
+      mobileMedia.removeEventListener('change', applyViewportMode);
+      blockedViewportMedia.removeEventListener('change', applyViewportMode);
     };
   }, [weblabText.statusRecovered]);
 
@@ -1281,43 +1338,51 @@ export function WebLab() {
           </div>
           <p>{editorIntroCopy.text}</p>
         </div>
-        <label className="weblabNameField">
-          {weblabText.projectName}
-          <input
-            type="text"
-            value={project.name}
-            onChange={handleProjectNameChange}
-            placeholder={weblabText.projectPlaceholder}
-            maxLength={80}
-          />
-        </label>
-        <div className="weblabControls">
-          <div className="weblabActions">
-            <button type="button" className="weblabNewButton" onClick={requestNewProjectReset}>
-              {weblabText.newSite}
-            </button>
-            <button type="button" onClick={handleSave} className={isDirty ? 'isDirty' : ''}>
-              {weblabText.save}
-            </button>
-            <button type="button" onClick={handleImportRequest}>
-              {weblabText.import}
-            </button>
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept=".json,.nordpixel.json,application/json"
-              onChange={handleImportFile}
-              hidden
-            />
+        {!isViewportBlocked ? (
+          <>
+            <label className="weblabNameField">
+              {weblabText.projectName}
+              <input
+                type="text"
+                value={project.name}
+                onChange={handleProjectNameChange}
+                placeholder={weblabText.projectPlaceholder}
+                maxLength={80}
+              />
+            </label>
+            <div className="weblabControls">
+              <div className="weblabActions">
+                <button type="button" className="weblabNewButton" onClick={requestNewProjectReset}>
+                  {weblabText.newSite}
+                </button>
+                <button type="button" onClick={handleSave} className={isDirty ? 'isDirty' : ''}>
+                  {weblabText.save}
+                </button>
+                <button type="button" onClick={handleImportRequest}>
+                  {weblabText.import}
+                </button>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept=".json,.nordpixel.json,application/json"
+                  onChange={handleImportFile}
+                  hidden
+                />
+              </div>
+              <div className="weblabMeta">
+                <p>{weblabText.lastUpdate} {formattedLastUpdate}</p>
+                <p>{weblabText.lastSave} {formattedLastSave}</p>
+                {isRecoveredNotice ? (
+                  <p className="weblabMetaHint" title={weblabText.recoveredHint}>{notice}</p>
+                ) : null}
+              </div>
+            </div>
+          </>
+        ) : (
+          <div className="weblabBlockedTopMeta">
+            <p>{weblabText.mobileBlockedLabel}</p>
           </div>
-          <div className="weblabMeta">
-            <p>{weblabText.lastUpdate} {formattedLastUpdate}</p>
-            <p>{weblabText.lastSave} {formattedLastSave}</p>
-            {isRecoveredNotice ? (
-              <p className="weblabMetaHint" title={weblabText.recoveredHint}>{notice}</p>
-            ) : null}
-          </div>
-        </div>
+        )}
       </header>
 
       {!isRecoveredNotice ? (
@@ -1326,38 +1391,46 @@ export function WebLab() {
         </div>
       ) : null}
 
-      <div className="weblabViewbar" aria-label="View panes">
-        <span className="weblabViewbarLabel">{weblabText.view}</span>
-        <div className="weblabViewbarControls">
-          <button
-            type="button"
-            className={visiblePanes.explorer ? 'weblabPaneToggle isOn' : 'weblabPaneToggle isOff'}
-            onClick={() => togglePane('explorer')}
-            aria-pressed={visiblePanes.explorer}
-          >
-            {weblabText.explorer}
-          </button>
-          <button
-            type="button"
-            className={visiblePanes.editor ? 'weblabPaneToggle isOn' : 'weblabPaneToggle isOff'}
-            onClick={() => togglePane('editor')}
-            aria-pressed={visiblePanes.editor}
-          >
-            {weblabText.code}
-          </button>
-          <button
-            type="button"
-            className={visiblePanes.preview ? 'weblabPaneToggle isOn' : 'weblabPaneToggle isOff'}
-            onClick={() => togglePane('preview')}
-            aria-pressed={visiblePanes.preview}
-          >
-            {weblabText.preview}
-          </button>
+      {isViewportBlocked ? (
+        <div className="weblabMobileBlocked" role="status" aria-live="polite">
+          <h2>{weblabText.mobileBlockedTitle}</h2>
+          <p>{weblabText.mobileBlockedText}</p>
+          <p className="weblabMobileBlockedHint">{weblabText.mobileBlockedHint}</p>
         </div>
-      </div>
+      ) : (
+        <>
+          <div className="weblabViewbar" aria-label="View panes">
+            <span className="weblabViewbarLabel">{weblabText.view}</span>
+            <div className="weblabViewbarControls">
+              <button
+                type="button"
+                className={visiblePanes.explorer ? 'weblabPaneToggle isOn' : 'weblabPaneToggle isOff'}
+                onClick={() => togglePane('explorer')}
+                aria-pressed={visiblePanes.explorer}
+              >
+                {weblabText.explorer}
+              </button>
+              <button
+                type="button"
+                className={visiblePanes.editor ? 'weblabPaneToggle isOn' : 'weblabPaneToggle isOff'}
+                onClick={() => togglePane('editor')}
+                aria-pressed={visiblePanes.editor}
+              >
+                {weblabText.code}
+              </button>
+              <button
+                type="button"
+                className={visiblePanes.preview ? 'weblabPaneToggle isOn' : 'weblabPaneToggle isOff'}
+                onClick={() => togglePane('preview')}
+                aria-pressed={visiblePanes.preview}
+              >
+                {weblabText.preview}
+              </button>
+            </div>
+          </div>
 
-      <div className="weblabWorkspace">
-        {visiblePanes.explorer || visiblePanes.editor || visiblePanes.preview ? (
+          <div className="weblabWorkspace">
+            {visiblePanes.explorer || visiblePanes.editor || visiblePanes.preview ? (
             <PanelGroup
               key={`${isMobile ? 'full-vertical' : 'full-horizontal'}-${visiblePanesKey}`}
               autoSaveId={`${isMobile ? 'weblab-full-mobile-layout-v2' : 'weblab-full-desktop-layout-v2'}-${visiblePanesKey}`}
@@ -1546,7 +1619,53 @@ export function WebLab() {
             </div>
           )
         }
-      </div>
+          </div>
+
+          <aside className={isLearningOpen ? 'weblabLearning isOpen' : 'weblabLearning'} aria-label={weblabText.learningTitle}>
+            <button
+              type="button"
+              className="weblabLearningToggle"
+              onClick={() => setIsLearningOpen((current) => !current)}
+              aria-expanded={isLearningOpen}
+              aria-controls="weblab-learning-panel"
+            >
+              ?
+            </button>
+            <div id="weblab-learning-panel" className="weblabLearningPanel">
+              <h2>{weblabText.learningTitle}</h2>
+              <p>{weblabText.learningLead}</p>
+              <p>{weblabText.learningQuestion}</p>
+
+              <div className="weblabLearningTopics" aria-label={weblabText.learningTabLabel}>
+                {tutorialTopics.map((topic) => {
+                  const isDownloaded = downloadedTutorialIds.includes(topic.id);
+
+                  return (
+                    <button
+                      key={topic.id}
+                      type="button"
+                      className={isDownloaded ? 'weblabLearningTopic isDownloaded' : 'weblabLearningTopic'}
+                      aria-pressed={isDownloaded}
+                      onClick={() => {
+                        triggerTutorialDownload(topic);
+                      }}
+                    >
+                      <span>{topic.label}</span>
+                      {isDownloaded ? (
+                        <span className="weblabLearningTopicCheck" aria-hidden="true">✓</span>
+                      ) : null}
+                    </button>
+                  );
+                })}
+              </div>
+
+              <a className="weblabLearningFeedback" href="mailto:hello@nordpixel.dev?subject=WebLab%20feedback">
+                {weblabText.learningFeedback}
+              </a>
+            </div>
+          </aside>
+        </>
+      )}
 
       {isNewSiteConfirmOpen ? (
         <div

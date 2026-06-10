@@ -3639,6 +3639,183 @@ html {
 	background: color-mix(in oklab, var(--brand-orange) 58%, var(--border-subtle) 42%);
 }
 
+.weblabBlockedTopMeta {
+	grid-area: controls;
+	justify-self: end;
+	font-size: 0.8rem;
+	color: var(--text-muted);
+}
+
+.weblabBlockedTopMeta p {
+	margin: 0;
+	max-width: 42ch;
+	text-align: right;
+}
+
+.weblabMobileBlocked {
+	display: grid;
+	gap: 0.5rem;
+	padding: 1.2rem;
+	border-radius: 1rem;
+	background: color-mix(in oklab, var(--surface-panel) 86%, var(--brand-orange-soft) 14%);
+	box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--brand-orange) 18%, transparent 82%);
+}
+
+.weblabMobileBlocked h2,
+.weblabMobileBlocked p {
+	margin: 0;
+}
+
+.weblabMobileBlocked h2 {
+	font-size: var(--font-size-heading-4);
+	line-height: var(--line-height-tight);
+	color: color-mix(in oklab, var(--brand-navy) 88%, black 12%);
+}
+
+.weblabMobileBlocked p {
+	font-size: var(--font-size-body-sm);
+	line-height: var(--line-height-body);
+	color: var(--text-muted);
+	max-width: 70ch;
+}
+
+.weblabMobileBlockedHint {
+	font-weight: 600;
+}
+
+.weblabLearning {
+	position: fixed;
+	right: 1rem;
+	bottom: 1rem;
+	z-index: 30;
+	display: block;
+	pointer-events: none;
+}
+
+.weblabLearningToggle {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	pointer-events: auto;
+	width: 3.3rem;
+	height: 3.3rem;
+	border-radius: 999px;
+	border: 0;
+	background: var(--brand-orange);
+	color: color-mix(in oklab, var(--brand-navy) 92%, black 8%);
+	font-size: 2rem;
+	font-weight: 800;
+	line-height: 1;
+	box-shadow: 0 12px 34px color-mix(in oklab, black 30%, transparent 70%);
+	padding: 0;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.weblabLearningToggle:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 14px 36px color-mix(in oklab, black 34%, transparent 66%);
+}
+
+.weblabLearningPanel {
+	pointer-events: auto;
+	width: min(23.5rem, calc(100vw - 2rem));
+	margin: 0 2.2rem 1.55rem 0;
+	padding: 1.05rem 1rem 0.85rem;
+	border-radius: 1.1rem;
+	background: color-mix(in oklab, var(--brand-navy) 94%, #001820 6%);
+	border: 3px solid var(--brand-orange);
+	box-shadow: none;
+	color: #f4f8fb;
+	display: grid;
+	gap: 0.58rem;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	transform: translateY(0.5rem) scale(0.86);
+	transform-origin: calc(100% - 1.6rem) calc(100% - 1.6rem);
+	transition: opacity 0.22s ease, transform 0.26s cubic-bezier(0.2, 0.75, 0.2, 1), visibility 0.22s;
+}
+
+.weblabLearning.isOpen .weblabLearningPanel {
+	opacity: 1;
+	visibility: visible;
+	pointer-events: auto;
+	transform: translateY(0) scale(1);
+}
+
+.weblabLearningPanel h2,
+.weblabLearningPanel p {
+	margin: 0;
+}
+
+.weblabLearningPanel h2 {
+	font-size: clamp(1.5rem, 2vw, 2.15rem);
+	line-height: 1;
+	font-family: 'Tomorrow', sans-serif;
+	text-transform: none;
+	font-weight: 700;
+}
+
+.weblabLearningPanel p {
+	font-family: var(--font-family-body);
+	font-size: 0.9rem;
+	line-height: 1.34;
+	color: color-mix(in oklab, #f4f8fb 92%, #8fb4d5 8%);
+}
+
+.weblabLearningTopics {
+	display: grid;
+	gap: 0.38rem;
+	margin-top: 0.18rem;
+}
+
+.weblabLearningTopic {
+	display: inline-flex;
+	align-items: center;
+	justify-content: flex-start;
+	width: 100%;
+	gap: 0.6rem;
+	padding: 0.26rem 0.54rem;
+	border-radius: clamp(0.42rem, 0.45em + 0.2rem, 0.7rem);
+	border: 1px solid transparent;
+	background: #f1f1f1;
+	color: var(--text-primary);
+	text-decoration: none;
+	font-family: var(--font-family-body);
+	font-size: 0.76rem;
+	font-weight: 600;
+	line-height: 1.1;
+	cursor: pointer;
+	transition: transform 0.2s ease;
+}
+
+.weblabLearningTopic:hover {
+	transform: translateY(-1px);
+}
+
+.weblabLearningTopic.isDownloaded {
+	background: color-mix(in oklab, var(--brand-orange) 78%, #ffe2ae 22%);
+	border-color: color-mix(in oklab, var(--brand-orange) 52%, #ca8a20 48%);
+	color: #1f1500;
+}
+
+.weblabLearningTopicCheck {
+	margin-left: auto;
+	font-size: 0.78rem;
+	font-weight: 800;
+	line-height: 1;
+}
+
+.weblabLearningFeedback {
+	justify-self: end;
+	font-family: var(--font-family-body);
+	font-size: 0.8rem;
+	color: #33dbff;
+}
+
 /* Hold knaphjørner konsistente på tværs af CTA-links og native knapper. */
 button,
 .landingButton,
@@ -3965,6 +4142,10 @@ button,
 
 	.weblabMeta {
 		justify-items: start;
+	}
+
+	.weblabLearning {
+		display: none;
 	}
 
 	.cookieConsent {

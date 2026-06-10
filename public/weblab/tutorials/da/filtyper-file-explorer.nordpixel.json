@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "mode": "full",
+  "name": "filtyper-og-file-explorer",
+  "updatedAt": "2026-06-10T09:00:00.000Z",
+  "files": [
+    {
+      "id": "t1-index",
+      "name": "index.html",
+      "kind": "html",
+      "content": "<!doctype html>\n<html lang=\"da\">\n  <head>\n    <meta charset=\"utf-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n    <title>Filtyper og File Explorer</title>\n    <link rel=\"stylesheet\" href=\"styles.css\" />\n  </head>\n  <body>\n    <main>\n      <h1>Filtyper og File Explorer</h1>\n      <p>Denne tutorial viser hvordan HTML, CSS og JavaScript arbejder sammen i WebLab.</p>\n\n      <section>\n        <h2>Tre kernefiler</h2>\n        <ul>\n          <li><strong>index.html</strong>: struktur og indhold.</li>\n          <li><strong>styles.css</strong>: farver, afstand og layout.</li>\n          <li><strong>script.js</strong>: interaktiv adfærd.</li>\n        </ul>\n      </section>\n\n      <section>\n        <h2>Træn i File Explorer</h2>\n        <ol>\n          <li>Opret en ny HTML-fil og kald den side-2.html.</li>\n          <li>Dobbelklik på filnavn i explorer for at omdøbe.</li>\n          <li>Tilføj et link fra index.html til side-2.html.</li>\n          <li>Test at Preview skifter fil, når du klikker på linket.</li>\n        </ol>\n      </section>\n\n      <button id=\"check-btn\" type=\"button\">Marker tutorial som gennemført</button>\n      <p id=\"status\" aria-live=\"polite\">Status: I gang</p>\n    </main>\n\n    <script src=\"script.js\"></script>\n  </body>\n</html>"
+    },
+    {
+      "id": "t1-css",
+      "name": "styles.css",
+      "kind": "css",
+      "content": "* { box-sizing: border-box; }\n\nbody {\n  margin: 0;\n  font-family: 'Segoe UI', sans-serif;\n  background: #f2f4f7;\n  color: #0e1a22;\n}\n\nmain {\n  width: min(860px, 92vw);\n  margin: 2rem auto;\n  padding: 1.25rem;\n  border-radius: 0.9rem;\n  background: #ffffff;\n  box-shadow: 0 10px 28px rgba(8, 24, 38, 0.1);\n}\n\nh1 {\n  margin-top: 0;\n}\n\nbutton {\n  border: 0;\n  border-radius: 0.6rem;\n  padding: 0.6rem 0.9rem;\n  background: #f3ad3b;\n  color: #121212;\n  font-weight: 700;\n  cursor: pointer;\n}\n"
+    },
+    {
+      "id": "t1-js",
+      "name": "script.js",
+      "kind": "js",
+      "content": "const checkButton = document.getElementById('check-btn');\nconst status = document.getElementById('status');\n\ncheckButton?.addEventListener('click', () => {\n  if (!status) return;\n  status.textContent = 'Status: Færdig - du har gennemført filtype introen.';\n});\n"
+    }
+  ]
+}
