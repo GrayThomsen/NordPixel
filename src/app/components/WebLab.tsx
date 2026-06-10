@@ -511,6 +511,7 @@ export function WebLab() {
   const [isViewportBlocked, setIsViewportBlocked] = useState(false);
   const [isLearningOpen, setIsLearningOpen] = useState(false);
   const [downloadedTutorialIds, setDownloadedTutorialIds] = useState<TutorialTopicId[]>([]);
+  const [learningBottomOffset, setLearningBottomOffset] = useState(0);
   const visiblePanesKey = `${visiblePanes.explorer ? '1' : '0'}${visiblePanes.editor ? '1' : '0'}${visiblePanes.preview ? '1' : '0'}`;
   const weblabText = weblabLanguage[siteLocale].weblab;
   const editorIntroCopy = weblabLanguage[siteLocale].editorIntro;
@@ -665,6 +666,31 @@ export function WebLab() {
       window.clearInterval(intervalId);
       window.removeEventListener('focus', syncTimeZone);
       document.removeEventListener('visibilitychange', syncTimeZone);
+    };
+  }, []);
+
+  useEffect(() => {
+    const baseBottom = 16;
+
+    const syncLearningOffset = () => {
+      const footer = document.querySelector('.siteFooter') as HTMLElement | null;
+      if (!footer) {
+        setLearningBottomOffset(0);
+        return;
+      }
+
+      const footerTop = footer.getBoundingClientRect().top;
+      const overlap = window.innerHeight - baseBottom - footerTop;
+      setLearningBottomOffset(overlap > 0 ? Math.ceil(overlap) : 0);
+    };
+
+    syncLearningOffset();
+    window.addEventListener('scroll', syncLearningOffset, { passive: true });
+    window.addEventListener('resize', syncLearningOffset);
+
+    return () => {
+      window.removeEventListener('scroll', syncLearningOffset);
+      window.removeEventListener('resize', syncLearningOffset);
     };
   }, []);
 
@@ -1621,7 +1647,11 @@ export function WebLab() {
         }
           </div>
 
-          <aside className={isLearningOpen ? 'weblabLearning isOpen' : 'weblabLearning'} aria-label={weblabText.learningTitle}>
+          <aside
+            className={isLearningOpen ? 'weblabLearning isOpen' : 'weblabLearning'}
+            aria-label={weblabText.learningTitle}
+            style={{ bottom: `${16 + learningBottomOffset}px` }}
+          >
             <button
               type="button"
               className="weblabLearningToggle"

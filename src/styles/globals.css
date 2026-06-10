@@ -3690,6 +3690,7 @@ html {
 	z-index: 30;
 	display: block;
 	pointer-events: none;
+	transition: bottom 0.16s ease;
 }
 
 .weblabLearningToggle {
