@@ -512,7 +512,6 @@ export function WebLab() {
   const [isLearningOpen, setIsLearningOpen] = useState(false);
   const [downloadedTutorialIds, setDownloadedTutorialIds] = useState<TutorialTopicId[]>([]);
   const [learningBottomOffset, setLearningBottomOffset] = useState(0);
-  const visiblePanesKey = `${visiblePanes.explorer ? '1' : '0'}${visiblePanes.editor ? '1' : '0'}${visiblePanes.preview ? '1' : '0'}`;
   const weblabText = weblabLanguage[siteLocale].weblab;
   const editorIntroCopy = weblabLanguage[siteLocale].editorIntro;
   const tutorialTopics = useMemo<TutorialTopic[]>(
@@ -771,77 +770,76 @@ export function WebLab() {
   );
 
   const handleEditorMount = useCallback<OnMount>((editor, monaco) => {
-    // Registrer brugerdefinerede HTML-fuldførelser én gang pr. komponentlivscyklus.
-    if (!htmlCompletionProviderDisposableRef.current) {
-      htmlCompletionProviderDisposableRef.current = monaco.languages.registerCompletionItemProvider('html', {
-        triggerCharacters: ['<', '"', '\'', '/'],
-        provideCompletionItems(
-          model: Monaco.editor.ITextModel,
-          position: Monaco.Position,
-        ): Monaco.languages.ProviderResult<Monaco.languages.CompletionList> {
-          const linePrefix = model
-            .getValueInRange({
-              startLineNumber: position.lineNumber,
-              startColumn: 1,
-              endLineNumber: position.lineNumber,
-              endColumn: position.column,
-            })
-            .trimEnd();
-
-          const hrefMatch = linePrefix.match(/\bhref\s*=\s*["']([^"']*)$/i);
-          if (hrefMatch) {
-            const hrefPrefix = hrefMatch[1] ?? '';
-            const normalizedPrefix = hrefPrefix.toLowerCase();
-            const htmlReferences = htmlReferenceNamesRef.current;
-            const startColumn = Math.max(1, position.column - hrefPrefix.length);
-
-            const hrefSuggestions = htmlReferences
-              .filter((name) => name.toLowerCase().startsWith(normalizedPrefix))
-              .map((name) => ({
-                label: name,
-                kind: monaco.languages.CompletionItemKind.File,
-                insertText: name,
-                range: {
-                  startLineNumber: position.lineNumber,
-                  startColumn,
-                  endLineNumber: position.lineNumber,
-                  endColumn: position.column,
-                },
-              }));
-
-            return { suggestions: hrefSuggestions };
-          }
-
-          const tagMatch = linePrefix.match(/<([a-zA-Z][\w-]*)?$/);
-          if (!tagMatch) {
-            return { suggestions: [] };
-          }
-
-          const tagPrefix = tagMatch[1] ?? '';
-          const range = {
+    // Genregistrer provider ved mount for at undgå stale Monaco-disposables efter panel-toggles.
+    htmlCompletionProviderDisposableRef.current?.dispose();
+    htmlCompletionProviderDisposableRef.current = monaco.languages.registerCompletionItemProvider('html', {
+      triggerCharacters: ['<', '"', '\'', '/'],
+      provideCompletionItems(
+        model: Monaco.editor.ITextModel,
+        position: Monaco.Position,
+      ): Monaco.languages.ProviderResult<Monaco.languages.CompletionList> {
+        const linePrefix = model
+          .getValueInRange({
             startLineNumber: position.lineNumber,
-            startColumn: Math.max(1, position.column - tagPrefix.length - 1),
+            startColumn: 1,
             endLineNumber: position.lineNumber,
             endColumn: position.column,
-          };
+          })
+          .trimEnd();
 
-          const suggestions = HTML_COMPLETION_TAGS.filter((tag) => tag.startsWith(tagPrefix)).map((tag) => ({
-            label: tag,
-            kind: monaco.languages.CompletionItemKind.Snippet,
-            insertText: `<${tag}>$0</${tag}>`,
-            insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-            range,
-            sortText: tag,
-          }));
+        const hrefMatch = linePrefix.match(/\bhref\s*=\s*["']([^"']*)$/i);
+        if (hrefMatch) {
+          const hrefPrefix = hrefMatch[1] ?? '';
+          const normalizedPrefix = hrefPrefix.toLowerCase();
+          const htmlReferences = htmlReferenceNamesRef.current;
+          const startColumn = Math.max(1, position.column - hrefPrefix.length);
 
-          return { suggestions };
-        },
-      });
-    }
+          const hrefSuggestions = htmlReferences
+            .filter((name) => name.toLowerCase().startsWith(normalizedPrefix))
+            .map((name) => ({
+              label: name,
+              kind: monaco.languages.CompletionItemKind.File,
+              insertText: name,
+              range: {
+                startLineNumber: position.lineNumber,
+                startColumn,
+                endLineNumber: position.lineNumber,
+                endColumn: position.column,
+              },
+            }));
+
+          return { suggestions: hrefSuggestions };
+        }
+
+        const tagMatch = linePrefix.match(/<([a-zA-Z][\w-]*)?$/);
+        if (!tagMatch) {
+          return { suggestions: [] };
+        }
+
+        const tagPrefix = tagMatch[1] ?? '';
+        const range = {
+          startLineNumber: position.lineNumber,
+          startColumn: Math.max(1, position.column - tagPrefix.length - 1),
+          endLineNumber: position.lineNumber,
+          endColumn: position.column,
+        };
+
+        const suggestions = HTML_COMPLETION_TAGS.filter((tag) => tag.startsWith(tagPrefix)).map((tag) => ({
+          label: tag,
+          kind: monaco.languages.CompletionItemKind.Snippet,
+          insertText: `<${tag}>$0</${tag}>`,
+          insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+          range,
+          sortText: tag,
+        }));
+
+        return { suggestions };
+      },
+    });
 
     let isApplyingAutoClose = false;
     const closeTagDisposable = editor.onDidChangeModelContent((changeEvent) => {
-      // Auto-luk tags ved accepteret fuldførelse eller skrevet ">", uden at skabe løkker.
+      // Auto-luk tags ved skrevet ">", uden at skabe løkker.
       if (isApplyingAutoClose || changeEvent.isFlush) {
         return;
       }
@@ -862,44 +860,6 @@ export function WebLab() {
         endLineNumber: position.lineNumber,
         endColumn: position.column,
       });
-
-      const acceptedTagSuggestion = changeEvent.changes.some((change) => {
-        if (!/^[a-zA-Z][\w-]*$/.test(change.text)) {
-          return false;
-        }
-
-        return change.text.length > 1 || change.rangeLength > 0;
-      });
-
-      if (acceptedTagSuggestion) {
-        const completionTagMatch = linePrefix.match(/<([a-zA-Z][\w-]*)$/);
-        if (!completionTagMatch) {
-          return;
-        }
-
-        const tagName = completionTagMatch[1].toLowerCase();
-        if (
-          HTML_VOID_TAGS.has(tagName) ||
-          !HTML_COMPLETION_TAGS.includes(tagName as (typeof HTML_COMPLETION_TAGS)[number])
-        ) {
-          return;
-        }
-
-        const lineSuffix = model.getValueInRange({
-          startLineNumber: position.lineNumber,
-          startColumn: position.column,
-          endLineNumber: position.lineNumber,
-          endColumn: model.getLineMaxColumn(position.lineNumber),
-        });
-        if (lineSuffix.startsWith('>') || lineSuffix.startsWith(`</${tagName}>`)) {
-          return;
-        }
-
-        isApplyingAutoClose = true;
-        insertClosingHtmlTag(editor, monaco, tagName, true);
-        isApplyingAutoClose = false;
-        return;
-      }
 
       const insertedCloseBracket = changeEvent.changes.some(
         (change) => change.rangeLength === 0 && change.text === '>',
@@ -1458,8 +1418,8 @@ export function WebLab() {
           <div className="weblabWorkspace">
             {visiblePanes.explorer || visiblePanes.editor || visiblePanes.preview ? (
             <PanelGroup
-              key={`${isMobile ? 'full-vertical' : 'full-horizontal'}-${visiblePanesKey}`}
-              autoSaveId={`${isMobile ? 'weblab-full-mobile-layout-v2' : 'weblab-full-desktop-layout-v2'}-${visiblePanesKey}`}
+              key={isMobile ? 'full-vertical' : 'full-horizontal'}
+              autoSaveId={isMobile ? 'weblab-full-mobile-layout-v2' : 'weblab-full-desktop-layout-v2'}
               direction={isMobile ? 'vertical' : 'horizontal'}
             >
             {visiblePanes.explorer ? (
@@ -1595,7 +1555,7 @@ export function WebLab() {
                       automaticLayout: true,
                       tabSize: 2,
                       acceptSuggestionOnEnter: 'on',
-                      linkedEditing: true,
+                      linkedEditing: false,
                     }}
                     onMount={handleEditorMount}
                     theme="vs"
