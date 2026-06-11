@@ -605,7 +605,7 @@ export function WebLab() {
   useEffect(() => {
     // Indledende hydrering: viewport-tilstand + gendannelse af lokalt kladdeindhold.
     const mobileMedia = window.matchMedia('(max-width: 880px)');
-    const blockedViewportMedia = window.matchMedia('(max-width: 1023px)');
+    const blockedViewportMedia = window.matchMedia('(max-width: 424px)');
     const applyViewportMode = () => {
       setIsMobile(mobileMedia.matches);
       setIsViewportBlocked(blockedViewportMedia.matches);
