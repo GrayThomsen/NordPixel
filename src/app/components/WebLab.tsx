@@ -503,6 +503,8 @@ export function WebLab() {
   const { locale: siteLocale } = useLanguage();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const previewTabRef = useRef<Window | null>(null);
+  const editorInstanceRef = useRef<Monaco.editor.IStandaloneCodeEditor | null>(null);
+  const monacoInstanceRef = useRef<typeof Monaco | null>(null);
   const htmlReferenceNamesRef = useRef<string[]>([]);
   const htmlCompletionProviderDisposableRef = useRef<{ dispose: () => void } | null>(null);
   const [activeFileId, setActiveFileId] = useState<string>(() => getInitialActiveFileId(createStarterProject().files));
@@ -783,6 +785,9 @@ export function WebLab() {
   );
 
   const handleEditorMount = useCallback<OnMount>((editor, monaco) => {
+    editorInstanceRef.current = editor;
+    monacoInstanceRef.current = monaco;
+
     // Genregistrer provider ved mount for at undgå stale Monaco-disposables efter panel-toggles.
     htmlCompletionProviderDisposableRef.current?.dispose();
     htmlCompletionProviderDisposableRef.current = monaco.languages.registerCompletionItemProvider('html', {
@@ -896,8 +901,43 @@ export function WebLab() {
       isApplyingAutoClose = false;
     });
 
-    editor.onDidDispose(() => closeTagDisposable.dispose());
+    editor.onDidDispose(() => {
+      closeTagDisposable.dispose();
+      if (editorInstanceRef.current === editor) {
+        editorInstanceRef.current = null;
+      }
+    });
   }, [insertClosingHtmlTag]);
+
+  useEffect(() => {
+    if (!visiblePanes.editor) {
+      return;
+    }
+
+    const editor = editorInstanceRef.current;
+    const monaco = monacoInstanceRef.current;
+    if (!editor || !monaco) {
+      return;
+    }
+
+    const model = editor.getModel();
+    if (!model) {
+      return;
+    }
+
+    // Genskab language/layout ved genvisning af kodepanelet.
+    if (model.getLanguageId() !== currentLanguage) {
+      monaco.editor.setModelLanguage(model, currentLanguage);
+    }
+
+    const rafId = window.requestAnimationFrame(() => {
+      editor.layout();
+    });
+
+    return () => {
+      window.cancelAnimationFrame(rafId);
+    };
+  }, [currentLanguage, visiblePanes.editor]);
 
   const pushPreviewUpdate = useCallback(
     (targetWindow?: Window | null) => {
