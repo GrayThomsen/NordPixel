@@ -374,11 +374,21 @@ const PREVIEW_TAB_HTML = `<!doctype html>
     <title>NordPixel Preview</title>
     <style>
       :root { color-scheme: light; }
-      body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif; }
+      html, body {
+        margin: 0;
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+      }
+      body { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif; }
       .previewShell {
         display: grid;
         grid-template-rows: auto 1fr;
+        width: 100%;
+        max-width: 100%;
+        height: 100vh;
         min-height: 100vh;
+        overflow: hidden;
       }
       .previewShellBar {
         padding: 0.5rem 0.75rem;
@@ -388,7 +398,10 @@ const PREVIEW_TAB_HTML = `<!doctype html>
         background: #fafafa;
       }
       #preview-frame {
+        display: block;
         width: 100%;
+        max-width: 100%;
+        min-width: 0;
         height: 100%;
         border: 0;
       }

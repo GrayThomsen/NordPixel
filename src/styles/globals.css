@@ -3599,10 +3599,15 @@ html {
 	display: grid;
 	grid-template-rows: auto 1fr;
 	border-left: 0;
+	min-width: 0;
+	overflow: hidden;
 }
 
 .weblabPreview {
+	display: block;
 	width: 100%;
+	max-width: 100%;
+	min-width: 0;
 	height: 100%;
 	border: 0;
 	background: white;
