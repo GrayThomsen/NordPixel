@@ -508,6 +508,9 @@ export function WebLab() {
   const htmlReferenceNamesRef = useRef<string[]>([]);
   const htmlCompletionProviderDisposableRef = useRef<{ dispose: () => void } | null>(null);
   const [activeFileId, setActiveFileId] = useState<string>(() => getInitialActiveFileId(createStarterProject().files));
+  const [previewHtmlFileId, setPreviewHtmlFileId] = useState<string>(() =>
+    getInitialActiveFileId(createStarterProject().files),
+  );
   const [project, setProject] = useState<LabProject>(() => createStarterProject());
   const [editingFileId, setEditingFileId] = useState<string | null>(null);
   const [editingFileName, setEditingFileName] = useState<string>('');
@@ -712,9 +715,22 @@ export function WebLab() {
     return project.files.find((file) => file.id === activeFileId) ?? project.files[0];
   }, [activeFileId, project.files]);
 
+  const previewHtmlFile = useMemo(() => {
+    if (activeFile?.kind === 'html') {
+      return activeFile;
+    }
+
+    const rememberedHtml = project.files.find((file) => file.id === previewHtmlFileId && file.kind === 'html');
+    if (rememberedHtml) {
+      return rememberedHtml;
+    }
+
+    return project.files.find((file) => file.kind === 'html');
+  }, [activeFile, previewHtmlFileId, project.files]);
+
   const srcDoc = useMemo(() => {
-    return buildFullPreviewDocument(project, activeFile);
-  }, [activeFile, project]);
+    return buildFullPreviewDocument(project, previewHtmlFile);
+  }, [previewHtmlFile, project]);
 
   useEffect(() => {
     if (project.files.some((file) => file.id === activeFileId)) {
@@ -723,6 +739,22 @@ export function WebLab() {
 
     setActiveFileId(getInitialActiveFileId(project.files));
   }, [activeFileId, project.files]);
+
+  useEffect(() => {
+    if (activeFile?.kind !== 'html') {
+      return;
+    }
+
+    setPreviewHtmlFileId((current) => (current === activeFile.id ? current : activeFile.id));
+  }, [activeFile]);
+
+  useEffect(() => {
+    if (project.files.some((file) => file.id === previewHtmlFileId && file.kind === 'html')) {
+      return;
+    }
+
+    setPreviewHtmlFileId(getInitialActiveFileId(project.files));
+  }, [previewHtmlFileId, project.files]);
 
   useEffect(() => {
     return () => {
