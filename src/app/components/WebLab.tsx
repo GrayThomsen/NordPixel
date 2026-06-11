@@ -1431,8 +1431,7 @@ export function WebLab() {
           <div className="weblabWorkspace">
             {visiblePanes.explorer || visiblePanes.editor || visiblePanes.preview ? (
             <PanelGroup
-              key={isMobile ? 'full-vertical' : 'full-horizontal'}
-              autoSaveId={isMobile ? 'weblab-full-mobile-layout-v2' : 'weblab-full-desktop-layout-v2'}
+              autoSaveId={isMobile ? 'weblab-full-mobile-layout-v3' : 'weblab-full-desktop-layout-v3'}
               direction={isMobile ? 'vertical' : 'horizontal'}
             >
             {visiblePanes.explorer ? (
