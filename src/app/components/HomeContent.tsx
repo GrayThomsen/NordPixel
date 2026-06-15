@@ -57,6 +57,18 @@ export function HomeContent() {
         </ul>
       </section>
 
+      <section className="landingTestimonial" aria-label={copy.testimonialTitle}>
+        <h2>{copy.testimonialTitle}</h2>
+        <figure className="landingTestimonialCard">
+          <blockquote>
+            {copy.testimonialQuote.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </blockquote>
+          <figcaption>{copy.testimonialAttribution}</figcaption>
+        </figure>
+      </section>
+
       <section className="landingAuthority" aria-label={copy.authorityTitle}>
         <h2>{copy.authorityTitle}</h2>
         <div className="landingAuthorityGrid">

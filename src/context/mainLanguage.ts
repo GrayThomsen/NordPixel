@@ -8,6 +8,9 @@ export const mainLanguage: Record<Locale, {
     statusNote: string;
     proofPoints: ReadonlyArray<{ value: string; label: string }>;
     authorityTitle: string;
+    testimonialTitle: string;
+    testimonialQuote: ReadonlyArray<string>;
+    testimonialAttribution: string;
     authorityCards: ReadonlyArray<{ title: string; text: string }>;
     methodTitle: string;
     methodLead: string;
@@ -46,6 +49,13 @@ export const mainLanguage: Record<Locale, {
         },
       ],
       authorityTitle: 'Hvorfor lærere vælger NordPixel',
+      testimonialTitle: 'Hvad lærerne oplever i praksis',
+      testimonialQuote: [
+        'Min 8. klasse har arbejdet med design af deres egen hjemmeside, og det er fantastisk at se eleverne tage ejerskab over deres produkt. Eleverne udvikler en forståelse af den skabende side af teknologi og ikke kun brugen af teknologi.',
+        'Efterfølgende har de fortalt om og vist deres arbejde til elever fra andre klasser, uden at det var faciliteret, men simpelthen fordi de synes, det er sejt.',
+        'Ved at give eleverne denne mulighed har de fået værktøj til at bruge teknologien og tilpasse den til deres faglige niveau. Det er ikke længere en black-box oplevelse, men faglighed der styrer og styrkes.',
+      ],
+      testimonialAttribution: 'Udskolingslærer med 27 års undervisningserfaring',
       authorityCards: [
         {
           title: 'Klar opstart uden overteori',
@@ -119,6 +129,13 @@ export const mainLanguage: Record<Locale, {
         },
       ],
       authorityTitle: 'Why teachers choose NordPixel',
+      testimonialTitle: 'What teachers see in real classrooms',
+      testimonialQuote: [
+        'My 8th grade class worked on designing their own website, and it was amazing to see students take ownership of their product. They developed an understanding of the creative side of technology, not only its use.',
+        'Afterwards, they shared and presented their work to students from other classes on their own initiative, simply because they thought it was cool.',
+        'By giving students this opportunity, they gained tools to use technology and adapt it to their academic level. It is no longer a black-box experience, but subject knowledge that guides and is strengthened.',
+      ],
+      testimonialAttribution: 'Lower secondary teacher with 27 years of teaching experience',
       authorityCards: [
         {
           title: 'Fast start without overload',

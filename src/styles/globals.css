@@ -869,10 +869,18 @@ html {
 }
 
 .landingAuthority,
+.landingTestimonial,
 .landingMethod,
 .landingClosing {
 	border-radius: 0;
 	padding: 0 clamp(1.6rem, 2.6vw, 2.7rem);
+}
+
+.landingTestimonial {
+	display: grid;
+	gap: clamp(1rem, 1.5vw, 1.35rem);
+	padding-top: clamp(0.2rem, 0.8vw, 0.6rem);
+	background: transparent;
 }
 
 .landingAuthority {
@@ -884,6 +892,7 @@ html {
 }
 
 .landingAuthority h2,
+.landingTestimonial h2,
 .landingMethod h2 {
 	margin: 0;
 	font-size: clamp(1.4rem, 1.9vw, 1.95rem);
@@ -891,6 +900,60 @@ html {
 	font-weight: 700;
 	letter-spacing: -0.01em;
 	color: color-mix(in oklab, var(--brand-navy) 92%, black 8%);
+}
+
+.landingTestimonialCard {
+	position: relative;
+	margin: 0;
+	padding: clamp(1.1rem, 1.8vw, 1.6rem);
+	border-left: 4px solid var(--brand-orange);
+	border-radius: 0.8rem;
+	background: linear-gradient(140deg,
+			color-mix(in oklab, #ffffff 90%, var(--surface-page) 10%),
+			color-mix(in oklab, var(--brand-orange-soft) 34%, #ffffff 66%));
+}
+
+.landingTestimonialCard blockquote {
+	margin: 0;
+	display: grid;
+	gap: 0.85rem;
+	color: color-mix(in oklab, var(--text-primary) 88%, var(--text-muted) 12%);
+}
+
+.landingTestimonialCard blockquote p {
+	margin: 0;
+	max-width: 78ch;
+	font-size: clamp(1rem, 1.05vw, 1.08rem);
+	line-height: 1.62;
+}
+
+.landingTestimonialCard blockquote p:first-child::before {
+	content: '"';
+	font-size: 1.4em;
+	line-height: 0;
+	font-weight: 700;
+	color: color-mix(in oklab, var(--brand-orange) 84%, var(--brand-navy) 16%);
+	margin-right: 0.1rem;
+	vertical-align: -0.08em;
+}
+
+.landingTestimonialCard blockquote p:last-child::after {
+	content: '"';
+	font-size: 1.4em;
+	line-height: 0;
+	font-weight: 700;
+	color: color-mix(in oklab, var(--brand-orange) 84%, var(--brand-navy) 16%);
+	margin-left: 0.08rem;
+	vertical-align: -0.14em;
+}
+
+.landingTestimonialCard figcaption {
+	margin-top: clamp(0.7rem, 1.2vw, 1rem);
+	font-size: clamp(0.85rem, 0.95vw, 0.95rem);
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	color: color-mix(in oklab, var(--brand-navy) 82%, var(--text-muted) 18%);
 }
 
 .landingAuthorityGrid {
@@ -3738,18 +3801,21 @@ button,
 
 	.landingProof,
 	.landingTrust,
+	.landingTestimonial,
 	.landingAuthority,
 	.landingMethod {
 		padding-inline: clamp(1.1rem, 4vw, 1.6rem);
 	}
 
 	.landingTrust,
+	.landingTestimonial,
 	.landingAuthority,
 	.landingMethod {
 		gap: 1rem;
 	}
 
 	.landingTrust h2,
+	.landingTestimonial h2,
 	.landingAuthority h2,
 	.landingMethod h2 {
 		font-size: clamp(1.2rem, 5.2vw, 1.5rem);
@@ -3761,11 +3827,21 @@ button,
 	}
 
 	.landingTrust li,
+	.landingTestimonialCard blockquote p,
 	.landingAuthorityCard p,
 	.landingMethod li span,
 	.landingMethodLead {
 		font-size: 0.98rem;
 		line-height: 1.55;
+	}
+
+	.landingTestimonialCard {
+		padding: 1rem;
+		border-radius: 0.7rem;
+	}
+
+	.landingTestimonialCard figcaption {
+		font-size: 0.8rem;
 	}
 
 	.landingMethodCta {
