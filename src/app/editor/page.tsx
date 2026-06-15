@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { WebLab } from '../components/WebLab';
 
 export const metadata: Metadata = {
-  title: 'WebLab til HTML og CSS i undervisningen',
+  title: 'WebLab til HTML og CSS i undervisningen | NordPixel',
   description: 'WebLab er NordPixels browserbaserede rum til HTML og CSS, hvor elever kan bygge, teste og gemme egne projekter.',
   openGraph: {
     title: 'WebLab til HTML og CSS i undervisningen | NordPixel',

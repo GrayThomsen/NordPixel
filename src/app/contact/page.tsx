@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { ContactContent } from '../components/ContactContent';
 
 export const metadata: Metadata = {
-  title: 'Kontakt om skoleforløb i teknologiforståelse',
+  title: 'Kontakt om skoleforløb i teknologiforståelse | NordPixel',
   description: 'Kontakt NordPixel for en uforpligtende dialog om forløb, opstart og samarbejde med jeres skole.',
   openGraph: {
     title: 'Kontakt om skoleforløb i teknologiforståelse | NordPixel',

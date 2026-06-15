@@ -30,10 +30,10 @@ const homeJsonLd = {
 
 // Side-metadata til søgning, deling og canonical URL.
 export const metadata: Metadata = {
-  title: 'Digital teknologiforståelse for skoler',
+  title: 'Digital teknologiforståelse for skoler, elever og lærere | NordPixel',
   description: 'NordPixel tilbyder digital teknologiforståelse for skoler med praksisnære forløb, tydelig progression, WebLab og konkrete undervisningsmaterialer.',
   openGraph: {
-    title: 'Digital teknologiforståelse for skoler | NordPixel',
+    title: 'Digital teknologiforståelse for skoler, elever og lærere | NordPixel',
     description: 'Praksisnære skoleforløb i digital teknologiforståelse, web og AI med tydelig progression og konkrete elevprodukter.',
     type: 'website',
     url: '/',

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { CoursesContent } from '../components/CoursesContent';
 
 export const metadata: Metadata = {
-  title: 'Forløb i teknologiforståelse, web og AI',
+  title: 'Forløb i teknologiforståelse, web og AI | NordPixel',
   description: 'Se NordPixels forløb i teknologiforståelse, web og AI til skoler. Filtrer efter målgruppe og gå direkte til booking.',
   openGraph: {
     title: 'Forløb i teknologiforståelse, web og AI | NordPixel',
