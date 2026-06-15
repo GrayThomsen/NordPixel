@@ -27,7 +27,7 @@ export const PROGRAM_TRACKS: ProgramTrack[] = [
       da: 'Typisk dansk, engelsk, billedkunst og lignende fag.',
       en: 'Fits Danish, English, visual arts, and similar subjects.',
     },
-    image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1200&q=80',
+    image: '/images/live/webdesignkursus4.avif',
     imageAlt: {
       da: 'Elever samarbejder om et kreativt projekt i klasselokalet.',
       en: 'Students collaborating on a creative project in a classroom.',
@@ -110,7 +110,7 @@ export const PROGRAM_TRACKS: ProgramTrack[] = [
       da: 'Velegnet i projektforløb på tværs af dansk, engelsk, samfundsfag og IT.',
       en: 'Well suited for project-based learning across language arts, social studies, and IT.',
     },
-    image: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1200&q=80',
+    image: '/images/live/webdesignkursus2.avif',
     imageAlt: {
       da: 'Kodevisning på en bærbar computer under webundervisning.',
       en: 'Code editor on a laptop during a web learning session.',
@@ -193,7 +193,7 @@ export const PROGRAM_TRACKS: ProgramTrack[] = [
       da: 'Velegnet til design, programmering og innovationsforløb.',
       en: 'Well suited for design, programming, and innovation tracks.',
     },
-    image: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1200&q=80',
+    image: '/images/live/webdesignkursus1.avif',
     imageAlt: {
       da: 'Kodevisning på en bærbar computer under appudvikling.',
       en: 'Code editor on a laptop during app development.',
@@ -276,7 +276,7 @@ export const PROGRAM_TRACKS: ProgramTrack[] = [
       da: 'Kan kobles til dansk, samfundsfag, historie og teknologiforståelse.',
       en: 'Can connect to language arts, civics, history, and digital literacy.',
     },
-    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80',
+    image: '/images/courses/NordPixelAIKursusImage.png',
     imageAlt: {
       da: 'Abstrakt visualisering af kunstig intelligens og netværk.',
       en: 'Abstract visualization of artificial intelligence and networks.',

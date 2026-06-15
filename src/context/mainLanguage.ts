@@ -26,23 +26,23 @@ export const mainLanguage: Record<Locale, {
   da: {
     homePage: {
       eyebrow: 'Digital teknologiforståelse for skoler',
-      title: 'Teknologiforståelse i praksis: gør elever til aktive digitale skabere.',
+      title: 'Digital teknologiforståelse for elever og lærere i den danske folkeskole.',
       lead:
-        'NordPixel leverer en klar løsning til teknologiforståelse: mindre teori, mere skaben, undersøgelse og kritisk refleksion i klassen.',
+        'Praktiske forløb, der gør det nemt for dig som lærer at skabe inkluderende undervisning, hvor alle elever kan deltage, udvikle sig og skabe med teknologi.',
       statusNote:
         'Digital teknologiforståelse for skoler bliver omsat til praktiske og gennemførlige forløb med tydelig progression, klare materialer og en struktur, der fungerer i virkelige klasselokaler.',
       proofPoints: [
         {
           value: 'Praksisnær kompetenceudvikling',
-          label: 'Eleverne arbejder systematisk med at udvikle, afprøve og forbedre digitale løsninger i autentiske læringssituationer.',
+          label: 'Dine elever udvikler, afprøver og forbedrer digitale løsninger i virkelige læringssituationer.',
         },
         {
           value: 'Reflekteret læring gennem iteration',
-          label: 'Fejl og justeringer anvendes aktivt som en del af den faglige proces, så eleverne opbygger robust problemløsningskompetence.',
+          label: 'Fejl og justeringer bruges aktivt, så eleverne opbygger mod og faglig styrke i processen.',
         },
         {
           value: 'Inkluderende didaktisk progression',
-          label: 'Forløbene er struktureret med tydelige trin, så forskellige elevforudsætninger understøttes med høj faglig kvalitet.',
+          label: 'Tydelige trin giver plads til forskellige elevforudsætninger og styrker fællesskabet i klassen.',
         },
       ],
       authorityTitle: 'Hvorfor lærere vælger NordPixel',
@@ -99,23 +99,23 @@ export const mainLanguage: Record<Locale, {
   en: {
     homePage: {
       eyebrow: 'Digital technology literacy for schools',
-      title: 'Technology literacy in practice: help students become active digital creators.',
+      title: 'Digital technology literacy for students and teachers in real classrooms.',
       lead:
-        'NordPixel delivers a clear technology literacy solution: less theory, more creation, investigation, and critical reflection in class.',
+        'Practical tracks that make it easier for you as a teacher to run inclusive lessons where every student can participate, grow, and create with technology.',
       statusNote:
         'Digital technology literacy for schools is translated into practical, classroom-ready programs with clear progression, strong teaching materials, and a structure that works in real classrooms.',
       proofPoints: [
         {
           value: 'Practice-based competence development',
-          label: 'Students systematically develop, test, and refine digital solutions in authentic classroom contexts.',
+          label: 'Students develop, test, and improve digital solutions in authentic classroom contexts.',
         },
         {
           value: 'Reflective learning through iteration',
-          label: 'Mistakes and revisions are used deliberately as part of the academic process to strengthen problem-solving capacity.',
+          label: 'Mistakes and revisions are used as a learning resource to build confidence and problem-solving capacity.',
         },
         {
           value: 'Inclusive pedagogical progression',
-          label: 'Programs are structured in clear stages that support diverse learner profiles while maintaining strong academic quality.',
+          label: 'Clear stages support diverse learners while helping the whole class progress together.',
         },
       ],
       authorityTitle: 'Why teachers choose NordPixel',

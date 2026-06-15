@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useLanguage } from '../../context/LanguageContext';
 import { mainLanguage } from '../../context/mainLanguage';
@@ -13,19 +14,8 @@ export function HomeContent() {
       <section className="landingHero">
         <div className="landingHeroGrid">
           <div className="landingHeroCopy">
-            <h1 className="landingHeroTitle">{copy.eyebrow}</h1>
-            <p className="landingHeroSubtitle">{copy.title}</p>
+            <h1 className="landingHeroTitle">{copy.title}</h1>
             <p className="landingLead">{copy.lead}</p>
-            <p className="landingStatusNote">{copy.statusNote}</p>
-
-            <ul className="landingProof" aria-label={copy.authorityTitle}>
-              {copy.proofPoints.map((point) => (
-                <li key={point.value} className="landingProofCard">
-                  <strong>{point.value}</strong>
-                  <span>{point.label}</span>
-                </li>
-              ))}
-            </ul>
 
             <div className="landingActions">
               <Link href="/courses" className="landingButton landingButtonPrimary">
@@ -40,26 +30,29 @@ export function HomeContent() {
             </div>
           </div>
 
-          <aside className="landingHeroVisual" aria-label={copy.heroCardTitle}>
-            <h2>{copy.heroCardTitle}</h2>
-            <ul>
-              {copy.heroCardPoints.map((point) => (
-                <li key={point}>{point}</li>
-              ))}
-            </ul>
-            <p className="landingWeblabNote">{copy.weblabNote}</p>
-          </aside>
+          <figure className="landingHeroVisual">
+            <Image
+              src="/images/live/webdesignkursus5.avif"
+              alt={locale === 'da' ? 'Elever arbejder fokuseret med webdesign i klasselokalet.' : 'Students focused on web design work in a classroom.'}
+              fill
+              sizes="(max-width: 880px) 92vw, 48vw"
+              priority
+            />
+          </figure>
 
         </div>
+
       </section>
 
       <section className="landingTrust" aria-label={copy.trustTitle}>
-        <div className="landingTrustIntro">
-          <h2>{copy.trustTitle}</h2>
-        </div>
-        <ul>
-          {copy.trustPoints.map((point) => (
-            <li key={point}>{point}</li>
+
+
+        <ul className="landingProof" aria-label={copy.authorityTitle}>
+          {copy.proofPoints.map((point) => (
+            <li key={point.value} className="landingProofCard">
+              <strong>{point.value}</strong>
+              <span>{point.label}</span>
+            </li>
           ))}
         </ul>
       </section>
