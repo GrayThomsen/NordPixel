@@ -2,6 +2,90 @@ import { type BookableOption, type DiscountTier, type FocusCourse, type ProgramT
 
 const CUSTOM_TRACK_BASE_PRICE = 0;
 
+//Boiler plate templates for new courses and tracks to ensure all fields are filled out and to make it easy to add new offerings in the future. These can be used as starting points when creating new courses or tracks, and should be updated with real content before being added to the catalog.
+
+//*Will be removed when moving to a Database in the future, but for now it serves as a clear template for the structure of course and track data, and ensures that all necessary fields are included when adding new offerings to the catalog.
+const PROGRAM_TRACK_TEMPLATE: ProgramTrack = {
+  id: 'nyt-forlob-id',
+  title: {
+    da: 'Nyt forløb',
+    en: 'New Track',
+  },
+  summary: {
+    da: 'Kort beskrivelse af forløbet og hvad eleverne arbejder med.',
+    en: 'Short description of the track and what students will work with.',
+  },
+  subjectKey: 'design',
+  targetKeys: ['mellemtrin'],
+  targetGroup: {
+    da: 'Kort beskrivelse af målgruppen.',
+    en: 'Short description of the target group.',
+  },
+  duration: {
+    da: '1-3 moduler',
+    en: '1-3 modules',
+  },
+  subjects: {
+    da: 'Relevante fag og koblinger.',
+    en: 'Relevant subjects and curriculum connections.',
+  },
+  image: '/images/live/webdesignkursus1.avif',
+  imageAlt: {
+    da: 'Kort beskrivelse af billedet til forløbet.',
+    en: 'Short description of the track image.',
+  },
+  timeline: [
+    {
+      module: { da: 'Modul 1', en: 'Module 1' },
+      duration: { da: 'Varighed', en: 'Duration' },
+      focus: {
+        da: 'Hvad er fokus i dette modul?',
+        en: 'What is the focus of this module?',
+      },
+      workload: {
+        da: 'Hvad gør lærer og elever i modulet?',
+        en: 'What do teacher and students do in this module?',
+      },
+      format: {
+        da: 'Hvordan afvikles modulet?',
+        en: 'How is the module delivered?',
+      },
+    },
+  ],
+  pricing: {
+    basePrice: 1500,
+  },
+};
+
+//*Same as above.
+const FOCUS_COURSE_TEMPLATE: FocusCourse = {
+  id: 'nyt-fokuskursus-id',
+  title: {
+    da: 'Nyt fokuskursus',
+    en: 'New Focus Course',
+  },
+  description: {
+    da: 'Kort beskrivelse af fokuskurset og hvad det kan bruges til.',
+    en: 'Short description of the focus course and what it is useful for.',
+  },
+  targetKeys: ['mellemtrin'],
+  duration: {
+    da: '1-2 moduler',
+    en: '1-2 modules',
+  },
+  audience: {
+    da: 'Hvem passer kurset til?',
+    en: 'Who is this course suited for?',
+  },
+  bookingHint: {
+    da: 'Hvordan kan kurset bruges som supplement eller selvstændigt forløb?',
+    en: 'How can the course be used as an add-on or standalone offering?',
+  },
+  pricing: {
+    basePrice: 595,
+  },
+};
+
 export const PROGRAM_TRACKS: ProgramTrack[] = [
   {
     id: 'designthinking-digital-produktionsforlob',
