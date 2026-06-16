@@ -1935,6 +1935,20 @@ html {
 	background: color-mix(in oklab, var(--surface-page) 90%, #ffffff 10%);
 }
 
+.editorPage,
+.coursesPage,
+.contactPage,
+.bookingCartPage {
+	width: min(1320px, 96vw);
+	padding-inline: clamp(0.7rem, 1.2vw, 1.1rem);
+	box-sizing: border-box;
+}
+
+.landing {
+	width: min(1320px, 96vw);
+	padding-inline: 0;
+}
+
 .bookingCartPageHero {
 	display: grid;
 	grid-template-columns: minmax(0, 1fr) minmax(220px, 0.5fr);
