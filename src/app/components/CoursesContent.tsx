@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { Clock3, Layers3, Users } from 'lucide-react';
+import { ChevronDown, Clock3, Layers3, Users } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { type MouseEvent } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
@@ -235,6 +235,9 @@ export function CoursesContent() {
                   <button type="button" className="timelineTrackBookButton" onClick={(event) => handleBookClick(track.id, event)}>
                     {copy.bookingButton}
                   </button>
+                  <div className="cardToggleIndicator" aria-hidden="true">
+                    <ChevronDown className="cardToggleIndicatorIcon" />
+                  </div>
                 </div>
               </div>
               {/* Right media column spans full card height in both states. */}
@@ -311,6 +314,9 @@ export function CoursesContent() {
                 <button type="button" className="timelineTrackBookButton" onClick={(event) => handleBookClick(course.id, event)}>
                   {copy.bookingButton}
                 </button>
+                <div className="cardToggleIndicator" aria-hidden="true">
+                  <ChevronDown className="cardToggleIndicatorIcon" />
+                </div>
               </div>
             </article>
           )) : (
