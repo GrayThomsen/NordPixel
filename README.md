@@ -1,5 +1,7 @@
 # NordPixel – Teknologiforståelse
 
+Sidst godkendt: 2026-06-16
+
 Next.js hjemmeside for NordPixel med fokus på teknologiforståelse, WebLab og skoleklare forløb.
 
 ## Indhold

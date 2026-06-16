@@ -1,5 +1,7 @@
 # NordPixel Foundation – Marts 2026
 
+Sidst godkendt: 2026-06-16
+
 ## Formål
 Hjemmeside for NordPixel med fokus på teknologiforståelse, web og AI til folkeskoler.
 

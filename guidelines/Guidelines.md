@@ -1,5 +1,7 @@
 # NordPixel Repository Guidelines
 
+Sidst godkendt: 2026-06-16
+
 ## Scope
 - These guidelines apply to changes in this repository.
 - Keep changes minimal, focused, and consistent with existing structure.
