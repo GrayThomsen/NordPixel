@@ -67,6 +67,19 @@ export function CoursesContent() {
     openBookingCart(initialId);
   };
 
+  const toggleCardFromContainerClick = (event: MouseEvent<HTMLElement>) => {
+    const target = event.target as HTMLElement;
+
+    if (target.closest('button, a, input, select, textarea, summary')) {
+      return;
+    }
+
+    const details = event.currentTarget.querySelector('[data-card-details]');
+    if (details instanceof HTMLDetailsElement) {
+      details.open = !details.open;
+    }
+  };
+
   const cartPromptCopy = courseCopy.coursesCartPrompt;
 
   const formatPrice = (value: number) =>
@@ -135,69 +148,102 @@ export function CoursesContent() {
 
         <div className="coursesTimelines">
           {visibleTracks.length ? visibleTracks.map((track, index) => (
-            <article key={track.id} className="timelineTrack" aria-label={translate(track.title)}>
-              <div className="timelineTrackContent">
-                <div className="timelineTrackHeadingRow">
-                  <h3>{translate(track.title)}</h3>
-                </div>
-                <p className="timelineTrackSummary">{translate(track.summary)}</p>
-
-                <ul className="timelineTrackMeta" aria-label={courseCopy.courses.programsTitle}>
-                  <li>
-                    <Clock3 aria-hidden="true" />
-                    <div>
-                      <p>{courseCopy.courses.durationLabel}</p>
-                      <span>{translate(track.duration)}</span>
+            <article
+              key={track.id}
+              className="timelineTrack"
+              aria-label={translate(track.title)}
+              onClick={toggleCardFromContainerClick}
+            >
+              {/* Left content column: compact header + expanded details + sticky CTA. */}
+              <div className="timelineTrackMain">
+                {/* Single source of truth for collapsed/expanded track state. */}
+                <details className="timelineTrackDetails" data-card-details>
+                  {/* Compact summary shown in collapsed state. */}
+                  <summary className="timelineTrackDetailsSummary">
+                    <div className="timelineTrackSummaryHead">
+                      <div>
+                        <h3>{translate(track.title)}</h3>
+                        <p className="timelineTrackSummaryLine">{translate(track.summary)}</p>
+                        <p className="timelineTrackCompactMeta">
+                          {track.timeline.length} {locale === 'da' ? 'moduler' : 'modules'}
+                        </p>
+                      </div>
                     </div>
-                  </li>
-                  <li>
-                    <Users aria-hidden="true" />
-                    <div>
-                      <p>{courseCopy.courses.targetGroupLabel}</p>
-                      <span>{translate(track.targetGroup)}</span>
-                    </div>
-                  </li>
-                  <li>
-                    <Layers3 aria-hidden="true" />
-                    <div>
-                      <p>{courseCopy.courses.subjectsLabel}</p>
-                      <span>{translate(track.subjects)}</span>
-                    </div>
-                  </li>
-                </ul>
+                  </summary>
+                  {/* Full details shown when the track is expanded. */}
+                  <div className="timelineTrackContent">
+                    <p className="timelineTrackSummary">{translate(track.summary)}</p>
 
-                <div className="timelineTrackPricing" aria-label={copy.pricingEstimatedLabel}>
-                  <p>{copy.pricingEstimatedLabel}</p>
-                  <strong>{formatPrice(getEstimatedPrice(track.pricing.basePrice))}</strong>
-                </div>
-
-                <div className="timelineTrackTimeline">
-                  <p className="timelineTrackTimelineTitle">{courseCopy.courses.timelineLabel}</p>
-                  <ol>
-                    {track.timeline.map((step) => (
-                      <li key={`${track.id}-${translate(step.module)}`}>
-                        <p>{translate(step.module)}</p>
-                        <strong>{translate(step.duration)}</strong>
-                        <span>{translate(step.focus)}</span>
-                        <em>{translate(step.workload)}</em>
+                    <ul className="timelineTrackMeta" aria-label={courseCopy.courses.programsTitle}>
+                      <li>
+                        <Clock3 aria-hidden="true" />
+                        <div>
+                          <p>{courseCopy.courses.durationLabel}</p>
+                          <span>{translate(track.duration)}</span>
+                        </div>
                       </li>
-                    ))}
-                  </ol>
-                </div>
+                      <li>
+                        <Users aria-hidden="true" />
+                        <div>
+                          <p>{courseCopy.courses.targetGroupLabel}</p>
+                          <span>{translate(track.targetGroup)}</span>
+                        </div>
+                      </li>
+                      <li>
+                        <Layers3 aria-hidden="true" />
+                        <div>
+                          <p>{courseCopy.courses.subjectsLabel}</p>
+                          <span>{translate(track.subjects)}</span>
+                        </div>
+                      </li>
+                    </ul>
 
+                    <div className="timelineTrackPricing" aria-label={copy.pricingEstimatedLabel}>
+                      <p>{copy.pricingEstimatedLabel}</p>
+                      <strong>{formatPrice(getEstimatedPrice(track.pricing.basePrice))}</strong>
+                    </div>
+
+                    <div className="timelineTrackAudienceNote">
+                      <p>
+                        {locale === 'da'
+                          ? 'Et tydeligt og praksisnært forløb for lærere og ledelser, der ønsker en rolig ramme, faglig progression og et produkt, der er let at forankre i skolens hverdag.'
+                          : 'A clear, practice-oriented track for teachers and school leadership who want a calm structure, strong progression, and an outcome that is easy to anchor in everyday school life.'}
+                      </p>
+                    </div>
+
+                    <div className="timelineTrackTimelineDetails">
+                      <div className="timelineTrackDetailsSummary timelineTrackDetailsSummarySubtle">
+                        <span>{courseCopy.courses.timelineLabel}</span>
+                        <em className="timelineTrackSectionCount">{track.timeline.length} {locale === 'da' ? 'moduler' : 'modules'}</em>
+                      </div>
+                      <div className="timelineTrackTimeline">
+                        <ol>
+                          {track.timeline.map((step) => (
+                            <li key={`${track.id}-${translate(step.module)}`}>
+                              <p>{translate(step.module)}</p>
+                              <strong>{translate(step.duration)}</strong>
+                              <span>{translate(step.focus)}</span>
+                              <em>{translate(step.workload)}</em>
+                            </li>
+                          ))}
+                        </ol>
+                      </div>
+                    </div>
+                  </div>
+                </details>
                 <div className="timelineTrackActions">
                   <button type="button" className="timelineTrackBookButton" onClick={(event) => handleBookClick(track.id, event)}>
                     {copy.bookingButton}
                   </button>
                 </div>
               </div>
-
-              <figure className="timelineTrackMedia">
+              {/* Right media column spans full card height in both states. */}
+              <figure className="timelineTrackMedia timelineTrackMediaPreview">
                 <Image
                   src={track.image}
                   alt={translate(track.imageAlt)}
                   fill
-                  sizes="(max-width: 880px) 92vw, 38vw"
+                  sizes="(max-width: 880px) 38vw, 320px"
                   priority={index === 0}
                 />
               </figure>
@@ -227,29 +273,45 @@ export function CoursesContent() {
 
         <div className="focusGrid">
           {visibleFocusCourses.length ? visibleFocusCourses.map((course) => (
-            <article key={course.id} className="focusItem">
-              <div className="focusItemTop">
-                <h3>{translate(course.title)}</h3>
+            <article key={course.id} className="focusItem" onClick={toggleCardFromContainerClick}>
+              {/* Single source of truth for collapsed/expanded focus card state. */}
+              <details className="focusItemDetails" data-card-details>
+                {/* Compact summary shown in collapsed state. */}
+                <summary className="focusItemSummary">
+                  <div>
+                    <h3>{translate(course.title)}</h3>
+                    <p className="focusItemSummaryLine">
+                      {translate(course.duration)}
+                    </p>
+                    <p className="focusItemSummaryLine">{translate(course.description)}</p>
+                  </div>
+                </summary>
+                {/* Full details shown when the focus card is expanded. */}
+                <div className="focusItemBody">
+                  <p>{translate(course.description)}</p>
+                  <div className="focusItemPricing" aria-label={copy.pricingEstimatedLabel}>
+                    <span>{copy.pricingEstimatedLabel}</span>
+                    <strong>{formatPrice(getEstimatedPrice(course.pricing.basePrice))}</strong>
+                  </div>
+                  <ul className="focusItemMeta">
+                    <li>
+                      <span>{courseCopy.courses.durationLabel}</span>
+                      <strong>{translate(course.duration)}</strong>
+                    </li>
+                    <li>
+                      <span>{courseCopy.courses.targetGroupLabel}</span>
+                      <strong>{translate(course.audience)}</strong>
+                    </li>
+                  </ul>
+                  <p className="focusItemHint">{translate(course.bookingHint)}</p>
+                </div>
+              </details>
+
+              <div className="timelineTrackActions">
                 <button type="button" className="timelineTrackBookButton" onClick={(event) => handleBookClick(course.id, event)}>
                   {copy.bookingButton}
                 </button>
               </div>
-              <p>{translate(course.description)}</p>
-              <div className="focusItemPricing" aria-label={copy.pricingEstimatedLabel}>
-                <span>{copy.pricingEstimatedLabel}</span>
-                <strong>{formatPrice(getEstimatedPrice(course.pricing.basePrice))}</strong>
-              </div>
-              <ul className="focusItemMeta">
-                <li>
-                  <span>{courseCopy.courses.durationLabel}</span>
-                  <strong>{translate(course.duration)}</strong>
-                </li>
-                <li>
-                  <span>{courseCopy.courses.targetGroupLabel}</span>
-                  <strong>{translate(course.audience)}</strong>
-                </li>
-              </ul>
-              <p className="focusItemHint">{translate(course.bookingHint)}</p>
             </article>
           )) : (
             <div className="coursesFiltersEmpty">

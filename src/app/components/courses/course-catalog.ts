@@ -94,8 +94,8 @@ export const PROGRAM_TRACKS: ProgramTrack[] = [
       en: 'Design Thinking & Digital Production',
     },
     summary: {
-      da: 'Eleverne arbejder med brugerundersøgelser, idéudvikling, visuel præsentation og konkret formidling i både print og digitale formater.',
-      en: 'Students work with user research, idea development, visual presentation, and clear communication in both print and digital formats.',
+      da: 'Et trygt og praksisnært forløb, hvor eleverne arbejder med brugerundersøgelser, idéudvikling og tydelig formidling i både print og digitale formater.',
+      en: 'A clear, practice-oriented track where students work with user research, idea development, and purposeful communication in both print and digital formats.',
     },
     subjectKey: 'design',
     targetKeys: ['mellemtrin', 'udskoling'],
@@ -177,8 +177,8 @@ export const PROGRAM_TRACKS: ProgramTrack[] = [
       en: 'Web Design',
     },
     summary: {
-      da: 'Et praktisk forløb hvor eleverne bygger egne hjemmesider i WebLab med HTML og CSS, og arbejder med både design og funktion.',
-      en: 'Students learn to build simple websites in WebLab with HTML and CSS, combining structure, layout, and function.',
+      da: 'Et konkret og let at forankre forløb, hvor eleverne bygger egne hjemmesider i WebLab med HTML og CSS og arbejder med både design og funktion.',
+      en: 'A concrete, easy-to-anchor track where students build their own websites in WebLab with HTML and CSS while working with both design and function.',
     },
     subjectKey: 'web',
     targetKeys: ['udskoling', 'gymnasium'],
@@ -260,8 +260,8 @@ export const PROGRAM_TRACKS: ProgramTrack[] = [
       en: 'App Development',
     },
     summary: {
-      da: 'Fra idé til app-forløb: eleverne arbejder med brugerrejse, skærmflow, navigation og funktionelle prototyper på tre workshopdage.',
-      en: 'From idea to app track: students work with user journeys, screen flows, navigation, and functional prototypes across three workshop days.',
+      da: 'Et motiverende app-forløb, hvor eleverne går fra idé til prototype med brugerrejse, skærmflow, navigation og funktionelle løsninger.',
+      en: 'An engaging app track where students move from idea to prototype through user journeys, screen flows, navigation, and working solutions.',
     },
     subjectKey: 'app',
     targetKeys: ['udskoling', 'gymnasium'],
@@ -343,8 +343,8 @@ export const PROGRAM_TRACKS: ProgramTrack[] = [
       en: 'Artificial Intelligence',
     },
     summary: {
-      da: 'Et kort forløb om AI i elevernes hverdag, hvor de lærer at teste, vurdere og bruge teknologien ansvarligt.',
-      en: 'A short track that gives students a basic understanding of artificial intelligence, prompt work, and responsible use.',
+      da: 'Et aktuelt og overskueligt forløb om AI i elevernes hverdag, hvor de lærer at teste, vurdere og bruge teknologien ansvarligt.',
+      en: 'A timely, accessible track about AI in students\' everyday life, teaching them to test, evaluate, and use the technology responsibly.',
     },
     subjectKey: 'ai',
     targetKeys: ['mellemtrin', 'udskoling', 'gymnasium'],
@@ -429,8 +429,8 @@ export const FOCUS_COURSES: FocusCourse[] = [
       en: 'Extended HTML & CSS',
     },
     description: {
-      da: 'Tilkoblingsmodul der styrker elevernes arbejdsevne i webdesign. Kan gennemføres af klassens underviser eller med NordPixel i klassen.',
-      en: 'Add-on module that strengthens student fluency in web design. Can be run by the classroom teacher or with NordPixel in class.',
+      da: 'Et fleksibelt tilkoblingsmodul, der styrker elevernes arbejdsevne i webdesign og giver læreren et konkret, roligt afsæt til videre arbejde. Kan gennemføres af klassens underviser eller med NordPixel i klassen.',
+      en: 'A flexible add-on module that strengthens student fluency in web design and gives the teacher a concrete, calm starting point for continued work. Can be run by the classroom teacher or with NordPixel in class.',
     },
     targetKeys: ['mellemtrin', 'udskoling'],
     duration: {
@@ -456,8 +456,8 @@ export const FOCUS_COURSES: FocusCourse[] = [
       en: 'JavaScript Workshop',
     },
     description: {
-      da: 'En dags workshop med reel programmering for de større klasser. For elever med lyst til at gå et niveau dybere.',
-      en: 'A full-day coding workshop for older students. Ideal for learners ready to go deeper.',
+      da: 'En praksisnær workshop med reel programmering for de større klasser, hvor eleverne får en oplevelse af at kunne noget konkret og meningsfuldt.',
+      en: 'A hands-on coding workshop for older students that gives them a tangible, meaningful programming experience.',
     },
     targetKeys: ['udskoling', 'gymnasium'],
     duration: {
@@ -483,8 +483,8 @@ export const FOCUS_COURSES: FocusCourse[] = [
       en: 'Generative AI',
     },
     description: {
-      da: 'Hvad det er, hvordan det produceres, hvordan det genkendes, og hvilke konsekvenser det kan have i samfund og skole.',
-      en: 'What it is, how it is generated, how to identify it, and the consequences it can have in school and society.',
+      da: 'Et relevant og let at gå til fokuskursus om generativ AI, hvor eleverne lærer at forstå teknologien, genkende den og forholde sig kritisk til den.',
+      en: 'A relevant, easy-to-access focus course on generative AI where students learn to understand the technology, identify it, and respond critically to it.',
     },
     targetKeys: ['mellemtrin', 'udskoling', 'gymnasium'],
     duration: {
@@ -510,8 +510,8 @@ export const FOCUS_COURSES: FocusCourse[] = [
       en: 'Computational Thinking',
     },
     description: {
-      da: 'Arbejdsmateriale til naturfag, matematik og fag med videnskabelige metoder. Fokus på fejl, systemer og hvordan apparater tænker.',
-      en: 'Learning materials for science, mathematics, and inquiry-based subjects. Focus on debugging, systems thinking, and how digital systems process information.',
+      da: 'Arbejdsmateriale til naturfag, matematik og andre fag med videnskabelige metoder. Fokus på fejl, systemer og på at tænke som en problemløser.',
+      en: 'Learning materials for science, mathematics, and other inquiry-based subjects. Focus on debugging, systems thinking, and learning to think like a problem solver.',
     },
     targetKeys: ['indskoling', 'mellemtrin'],
     duration: {
