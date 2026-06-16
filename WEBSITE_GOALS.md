@@ -1,16 +1,17 @@
 # NordPixel Foundation – Marts 2026
 
 ## Formål
-Minimal hjemmeside for NordPixel – fokuseret på undervisning i teknologiforståelse.
+Hjemmeside for NordPixel med fokus på teknologiforståelse, web og AI til folkeskoler.
 
-Siden understøtter Emil's virksomhed som underviser i teknologiforståelse for folkeskoler, mens han uddanner sig til:
-- Multimediedesigner
-- Web-udvikler (efterfølgende)
+Siden understøtter virksomhedens salg, booking og leverance af skoleforløb.
 
 ## Omfang
 Siderne i denne fase:
 - `/` : Hovedside med undervisningsinformation og booking-muligheder
-- `/about` : Placeholder-side (udfyldes senere)
+- `/courses` : Forløbsoverblik
+- `/courses/booking` : Bookingflow
+- `/contact` : Kontakt og virksomhedsoplysninger
+- `/editor` : WebLab med filhåndtering og preview
 
 ## Kontakt
 Kun direkte email-kontakt:
@@ -21,21 +22,22 @@ Kun direkte email-kontakt:
 
 ## Externe Profiler
 Begge LinkedIn-links er inkluderet:
-- Virksomhed: https://www.linkedin.com/company/pordpixel-development/
+- Virksomhed: https://www.linkedin.com/company/107025728/
 - Personlig: https://www.linkedin.com/in/emil-gray-thomsen-845a8b33b/
 
 ## Designvalg (Grundfarver og Fonts)
 
 ### Fonte
 - Overskrifter: `Tomorrow`
-- Brødtekst: `IBM Plex Sans Hebrew`
+- Brødtekst: `Google Sans Text`
 
 ### Farver
 - Mørk baggrund: `#00181D` (`gradient-dark`)
 - Mørkere baggrund: `#000E11` (`gradient-darker`)
 - Accent (orange): `#FBB03B` (`accent-orange`)
-- Lys baggrund: `#FFFFFF` (`light-bg`)
-- Lys tekst: `#000000` (`light-text`)
+- Neutral gray: `#DFDFDF`
+- Back gray: `#FEFEFE`
+- Accent cyan: `#3BEEFB`
 
 ## Retning
-Dette er et bevidst lille fundament, der vil blive udvidet i fremtiden.
+Designsystem og indhold holdes i sync med de aktive token-filer og App Router-struktur.

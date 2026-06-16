@@ -27,17 +27,6 @@ type LabProject = {
   files: ProjectFile[];
 };
 
-type LegacyLabProject = {
-  version: 1;
-  name: string;
-  updatedAt: string;
-  files: {
-    html: string;
-    css: string;
-    js: string;
-  };
-};
-
 type TutorialTopicId = 'fileTypes' | 'preview' | 'semantic' | 'symbols';
 
 type TutorialTopic = {
@@ -446,9 +435,9 @@ const PREVIEW_TAB_HTML = `<!doctype html>
 </html>`;
 
 function safeParseProject(raw: string): LabProject | null {
-  // Accepter både nuværende skema (v2) og ældre skema (v1), normaliser til v2.
+  // Accepter kun nuværende skema (v2).
   try {
-    const parsed = JSON.parse(raw) as Partial<LabProject | LegacyLabProject>;
+    const parsed = JSON.parse(raw) as Partial<LabProject>;
 
     if (parsed.version === 2 && Array.isArray(parsed.files)) {
       const files = parsed.files.filter(
@@ -473,23 +462,6 @@ function safeParseProject(raw: string): LabProject | null {
             ? parsed.updatedAt
             : new Date().toISOString(),
         files,
-      };
-    }
-
-    if (parsed.version === 1 && parsed.files) {
-      return {
-        version: 2,
-        mode: 'full',
-        name: typeof parsed.name === 'string' && parsed.name.trim().length > 0 ? parsed.name : 'my-project',
-        updatedAt:
-          typeof parsed.updatedAt === 'string' && parsed.updatedAt.trim().length > 0
-            ? parsed.updatedAt
-            : new Date().toISOString(),
-        files: [
-          createFile('html', 'index.html', parsed.files.html),
-          createFile('css', 'styles.css', parsed.files.css),
-          createFile('js', 'script.js', parsed.files.js),
-        ],
       };
     }
 
