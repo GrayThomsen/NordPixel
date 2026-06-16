@@ -1794,17 +1794,6 @@ html {
 	outline-offset: 2px;
 }
 
-	}
-
-	45% {
-		transform: scale(0.95);
-	}
-
-	100% {
-		transform: scale(1);
-	}
-}
-
 .timelineTrackBookButton svg,
 .bookingFormSubmit svg {
 	width: 1rem;

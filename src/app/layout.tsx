@@ -2,7 +2,10 @@ import type { Metadata } from 'next';
 import { AppShell } from './components/AppShell';
 import { CookieConsent } from './components/CookieConsent';
 import { LanguageProvider } from '../context/LanguageContext';
-import '../styles/index.css';
+import '../styles/fonts.css';
+import '../styles/tailwind.css';
+import '../styles/design-tokens.css';
+import '../styles/globals.css';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
   ?? (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://nordpixel.dev');
