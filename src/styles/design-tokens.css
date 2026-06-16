@@ -2,7 +2,11 @@
 
 :root {
   --brand-orange: #fbb03b;
-  --brand-navy: #000f11;
+  --brand-navy: #00181d;
+  --brand-navy-deep: #000e11;
+  --brand-back-gray: #fefefe;
+  --brand-neutral-gray: #dfdfdf;
+  --brand-cyan: #3beefb;
   --brand-orange-soft: #fff2db;
   --font-family-body: 'Google Sans Text', 'Google Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
   --font-size-body: 1rem;
@@ -32,25 +36,25 @@
   --font-weight-medium: 500;
 
   /* Side- og containerflader: brug page til app-baggrund, panel til kort og overlay til dialoger/popovers. */
-  --surface-page: #f9f9f9;
-  --surface-panel: #f9f9f9;
+  --surface-page: var(--brand-back-gray);
+  --surface-panel: var(--brand-back-gray);
   --surface-overlay: oklch(1 0 0);
-  --surface-muted: #efefef;
-  --surface-accent: #ececec;
-  --surface-field: #f5f5f5;
+  --surface-muted: #f4f4f4;
+  --surface-accent: #f0f0f0;
+  --surface-field: #fafafa;
 
   /* Tekstfarver: brug primary til normal læsning, muted til hjælpetekst og inverse/on-* på fyldte flader. */
   --text-primary: oklch(0.1 0 0);
   --text-muted: #717182;
   --text-on-primary: oklch(1 0 0);
-  --text-on-secondary: var(--brand-navy);
+  --text-on-secondary: var(--brand-navy-deep);
   --text-on-accent: var(--brand-navy);
   --text-on-danger: #ffffff;
 
   /* Interaktive- og statusfarver: brug primary til primære CTA-handlinger, secondary til blødere flader, danger til destruktive tilstande og ring til fokus. */
   /* BEMÆRK: --action-secondary er endnu ikke i aktiv brug i UI-komponenterne. */
   --action-primary: var(--brand-navy);
-  --action-secondary: oklch(1 0 264.5);
+  --action-secondary: var(--brand-cyan);
   --status-danger: #d4183d;
   --focus-ring: oklch(0.7 0 0);
 
@@ -81,8 +85,8 @@
   --sidebar-text: oklch(0.1 0 0);
   --sidebar-primary-surface: var(--brand-navy);
   --sidebar-primary-text: oklch(1 0 0);
-  --sidebar-accent-surface: oklch(1 0 0);
-  --sidebar-accent-text: oklch(0.2 0 0);
+  --sidebar-accent-surface: var(--brand-cyan);
+  --sidebar-accent-text: var(--brand-navy-deep);
   --sidebar-border-subtle: oklch(0.9 0 0);
   --sidebar-focus-ring: oklch(0.7 0 0);
 }
@@ -133,7 +137,7 @@
   /* BEMÆRK: --sidebar-* (mørk) bruges ikke endnu, da der ikke er en dedikeret sidepanel-løsning på siden. */
   --sidebar-surface: oklch(0.2 0 0);
   --sidebar-text: oklch(1 0 0);
-  --sidebar-primary-surface: oklch(0.5 0.2 264.4);
+  --sidebar-primary-surface: var(--brand-navy);
   --sidebar-primary-text: oklch(1 0 0);
   --sidebar-accent-surface: oklch(0.3 0 0);
   --sidebar-accent-text: oklch(1 0 0);
