@@ -3,9 +3,6 @@ node_modules
 .pnpm-store
 
 # Build output
-dist
-build
-.output
 
 # Environment
 .env
@@ -30,11 +27,8 @@ npm-debug.log*
 pnpm-debug.log*
 
 # Cache
-.cache
-.parcel-cache
 .next
 .next-dev
-.nuxt
 
 # Testing
 coverage
