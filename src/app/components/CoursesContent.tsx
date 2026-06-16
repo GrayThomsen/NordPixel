@@ -49,7 +49,7 @@ export function CoursesContent() {
 
   const animateBookButton = (button: HTMLButtonElement) => {
     button.classList.remove('isClicked');
-    // Tving reflow, så animationen kan starte forfra ved hvert klik.
+    // Forced reflow for the animation to restart.
     void button.offsetWidth;
     button.classList.add('isClicked');
     window.setTimeout(() => {

@@ -30,7 +30,7 @@ export function SiteHeader() {
     const allowedIds = BOOKABLE_OPTIONS.map((option) => option.id);
     const updateCount = () => setCartCount(getBookingCartCount(allowedIds));
     const highlightCart = () => {
-      // Nulstil klassen først, så CSS-animationen kan afspilles igen ved hvert klik.
+      // Reset previous highlight to ensure the animation replays.
       setIsCartHighlighted(false);
       if (cartHighlightRafRef.current) {
         window.cancelAnimationFrame(cartHighlightRafRef.current);
