@@ -803,7 +803,7 @@ html {
 .landingTrust {
 	display: grid;
 	gap: clamp(0.9rem, 1.2vw, 1.25rem);
-	padding: clamp(0.4rem, 1vw, 0.9rem) clamp(1.6rem, 2.6vw, 2.7rem) 0;
+	padding: clamp(0.4rem, 1vw, 0.9rem);
 	background: transparent;
 	border: 0;
 	border-radius: 0;
@@ -824,7 +824,6 @@ html {
 
 .landingTrust ul {
 	margin: 0;
-	padding-left: 1.1rem;
 	display: grid;
 	gap: 0.75rem;
 }
