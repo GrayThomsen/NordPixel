@@ -583,24 +583,6 @@ html {
 	width: 100%;
 }
 
-.skipToContent {
-	position: absolute;
-	left: -9999px;
-	top: 0;
-	z-index: 999;
-	padding: 0.6rem 0.9rem;
-	border-radius: 0 0 0.5rem 0;
-	background: var(--brand-navy);
-	color: #ffffff;
-	text-decoration: none;
-	font-size: var(--font-size-body-xs);
-	font-weight: 700;
-}
-
-.skipToContent:focus {
-	left: 0;
-}
-
 .siteFooter {
 	margin-top: auto;
 	border-top: 0;
@@ -1534,7 +1516,7 @@ html {
 	color: color-mix(in oklab, var(--text-primary) 74%, var(--text-muted) 26%);
 }
 
-/* Bottom CTA row stays pinned in both collapsed and expanded states. */
+/* Bottom CTA row stays pinned in both collapsed and expanded states. */ 
 .timelineTrackActions {
 	display: flex;
 	justify-content: flex-start;
