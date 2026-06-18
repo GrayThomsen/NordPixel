@@ -7,27 +7,11 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
-        // Farvepalet til mørk tilstand
-        'gradient-dark': '#00181D',
-        'gradient-darker': '#000E11',
-        'neutral-gray': '#DFDFD',
-        'accent-orange': '#FBB03B',
-        // Farvepalet til lys tilstand
-        'light-bg': '#ffffff',
-        'light-text': '#000000',
-        // Ældre farver (bevares for kompatibilitet)
-        'primary-dark': '#0a0e27',
-        'primary-bright': '#00c599',
-        'primary-light': '#1a2342',
-        'accent': '#ff8847',
-        'secondary-dark': '#00c599',
-        'secondary-light': '#003d42',
-        'secondary-muted': '#49907c',
-      },
+      // Brand colors defined in design-tokens.css (CSS custom properties)
+      // Use var(--brand-*) instead of Tailwind color utilities
       fontFamily: {
         'heading': ['Tomorrow', 'sans-serif'],
-        'body': ['IBM Plex Sans Hebrew', 'sans-serif'],
+        'body': ['Google Sans', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Arial', 'sans-serif'],
       },
       fontSize: {
         'xs': '0.75rem',

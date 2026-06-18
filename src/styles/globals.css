@@ -3,8 +3,7 @@
 	top: 0;
 	z-index: 40;
 	border-bottom: 0;
-	background:
-		linear-gradient(110deg, var(--brand-navy), var(--brand-navy-deep));
+	background: var(--brand-navy-deep);
 	backdrop-filter: saturate(120%) blur(6px);
 	box-shadow: none;
 }
@@ -51,7 +50,6 @@ html.light {
 button,
 .landingButton,
 .contactAction,
-.contactPageClosing a,
 .siteHeaderCart {
 	transition:
 		transform 0.14s ease,
@@ -65,7 +63,6 @@ button,
 button:not(:disabled):hover,
 .landingButton:hover,
 .contactAction:hover,
-.contactPageClosing a:hover,
 .siteHeaderCart:hover {
 	transform: translateY(-1px);
 	filter: saturate(1.04);
@@ -74,7 +71,6 @@ button:not(:disabled):hover,
 button:not(:disabled):active,
 .landingButton:active,
 .contactAction:active,
-.contactPageClosing a:active,
 .siteHeaderCart:active {
 	transform: translateY(0);
 }
@@ -95,7 +91,7 @@ button:not(:disabled):active,
 	padding: 1rem 1rem;
 	border-radius: 0.9rem;
 	border: 1px solid color-mix(in oklab, var(--brand-orange) 24%, transparent 76%);
-	background: linear-gradient(145deg, color-mix(in oklab, var(--surface-panel) 94%, #ffffff 6%), color-mix(in oklab, var(--brand-orange-soft) 48%, var(--surface-panel) 52%));
+	background: color-mix(in oklab, var(--surface-panel) 88%, var(--brand-orange-soft) 12%);
 	box-shadow: 0 1rem 2.4rem color-mix(in oklab, #0f1f22 16%, transparent 84%);
 	animation: cookieConsentEnter 320ms cubic-bezier(0.2, 0.75, 0.2, 1) both;
 }
@@ -149,9 +145,7 @@ button:not(:disabled):active,
 
 .cookieConsentButtonAccept {
 	border: 1px solid color-mix(in oklab, var(--brand-orange) 82%, #b56b07 18%);
-	background: linear-gradient(130deg,
-			color-mix(in oklab, var(--brand-orange) 78%, #ffd07e 22%),
-			var(--brand-orange));
+	background: var(--brand-orange);
 	color: color-mix(in oklab, var(--brand-navy) 92%, black 8%);
 }
 
@@ -412,7 +406,7 @@ button:not(:disabled):active,
 	.landing,
 	.editorPage,
 	.coursesPage,
-	.contactPage,
+	.contactLanding,
 	.bookingCartPage {
 		width: 100%;
 		max-width: 100%;
@@ -463,7 +457,7 @@ button:not(:disabled):active,
 	.landing,
 	.editorPage,
 	.coursesPage,
-	.contactPage,
+	.contactLanding,
 	.bookingCartPage {
 		padding-top: 1rem;
 		padding-bottom: 1.5rem;
@@ -586,8 +580,7 @@ html {
 .siteFooter {
 	margin-top: auto;
 	border-top: 0;
-	background:
-		linear-gradient(110deg, var(--brand-navy), var(--brand-navy-deep));
+	background: var(--brand-navy-deep);
 	box-shadow: none;
 }
 
@@ -780,6 +773,7 @@ html {
 	border-radius: 0.7rem;
 	padding: 0.8rem 1.2rem;
 	border: 1px solid transparent;
+	font-weight: 600;
 }
 
 .landingTrust {
@@ -872,9 +866,7 @@ html {
 	padding: clamp(1.1rem, 1.8vw, 1.6rem);
 	border-left: 4px solid var(--brand-orange);
 	border-radius: 0.8rem;
-	background: linear-gradient(140deg,
-			color-mix(in oklab, #ffffff 90%, var(--surface-page) 10%),
-			color-mix(in oklab, var(--brand-orange-soft) 34%, #ffffff 66%));
+	background: color-mix(in oklab, #ffffff 86%, var(--brand-orange-soft) 14%);
 }
 
 .landingTestimonialCard blockquote {
@@ -1036,7 +1028,7 @@ html {
 	justify-content: space-between;
 	gap: var(--space-xl);
 	flex-wrap: wrap;
-	background: linear-gradient(130deg, color-mix(in oklab, var(--brand-orange-soft) 70%, var(--surface-panel) 30%), color-mix(in oklab, #ffffff 86%, var(--surface-panel) 14%));
+	background: color-mix(in oklab, var(--brand-orange-soft) 70%, var(--surface-panel) 30%);
 }
 
 .landingClosing p {
@@ -1053,8 +1045,7 @@ html {
 	flex-wrap: wrap;
 }
 
-.coursesPage,
-.contactPage {
+.coursesPage {
 	margin: 0 auto;
 	width: min(1320px, 94vw);
 	padding: 0;
@@ -1070,8 +1061,12 @@ html {
 	padding: 0 clamp(0.9rem, 1.6vw, 1.4rem) var(--space-2xl);
 }
 
+.coursesPage::after {
+	border: 0;
+}
+
 .coursesPage::after,
-.contactPage::after,
+.contactLanding::after,
 .bookingCartPage::after {
 	content: '';
 	position: absolute;
@@ -1081,57 +1076,253 @@ html {
 	z-index: 2;
 }
 
-.contactPageHero {
-	border: 0;
-	border-radius: 0;
-	padding: clamp(1.3rem, 2.2vw, 2rem) clamp(1rem, 2vw, 1.5rem) 0;
-	background: transparent;
-}
-
-.contactPageHero h1 {
-	margin: 0;
-	color: var(--brand-navy);
-}
-
-.contactPageHero {
+.contactLanding {
+	margin: 0 auto;
+	width: min(1320px, 94vw);
+	padding: 0 0 var(--space-2xl);
 	display: grid;
-	gap: var(--space-sm);
-	padding-top: clamp(1.3rem, 2.2vw, 2rem);
-	padding-bottom: 0.2rem;
+	gap: clamp(3.2rem, 4.6vw, 4.8rem);
+	position: relative;
+	isolation: isolate;
+	background: color-mix(in oklab, var(--surface-page) 92%, #ffffff 8%);
+	box-sizing: border-box;
+	overflow: hidden;
 }
 
-.contactPageHero p {
-	max-width: 82ch;
+.contactLandingHero,
+.contactLandingTrust,
+.contactLandingAuthority,
+.contactLandingMethod {
+	padding-inline: clamp(1.6rem, 2.6vw, 2.7rem);
+}
+
+.contactLandingHero {
+	padding-top: clamp(2.2rem, 3.6vw, 3.2rem);
+	display: grid;
+	gap: clamp(1.1rem, 1.7vw, 1.8rem);
+}
+
+.contactLandingHeroGrid {
+	display: grid;
+	grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.65fr);
+	gap: clamp(var(--space-lg), 2.4vw, var(--space-3xl));
+	align-items: start;
+}
+
+.contactLandingCopy {
+	display: grid;
+	gap: var(--space-lg);
+	align-content: start;
+}
+
+.contactLandingTitle {
 	margin: 0;
-	font-size: 1rem;
-	line-height: 1.6;
+	max-width: 19ch;
+	font-size: clamp(1.7rem, 3.1vw, 3rem);
+	font-weight: 700;
+	line-height: 1.08;
+	letter-spacing: -0.01em;
+	color: color-mix(in oklab, var(--brand-navy) 94%, black 6%);
+}
+
+.contactLandingLead {
+	margin: 0;
+	max-width: 46ch;
+	font-size: clamp(1rem, 1.25vw, 1.05rem);
+	line-height: 1.48;
 	color: color-mix(in oklab, var(--text-primary) 86%, var(--text-muted) 14%);
 }
 
-.contactPageProof {
-	display: grid;
-	grid-template-columns: repeat(3, minmax(0, 1fr));
-	gap: var(--space-md);
+.contactLandingActions {
 	margin-top: var(--space-xs);
 }
 
-.contactProof {
+.contactLandingCard {
 	display: grid;
-	gap: var(--space-2xs);
-	padding: var(--space-md);
-	border-radius: 0.9rem;
-	background: color-mix(in oklab, var(--surface-panel) 90%, var(--brand-orange-soft) 10%);
+	gap: 0.85rem;
+	align-content: start;
+	max-width: 430px;
+	justify-self: end;
+	width: 100%;
+	padding: 1rem;
+	border-radius: 1rem;
+	background: color-mix(in oklab, var(--surface-panel) 91%, var(--brand-orange-soft) 9%);
 }
 
-.contactProof strong {
-	font-size: 1rem;
+.contactLandingCard h2,
+.contactLandingCard p {
+	margin: 0;
+}
+
+.contactLandingCard h2 {
+	font-size: var(--font-size-heading-3);
+	line-height: var(--line-height-heading);
+	font-weight: 700;
+	color: color-mix(in oklab, var(--brand-navy) 92%, black 8%);
+}
+
+.contactLandingCard p {
+	font-size: var(--font-size-body-sm);
+	line-height: var(--line-height-comfortable);
+	color: color-mix(in oklab, var(--text-primary) 86%, var(--text-muted) 14%);
+}
+
+.contactLandingTrust {
+	padding-top: clamp(0.2rem, 0.7vw, 0.5rem);
+}
+
+.contactLandingProof {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: var(--space-sm);
+}
+
+.contactLandingProofCard {
+	display: grid;
+	gap: 0.28rem;
+	align-items: start;
+	padding: 0.7rem 0.9rem;
+	border-radius: 0.6rem;
+	background: color-mix(in oklab, #ffffff 84%, var(--surface-page) 16%);
+	text-align: left;
+	border: 1px solid color-mix(in oklab, var(--brand-navy) 10%, transparent 90%);
+}
+
+.contactLandingProofCard strong {
+	font-size: 0.82rem;
+	line-height: 1.25;
+	color: color-mix(in oklab, var(--brand-navy) 86%, black 14%);
+	font-weight: 700;
+}
+
+.contactLandingProofCard span {
+	font-size: 0.76rem;
+	line-height: 1.35;
+	color: color-mix(in oklab, var(--text-primary) 60%, var(--text-muted) 40%);
+}
+
+.contactLandingAuthority,
+.contactLandingMethod {
+	display: grid;
+	gap: clamp(1.2rem, 1.8vw, 1.8rem);
+}
+
+.contactLandingAuthority {
+	padding-top: clamp(0.8rem, 1.6vw, 1.5rem);
+}
+
+.contactLandingAuthority h2,
+.contactLandingMethod h2 {
+	margin: 0;
+	font-size: clamp(1.4rem, 1.9vw, 1.95rem);
+	line-height: 1.12;
+	font-weight: 700;
+	letter-spacing: -0.01em;
+	color: color-mix(in oklab, var(--brand-navy) 92%, black 8%);
+}
+
+.contactLandingAuthorityGrid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: clamp(1.1rem, 1.8vw, 2rem);
+}
+
+.contactLandingAuthorityCard {
+	display: grid;
+	gap: var(--space-xs);
+	padding: 0.1rem 0;
+	background: transparent;
+}
+
+.contactLandingAuthorityCard h3 {
+	margin: 0;
+	font-size: clamp(1.1rem, 1.25vw, 1.3rem);
+	line-height: 1.2;
+	font-weight: 700;
+	color: color-mix(in oklab, var(--brand-navy) 87%, black 13%);
+}
+
+.contactLandingAuthorityCard p {
+	margin: 0;
+	font-size: clamp(1rem, 1.05vw, 1.06rem);
+	line-height: 1.6;
+	color: var(--text-muted);
+}
+
+.contactLandingMethod {
+	padding-top: clamp(0.8rem, 1.6vw, 1.5rem);
+}
+
+.contactLandingMethodHeader {
+	display: grid;
+	gap: 0.75rem;
+}
+
+.contactLandingMethodLead {
+	margin: 0;
+	max-width: 74ch;
+	font-size: clamp(1rem, 1.08vw, 1.08rem);
+	line-height: 1.62;
+	color: color-mix(in oklab, var(--text-primary) 84%, var(--text-muted) 16%);
+}
+
+.contactLandingMethodList {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: clamp(0.95rem, 1.4vw, 1.3rem);
+}
+
+.contactLandingMethodItem {
+	display: grid;
+	gap: 0.6rem;
+	padding: 0.2rem 0;
+	background: transparent;
+}
+
+.contactLandingMethodItem strong {
+	font-size: clamp(1.12rem, 1.25vw, 1.32rem);
+	line-height: 1.2;
 	color: color-mix(in oklab, var(--brand-navy) 90%, black 10%);
 }
 
-.contactProof span {
-	font-size: 0.8rem;
-	line-height: 1.4;
+.contactLandingMethodItem span {
+	font-size: var(--font-size-body-sm);
+	line-height: var(--line-height-comfortable);
 	color: var(--text-muted);
+}
+
+.contactLandingMethodCta {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: clamp(0.9rem, 1.4vw, 1.4rem);
+	flex-wrap: wrap;
+	padding-top: 1.1rem;
+	border-top: 1px solid color-mix(in oklab, var(--brand-orange) 24%, transparent 76%);
+}
+
+.contactLandingMethodCta p {
+	margin: 0;
+	font-size: clamp(1.24rem, 1.5vw, 1.55rem);
+	line-height: 1.24;
+	font-weight: 600;
+	color: color-mix(in oklab, var(--brand-navy) 88%, black 12%);
+}
+
+.contactLandingMethodActions {
+	display: inline-flex;
+	gap: 0.55rem;
+	flex-wrap: wrap;
+}
+
+.contactLandingMethodActions .landingButton {
+	border-radius: 0.7rem;
 }
 
 .coursesIntroStack {
@@ -1199,7 +1390,7 @@ html {
 	gap: var(--space-md);
 	padding: var(--space-lg);
 	border-radius: 1rem;
-	background: linear-gradient(145deg, color-mix(in oklab, var(--surface-panel) 86%, var(--brand-orange-soft) 14%), color-mix(in oklab, #ffffff 90%, var(--surface-panel) 10%));
+	background: var(--surface-panel);
 }
 
 .coursesUvm h2 {
@@ -1222,8 +1413,9 @@ html {
 	margin-inline: auto;
 	padding: var(--space-md);
 	border-radius: 1rem;
-	background: linear-gradient(145deg, color-mix(in oklab, var(--surface-page) 84%, #ffffff 16%), color-mix(in oklab, var(--brand-orange-soft) 30%, var(--surface-panel) 70%));
-	box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--brand-orange) 18%, transparent 82%);
+	background: var(--surface-page);
+	border: 1px solid color-mix(in oklab, var(--brand-navy) 12%, transparent 88%);
+	box-shadow: none;
 }
 
 .coursesCustomTrack>div {
@@ -1263,9 +1455,7 @@ html {
 	font-size: var(--font-size-body-sm);
 	font-weight: 600;
 	color: color-mix(in oklab, var(--brand-navy) 92%, black 8%);
-	background: linear-gradient(130deg,
-			color-mix(in oklab, var(--brand-orange) 78%, #ffd07e 22%),
-			var(--brand-orange));
+	background: var(--brand-orange);
 }
 
 .coursesSectionTracks {
@@ -1374,7 +1564,7 @@ html {
 	border-radius: 1rem;
 	border: 1px solid color-mix(in oklab, var(--brand-orange) 32%, transparent 68%);
 	border-left: 0.4rem solid color-mix(in oklab, var(--brand-orange) 72%, transparent 28%);
-	background: linear-gradient(145deg, color-mix(in oklab, var(--surface-page) 78%, var(--brand-orange-soft) 22%), color-mix(in oklab, var(--surface-panel) 88%, white 12%));
+	background: color-mix(in oklab, var(--surface-page) 78%, var(--brand-orange-soft) 22%);
 	box-shadow: 0 0.5rem 1.4rem color-mix(in oklab, var(--brand-orange) 8%, transparent 92%);
 	transition: max-height 0.35s ease, box-shadow 0.25s ease;
 	position: relative;
@@ -1724,7 +1914,7 @@ html {
 	width: 0.5rem;
 	height: 0.5rem;
 	border-radius: 999px;
-	background: linear-gradient(145deg, color-mix(in oklab, var(--brand-orange) 78%, white 22%), var(--brand-orange));
+	background: var(--brand-orange);
 	box-shadow: 0 0 0 2px color-mix(in oklab, var(--brand-orange-soft) 55%, white 45%);
 }
 
@@ -1790,7 +1980,7 @@ html {
 	font-weight: 700;
 	border: 1px solid color-mix(in oklab, var(--brand-orange) 88%, #000000 12%);
 	border-radius: 999px;
-	background: linear-gradient(140deg, var(--brand-orange), color-mix(in oklab, var(--brand-orange) 78%, #ffd08a 22%));
+	background: var(--brand-orange);
 	color: var(--brand-navy);
 	cursor: pointer;
 	pointer-events: auto;
@@ -1802,7 +1992,7 @@ html {
 
 .timelineTrackBookButton:hover {
 	transform: translateY(-1px);
-	background: linear-gradient(140deg, color-mix(in oklab, var(--brand-orange) 92%, #fff 8%), color-mix(in oklab, var(--brand-orange) 74%, #ffd08a 26%));
+	background: color-mix(in oklab, var(--brand-orange) 90%, #fff 10%);
 	border-color: color-mix(in oklab, var(--brand-orange) 94%, #000000 6%);
 	filter: saturate(1.08);
 	box-shadow: 0 0.35rem 1rem color-mix(in oklab, var(--brand-orange) 45%, transparent 55%);
@@ -1856,9 +2046,7 @@ html {
 	border-radius: 0.9rem;
 	border: 1px solid color-mix(in oklab, var(--brand-cyan) 40%, transparent 60%);
 	border-left: 0.4rem solid color-mix(in oklab, var(--brand-cyan) 78%, transparent 22%);
-	background: linear-gradient(145deg,
-			color-mix(in oklab, var(--brand-cyan) 18%, white 82%),
-			color-mix(in oklab, var(--surface-page) 90%, var(--brand-cyan) 10%));
+	background: color-mix(in oklab, var(--surface-page) 88%, var(--brand-cyan) 12%);
 	display: flex;
 	flex-direction: column;
 	gap: var(--space-sm);
@@ -2104,7 +2292,7 @@ html {
 
 .coursesCartPromptPrimary {
 	border: 1px solid color-mix(in oklab, var(--brand-orange) 90%, #000 10%);
-	background: linear-gradient(140deg, var(--brand-orange), color-mix(in oklab, var(--brand-orange) 80%, #ffd08a 20%));
+	background: var(--brand-orange);
 	color: var(--brand-navy);
 }
 
@@ -2147,13 +2335,12 @@ html {
 .coursesPage,
 .contactPage,
 .bookingCartPage {
-	width: min(1320px, 96vw);
-	padding-inline: clamp(0.7rem, 1.2vw, 1.1rem);
+	width: min(1320px, 94vw);
 	box-sizing: border-box;
 }
 
 .landing {
-	width: min(1320px, 96vw);
+	width: min(1320px, 94vw);
 	padding-inline: 0;
 }
 
@@ -2189,12 +2376,18 @@ html {
 }
 
 .bookingCartPageBackLink {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.72rem 1.05rem;
 	justify-self: start;
 	text-decoration: none;
 	font-weight: 600;
 	font-size: 0.9rem;
 	color: color-mix(in oklab, var(--brand-navy) 88%, black 12%);
-	border-bottom: 1px solid color-mix(in oklab, var(--brand-orange) 34%, transparent 66%);
+	border: 1px solid color-mix(in oklab, var(--brand-navy) 16%, transparent 84%);
+	background: #ffffff;
+	box-shadow: inset 0 0 0 1px color-mix(in oklab, #ffffff 24%, transparent 76%);
 }
 
 
@@ -2246,12 +2439,12 @@ html {
 }
 
 .bookingItemTrack {
-	background: linear-gradient(145deg, color-mix(in oklab, var(--surface-page) 80%, var(--brand-orange-soft) 20%), color-mix(in oklab, white 84%, var(--brand-orange-soft) 16%));
+	background: color-mix(in oklab, var(--surface-page) 80%, var(--brand-orange-soft) 20%);
 	box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--brand-orange) 36%, transparent 64%);
 }
 
 .bookingItemFocus {
-	background: linear-gradient(145deg, color-mix(in oklab, var(--surface-page) 80%, #dff3ef 20%), color-mix(in oklab, white 84%, #dff3ef 16%));
+	background: color-mix(in oklab, var(--surface-page) 80%, #dff3ef 20%);
 	box-shadow: inset 0 0 0 1px color-mix(in oklab, #2f9d8f 36%, transparent 64%);
 }
 
@@ -2627,12 +2820,11 @@ html {
 	gap: 0.4rem;
 	padding: 0.6rem 1rem;
 	border: 1px solid color-mix(in oklab, var(--brand-orange) 82%, #b56b07 18%);
-	border-radius: 999px;
-	background: linear-gradient(130deg,
-			color-mix(in oklab, var(--brand-orange) 78%, #ffd07e 22%),
-			var(--brand-orange));
+	border-radius: clamp(0.42rem, 0.45em + 0.2rem, 0.7rem);
+	background: var(--brand-orange);
 	color: color-mix(in oklab, var(--brand-navy) 92%, black 8%);
 	font-size: var(--font-size-body-sm);
+	font-weight: 600;
 	cursor: pointer;
 }
 
@@ -2641,157 +2833,11 @@ html {
 	cursor: not-allowed;
 }
 
-.contactPageGrid {
-	display: grid;
-	grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.6fr);
-	gap: 1.2rem;
-}
-
-.contactPageHero,
-.contactAuthority,
-.contactPageClosing {
-	gap: 1rem;
-}
-
-.contactPageHero {
-	display: grid;
-	gap: 0.75rem;
-}
-
-.contactPageHero h1,
-.contactPageHero p,
-.contactPageClosing p,
-.contactAuthority h2,
-.contactCard h2,
-.contactCardMethod h3 {
-	margin: 0;
-}
-
-.contactPageHero h1 {
-	font-size: var(--font-size-heading-1);
-	line-height: var(--line-height-heading);
-	font-weight: 700;
-	letter-spacing: -0.01em;
-	color: color-mix(in oklab, var(--brand-navy) 94%, black 6%);
-}
-
-.contactPageHero > p {
-	max-width: 72ch;
-	font-size: var(--font-size-body);
-	line-height: var(--line-height-body);
-	color: color-mix(in oklab, var(--text-primary) 84%, var(--text-muted) 16%);
-}
-
-.contactPageProof {
-	display: grid;
-	grid-template-columns: repeat(3, minmax(0, 1fr));
-	gap: 0.85rem;
-	margin: 0.25rem 0 0;
-	padding: 0;
-	list-style: none;
-}
-
-.contactProof {
-	display: grid;
-	gap: 0.2rem;
-	padding: 0.85rem 0.9rem;
-	border-radius: 0.8rem;
-	background: color-mix(in oklab, var(--surface-panel) 90%, #ffffff 10%);
-	box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--brand-orange) 12%, transparent 88%);
-}
-
-.contactProof strong {
-	font-size: var(--font-size-body-sm);
-	line-height: var(--line-height-tight);
-	font-weight: 700;
-	color: color-mix(in oklab, var(--brand-navy) 92%, black 8%);
-}
-
-.contactProof span {
-	font-size: var(--font-size-caption);
-	line-height: var(--line-height-comfortable);
-	color: var(--text-muted);
-}
-
-.contactCard {
-	display: grid;
-	gap: 1rem;
-	border: 0;
-	border-radius: 1rem;
-	padding: 1.15rem;
-	background: linear-gradient(145deg, color-mix(in oklab, var(--surface-panel) 91%, var(--brand-orange-soft) 9%), var(--surface-panel));
-}
-
-.contactCard h2 {
-	font-size: var(--font-size-heading-3);
-	line-height: var(--line-height-heading);
-	font-weight: 700;
-	color: color-mix(in oklab, var(--brand-navy) 92%, black 8%);
-}
-
-.contactCard p {
-	margin: 0;
-	font-size: var(--font-size-body-sm);
-	line-height: var(--line-height-comfortable);
-	color: color-mix(in oklab, var(--text-primary) 86%, var(--text-muted) 14%);
-}
-
-.contactCardList {
-	margin: 0;
-	padding-left: 1.1rem;
-	display: grid;
-	gap: 0.55rem;
-}
-
-.contactCardList li {
-	font-size: var(--font-size-body-sm);
-	line-height: var(--line-height-body);
-}
-
-.contactCardMethod {
-	display: grid;
-	gap: 0.55rem;
-	padding: 0.95rem;
-	border-radius: 0.8rem;
-	background: color-mix(in oklab, var(--surface-page) 88%, #ffffff 12%);
-}
-
-.contactCardMethod h3 {
-	font-size: var(--font-size-body);
-	font-weight: 700;
-	line-height: var(--line-height-tight);
-	color: color-mix(in oklab, var(--brand-navy) 90%, black 10%);
-}
-
-.contactCardMethod ol {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	display: grid;
-	gap: 0.6rem;
-}
-
-.contactCardMethod li {
-	display: grid;
-	gap: 0.3rem;
-}
-
-.contactCardMethod strong {
-	font-size: var(--font-size-body-sm);
-	line-height: var(--line-height-tight);
-	font-weight: 700;
-	color: color-mix(in oklab, var(--brand-navy) 88%, black 12%);
-}
-
-.contactCardMethod span {
-	font-size: var(--font-size-body-xs);
-	line-height: var(--line-height-comfortable);
-	color: var(--text-muted);
-}
-
-.contactCardCta {
-	align-content: start;
-	background: linear-gradient(155deg, color-mix(in oklab, var(--brand-orange-soft) 54%, var(--surface-panel) 46%), color-mix(in oklab, #ffffff 84%, var(--surface-panel) 16%));
+.contactCardLogo {
+	width: 2rem;
+	height: 2rem;
+	object-fit: contain;
+	opacity: 0.92;
 }
 
 .contactCardDetails {
@@ -2894,116 +2940,6 @@ html {
 	color: color-mix(in oklab, var(--brand-navy) 78%, var(--text-muted) 22%);
 }
 
-.contactCardActions {
-	display: grid;
-	grid-template-columns: 1fr;
-	gap: 0.75rem;
-	margin-top: 0.25rem;
-}
-
-.contactAction {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	padding: 0.8rem 1rem;
-	border-radius: 999px;
-	border: 1px solid color-mix(in oklab, var(--brand-orange) 82%, #b56b07 18%);
-	background: linear-gradient(130deg,
-			color-mix(in oklab, var(--brand-orange) 78%, #ffd07e 22%),
-			var(--brand-orange));
-	color: color-mix(in oklab, var(--brand-navy) 92%, black 8%);
-	font-size: var(--font-size-body-sm);
-	line-height: var(--line-height-tight);
-	font-weight: 700;
-	text-decoration: none;
-}
-
-.contactActionSecondary {
-	background: color-mix(in oklab, var(--surface-page) 86%, #ffffff 14%);
-	color: color-mix(in oklab, var(--brand-navy) 90%, black 10%);
-}
-
-.contactAuthority {
-	display: grid;
-	gap: 0.9rem;
-	padding: 1.1rem;
-	border-radius: 1rem;
-	background: color-mix(in oklab, var(--surface-panel) 90%, #ffffff 10%);
-}
-
-.contactAuthority h2 {
-	margin: 0;
-	font-size: var(--font-size-heading-4);
-	line-height: var(--line-height-tight);
-	font-weight: 700;
-	color: color-mix(in oklab, var(--brand-navy) 88%, black 12%);
-}
-
-.contactAuthorityGrid {
-	display: grid;
-	grid-template-columns: repeat(3, minmax(0, 1fr));
-	gap: 0.85rem;
-}
-
-.contactAuthorityCard {
-	padding: 0.95rem;
-	border-radius: 0.8rem;
-	background: color-mix(in oklab, var(--surface-page) 90%, #ffffff 10%);
-	display: grid;
-	gap: 0.35rem;
-}
-
-.contactAuthorityCard h3 {
-	margin: 0;
-	font-size: var(--font-size-body-sm);
-	line-height: var(--line-height-tight);
-	font-weight: 700;
-	color: color-mix(in oklab, var(--brand-navy) 87%, black 13%);
-}
-
-.contactAuthorityCard p {
-	margin: 0;
-	font-size: var(--font-size-caption);
-	line-height: var(--line-height-body);
-	color: var(--text-muted);
-}
-
-.contactPageClosing {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	justify-content: space-between;
-	gap: 1rem;
-	padding: 1.15rem 1rem;
-	background: linear-gradient(135deg, color-mix(in oklab, var(--brand-orange-soft) 72%, var(--surface-panel) 28%), color-mix(in oklab, var(--surface-page) 88%, #ffffff 12%));
-}
-
-.contactPageClosing p {
-	margin: 0;
-	max-width: 72ch;
-	font-size: var(--font-size-body);
-	font-weight: 600;
-	line-height: var(--line-height-body);
-	color: color-mix(in oklab, var(--brand-navy) 86%, black 14%);
-}
-
-.contactPageClosing a {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	padding: 0.75rem 1.1rem;
-	border-radius: 999px;
-	text-decoration: none;
-	font-size: var(--font-size-body-sm);
-	line-height: var(--line-height-tight);
-	font-weight: 700;
-	border: 1px solid color-mix(in oklab, var(--brand-orange) 82%, #b56b07 18%);
-	background: linear-gradient(130deg,
-			color-mix(in oklab, var(--brand-orange) 78%, #ffd07e 22%),
-			var(--brand-orange));
-	color: color-mix(in oklab, var(--brand-navy) 92%, black 8%);
-}
-
 .weblab {
 	display: grid;
 	gap: 0.9rem;
@@ -3048,9 +2984,10 @@ html {
 	background: color-mix(in oklab, var(--surface-panel) 86%, var(--brand-orange-soft) 14%);
 	color: color-mix(in oklab, var(--brand-navy) 86%, black 14%);
 	font-size: 1rem;
+	font-weight: 600;
 	padding: 0.68rem 1.44rem;
 	text-decoration: none;
-	border-radius: 999px;
+	border-radius: clamp(0.42rem, 0.45em + 0.2rem, 0.7rem);
 	opacity: 0.96;
 	display: inline-flex;
 	align-items: center;
@@ -3097,7 +3034,7 @@ html {
 
 .weblabPaneToggle {
 	cursor: pointer;
-	border-radius: 999px;
+	border-radius: clamp(0.42rem, 0.45em + 0.2rem, 0.7rem);
 	border: 1px solid transparent;
 	padding: 0.35rem 1.2rem;
 	font-size: 1rem;
@@ -3180,7 +3117,7 @@ html {
 .weblabPreviewOverlayActions button,
 .weblabConfirmActions button {
 	cursor: pointer;
-	border-radius: 999px;
+	border-radius: clamp(0.42rem, 0.45em + 0.2rem, 0.7rem);
 	border: 1px solid color-mix(in oklab, var(--brand-orange) 24%, transparent 76%);
 	background: color-mix(in oklab, var(--surface-panel) 86%, var(--brand-orange-soft) 14%);
 	color: color-mix(in oklab, var(--brand-navy) 86%, black 14%);
@@ -3215,9 +3152,7 @@ html {
 }
 
 .weblabActions .isDirty {
-	background: linear-gradient(130deg,
-			color-mix(in oklab, var(--brand-orange) 78%, #ffd07e 22%),
-			var(--brand-orange));
+	background: var(--brand-orange);
 	border-color: color-mix(in oklab, var(--brand-orange) 82%, #b56b07 18%);
 	color: color-mix(in oklab, var(--brand-navy) 92%, black 8%);
 	box-shadow: 0 0.45rem 1.1rem color-mix(in oklab, var(--brand-orange) 24%, transparent 76%);
@@ -3237,9 +3172,7 @@ html {
 	width: min(460px, 96vw);
 	border-radius: 1rem;
 	border: 0;
-	background:
-		radial-gradient(circle at 12% 18%, color-mix(in oklab, var(--surface-accent) 22%, white 78%) 0%, transparent 44%),
-		linear-gradient(145deg, color-mix(in oklab, var(--surface-panel) 90%, var(--surface-muted) 10%), var(--surface-panel));
+	background: color-mix(in oklab, var(--surface-panel) 90%, var(--surface-muted) 10%);
 	box-shadow: 0 14px 42px color-mix(in oklab, black 32%, transparent 68%);
 	padding: 1rem;
 	display: grid;
@@ -3882,7 +3815,6 @@ html {
 button,
 .landingButton,
 .contactAction,
-.contactPageClosing a,
 .coursesCustomTrackButton,
 .coursesFiltersReset,
 .timelineTrackBookButton,
@@ -3964,7 +3896,7 @@ button,
 		gap: 0.4rem;
 		padding: 1rem 1.1rem;
 		border-radius: 0.9rem;
-		background: linear-gradient(145deg, color-mix(in oklab, var(--surface-panel) 86%, var(--brand-orange-soft) 14%), color-mix(in oklab, #ffffff 92%, var(--surface-page) 8%));
+		background: color-mix(in oklab, var(--surface-panel) 86%, var(--brand-orange-soft) 14%);
 		box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--brand-orange) 16%, transparent 84%);
 	}
 
@@ -3997,6 +3929,11 @@ button,
 
 	.landingHeroGrid {
 		grid-template-columns: 1fr;
+	}
+
+	.contactLandingCard {
+		justify-self: start;
+		max-width: 100%;
 	}
 
 	.landingHeroVisual {

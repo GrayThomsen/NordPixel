@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { AppShell } from './components/AppShell';
 import { CookieConsent } from './components/CookieConsent';
+import { LocalBusinessSchema } from './components/LocalBusinessSchema';
 import { LanguageProvider } from '../context/LanguageContext';
 import '../styles/fonts.css';
 import '../styles/tailwind.css';
@@ -17,6 +18,7 @@ export const metadata: Metadata = {
     template: '%s | NordPixel',
   },
   description: 'NordPixel leverer skoleklare forløb i teknologiforståelse, webudvikling og AI med tydelig struktur, materialer og booking for skoler.',
+  robots: 'index, follow',
   openGraph: {
     title: 'NordPixel - Teknologiforståelse, web og AI for skoler',
     description: 'Skoleklare forløb i teknologiforståelse, webudvikling og AI med tydelig struktur, materialer og booking for skoler.',
@@ -34,11 +36,17 @@ export const metadata: Metadata = {
     shortcut: '/images/brand/black-logo.png',
     apple: '/images/brand/black-logo.png',
   },
+  other: {
+    'revisit-after': '7 days',
+  },
 };
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="da" className="light" suppressHydrationWarning>
+      <head>
+        <LocalBusinessSchema />
+      </head>
       <body>
         <LanguageProvider>
           <CookieConsent />

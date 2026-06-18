@@ -40,9 +40,18 @@ export const contactLanguage: Record<Locale, {
       ],
       methodTitle: 'Sådan arbejder vi',
       methodSteps: [
-        { title: '1. Afklaring', text: 'Vi kortlægger målgruppe, faglig retning og rammer på jeres skole.' },
-        { title: '2. Design', text: 'Vi tilpasser forløb og materialer, så de matcher jeres niveau og ambition.' },
-        { title: '3. Leverance', text: 'Vi gennemfører med tydelig opfølgning, så kvaliteten holder i praksis.' },
+        {
+          title: '1. Afklaring',
+          text: 'Vi kortlægger målgruppe, faglig retning og rammer på jeres skole. Vi afklarer hvilke læringsmål I prioriterer, og hvordan forløbet bedst passer ind i jeres eksisterende planlægning. Vi gennemgår praktiske forhold som holdstørrelse, tidsramme og udstyr, så alle har realistiske forventninger. Vi samler beslutningerne i en tydelig ramme, der giver ro før opstart. Vi bruger afklaringen til at sikre, at didaktik og drift hænger sammen fra dag ét.',
+        },
+        {
+          title: '2. Design',
+          text: 'Vi tilpasser forløb og materialer, så de matcher jeres niveau og ambition. Indholdet struktureres i overskuelige moduler med progression, så elever og undervisere kan følge med uden unødig kompleksitet. Opgaver, eksempler og instruktioner justeres til den konkrete elevgruppe og de faglige mål I arbejder med. Vi kvalitetssikrer sprogtone og materialeflow, så det er let at bruge i klasselokalet. Resultatet er et forløb, der føles både fagligt skarpt og praktisk anvendeligt.',
+        },
+        {
+          title: '3. Leverance',
+          text: 'Vi gennemfører med tydelig opfølgning, så kvaliteten holder i praksis. Undervejs holder vi kommunikationen enkel og konkret, så lærere og ledelse altid ved, hvad næste skridt er. Vi samler løbende feedback og justerer, hvis noget skal fintrimmes i tempo eller format. Efter forløbet deler vi anbefalinger til videre arbejde, så værdien forankres i den daglige undervisning. På den måde får I ikke kun en god opstart, men også en stabil model for fortsættelse.',
+        },
       ],
       contactTitle: 'Kontakt os direkte',
       contactIntro: 'Skriv til os for en uforpligtende afklaring af muligheder, pris og opstart.',
@@ -88,9 +97,18 @@ export const contactLanguage: Record<Locale, {
       ],
       methodTitle: 'How we work',
       methodSteps: [
-        { title: '1. Discovery', text: 'We map target groups, subject goals, and practical constraints with your team.' },
-        { title: '2. Design', text: 'We adapt program structure and materials to your level and ambitions.' },
-        { title: '3. Delivery', text: 'We execute with clear follow-up to ensure quality in real teaching contexts.' },
+        {
+          title: '1. Discovery',
+          text: 'We map target groups, subject goals, and practical constraints with your team. We align priorities so the program supports both classroom reality and leadership expectations. We review timing, staffing, and available equipment to avoid friction during rollout. We document decisions in a clear starting framework that everyone can act on. This gives your school a calm and reliable foundation before implementation begins.',
+        },
+        {
+          title: '2. Design',
+          text: 'We adapt program structure and materials to your level and ambitions. Content is organized into focused modules with clear progression so teachers can apply it confidently. We tune tasks, examples, and instructions to your student profile and curriculum priorities. We also review wording and material flow to keep delivery practical in real schedules. The outcome is a program that is academically strong and operationally realistic.',
+        },
+        {
+          title: '3. Delivery',
+          text: 'We execute with clear follow-up to ensure quality in real teaching contexts. Throughout delivery we keep communication concise so staff always know what comes next. We gather feedback continuously and adjust pace or format where needed. After completion we share concrete recommendations that support long-term adoption. This ensures you get both a strong launch and a sustainable model going forward.',
+        },
       ],
       contactTitle: 'Contact us directly',
       contactIntro: 'Reach out for a no-obligation conversation about scope, pricing, and launch.',
