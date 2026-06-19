@@ -19,6 +19,7 @@ export function CoursesContent() {
 
   const translate = (value: LocalizedText) => value[locale];
   const bookingOptionIds = useMemo(() => BOOKABLE_OPTIONS.map((option) => option.id), []);
+  // Filter both main tracks and focus courses from one shared target selector.
   const visibleTracks = useMemo(
     () =>
       PROGRAM_TRACKS.filter((track) => {
@@ -58,6 +59,7 @@ export function CoursesContent() {
   };
 
   const openBookingCart = (initialId: string) => {
+    // Persist selection in localStorage so booking page and header badge stay in sync.
     addSelectionToBookingCart(initialId, bookingOptionIds);
     setIsCartPromptVisible(true);
   };
@@ -70,6 +72,7 @@ export function CoursesContent() {
   const toggleCardFromContainerClick = (event: MouseEvent<HTMLElement>) => {
     const target = event.target as HTMLElement;
 
+    // Keep native controls clickable while still allowing click-anywhere card toggling.
     if (target.closest('button, a, input, select, textarea, summary')) {
       return;
     }
@@ -349,6 +352,7 @@ export function CoursesContent() {
               type="button"
               className="coursesCartPromptPrimary"
               onClick={() => {
+                // Prompt closes before navigation so UI state is clean when user returns.
                 setIsCartPromptVisible(false);
                 router.push('/courses/booking');
               }}

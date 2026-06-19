@@ -36,6 +36,7 @@ export function CoursesBookingContent({ initialAddId }: CoursesBookingContentPro
   const allowedIds = useMemo(() => BOOKABLE_OPTIONS.map((option) => option.id), []);
 
   useEffect(() => {
+    // First render hydrates cart from localStorage, optionally adding one item from URL.
     const addId = initialAddId;
     const hasValidAddId = addId ? allowedIds.includes(addId) : false;
 
@@ -54,6 +55,7 @@ export function CoursesBookingContent({ initialAddId }: CoursesBookingContentPro
       return;
     }
 
+    // Persist every cart change after hydration, so reloads keep the same selection.
     writeBookingSelection(selectedQuantities);
   }, [isCartHydrated, selectedQuantities]);
 
@@ -63,6 +65,7 @@ export function CoursesBookingContent({ initialAddId }: CoursesBookingContentPro
     }
 
     setBookingStatus('idle');
+    // Normalize all user input to whole positive numbers and remove zero-quantity rows.
     setSelectedQuantities((prev) => {
       const normalized = Math.max(0, Math.floor(quantity));
       if (normalized < 1) {
@@ -104,6 +107,7 @@ export function CoursesBookingContent({ initialAddId }: CoursesBookingContentPro
   const subtotalPrice = pricingRows.reduce((total, row) => total + row.subtotal, 0);
   const hasPlanningPricedItems = pricingRows.some((row) => row.isByPlanning);
 
+  // Build plain text pricing lines for the booking email template.
   const pricingBreakdown = pricingRows
     .map(
       (row) =>
@@ -116,6 +120,7 @@ export function CoursesBookingContent({ initialAddId }: CoursesBookingContentPro
   const submitBooking = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    // Booking requires at least one selected course before sending contact details.
     if (!selectedItems.length) {
       setBookingStatus('selection-error');
       return;
@@ -125,6 +130,7 @@ export function CoursesBookingContent({ initialAddId }: CoursesBookingContentPro
     const ownerTemplateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
     const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
+    // Fail fast when EmailJS runtime configuration is missing.
     if (!serviceId || !ownerTemplateId || !publicKey) {
       setBookingStatus('config-error');
       return;
@@ -164,6 +170,7 @@ export function CoursesBookingContent({ initialAddId }: CoursesBookingContentPro
     setBookingStatus('sending');
 
     try {
+      // Send one owner-facing booking email containing both selections and contact form data.
       await emailjs.send(serviceId, ownerTemplateId, templateParams, { publicKey });
       setBookingStatus('success');
 
@@ -180,6 +187,7 @@ export function CoursesBookingContent({ initialAddId }: CoursesBookingContentPro
       });
       writeBookingSelection({});
     } catch {
+      // Keep user input in place on failure so they can retry without re-entering everything.
       setBookingStatus('send-error');
     }
   };

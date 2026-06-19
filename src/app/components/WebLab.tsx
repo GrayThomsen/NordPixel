@@ -504,6 +504,7 @@ export function WebLab() {
   const [learningBottomOffset, setLearningBottomOffset] = useState(0);
   const weblabText = weblabLanguage[siteLocale].weblab;
   const editorIntroCopy = weblabLanguage[siteLocale].editorIntro;
+  // Downloadable tutorial bundles shown under the floating help widget.
   const tutorialTopics = useMemo<TutorialTopic[]>(
     () => [
       {
@@ -535,6 +536,7 @@ export function WebLab() {
     ],
   );
   const triggerTutorialDownload = useCallback((topic: TutorialTopic) => {
+    // Browser-level download is triggered with an anchor so file URLs stay static and cacheable.
     const anchor = document.createElement('a');
     anchor.href = topic.href;
     anchor.download = '';
@@ -756,6 +758,7 @@ export function WebLab() {
   }, [editingFileId, project.files]);
 
   const currentCode = activeFile?.content ?? '';
+  // Monaco expects "javascript" language id instead of our internal "js" shorthand.
   const currentLanguage = activeFile?.kind === 'js' ? 'javascript' : activeFile?.kind ?? 'html';
 
   const insertClosingHtmlTag = useCallback(

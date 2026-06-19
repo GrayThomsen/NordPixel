@@ -1,5 +1,6 @@
 import type { Locale } from './languageConfig';
 
+// Localized copy for the full WebLab interface, status messages, and help panel.
 export const weblabLanguage: Record<Locale, {
   editorIntro: {
     title: string;

@@ -1,5 +1,6 @@
 import type { Locale } from './languageConfig';
 
+// Centralized copy for courses list, cart prompt, and booking form in both locales.
 export const courseLanguage: Record<Locale, {
   courses: {
     programsTitle: string;

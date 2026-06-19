@@ -2,9 +2,8 @@ import { type BookableOption, type DiscountTier, type FocusCourse, type ProgramT
 
 const CUSTOM_TRACK_BASE_PRICE = 0;
 
-//Boiler plate templates for new courses and tracks to ensure all fields are filled out and to make it easy to add new offerings in the future. These can be used as starting points when creating new courses or tracks, and should be updated with real content before being added to the catalog.
-
-//*Will be removed when moving to a Database in the future, but for now it serves as a clear template for the structure of course and track data, and ensures that all necessary fields are included when adding new offerings to the catalog.
+// Template objects are kept as in-file examples when adding new catalog entries.
+// They are not used at runtime, but document required fields for editors.
 const PROGRAM_TRACK_TEMPLATE: ProgramTrack = {
   id: 'nyt-forlob-id',
   title: {
@@ -57,7 +56,7 @@ const PROGRAM_TRACK_TEMPLATE: ProgramTrack = {
   },
 };
 
-//*Same as above.
+// Same purpose as PROGRAM_TRACK_TEMPLATE, but for standalone focus courses.
 const FOCUS_COURSE_TEMPLATE: FocusCourse = {
   id: 'nyt-fokuskursus-id',
   title: {
@@ -699,6 +698,7 @@ export const DISCOUNT_TIERS: DiscountTier[] = [
   { minCourses: 5, discountPercentage: 15 },
 ];
 
+// Unified booking source used by both the courses overview and booking cart page.
 export const BOOKABLE_OPTIONS: BookableOption[] = [
   {
     id: 'mit-eget-forlob',
@@ -726,4 +726,5 @@ export const BOOKABLE_OPTIONS: BookableOption[] = [
   })),
 ];
 
+// Recipient inbox for booking requests sent from the booking form.
 export const BOOKING_EMAIL = 'thomsenwork@outlook.dk';

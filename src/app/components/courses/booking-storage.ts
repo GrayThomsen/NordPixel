@@ -5,6 +5,7 @@ export const BOOKING_CART_ATTENTION_EVENT = 'nordpixel-booking-cart-attention';
 export type BookingSelection = Record<string, number>;
 
 function sanitizeSelection(raw: unknown, allowedIds: Set<string>): BookingSelection {
+  // Guard persisted data: only known IDs with positive integer quantities are accepted.
   if (!raw || typeof raw !== 'object') {
     return {};
   }
@@ -40,6 +41,7 @@ export function readBookingSelection(allowedIds: string[]): BookingSelection {
     const parsed = JSON.parse(raw) as unknown;
     return sanitizeSelection(parsed, new Set(allowedIds));
   } catch {
+    // Broken JSON should never crash the booking flow.
     return {};
   }
 }
@@ -50,10 +52,12 @@ export function writeBookingSelection(selection: BookingSelection) {
   }
 
   window.localStorage.setItem(BOOKING_STORAGE_KEY, JSON.stringify(selection));
+  // Custom event keeps header badge and other listeners synchronized in the same tab.
   window.dispatchEvent(new CustomEvent(BOOKING_CART_UPDATED_EVENT));
 }
 
 export function addSelectionToBookingCart(optionId: string, allowedIds: string[]) {
+  // Read-modify-write ensures additive updates from different entry points.
   const selection = readBookingSelection(allowedIds);
   const next = {
     ...selection,
@@ -62,6 +66,7 @@ export function addSelectionToBookingCart(optionId: string, allowedIds: string[]
 
   writeBookingSelection(next);
   if (typeof window !== 'undefined') {
+    // Separate event is used to trigger pulse animation when something is newly added.
     window.dispatchEvent(new CustomEvent(BOOKING_CART_ATTENTION_EVENT, { detail: { optionId } }));
   }
   return next;
@@ -69,5 +74,6 @@ export function addSelectionToBookingCart(optionId: string, allowedIds: string[]
 
 export function getBookingCartCount(allowedIds: string[]): number {
   const selection = readBookingSelection(allowedIds);
+  // Count distinct selected options, not summed quantities.
   return Object.keys(selection).length;
 }

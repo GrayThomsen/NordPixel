@@ -23,10 +23,12 @@ export function SiteHeader() {
   const cartHighlightRafRef = useRef<number | null>(null);
 
   useEffect(() => {
+    // Close mobile menu on route changes to avoid stale open state after navigation.
     setIsMenuOpen(false);
   }, [pathname]);
 
   useEffect(() => {
+    // Header cart badge only counts valid options from the shared booking catalog.
     const allowedIds = BOOKABLE_OPTIONS.map((option) => option.id);
     const updateCount = () => setCartCount(getBookingCartCount(allowedIds));
     const highlightCart = () => {
@@ -47,6 +49,7 @@ export function SiteHeader() {
     };
 
     updateCount();
+    // Listen for both cross-tab storage updates and same-tab custom cart events.
     window.addEventListener('storage', updateCount);
     window.addEventListener(BOOKING_CART_UPDATED_EVENT, updateCount as EventListener);
     window.addEventListener(BOOKING_CART_ATTENTION_EVENT, highlightCart as EventListener);
